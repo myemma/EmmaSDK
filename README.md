@@ -1,4 +1,4 @@
-emma-sdk-iphone
+emma-sdk
 ===============
 
-Software Development Kit for iPhone
+A static library for iOS and a dynamic Cocoa framework for OS X.
