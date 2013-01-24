@@ -1,14 +1,16 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "EMGroup.h"
+#import "EMMailing.h"
+#import "EMMember.h"
+#import "EMMailingResponse.h"
+#import "EMMailingLinkResponse.h"
+#import "EMMailingResponseEvent.h"
 
 @protocol EMResultsBatch <NSObject>
 
-@property (nonatomic, strong) NSArray *results;
+@property (nonatomic, strong) NSArray *results; // contains the results of the call
 
-- (RACSignal *)getNextBatch; // return id<EMResultsBatch>
-
-@end
-
-@protocol EMSearch <NSObject>
+- (RACSignal *)getNextBatch; // returns id<EMResultsBatch> containing next page of results
 
 @end
 
@@ -16,7 +18,7 @@
 
 - (RACSignal *)getGroupsWithType:(EMGroupType)groupType; // returns id<EMResultsBatch> of EMGroup
 - (RACSignal *)createGroupsWithNames:(NSArray *)names;
-- (RACSignal *)updateGroup:(EMGroup)group;
+- (RACSignal *)updateGroup:(EMGroup *)group;
 - (RACSignal *)deleteGroupID:(NSString *)groupID;
 - (RACSignal *)addMemberIDs:(NSArray *)memberIDs toGroupID:(NSString *)groupID;
 - (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupID:(NSString *)groupID;
