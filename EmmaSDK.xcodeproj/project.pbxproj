@@ -33,10 +33,18 @@
 		414AC83C16B0A7B80037C299 /* EMMailingResponseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC83A16B0A7B70037C299 /* EMMailingResponseEvent.h */; };
 		414AC83D16B0A7B80037C299 /* EMMailingResponseEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83B16B0A7B70037C299 /* EMMailingResponseEvent.m */; };
 		414AC86916B0AA7D0037C299 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414AC86816B0AA7D0037C299 /* Foundation.framework */; };
-		77FB5CACE358492BA1C7EEC0 /* libPods-EmmaSDKiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6576359576A4283BAA343A0 /* libPods-EmmaSDKiOS.a */; };
-		8C49437A65C6427F97544078 /* libPods-EmmaSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 88038F36321E47BDBD287554 /* libPods-EmmaSDK.a */; };
-		9346D30579154D3B961B9423 /* libPods-EmmaSDKTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 723A099D6A6F4578B98772CD /* libPods-EmmaSDKTests.a */; };
-		D24CE340672741169FF232A0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF9C674756B4A4B99C9EE04 /* libPods.a */; };
+		41D8DC9116C451B800993F4E /* SMWebRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 41D8DC8F16C451B800993F4E /* SMWebRequest.h */; };
+		41D8DC9216C451B800993F4E /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D8DC9016C451B800993F4E /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-no-arc"; }; };
+		41D8DC9316C451B800993F4E /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D8DC9016C451B800993F4E /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-no-arc"; }; };
+		41D8DC9C16C4538100993F4E /* EMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC81E16B0852B0037C299 /* EMGroup.m */; };
+		41D8DC9D16C4538100993F4E /* EMMailing.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82316B086DD0037C299 /* EMMailing.m */; };
+		41D8DC9E16C4538100993F4E /* EMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82716B09E7C0037C299 /* EMMember.m */; };
+		41D8DC9F16C4538100993F4E /* EMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82B16B0A1CD0037C299 /* EMMessage.m */; };
+		41D8DCA016C4538100993F4E /* EMSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82F16B0A2C20037C299 /* EMSearch.m */; };
+		41D8DCA116C4538100993F4E /* EMMailingResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83316B0A4910037C299 /* EMMailingResponse.m */; };
+		41D8DCA216C4538100993F4E /* EMMailingLinkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83716B0A6630037C299 /* EMMailingLinkResponse.m */; };
+		41D8DCA316C4538100993F4E /* EMMailingResponseEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83B16B0A7B70037C299 /* EMMailingResponseEvent.m */; };
+		41D8DCA416C4538100993F4E /* EMClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC81916B080F30037C299 /* EMClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +54,83 @@
 			proxyType = 1;
 			remoteGlobalIDString = 414AC7A216B0747C0037C299;
 			remoteInfo = EmmaSDK;
+		};
+		41D8DC7A16C4517300993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 88037F8315056328001A5B19;
+			remoteInfo = ReactiveCocoa;
+		};
+		41D8DC7C16C4517300993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 88F440AB153DAC820097B4C3;
+			remoteInfo = "ReactiveCocoa-iOS";
+		};
+		41D8DC7E16C4517300993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 88CDF7DC15000FCF00163A9F;
+			remoteInfo = ReactiveCocoaTests;
+		};
+		41D8DC8716C4517D00993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC12323D1391D5CC00131607;
+			remoteInfo = SBJson;
+		};
+		41D8DC8916C4517D00993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC1232521391D5CC00131607;
+			remoteInfo = SBJsonTests;
+		};
+		41D8DC8B16C4517D00993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCC2626913920FC7003D9994;
+			remoteInfo = "sbjson-ios";
+		};
+		41D8DC8D16C4517D00993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCC2627313920FC7003D9994;
+			remoteInfo = "sbjson-iosTests";
+		};
+		41D8DC9416C4529C00993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 88037F8215056328001A5B19;
+			remoteInfo = ReactiveCocoa;
+		};
+		41D8DC9616C4529C00993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC12323C1391D5CC00131607;
+			remoteInfo = SBJson;
+		};
+		41D8DC9816C452AC00993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 88F440AA153DAC820097B4C3;
+			remoteInfo = "ReactiveCocoa-iOS";
+		};
+		41D8DC9A16C452AC00993F4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCC2626813920FC7003D9994;
+			remoteInfo = "sbjson-ios";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -62,7 +147,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3886007BDBED48E1A0602C53 /* Pods-EmmaSDKiOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmmaSDKiOS.xcconfig"; path = "Pods/Pods-EmmaSDKiOS.xcconfig"; sourceTree = SOURCE_ROOT; };
 		414AC7A316B0747C0037C299 /* EmmaSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmmaSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		414AC7A616B0747C0037C299 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		414AC7A916B0747C0037C299 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -98,13 +182,10 @@
 		414AC83B16B0A7B70037C299 /* EMMailingResponseEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMailingResponseEvent.m; sourceTree = "<group>"; };
 		414AC86716B0AA7D0037C299 /* libEmmaSDKiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEmmaSDKiOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		414AC86816B0AA7D0037C299 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		4FF9C674756B4A4B99C9EE04 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		723A099D6A6F4578B98772CD /* libPods-EmmaSDKTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmmaSDKTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		88038F36321E47BDBD287554 /* libPods-EmmaSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmmaSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2ABC64072524268B2C73097 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		AEDC78CF3BD44E59A8425173 /* Pods-EmmaSDKTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmmaSDKTests.xcconfig"; path = "Pods/Pods-EmmaSDKTests.xcconfig"; sourceTree = SOURCE_ROOT; };
-		E6198A1AC9844BAA8640736A /* Pods-EmmaSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmmaSDK.xcconfig"; path = "Pods/Pods-EmmaSDK.xcconfig"; sourceTree = SOURCE_ROOT; };
-		F6576359576A4283BAA343A0 /* libPods-EmmaSDKiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EmmaSDKiOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = Dependencies/ReactiveCocoa/ReactiveCocoaFramework/ReactiveCocoa.xcodeproj; sourceTree = "<group>"; };
+		41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SBJson.xcodeproj; path = Dependencies/SBJson/SBJson.xcodeproj; sourceTree = "<group>"; };
+		41D8DC8F16C451B800993F4E /* SMWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMWebRequest.h; path = Dependencies/SMWebRequest/SMWebRequest.h; sourceTree = SOURCE_ROOT; };
+		41D8DC9016C451B800993F4E /* SMWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMWebRequest.m; path = Dependencies/SMWebRequest/SMWebRequest.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +194,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				414AC7A716B0747C0037C299 /* Cocoa.framework in Frameworks */,
-				D24CE340672741169FF232A0 /* libPods.a in Frameworks */,
-				8C49437A65C6427F97544078 /* libPods-EmmaSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +204,6 @@
 				414AC7BD16B0747C0037C299 /* SenTestingKit.framework in Frameworks */,
 				414AC7BE16B0747C0037C299 /* Cocoa.framework in Frameworks */,
 				414AC7C116B0747C0037C299 /* EmmaSDK.framework in Frameworks */,
-				9346D30579154D3B961B9423 /* libPods-EmmaSDKTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +212,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				414AC86916B0AA7D0037C299 /* Foundation.framework in Frameworks */,
-				77FB5CACE358492BA1C7EEC0 /* libPods-EmmaSDKiOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,10 +225,6 @@
 				414AC7C216B0747C0037C299 /* EmmaSDKTests */,
 				414AC7A516B0747C0037C299 /* Frameworks */,
 				414AC7A416B0747C0037C299 /* Products */,
-				AEDC78CF3BD44E59A8425173 /* Pods-EmmaSDKTests.xcconfig */,
-				A2ABC64072524268B2C73097 /* Pods.xcconfig */,
-				E6198A1AC9844BAA8640736A /* Pods-EmmaSDK.xcconfig */,
-				3886007BDBED48E1A0602C53 /* Pods-EmmaSDKiOS.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,14 +241,12 @@
 		414AC7A516B0747C0037C299 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */,
+				41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */,
 				414AC7A616B0747C0037C299 /* Cocoa.framework */,
 				414AC7BC16B0747C0037C299 /* SenTestingKit.framework */,
 				414AC86816B0AA7D0037C299 /* Foundation.framework */,
 				414AC7A816B0747C0037C299 /* Other Frameworks */,
-				723A099D6A6F4578B98772CD /* libPods-EmmaSDKTests.a */,
-				4FF9C674756B4A4B99C9EE04 /* libPods.a */,
-				88038F36321E47BDBD287554 /* libPods-EmmaSDK.a */,
-				F6576359576A4283BAA343A0 /* libPods-EmmaSDKiOS.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,9 +265,11 @@
 			isa = PBXGroup;
 			children = (
 				414AC7B316B0747C0037C299 /* EmmaSDK.h */,
-				414AC81C16B085190037C299 /* Models */,
 				414AC81816B080F30037C299 /* EMClient.h */,
 				414AC81916B080F30037C299 /* EMClient.m */,
+				414AC81C16B085190037C299 /* Models */,
+				41D8DC8F16C451B800993F4E /* SMWebRequest.h */,
+				41D8DC9016C451B800993F4E /* SMWebRequest.m */,
 				414AC7AD16B0747C0037C299 /* Supporting Files */,
 			);
 			path = EmmaSDK;
@@ -254,6 +327,27 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		41D8DC7316C4517300993F4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				41D8DC7B16C4517300993F4E /* ReactiveCocoa.framework */,
+				41D8DC7D16C4517300993F4E /* libReactiveCocoa-iOS.a */,
+				41D8DC7F16C4517300993F4E /* ReactiveCocoaTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		41D8DC8116C4517C00993F4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				41D8DC8816C4517D00993F4E /* SBJson.framework */,
+				41D8DC8A16C4517D00993F4E /* SBJsonTests.octest */,
+				41D8DC8C16C4517D00993F4E /* libsbjson-ios.a */,
+				41D8DC8E16C4517D00993F4E /* sbjson-iosTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -270,6 +364,7 @@
 				414AC83416B0A4910037C299 /* EMMailingResponse.h in Headers */,
 				414AC83816B0A6640037C299 /* EMMailingLinkResponse.h in Headers */,
 				414AC83C16B0A7B80037C299 /* EMMailingResponseEvent.h in Headers */,
+				41D8DC9116C451B800993F4E /* SMWebRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +385,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				41D8DC9516C4529C00993F4E /* PBXTargetDependency */,
+				41D8DC9716C4529C00993F4E /* PBXTargetDependency */,
 			);
 			name = EmmaSDK;
 			productName = EmmaSDK;
@@ -328,6 +425,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				41D8DC9916C452AC00993F4E /* PBXTargetDependency */,
+				41D8DC9B16C452AC00993F4E /* PBXTargetDependency */,
 			);
 			name = EmmaSDKiOS;
 			productName = "EmmaSDK-iOS";
@@ -353,6 +452,16 @@
 			mainGroup = 414AC79716B0747C0037C299;
 			productRefGroup = 414AC7A416B0747C0037C299 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 41D8DC7316C4517300993F4E /* Products */;
+					ProjectRef = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+				},
+				{
+					ProductGroup = 41D8DC8116C4517C00993F4E /* Products */;
+					ProjectRef = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				414AC7A216B0747C0037C299 /* EmmaSDK */,
@@ -361,6 +470,58 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		41D8DC7B16C4517300993F4E /* ReactiveCocoa.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveCocoa.framework;
+			remoteRef = 41D8DC7A16C4517300993F4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41D8DC7D16C4517300993F4E /* libReactiveCocoa-iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libReactiveCocoa-iOS.a";
+			remoteRef = 41D8DC7C16C4517300993F4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41D8DC7F16C4517300993F4E /* ReactiveCocoaTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ReactiveCocoaTests.octest;
+			remoteRef = 41D8DC7E16C4517300993F4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41D8DC8816C4517D00993F4E /* SBJson.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SBJson.framework;
+			remoteRef = 41D8DC8716C4517D00993F4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41D8DC8A16C4517D00993F4E /* SBJsonTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SBJsonTests.octest;
+			remoteRef = 41D8DC8916C4517D00993F4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41D8DC8C16C4517D00993F4E /* libsbjson-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libsbjson-ios.a";
+			remoteRef = 41D8DC8B16C4517D00993F4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41D8DC8E16C4517D00993F4E /* sbjson-iosTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "sbjson-iosTests.octest";
+			remoteRef = 41D8DC8D16C4517D00993F4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		414AC7A116B0747C0037C299 /* Resources */ = {
@@ -467,6 +628,7 @@
 				414AC83516B0A4910037C299 /* EMMailingResponse.m in Sources */,
 				414AC83916B0A6640037C299 /* EMMailingLinkResponse.m in Sources */,
 				414AC83D16B0A7B80037C299 /* EMMailingResponseEvent.m in Sources */,
+				41D8DC9216C451B800993F4E /* SMWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +644,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41D8DC9C16C4538100993F4E /* EMGroup.m in Sources */,
+				41D8DC9D16C4538100993F4E /* EMMailing.m in Sources */,
+				41D8DC9E16C4538100993F4E /* EMMember.m in Sources */,
+				41D8DC9F16C4538100993F4E /* EMMessage.m in Sources */,
+				41D8DCA016C4538100993F4E /* EMSearch.m in Sources */,
+				41D8DCA116C4538100993F4E /* EMMailingResponse.m in Sources */,
+				41D8DCA216C4538100993F4E /* EMMailingLinkResponse.m in Sources */,
+				41D8DCA316C4538100993F4E /* EMMailingResponseEvent.m in Sources */,
+				41D8DCA416C4538100993F4E /* EMClient.m in Sources */,
+				41D8DC9316C451B800993F4E /* SMWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +664,26 @@
 			isa = PBXTargetDependency;
 			target = 414AC7A216B0747C0037C299 /* EmmaSDK */;
 			targetProxy = 414AC7BF16B0747C0037C299 /* PBXContainerItemProxy */;
+		};
+		41D8DC9516C4529C00993F4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ReactiveCocoa;
+			targetProxy = 41D8DC9416C4529C00993F4E /* PBXContainerItemProxy */;
+		};
+		41D8DC9716C4529C00993F4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SBJson;
+			targetProxy = 41D8DC9616C4529C00993F4E /* PBXContainerItemProxy */;
+		};
+		41D8DC9916C452AC00993F4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ReactiveCocoa-iOS";
+			targetProxy = 41D8DC9816C452AC00993F4E /* PBXContainerItemProxy */;
+		};
+		41D8DC9B16C452AC00993F4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "sbjson-ios";
+			targetProxy = 41D8DC9A16C452AC00993F4E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -541,7 +733,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -564,13 +755,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		414AC7CE16B0747C0037C299 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6198A1AC9844BAA8640736A /* Pods-EmmaSDK.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -586,7 +775,6 @@
 		};
 		414AC7CF16B0747C0037C299 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6198A1AC9844BAA8640736A /* Pods-EmmaSDK.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -602,7 +790,6 @@
 		};
 		414AC7D116B0747C0037C299 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AEDC78CF3BD44E59A8425173 /* Pods-EmmaSDKTests.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -615,7 +802,6 @@
 		};
 		414AC7D216B0747C0037C299 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AEDC78CF3BD44E59A8425173 /* Pods-EmmaSDKTests.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -628,7 +814,6 @@
 		};
 		414AC87216B0AA7D0037C299 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3886007BDBED48E1A0602C53 /* Pods-EmmaSDKiOS.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/EmmaSDK_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -642,7 +827,6 @@
 		};
 		414AC87316B0AA7D0037C299 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3886007BDBED48E1A0602C53 /* Pods-EmmaSDKiOS.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/EmmaSDK_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
