@@ -1,7 +1,4 @@
-//
-// Prefix header for all source files of the 'EmmaSDK' target in the 'EmmaSDK' project
-//
 
 #ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
+    #import <UIKit/UIKit.h>
 #endif

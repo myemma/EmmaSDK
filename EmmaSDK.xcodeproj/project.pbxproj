@@ -7,135 +7,126 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		414AC7A716B0747C0037C299 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414AC7A616B0747C0037C299 /* Cocoa.framework */; };
-		414AC7B116B0747C0037C299 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414AC7AF16B0747C0037C299 /* InfoPlist.strings */; };
-		414AC7BD16B0747C0037C299 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414AC7BC16B0747C0037C299 /* SenTestingKit.framework */; };
-		414AC7BE16B0747C0037C299 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414AC7A616B0747C0037C299 /* Cocoa.framework */; };
-		414AC7C116B0747C0037C299 /* EmmaSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414AC7A316B0747C0037C299 /* EmmaSDK.framework */; };
-		414AC7C716B0747C0037C299 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 414AC7C516B0747C0037C299 /* InfoPlist.strings */; };
-		414AC7CA16B0747C0037C299 /* EmmaSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC7C916B0747C0037C299 /* EmmaSDKTests.m */; };
-		414AC81A16B080F30037C299 /* EMClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC81816B080F30037C299 /* EMClient.h */; };
-		414AC81B16B080F30037C299 /* EMClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC81916B080F30037C299 /* EMClient.m */; };
-		414AC81F16B0852B0037C299 /* EMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC81D16B0852B0037C299 /* EMGroup.h */; };
-		414AC82016B0852B0037C299 /* EMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC81E16B0852B0037C299 /* EMGroup.m */; };
-		414AC82416B086DD0037C299 /* EMMailing.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC82216B086DC0037C299 /* EMMailing.h */; };
-		414AC82516B086DD0037C299 /* EMMailing.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82316B086DD0037C299 /* EMMailing.m */; };
-		414AC82816B09E7C0037C299 /* EMMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC82616B09E7C0037C299 /* EMMember.h */; };
-		414AC82916B09E7C0037C299 /* EMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82716B09E7C0037C299 /* EMMember.m */; };
-		414AC82C16B0A1CE0037C299 /* EMMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC82A16B0A1CD0037C299 /* EMMessage.h */; };
-		414AC82D16B0A1CE0037C299 /* EMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82B16B0A1CD0037C299 /* EMMessage.m */; };
-		414AC83016B0A2C20037C299 /* EMSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC82E16B0A2C20037C299 /* EMSearch.h */; };
-		414AC83116B0A2C20037C299 /* EMSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82F16B0A2C20037C299 /* EMSearch.m */; };
-		414AC83416B0A4910037C299 /* EMMailingResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC83216B0A4910037C299 /* EMMailingResponse.h */; };
-		414AC83516B0A4910037C299 /* EMMailingResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83316B0A4910037C299 /* EMMailingResponse.m */; };
-		414AC83816B0A6640037C299 /* EMMailingLinkResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC83616B0A6630037C299 /* EMMailingLinkResponse.h */; };
-		414AC83916B0A6640037C299 /* EMMailingLinkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83716B0A6630037C299 /* EMMailingLinkResponse.m */; };
-		414AC83C16B0A7B80037C299 /* EMMailingResponseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 414AC83A16B0A7B70037C299 /* EMMailingResponseEvent.h */; };
-		414AC83D16B0A7B80037C299 /* EMMailingResponseEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83B16B0A7B70037C299 /* EMMailingResponseEvent.m */; };
-		414AC86916B0AA7D0037C299 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414AC86816B0AA7D0037C299 /* Foundation.framework */; };
-		41D8DC9116C451B800993F4E /* SMWebRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 41D8DC8F16C451B800993F4E /* SMWebRequest.h */; };
-		41D8DC9216C451B800993F4E /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D8DC9016C451B800993F4E /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-no-arc"; }; };
-		41D8DC9316C451B800993F4E /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D8DC9016C451B800993F4E /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-no-arc"; }; };
-		41D8DC9C16C4538100993F4E /* EMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC81E16B0852B0037C299 /* EMGroup.m */; };
-		41D8DC9D16C4538100993F4E /* EMMailing.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82316B086DD0037C299 /* EMMailing.m */; };
-		41D8DC9E16C4538100993F4E /* EMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82716B09E7C0037C299 /* EMMember.m */; };
-		41D8DC9F16C4538100993F4E /* EMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82B16B0A1CD0037C299 /* EMMessage.m */; };
-		41D8DCA016C4538100993F4E /* EMSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC82F16B0A2C20037C299 /* EMSearch.m */; };
-		41D8DCA116C4538100993F4E /* EMMailingResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83316B0A4910037C299 /* EMMailingResponse.m */; };
-		41D8DCA216C4538100993F4E /* EMMailingLinkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83716B0A6630037C299 /* EMMailingLinkResponse.m */; };
-		41D8DCA316C4538100993F4E /* EMMailingResponseEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC83B16B0A7B70037C299 /* EMMailingResponseEvent.m */; };
-		41D8DCA416C4538100993F4E /* EMClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AC81916B080F30037C299 /* EMClient.m */; };
+		4129EC5116C45C71002A3C60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5016C45C71002A3C60 /* Foundation.framework */; };
+		4129EC6016C45C71002A3C60 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5F16C45C71002A3C60 /* SenTestingKit.framework */; };
+		4129EC6216C45C71002A3C60 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC6116C45C71002A3C60 /* UIKit.framework */; };
+		4129EC6316C45C71002A3C60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5016C45C71002A3C60 /* Foundation.framework */; };
+		4129EC6616C45C71002A3C60 /* libEmmaSDKiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */; };
+		4129EC6C16C45C71002A3C60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4129EC6A16C45C71002A3C60 /* InfoPlist.strings */; };
+		4129EC6F16C45C71002A3C60 /* EmmaSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4129EC6E16C45C71002A3C60 /* EmmaSDKTests.m */; };
+		41EB585F16C45CAC005C1805 /* EMClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB584D16C45CAC005C1805 /* EMClient.m */; };
+		41EB586016C45CAC005C1805 /* EMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB584F16C45CAC005C1805 /* EMGroup.m */; };
+		41EB586116C45CAC005C1805 /* EMMailing.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585116C45CAC005C1805 /* EMMailing.m */; };
+		41EB586216C45CAC005C1805 /* EMMailingLinkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585316C45CAC005C1805 /* EMMailingLinkResponse.m */; };
+		41EB586316C45CAC005C1805 /* EMMailingResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585516C45CAC005C1805 /* EMMailingResponse.m */; };
+		41EB586416C45CAC005C1805 /* EMMailingResponseEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585716C45CAC005C1805 /* EMMailingResponseEvent.m */; };
+		41EB586516C45CAC005C1805 /* EMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585A16C45CAC005C1805 /* EMMember.m */; };
+		41EB586616C45CAC005C1805 /* EMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585C16C45CAC005C1805 /* EMMessage.m */; };
+		41EB586716C45CAC005C1805 /* EMSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585E16C45CAC005C1805 /* EMSearch.m */; };
+		41EB586F16C45D5F005C1805 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EB586E16C45D5F005C1805 /* Cocoa.framework */; };
+		41EB589816C45E4F005C1805 /* EMClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB584D16C45CAC005C1805 /* EMClient.m */; };
+		41EB589916C45E4F005C1805 /* EMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB584F16C45CAC005C1805 /* EMGroup.m */; };
+		41EB589A16C45E4F005C1805 /* EMMailing.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585116C45CAC005C1805 /* EMMailing.m */; };
+		41EB589B16C45E4F005C1805 /* EMMailingLinkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585316C45CAC005C1805 /* EMMailingLinkResponse.m */; };
+		41EB589C16C45E4F005C1805 /* EMMailingResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585516C45CAC005C1805 /* EMMailingResponse.m */; };
+		41EB589D16C45E4F005C1805 /* EMMailingResponseEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585716C45CAC005C1805 /* EMMailingResponseEvent.m */; };
+		41EB589E16C45E4F005C1805 /* EMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585A16C45CAC005C1805 /* EMMember.m */; };
+		41EB589F16C45E4F005C1805 /* EMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585C16C45CAC005C1805 /* EMMessage.m */; };
+		41EB58A016C45E4F005C1805 /* EMSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585E16C45CAC005C1805 /* EMSearch.m */; };
+		41EB58C116C45EED005C1805 /* SMWebRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB58BF16C45EED005C1805 /* SMWebRequest.h */; };
+		41EB58C216C45EED005C1805 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB58C016C45EED005C1805 /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		41EB58C316C45EED005C1805 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB58C016C45EED005C1805 /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		414AC7BF16B0747C0037C299 /* PBXContainerItemProxy */ = {
+		4129EC6416C45C71002A3C60 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 414AC79916B0747C0037C299 /* Project object */;
+			containerPortal = 4129EC4516C45C71002A3C60 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 414AC7A216B0747C0037C299;
+			remoteGlobalIDString = 4129EC4C16C45C71002A3C60;
 			remoteInfo = EmmaSDK;
 		};
-		41D8DC7A16C4517300993F4E /* PBXContainerItemProxy */ = {
+		41EB58AA16C45ED6005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+			containerPortal = 41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 88037F8315056328001A5B19;
 			remoteInfo = ReactiveCocoa;
 		};
-		41D8DC7C16C4517300993F4E /* PBXContainerItemProxy */ = {
+		41EB58AC16C45ED6005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+			containerPortal = 41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 88F440AB153DAC820097B4C3;
 			remoteInfo = "ReactiveCocoa-iOS";
 		};
-		41D8DC7E16C4517300993F4E /* PBXContainerItemProxy */ = {
+		41EB58AE16C45ED6005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+			containerPortal = 41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 88CDF7DC15000FCF00163A9F;
 			remoteInfo = ReactiveCocoaTests;
 		};
-		41D8DC8716C4517D00993F4E /* PBXContainerItemProxy */ = {
+		41EB58B716C45EE0005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			containerPortal = 41EB58B016C45EDF005C1805 /* SBJson.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BC12323D1391D5CC00131607;
 			remoteInfo = SBJson;
 		};
-		41D8DC8916C4517D00993F4E /* PBXContainerItemProxy */ = {
+		41EB58B916C45EE0005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			containerPortal = 41EB58B016C45EDF005C1805 /* SBJson.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BC1232521391D5CC00131607;
 			remoteInfo = SBJsonTests;
 		};
-		41D8DC8B16C4517D00993F4E /* PBXContainerItemProxy */ = {
+		41EB58BB16C45EE0005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			containerPortal = 41EB58B016C45EDF005C1805 /* SBJson.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCC2626913920FC7003D9994;
 			remoteInfo = "sbjson-ios";
 		};
-		41D8DC8D16C4517D00993F4E /* PBXContainerItemProxy */ = {
+		41EB58BD16C45EE0005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			containerPortal = 41EB58B016C45EDF005C1805 /* SBJson.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCC2627313920FC7003D9994;
 			remoteInfo = "sbjson-iosTests";
 		};
-		41D8DC9416C4529C00993F4E /* PBXContainerItemProxy */ = {
+		41EB58C816C45F18005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 88037F8215056328001A5B19;
-			remoteInfo = ReactiveCocoa;
-		};
-		41D8DC9616C4529C00993F4E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			containerPortal = 41EB58B016C45EDF005C1805 /* SBJson.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = BC12323C1391D5CC00131607;
 			remoteInfo = SBJson;
 		};
-		41D8DC9816C452AC00993F4E /* PBXContainerItemProxy */ = {
+		41EB58CA16C45F18005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+			containerPortal = 41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 88F440AA153DAC820097B4C3;
-			remoteInfo = "ReactiveCocoa-iOS";
+			remoteGlobalIDString = 88037F8215056328001A5B19;
+			remoteInfo = ReactiveCocoa;
 		};
-		41D8DC9A16C452AC00993F4E /* PBXContainerItemProxy */ = {
+		41EB58CC16C45F1E005C1805 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+			containerPortal = 41EB58B016C45EDF005C1805 /* SBJson.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = BCC2626813920FC7003D9994;
 			remoteInfo = "sbjson-ios";
 		};
+		41EB58CE16C45F1E005C1805 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 88F440AA153DAC820097B4C3;
+			remoteInfo = "ReactiveCocoa-iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		414AC86516B0AA7D0037C299 /* CopyFiles */ = {
+		4129EC4B16C45C71002A3C60 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/${PRODUCT_NAME}";
@@ -147,203 +138,194 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		414AC7A316B0747C0037C299 /* EmmaSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmmaSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		414AC7A616B0747C0037C299 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		414AC7A916B0747C0037C299 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		414AC7AA16B0747C0037C299 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		414AC7AB16B0747C0037C299 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		414AC7AE16B0747C0037C299 /* EmmaSDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EmmaSDK-Info.plist"; sourceTree = "<group>"; };
-		414AC7B016B0747C0037C299 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		414AC7B216B0747C0037C299 /* EmmaSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmmaSDK-Prefix.pch"; sourceTree = "<group>"; };
-		414AC7B316B0747C0037C299 /* EmmaSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmmaSDK.h; sourceTree = "<group>"; };
-		414AC7BB16B0747C0037C299 /* EmmaSDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmmaSDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		414AC7BC16B0747C0037C299 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		414AC7C416B0747C0037C299 /* EmmaSDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EmmaSDKTests-Info.plist"; sourceTree = "<group>"; };
-		414AC7C616B0747C0037C299 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		414AC7C816B0747C0037C299 /* EmmaSDKTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmmaSDKTests.h; sourceTree = "<group>"; };
-		414AC7C916B0747C0037C299 /* EmmaSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmmaSDKTests.m; sourceTree = "<group>"; };
-		414AC81816B080F30037C299 /* EMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMClient.h; sourceTree = "<group>"; };
-		414AC81916B080F30037C299 /* EMClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMClient.m; sourceTree = "<group>"; };
-		414AC81D16B0852B0037C299 /* EMGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGroup.h; sourceTree = "<group>"; };
-		414AC81E16B0852B0037C299 /* EMGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGroup.m; sourceTree = "<group>"; };
-		414AC82216B086DC0037C299 /* EMMailing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMailing.h; sourceTree = "<group>"; };
-		414AC82316B086DD0037C299 /* EMMailing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMailing.m; sourceTree = "<group>"; };
-		414AC82616B09E7C0037C299 /* EMMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMember.h; sourceTree = "<group>"; };
-		414AC82716B09E7C0037C299 /* EMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMember.m; sourceTree = "<group>"; };
-		414AC82A16B0A1CD0037C299 /* EMMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMessage.h; sourceTree = "<group>"; };
-		414AC82B16B0A1CD0037C299 /* EMMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMessage.m; sourceTree = "<group>"; };
-		414AC82E16B0A2C20037C299 /* EMSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMSearch.h; sourceTree = "<group>"; };
-		414AC82F16B0A2C20037C299 /* EMSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMSearch.m; sourceTree = "<group>"; };
-		414AC83216B0A4910037C299 /* EMMailingResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMailingResponse.h; sourceTree = "<group>"; };
-		414AC83316B0A4910037C299 /* EMMailingResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMailingResponse.m; sourceTree = "<group>"; };
-		414AC83616B0A6630037C299 /* EMMailingLinkResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMailingLinkResponse.h; sourceTree = "<group>"; };
-		414AC83716B0A6630037C299 /* EMMailingLinkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMailingLinkResponse.m; sourceTree = "<group>"; };
-		414AC83A16B0A7B70037C299 /* EMMailingResponseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMailingResponseEvent.h; sourceTree = "<group>"; };
-		414AC83B16B0A7B70037C299 /* EMMailingResponseEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMailingResponseEvent.m; sourceTree = "<group>"; };
-		414AC86716B0AA7D0037C299 /* libEmmaSDKiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEmmaSDKiOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		414AC86816B0AA7D0037C299 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = Dependencies/ReactiveCocoa/ReactiveCocoaFramework/ReactiveCocoa.xcodeproj; sourceTree = "<group>"; };
-		41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SBJson.xcodeproj; path = Dependencies/SBJson/SBJson.xcodeproj; sourceTree = "<group>"; };
-		41D8DC8F16C451B800993F4E /* SMWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMWebRequest.h; path = Dependencies/SMWebRequest/SMWebRequest.h; sourceTree = SOURCE_ROOT; };
-		41D8DC9016C451B800993F4E /* SMWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMWebRequest.m; path = Dependencies/SMWebRequest/SMWebRequest.m; sourceTree = SOURCE_ROOT; };
+		4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEmmaSDKiOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4129EC5016C45C71002A3C60 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4129EC5416C45C71002A3C60 /* EmmaSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmmaSDK-Prefix.pch"; sourceTree = "<group>"; };
+		4129EC5E16C45C71002A3C60 /* EmmaSDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmmaSDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4129EC5F16C45C71002A3C60 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		4129EC6116C45C71002A3C60 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		4129EC6916C45C71002A3C60 /* EmmaSDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EmmaSDKTests-Info.plist"; sourceTree = "<group>"; };
+		4129EC6B16C45C71002A3C60 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4129EC6D16C45C71002A3C60 /* EmmaSDKTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmmaSDKTests.h; sourceTree = "<group>"; };
+		4129EC6E16C45C71002A3C60 /* EmmaSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmmaSDKTests.m; sourceTree = "<group>"; };
+		41EB584C16C45CAC005C1805 /* EMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMClient.h; sourceTree = "<group>"; };
+		41EB584D16C45CAC005C1805 /* EMClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMClient.m; sourceTree = "<group>"; };
+		41EB584E16C45CAC005C1805 /* EMGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGroup.h; sourceTree = "<group>"; };
+		41EB584F16C45CAC005C1805 /* EMGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMGroup.m; sourceTree = "<group>"; };
+		41EB585016C45CAC005C1805 /* EMMailing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMailing.h; sourceTree = "<group>"; };
+		41EB585116C45CAC005C1805 /* EMMailing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMailing.m; sourceTree = "<group>"; };
+		41EB585216C45CAC005C1805 /* EMMailingLinkResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMailingLinkResponse.h; sourceTree = "<group>"; };
+		41EB585316C45CAC005C1805 /* EMMailingLinkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMailingLinkResponse.m; sourceTree = "<group>"; };
+		41EB585416C45CAC005C1805 /* EMMailingResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMailingResponse.h; sourceTree = "<group>"; };
+		41EB585516C45CAC005C1805 /* EMMailingResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMailingResponse.m; sourceTree = "<group>"; };
+		41EB585616C45CAC005C1805 /* EMMailingResponseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMailingResponseEvent.h; sourceTree = "<group>"; };
+		41EB585716C45CAC005C1805 /* EMMailingResponseEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMailingResponseEvent.m; sourceTree = "<group>"; };
+		41EB585816C45CAC005C1805 /* EmmaSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmmaSDK.h; sourceTree = "<group>"; };
+		41EB585916C45CAC005C1805 /* EMMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMember.h; sourceTree = "<group>"; };
+		41EB585A16C45CAC005C1805 /* EMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMember.m; sourceTree = "<group>"; };
+		41EB585B16C45CAC005C1805 /* EMMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMMessage.h; sourceTree = "<group>"; };
+		41EB585C16C45CAC005C1805 /* EMMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMMessage.m; sourceTree = "<group>"; };
+		41EB585D16C45CAC005C1805 /* EMSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMSearch.h; sourceTree = "<group>"; };
+		41EB585E16C45CAC005C1805 /* EMSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMSearch.m; sourceTree = "<group>"; };
+		41EB586D16C45D5F005C1805 /* EmmaSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmmaSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		41EB586E16C45D5F005C1805 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		41EB587116C45D5F005C1805 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		41EB587216C45D5F005C1805 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		41EB587316C45D5F005C1805 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = Dependencies/ReactiveCocoa/ReactiveCocoaFramework/ReactiveCocoa.xcodeproj; sourceTree = "<group>"; };
+		41EB58B016C45EDF005C1805 /* SBJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SBJson.xcodeproj; path = Dependencies/SBJson/SBJson.xcodeproj; sourceTree = "<group>"; };
+		41EB58BF16C45EED005C1805 /* SMWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMWebRequest.h; path = Dependencies/SMWebRequest/SMWebRequest.h; sourceTree = SOURCE_ROOT; };
+		41EB58C016C45EED005C1805 /* SMWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMWebRequest.m; path = Dependencies/SMWebRequest/SMWebRequest.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		414AC79F16B0747C0037C299 /* Frameworks */ = {
+		4129EC4A16C45C71002A3C60 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414AC7A716B0747C0037C299 /* Cocoa.framework in Frameworks */,
+				4129EC5116C45C71002A3C60 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		414AC7B716B0747C0037C299 /* Frameworks */ = {
+		4129EC5A16C45C71002A3C60 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414AC7BD16B0747C0037C299 /* SenTestingKit.framework in Frameworks */,
-				414AC7BE16B0747C0037C299 /* Cocoa.framework in Frameworks */,
-				414AC7C116B0747C0037C299 /* EmmaSDK.framework in Frameworks */,
+				4129EC6016C45C71002A3C60 /* SenTestingKit.framework in Frameworks */,
+				4129EC6216C45C71002A3C60 /* UIKit.framework in Frameworks */,
+				4129EC6316C45C71002A3C60 /* Foundation.framework in Frameworks */,
+				4129EC6616C45C71002A3C60 /* libEmmaSDKiOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		414AC86416B0AA7D0037C299 /* Frameworks */ = {
+		41EB586916C45D5F005C1805 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414AC86916B0AA7D0037C299 /* Foundation.framework in Frameworks */,
+				41EB586F16C45D5F005C1805 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		414AC79716B0747C0037C299 = {
+		4129EC4416C45C71002A3C60 = {
 			isa = PBXGroup;
 			children = (
-				414AC7AC16B0747C0037C299 /* EmmaSDK */,
-				414AC7C216B0747C0037C299 /* EmmaSDKTests */,
-				414AC7A516B0747C0037C299 /* Frameworks */,
-				414AC7A416B0747C0037C299 /* Products */,
+				4129EC5216C45C71002A3C60 /* EmmaSDK */,
+				4129EC6716C45C71002A3C60 /* EmmaSDKTests */,
+				4129EC4F16C45C71002A3C60 /* Frameworks */,
+				4129EC4E16C45C71002A3C60 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		414AC7A416B0747C0037C299 /* Products */ = {
+		4129EC4E16C45C71002A3C60 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				414AC7A316B0747C0037C299 /* EmmaSDK.framework */,
-				414AC7BB16B0747C0037C299 /* EmmaSDKTests.octest */,
-				414AC86716B0AA7D0037C299 /* libEmmaSDKiOS.a */,
+				4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */,
+				4129EC5E16C45C71002A3C60 /* EmmaSDKTests.octest */,
+				41EB586D16C45D5F005C1805 /* EmmaSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		414AC7A516B0747C0037C299 /* Frameworks */ = {
+		4129EC4F16C45C71002A3C60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */,
-				41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */,
-				414AC7A616B0747C0037C299 /* Cocoa.framework */,
-				414AC7BC16B0747C0037C299 /* SenTestingKit.framework */,
-				414AC86816B0AA7D0037C299 /* Foundation.framework */,
-				414AC7A816B0747C0037C299 /* Other Frameworks */,
+				41EB58B016C45EDF005C1805 /* SBJson.xcodeproj */,
+				41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */,
+				4129EC5016C45C71002A3C60 /* Foundation.framework */,
+				4129EC5F16C45C71002A3C60 /* SenTestingKit.framework */,
+				4129EC6116C45C71002A3C60 /* UIKit.framework */,
+				41EB586E16C45D5F005C1805 /* Cocoa.framework */,
+				41EB587016C45D5F005C1805 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		414AC7A816B0747C0037C299 /* Other Frameworks */ = {
+		4129EC5216C45C71002A3C60 /* EmmaSDK */ = {
 			isa = PBXGroup;
 			children = (
-				414AC7A916B0747C0037C299 /* AppKit.framework */,
-				414AC7AA16B0747C0037C299 /* CoreData.framework */,
-				414AC7AB16B0747C0037C299 /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		414AC7AC16B0747C0037C299 /* EmmaSDK */ = {
-			isa = PBXGroup;
-			children = (
-				414AC7B316B0747C0037C299 /* EmmaSDK.h */,
-				414AC81816B080F30037C299 /* EMClient.h */,
-				414AC81916B080F30037C299 /* EMClient.m */,
-				414AC81C16B085190037C299 /* Models */,
-				41D8DC8F16C451B800993F4E /* SMWebRequest.h */,
-				41D8DC9016C451B800993F4E /* SMWebRequest.m */,
-				414AC7AD16B0747C0037C299 /* Supporting Files */,
+				41EB585816C45CAC005C1805 /* EmmaSDK.h */,
+				41EB584C16C45CAC005C1805 /* EMClient.h */,
+				41EB584D16C45CAC005C1805 /* EMClient.m */,
+				41EB584E16C45CAC005C1805 /* EMGroup.h */,
+				41EB584F16C45CAC005C1805 /* EMGroup.m */,
+				41EB585016C45CAC005C1805 /* EMMailing.h */,
+				41EB585116C45CAC005C1805 /* EMMailing.m */,
+				41EB585216C45CAC005C1805 /* EMMailingLinkResponse.h */,
+				41EB585316C45CAC005C1805 /* EMMailingLinkResponse.m */,
+				41EB585416C45CAC005C1805 /* EMMailingResponse.h */,
+				41EB585516C45CAC005C1805 /* EMMailingResponse.m */,
+				41EB585616C45CAC005C1805 /* EMMailingResponseEvent.h */,
+				41EB585716C45CAC005C1805 /* EMMailingResponseEvent.m */,
+				41EB585916C45CAC005C1805 /* EMMember.h */,
+				41EB585A16C45CAC005C1805 /* EMMember.m */,
+				41EB585B16C45CAC005C1805 /* EMMessage.h */,
+				41EB585C16C45CAC005C1805 /* EMMessage.m */,
+				41EB585D16C45CAC005C1805 /* EMSearch.h */,
+				41EB585E16C45CAC005C1805 /* EMSearch.m */,
+				41EB58BF16C45EED005C1805 /* SMWebRequest.h */,
+				41EB58C016C45EED005C1805 /* SMWebRequest.m */,
+				4129EC5316C45C71002A3C60 /* Supporting Files */,
 			);
 			path = EmmaSDK;
 			sourceTree = "<group>";
 		};
-		414AC7AD16B0747C0037C299 /* Supporting Files */ = {
+		4129EC5316C45C71002A3C60 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				414AC7AE16B0747C0037C299 /* EmmaSDK-Info.plist */,
-				414AC7AF16B0747C0037C299 /* InfoPlist.strings */,
-				414AC7B216B0747C0037C299 /* EmmaSDK-Prefix.pch */,
+				4129EC5416C45C71002A3C60 /* EmmaSDK-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		414AC7C216B0747C0037C299 /* EmmaSDKTests */ = {
+		4129EC6716C45C71002A3C60 /* EmmaSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				414AC7C816B0747C0037C299 /* EmmaSDKTests.h */,
-				414AC7C916B0747C0037C299 /* EmmaSDKTests.m */,
-				414AC7C316B0747C0037C299 /* Supporting Files */,
+				4129EC6D16C45C71002A3C60 /* EmmaSDKTests.h */,
+				4129EC6E16C45C71002A3C60 /* EmmaSDKTests.m */,
+				4129EC6816C45C71002A3C60 /* Supporting Files */,
 			);
 			path = EmmaSDKTests;
 			sourceTree = "<group>";
 		};
-		414AC7C316B0747C0037C299 /* Supporting Files */ = {
+		4129EC6816C45C71002A3C60 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				414AC7C416B0747C0037C299 /* EmmaSDKTests-Info.plist */,
-				414AC7C516B0747C0037C299 /* InfoPlist.strings */,
+				4129EC6916C45C71002A3C60 /* EmmaSDKTests-Info.plist */,
+				4129EC6A16C45C71002A3C60 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		414AC81C16B085190037C299 /* Models */ = {
+		41EB587016C45D5F005C1805 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				414AC81D16B0852B0037C299 /* EMGroup.h */,
-				414AC81E16B0852B0037C299 /* EMGroup.m */,
-				414AC82216B086DC0037C299 /* EMMailing.h */,
-				414AC82316B086DD0037C299 /* EMMailing.m */,
-				414AC82616B09E7C0037C299 /* EMMember.h */,
-				414AC82716B09E7C0037C299 /* EMMember.m */,
-				414AC82A16B0A1CD0037C299 /* EMMessage.h */,
-				414AC82B16B0A1CD0037C299 /* EMMessage.m */,
-				414AC82E16B0A2C20037C299 /* EMSearch.h */,
-				414AC82F16B0A2C20037C299 /* EMSearch.m */,
-				414AC83216B0A4910037C299 /* EMMailingResponse.h */,
-				414AC83316B0A4910037C299 /* EMMailingResponse.m */,
-				414AC83616B0A6630037C299 /* EMMailingLinkResponse.h */,
-				414AC83716B0A6630037C299 /* EMMailingLinkResponse.m */,
-				414AC83A16B0A7B70037C299 /* EMMailingResponseEvent.h */,
-				414AC83B16B0A7B70037C299 /* EMMailingResponseEvent.m */,
+				41EB587116C45D5F005C1805 /* AppKit.framework */,
+				41EB587216C45D5F005C1805 /* CoreData.framework */,
+				41EB587316C45D5F005C1805 /* Foundation.framework */,
 			);
-			name = Models;
+			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		41D8DC7316C4517300993F4E /* Products */ = {
+		41EB58A316C45ED5005C1805 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				41D8DC7B16C4517300993F4E /* ReactiveCocoa.framework */,
-				41D8DC7D16C4517300993F4E /* libReactiveCocoa-iOS.a */,
-				41D8DC7F16C4517300993F4E /* ReactiveCocoaTests.octest */,
+				41EB58AB16C45ED6005C1805 /* ReactiveCocoa.framework */,
+				41EB58AD16C45ED6005C1805 /* libReactiveCocoa-iOS.a */,
+				41EB58AF16C45ED6005C1805 /* ReactiveCocoaTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		41D8DC8116C4517C00993F4E /* Products */ = {
+		41EB58B116C45EDF005C1805 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				41D8DC8816C4517D00993F4E /* SBJson.framework */,
-				41D8DC8A16C4517D00993F4E /* SBJsonTests.octest */,
-				41D8DC8C16C4517D00993F4E /* libsbjson-ios.a */,
-				41D8DC8E16C4517D00993F4E /* sbjson-iosTests.octest */,
+				41EB58B816C45EE0005C1805 /* SBJson.framework */,
+				41EB58BA16C45EE0005C1805 /* SBJsonTests.octest */,
+				41EB58BC16C45EE0005C1805 /* libsbjson-ios.a */,
+				41EB58BE16C45EE0005C1805 /* sbjson-iosTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -351,213 +333,185 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		414AC7A016B0747C0037C299 /* Headers */ = {
+		41EB586A16C45D5F005C1805 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414AC81A16B080F30037C299 /* EMClient.h in Headers */,
-				414AC81F16B0852B0037C299 /* EMGroup.h in Headers */,
-				414AC82416B086DD0037C299 /* EMMailing.h in Headers */,
-				414AC82816B09E7C0037C299 /* EMMember.h in Headers */,
-				414AC82C16B0A1CE0037C299 /* EMMessage.h in Headers */,
-				414AC83016B0A2C20037C299 /* EMSearch.h in Headers */,
-				414AC83416B0A4910037C299 /* EMMailingResponse.h in Headers */,
-				414AC83816B0A6640037C299 /* EMMailingLinkResponse.h in Headers */,
-				414AC83C16B0A7B80037C299 /* EMMailingResponseEvent.h in Headers */,
-				41D8DC9116C451B800993F4E /* SMWebRequest.h in Headers */,
+				41EB58C116C45EED005C1805 /* SMWebRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		414AC7A216B0747C0037C299 /* EmmaSDK */ = {
+		4129EC4C16C45C71002A3C60 /* EmmaSDKiOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 414AC7CD16B0747C0037C299 /* Build configuration list for PBXNativeTarget "EmmaSDK" */;
+			buildConfigurationList = 4129EC7216C45C71002A3C60 /* Build configuration list for PBXNativeTarget "EmmaSDKiOS" */;
 			buildPhases = (
-				414AC79E16B0747C0037C299 /* Sources */,
-				414AC79F16B0747C0037C299 /* Frameworks */,
-				414AC7A016B0747C0037C299 /* Headers */,
-				414AC7A116B0747C0037C299 /* Resources */,
-				446C60BCB6FC43549DCDFBC6 /* Copy Pods Resources */,
-				8EACB997066F42B290D87EB3 /* Copy Pods Resources */,
+				4129EC4916C45C71002A3C60 /* Sources */,
+				4129EC4A16C45C71002A3C60 /* Frameworks */,
+				4129EC4B16C45C71002A3C60 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				41D8DC9516C4529C00993F4E /* PBXTargetDependency */,
-				41D8DC9716C4529C00993F4E /* PBXTargetDependency */,
+				41EB58CD16C45F1E005C1805 /* PBXTargetDependency */,
+				41EB58CF16C45F1E005C1805 /* PBXTargetDependency */,
 			);
-			name = EmmaSDK;
+			name = EmmaSDKiOS;
 			productName = EmmaSDK;
-			productReference = 414AC7A316B0747C0037C299 /* EmmaSDK.framework */;
-			productType = "com.apple.product-type.framework";
+			productReference = 4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */;
+			productType = "com.apple.product-type.library.static";
 		};
-		414AC7BA16B0747C0037C299 /* EmmaSDKTests */ = {
+		4129EC5D16C45C71002A3C60 /* EmmaSDKTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 414AC7D016B0747C0037C299 /* Build configuration list for PBXNativeTarget "EmmaSDKTests" */;
+			buildConfigurationList = 4129EC7516C45C71002A3C60 /* Build configuration list for PBXNativeTarget "EmmaSDKTests" */;
 			buildPhases = (
-				414AC7B616B0747C0037C299 /* Sources */,
-				414AC7B716B0747C0037C299 /* Frameworks */,
-				414AC7B816B0747C0037C299 /* Resources */,
-				414AC7B916B0747C0037C299 /* ShellScript */,
-				1024A9AB44D54DD58C64C978 /* Copy Pods Resources */,
+				4129EC5916C45C71002A3C60 /* Sources */,
+				4129EC5A16C45C71002A3C60 /* Frameworks */,
+				4129EC5B16C45C71002A3C60 /* Resources */,
+				4129EC5C16C45C71002A3C60 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				414AC7C016B0747C0037C299 /* PBXTargetDependency */,
+				4129EC6516C45C71002A3C60 /* PBXTargetDependency */,
 			);
 			name = EmmaSDKTests;
 			productName = EmmaSDKTests;
-			productReference = 414AC7BB16B0747C0037C299 /* EmmaSDKTests.octest */;
+			productReference = 4129EC5E16C45C71002A3C60 /* EmmaSDKTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		414AC86616B0AA7D0037C299 /* EmmaSDKiOS */ = {
+		41EB586C16C45D5F005C1805 /* EmmaSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 414AC87116B0AA7D0037C299 /* Build configuration list for PBXNativeTarget "EmmaSDKiOS" */;
+			buildConfigurationList = 41EB589216C45D5F005C1805 /* Build configuration list for PBXNativeTarget "EmmaSDK" */;
 			buildPhases = (
-				414AC86316B0AA7D0037C299 /* Sources */,
-				414AC86416B0AA7D0037C299 /* Frameworks */,
-				414AC86516B0AA7D0037C299 /* CopyFiles */,
-				8CA3F97722544B8584D38693 /* Copy Pods Resources */,
+				41EB586816C45D5F005C1805 /* Sources */,
+				41EB586916C45D5F005C1805 /* Frameworks */,
+				41EB586A16C45D5F005C1805 /* Headers */,
+				41EB586B16C45D5F005C1805 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				41D8DC9916C452AC00993F4E /* PBXTargetDependency */,
-				41D8DC9B16C452AC00993F4E /* PBXTargetDependency */,
+				41EB58C916C45F18005C1805 /* PBXTargetDependency */,
+				41EB58CB16C45F18005C1805 /* PBXTargetDependency */,
 			);
-			name = EmmaSDKiOS;
-			productName = "EmmaSDK-iOS";
-			productReference = 414AC86716B0AA7D0037C299 /* libEmmaSDKiOS.a */;
-			productType = "com.apple.product-type.library.static";
+			name = EmmaSDK;
+			productName = EmmaSDK;
+			productReference = 41EB586D16C45D5F005C1805 /* EmmaSDK.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		414AC79916B0747C0037C299 /* Project object */ = {
+		4129EC4516C45C71002A3C60 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Emma, Inc.";
 			};
-			buildConfigurationList = 414AC79C16B0747C0037C299 /* Build configuration list for PBXProject "EmmaSDK" */;
+			buildConfigurationList = 4129EC4816C45C71002A3C60 /* Build configuration list for PBXProject "EmmaSDK" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 414AC79716B0747C0037C299;
-			productRefGroup = 414AC7A416B0747C0037C299 /* Products */;
+			mainGroup = 4129EC4416C45C71002A3C60;
+			productRefGroup = 4129EC4E16C45C71002A3C60 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 41D8DC7316C4517300993F4E /* Products */;
-					ProjectRef = 41D8DC7216C4517300993F4E /* ReactiveCocoa.xcodeproj */;
+					ProductGroup = 41EB58A316C45ED5005C1805 /* Products */;
+					ProjectRef = 41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */;
 				},
 				{
-					ProductGroup = 41D8DC8116C4517C00993F4E /* Products */;
-					ProjectRef = 41D8DC8016C4517C00993F4E /* SBJson.xcodeproj */;
+					ProductGroup = 41EB58B116C45EDF005C1805 /* Products */;
+					ProjectRef = 41EB58B016C45EDF005C1805 /* SBJson.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
-				414AC7A216B0747C0037C299 /* EmmaSDK */,
-				414AC86616B0AA7D0037C299 /* EmmaSDKiOS */,
-				414AC7BA16B0747C0037C299 /* EmmaSDKTests */,
+				41EB586C16C45D5F005C1805 /* EmmaSDK */,
+				4129EC4C16C45C71002A3C60 /* EmmaSDKiOS */,
+				4129EC5D16C45C71002A3C60 /* EmmaSDKTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		41D8DC7B16C4517300993F4E /* ReactiveCocoa.framework */ = {
+		41EB58AB16C45ED6005C1805 /* ReactiveCocoa.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ReactiveCocoa.framework;
-			remoteRef = 41D8DC7A16C4517300993F4E /* PBXContainerItemProxy */;
+			remoteRef = 41EB58AA16C45ED6005C1805 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		41D8DC7D16C4517300993F4E /* libReactiveCocoa-iOS.a */ = {
+		41EB58AD16C45ED6005C1805 /* libReactiveCocoa-iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libReactiveCocoa-iOS.a";
-			remoteRef = 41D8DC7C16C4517300993F4E /* PBXContainerItemProxy */;
+			remoteRef = 41EB58AC16C45ED6005C1805 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		41D8DC7F16C4517300993F4E /* ReactiveCocoaTests.octest */ = {
+		41EB58AF16C45ED6005C1805 /* ReactiveCocoaTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ReactiveCocoaTests.octest;
-			remoteRef = 41D8DC7E16C4517300993F4E /* PBXContainerItemProxy */;
+			remoteRef = 41EB58AE16C45ED6005C1805 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		41D8DC8816C4517D00993F4E /* SBJson.framework */ = {
+		41EB58B816C45EE0005C1805 /* SBJson.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SBJson.framework;
-			remoteRef = 41D8DC8716C4517D00993F4E /* PBXContainerItemProxy */;
+			remoteRef = 41EB58B716C45EE0005C1805 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		41D8DC8A16C4517D00993F4E /* SBJsonTests.octest */ = {
+		41EB58BA16C45EE0005C1805 /* SBJsonTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = SBJsonTests.octest;
-			remoteRef = 41D8DC8916C4517D00993F4E /* PBXContainerItemProxy */;
+			remoteRef = 41EB58B916C45EE0005C1805 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		41D8DC8C16C4517D00993F4E /* libsbjson-ios.a */ = {
+		41EB58BC16C45EE0005C1805 /* libsbjson-ios.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libsbjson-ios.a";
-			remoteRef = 41D8DC8B16C4517D00993F4E /* PBXContainerItemProxy */;
+			remoteRef = 41EB58BB16C45EE0005C1805 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		41D8DC8E16C4517D00993F4E /* sbjson-iosTests.octest */ = {
+		41EB58BE16C45EE0005C1805 /* sbjson-iosTests.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "sbjson-iosTests.octest";
-			remoteRef = 41D8DC8D16C4517D00993F4E /* PBXContainerItemProxy */;
+			remoteRef = 41EB58BD16C45EE0005C1805 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		414AC7A116B0747C0037C299 /* Resources */ = {
+		4129EC5B16C45C71002A3C60 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414AC7B116B0747C0037C299 /* InfoPlist.strings in Resources */,
+				4129EC6C16C45C71002A3C60 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		414AC7B816B0747C0037C299 /* Resources */ = {
+		41EB586B16C45D5F005C1805 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414AC7C716B0747C0037C299 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1024A9AB44D54DD58C64C978 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-EmmaSDKTests-resources.sh\"\n";
-		};
-		414AC7B916B0747C0037C299 /* ShellScript */ = {
+		4129EC5C16C45C71002A3C60 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -570,136 +524,86 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
-		446C60BCB6FC43549DCDFBC6 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-		};
-		8CA3F97722544B8584D38693 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-EmmaSDKiOS-resources.sh\"\n";
-		};
-		8EACB997066F42B290D87EB3 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-EmmaSDK-resources.sh\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		414AC79E16B0747C0037C299 /* Sources */ = {
+		4129EC4916C45C71002A3C60 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414AC81B16B080F30037C299 /* EMClient.m in Sources */,
-				414AC82016B0852B0037C299 /* EMGroup.m in Sources */,
-				414AC82516B086DD0037C299 /* EMMailing.m in Sources */,
-				414AC82916B09E7C0037C299 /* EMMember.m in Sources */,
-				414AC82D16B0A1CE0037C299 /* EMMessage.m in Sources */,
-				414AC83116B0A2C20037C299 /* EMSearch.m in Sources */,
-				414AC83516B0A4910037C299 /* EMMailingResponse.m in Sources */,
-				414AC83916B0A6640037C299 /* EMMailingLinkResponse.m in Sources */,
-				414AC83D16B0A7B80037C299 /* EMMailingResponseEvent.m in Sources */,
-				41D8DC9216C451B800993F4E /* SMWebRequest.m in Sources */,
+				41EB585F16C45CAC005C1805 /* EMClient.m in Sources */,
+				41EB586016C45CAC005C1805 /* EMGroup.m in Sources */,
+				41EB586116C45CAC005C1805 /* EMMailing.m in Sources */,
+				41EB586216C45CAC005C1805 /* EMMailingLinkResponse.m in Sources */,
+				41EB586316C45CAC005C1805 /* EMMailingResponse.m in Sources */,
+				41EB586416C45CAC005C1805 /* EMMailingResponseEvent.m in Sources */,
+				41EB586516C45CAC005C1805 /* EMMember.m in Sources */,
+				41EB586616C45CAC005C1805 /* EMMessage.m in Sources */,
+				41EB586716C45CAC005C1805 /* EMSearch.m in Sources */,
+				41EB58C316C45EED005C1805 /* SMWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		414AC7B616B0747C0037C299 /* Sources */ = {
+		4129EC5916C45C71002A3C60 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				414AC7CA16B0747C0037C299 /* EmmaSDKTests.m in Sources */,
+				4129EC6F16C45C71002A3C60 /* EmmaSDKTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		414AC86316B0AA7D0037C299 /* Sources */ = {
+		41EB586816C45D5F005C1805 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41D8DC9C16C4538100993F4E /* EMGroup.m in Sources */,
-				41D8DC9D16C4538100993F4E /* EMMailing.m in Sources */,
-				41D8DC9E16C4538100993F4E /* EMMember.m in Sources */,
-				41D8DC9F16C4538100993F4E /* EMMessage.m in Sources */,
-				41D8DCA016C4538100993F4E /* EMSearch.m in Sources */,
-				41D8DCA116C4538100993F4E /* EMMailingResponse.m in Sources */,
-				41D8DCA216C4538100993F4E /* EMMailingLinkResponse.m in Sources */,
-				41D8DCA316C4538100993F4E /* EMMailingResponseEvent.m in Sources */,
-				41D8DCA416C4538100993F4E /* EMClient.m in Sources */,
-				41D8DC9316C451B800993F4E /* SMWebRequest.m in Sources */,
+				41EB589816C45E4F005C1805 /* EMClient.m in Sources */,
+				41EB589916C45E4F005C1805 /* EMGroup.m in Sources */,
+				41EB589A16C45E4F005C1805 /* EMMailing.m in Sources */,
+				41EB589B16C45E4F005C1805 /* EMMailingLinkResponse.m in Sources */,
+				41EB589C16C45E4F005C1805 /* EMMailingResponse.m in Sources */,
+				41EB589D16C45E4F005C1805 /* EMMailingResponseEvent.m in Sources */,
+				41EB589E16C45E4F005C1805 /* EMMember.m in Sources */,
+				41EB589F16C45E4F005C1805 /* EMMessage.m in Sources */,
+				41EB58A016C45E4F005C1805 /* EMSearch.m in Sources */,
+				41EB58C216C45EED005C1805 /* SMWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		414AC7C016B0747C0037C299 /* PBXTargetDependency */ = {
+		4129EC6516C45C71002A3C60 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 414AC7A216B0747C0037C299 /* EmmaSDK */;
-			targetProxy = 414AC7BF16B0747C0037C299 /* PBXContainerItemProxy */;
+			target = 4129EC4C16C45C71002A3C60 /* EmmaSDKiOS */;
+			targetProxy = 4129EC6416C45C71002A3C60 /* PBXContainerItemProxy */;
 		};
-		41D8DC9516C4529C00993F4E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ReactiveCocoa;
-			targetProxy = 41D8DC9416C4529C00993F4E /* PBXContainerItemProxy */;
-		};
-		41D8DC9716C4529C00993F4E /* PBXTargetDependency */ = {
+		41EB58C916C45F18005C1805 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SBJson;
-			targetProxy = 41D8DC9616C4529C00993F4E /* PBXContainerItemProxy */;
+			targetProxy = 41EB58C816C45F18005C1805 /* PBXContainerItemProxy */;
 		};
-		41D8DC9916C452AC00993F4E /* PBXTargetDependency */ = {
+		41EB58CB16C45F18005C1805 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "ReactiveCocoa-iOS";
-			targetProxy = 41D8DC9816C452AC00993F4E /* PBXContainerItemProxy */;
+			name = ReactiveCocoa;
+			targetProxy = 41EB58CA16C45F18005C1805 /* PBXContainerItemProxy */;
 		};
-		41D8DC9B16C452AC00993F4E /* PBXTargetDependency */ = {
+		41EB58CD16C45F1E005C1805 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "sbjson-ios";
-			targetProxy = 41D8DC9A16C452AC00993F4E /* PBXContainerItemProxy */;
+			targetProxy = 41EB58CC16C45F1E005C1805 /* PBXContainerItemProxy */;
+		};
+		41EB58CF16C45F1E005C1805 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ReactiveCocoa-iOS";
+			targetProxy = 41EB58CE16C45F1E005C1805 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		414AC7AF16B0747C0037C299 /* InfoPlist.strings */ = {
+		4129EC6A16C45C71002A3C60 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				414AC7B016B0747C0037C299 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		414AC7C516B0747C0037C299 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				414AC7C616B0747C0037C299 /* en */,
+				4129EC6B16C45C71002A3C60 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -707,178 +611,201 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		414AC7CB16B0747C0037C299 /* Debug */ = {
+		4129EC7016C45C71002A3C60 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		414AC7CC16B0747C0037C299 /* Release */ = {
+		4129EC7116C45C71002A3C60 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-			};
-			name = Release;
-		};
-		414AC7CE16B0747C0037C299 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
-				INFOPLIST_FILE = "EmmaSDK/EmmaSDK-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = framework;
-			};
-			name = Debug;
-		};
-		414AC7CF16B0747C0037C299 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
-				INFOPLIST_FILE = "EmmaSDK/EmmaSDK-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = framework;
-			};
-			name = Release;
-		};
-		414AC7D116B0747C0037C299 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
-				INFOPLIST_FILE = "EmmaSDKTests/EmmaSDKTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		414AC7D216B0747C0037C299 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
-				INFOPLIST_FILE = "EmmaSDKTests/EmmaSDKTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		414AC87216B0AA7D0037C299 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DSTROOT = /tmp/EmmaSDK_iOS.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "EmmaSDK-iOS/EmmaSDK-iOS-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		414AC87316B0AA7D0037C299 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DSTROOT = /tmp/EmmaSDK_iOS.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "EmmaSDK-iOS/EmmaSDK-iOS-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4129EC7316C45C71002A3C60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/EmmaSDK.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4129EC7416C45C71002A3C60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/EmmaSDK.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		4129EC7616C45C71002A3C60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
+				INFOPLIST_FILE = "EmmaSDKTests/EmmaSDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		4129EC7716C45C71002A3C60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
+				INFOPLIST_FILE = "EmmaSDKTests/EmmaSDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		41EB589316C45D5F005C1805 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "EmmaSDK/EmmaSDK-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		41EB589416C45D5F005C1805 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "EmmaSDK/EmmaSDK-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		414AC79C16B0747C0037C299 /* Build configuration list for PBXProject "EmmaSDK" */ = {
+		4129EC4816C45C71002A3C60 /* Build configuration list for PBXProject "EmmaSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				414AC7CB16B0747C0037C299 /* Debug */,
-				414AC7CC16B0747C0037C299 /* Release */,
+				4129EC7016C45C71002A3C60 /* Debug */,
+				4129EC7116C45C71002A3C60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		414AC7CD16B0747C0037C299 /* Build configuration list for PBXNativeTarget "EmmaSDK" */ = {
+		4129EC7216C45C71002A3C60 /* Build configuration list for PBXNativeTarget "EmmaSDKiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				414AC7CE16B0747C0037C299 /* Debug */,
-				414AC7CF16B0747C0037C299 /* Release */,
+				4129EC7316C45C71002A3C60 /* Debug */,
+				4129EC7416C45C71002A3C60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		414AC7D016B0747C0037C299 /* Build configuration list for PBXNativeTarget "EmmaSDKTests" */ = {
+		4129EC7516C45C71002A3C60 /* Build configuration list for PBXNativeTarget "EmmaSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				414AC7D116B0747C0037C299 /* Debug */,
-				414AC7D216B0747C0037C299 /* Release */,
+				4129EC7616C45C71002A3C60 /* Debug */,
+				4129EC7716C45C71002A3C60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		414AC87116B0AA7D0037C299 /* Build configuration list for PBXNativeTarget "EmmaSDKiOS" */ = {
+		41EB589216C45D5F005C1805 /* Build configuration list for PBXNativeTarget "EmmaSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				414AC87216B0AA7D0037C299 /* Debug */,
-				414AC87316B0AA7D0037C299 /* Release */,
+				41EB589316C45D5F005C1805 /* Debug */,
+				41EB589416C45D5F005C1805 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 414AC79916B0747C0037C299 /* Project object */;
+	rootObject = 4129EC4516C45C71002A3C60 /* Project object */;
 }
