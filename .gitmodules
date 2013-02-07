@@ -1,3 +1,9 @@
 [submodule "Dependencies/ReactiveCocoa"]
 	path = Dependencies/ReactiveCocoa
 	url = git@github.com:ReactiveCocoa/ReactiveCocoa.git
+[submodule "Dependencies/SBJson"]
+	path = Dependencies/SBJson
+	url = git@github.com:stig/json-framework.git
+[submodule "Dependencies/SMWebRequest"]
+	path = Dependencies/SMWebRequest
+	url = git@github.com:nfarina/webrequest.git
