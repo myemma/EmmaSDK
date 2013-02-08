@@ -106,6 +106,7 @@ describe(@"getGroupsWithType", ^{
         endpoint = [[MockEndpoint alloc] init];
         client = [[EMClient alloc] initWithEndpoint:endpoint];
     });
+    
     it(@"should call endpoint", ^ {
         [[client createGroupsWithNames:@[@"foo", @"bar", @"baz"]] subscribeCompleted:^ {}];
         
@@ -117,6 +118,22 @@ describe(@"getGroupsWithType", ^{
                      @"body": @{ @"groups": @[ @{ @"group_name": @"foo" },  @{ @"group_name": @"bar" }, @{ @"group_name": @"baz" } ] }
                      }];
         expect(endpoint.calls).to.equal(x);
+    });
+    
+    it (@"should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@[@{ @"group_name": @"foo", @"member_group_id": @123 }, @{ @"group_name" : @"bar", @"member_group_id": @456 }] ] ];
+        
+        [[client createGroupsWithNames:@[]] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(2);
+        expect([result[0] ID]).to.equal(@123);
+        expect([result[0] name]).to.equal(@"foo");
+        expect([result[1] ID]).to.equal(@456);
+        expect([result[1] name]).to.equal(@"bar");
     });
 });
 

@@ -96,7 +96,7 @@ static EMClient *shared;
             group.name = value[@"group_name"];
             group.ID = value[@"member_group_id"];
             return group;
-        }];
+        }].array;
     }];
 }
 
