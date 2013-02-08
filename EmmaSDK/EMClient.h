@@ -46,8 +46,8 @@
 
 @end
 
-@interface EMClient : NSObject
+@interface EMClient : NSObject <EMClient>
 
-
++ (EMClient *)shared;
 
 @end
