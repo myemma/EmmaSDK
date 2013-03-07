@@ -98,7 +98,7 @@
 
 SpecBegin(EMClient)
 
-describe(@"getGroupsWithType", ^{
+describe(@"createGroupsWithNames", ^{
     __block EMClient *client;
     __block MockEndpoint *endpoint;
     
@@ -130,10 +130,119 @@ describe(@"getGroupsWithType", ^{
         }];
         
         expect(result.count).to.equal(2);
-        expect([result[0] ID]).to.equal(@123);
+        expect([result[0] ID]).to.equal(@"123");
         expect([result[0] name]).to.equal(@"foo");
-        expect([result[1] ID]).to.equal(@456);
+        expect([result[1] ID]).to.equal(@"456");
         expect([result[1] name]).to.equal(@"bar");
+    });
+});
+
+describe(@"getGroupCountWithType:", ^{
+    __block EMClient *client;
+    __block MockEndpoint *endpoint;
+    
+    beforeEach(^ {
+        endpoint = [[MockEndpoint alloc] init];
+        client = [[EMClient alloc] initWithEndpoint:endpoint];
+    });
+    
+    it(@"should call endpoint", ^ {
+        [[client getGroupCountWithType:EMGroupTypeAll] subscribeCompleted:^{ }];
+        
+        id x = @[@{
+                     @"host": API_HOST,
+                     @"method": @"GET",
+                     @"path": @"/accounts/1/groups?group_types=all&count=true",
+                     @"headers": @{ },
+                     @"body": [NSNull null]
+                   }];
+        
+        expect(endpoint.calls).to.equal(x);
+    });
+    
+    it(@"should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@6] ];
+        
+        [[client getGroupCountWithType:EMGroupTypeAll] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@6);
+    });
+});
+
+describe(@"getGroupsWithType:inRange:", ^{
+    __block EMClient *client;
+    __block MockEndpoint *endpoint;
+    
+    beforeEach(^ {
+        endpoint = [[MockEndpoint alloc] init];
+        client = [[EMClient alloc] initWithEndpoint:endpoint];
+    });
+    
+    void (^testCallsEndpointWithGroupType)(EMGroupType type, NSString *groupTypeString) = ^ (EMGroupType type, NSString *groupTypeString) {
+        
+        [[client getGroupsWithType:type inRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeCompleted:^ { }];
+        
+        id x = @[@{
+                     @"host": API_HOST,
+                     @"method": @"GET",
+                     @"path": [NSString stringWithFormat:@"/accounts/1/groups?group_types=%@&start=10&end=20", groupTypeString],
+                     @"headers": @{ },
+                     @"body": [NSNull null]
+                     }];
+        
+        expect(endpoint.calls).to.equal(x);
+    };
+    
+    it(@"should call endpoint for all group types", ^ {
+        testCallsEndpointWithGroupType(EMGroupTypeAll, @"all");
+    });
+    
+    it(@"should call endpoint for test groups", ^ {
+        testCallsEndpointWithGroupType(EMGroupTypeTest, @"t");
+    });
+    
+    it(@"should call endpoint for group groups", ^ {
+        testCallsEndpointWithGroupType(EMGroupTypeGroup, @"g");
+    });
+    
+    it(@"should call endpoint for hidden groups", ^ {
+        testCallsEndpointWithGroupType(EMGroupTypeHidden, @"h");
+    });
+    
+    it(@"should call endpoint for multiple group types", ^ {
+        testCallsEndpointWithGroupType(EMGroupTypeHidden | EMGroupTypeTest, @"t,h");
+    });
+    
+    it(@"should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               @{
+                               @"active_count": @1,
+                               @"deleted_at": [NSNull null],
+                               @"error_count": @0,
+                               @"optout_count": @1,
+                               @"group_type": @"g",
+                               @"member_group_id": @150,
+                               @"account_id": @100,
+                               @"group_name": @"Monthly Newsletter"
+                               }
+                               ]] ];
+        
+        [[client getGroupsWithType:EMGroupTypeAll inRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"150");
+        expect([result[0] name]).to.equal(@"Monthly Newsletter");
+        expect([result[0] activeCount]).to.equal(@1);
+        expect([result[0] errorCount]).to.equal(@0);
+        expect([result[0] optoutCount]).to.equal(@1);
     });
 });
 

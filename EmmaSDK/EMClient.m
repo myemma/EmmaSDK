@@ -4,6 +4,81 @@
 #define API_HOST @"http://api.e2ma.net"
 #define API_BASE_PATH @"/accounts/1"
 
+NSString *EMGroupTypeGetString(EMGroupType type) {
+    if (type == EMGroupTypeAll)
+        return @"all";
+    
+    NSArray *types = @[];
+    
+    if ((type & EMGroupTypeGroup) > 0)
+        types = [types arrayByAddingObject:@"g"];
+    
+    if ((type & EMGroupTypeTest) > 0)
+        types = [types arrayByAddingObject:@"t"];
+    
+    if ((type & EMGroupTypeHidden) > 0)
+        types = [types arrayByAddingObject:@"h"];
+    
+    return [types componentsJoinedByString:@","];
+}
+
+@interface NSDictionary (QueryString)
+
+- (NSString *)queryString;
+
+@end
+
+@implementation NSDictionary (QueryString)
+
+- (NSString *)queryString {
+    return [[[self allKeys].rac_sequence map:^id(id value) {
+        return [NSString stringWithFormat:@"%@=%@", value, [self[value] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }].array componentsJoinedByString:@"&"];
+}
+
+- (NSDictionary *)dictionaryByAddingCountParam {
+    NSMutableDictionary *dict = [self mutableCopy];
+    dict[@"count"] = @"true";
+    return [dict copy];
+}
+
+- (NSDictionary *)dictionaryByAddingRangeParams:(EMResultRange)range {
+    NSMutableDictionary *dict = [self mutableCopy];
+    dict[@"start"] = [NSString stringWithFormat:@"%d", range.start];
+    dict[@"end"] = [NSString stringWithFormat:@"%d", range.end];
+    return [dict copy];
+}
+
+- (NSDictionary *)dictionaryByMergingDictionary:(NSDictionary *)dictionary {
+    NSMutableDictionary *dict = [self mutableCopy];
+    
+    for (id k in [dictionary allKeys])
+        dict[k] = dictionary[k];
+    
+    return [dict copy];
+}
+
+@end
+
+@interface NSString (QueryString)
+
+- (NSString *)stringByAppendingQueryString:(NSDictionary *)params;
+
+@end
+
+@implementation NSString (QueryString)
+
+- (NSString *)stringByAppendingQueryString:(NSDictionary *)params {
+    NSString *queryString = [params queryString];
+    
+    if (queryString.length)
+        return [self stringByAppendingFormat:@"?%@", queryString];
+    
+    return self;
+}
+
+@end
+
 @implementation NSObject (JSONDataRepresentation)
 
 - (NSData *)JSONDataRepresentation {
@@ -72,7 +147,7 @@ static EMClient *shared;
     if ([body isKindOfClass:[NSInputStream class]]) {
         urlRequest.HTTPBodyStream = (NSInputStream *)body;
     }
-    else {
+    else if (body) {
         urlRequest.HTTPBody = [body JSONDataRepresentation];
         [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     }
@@ -90,14 +165,29 @@ static EMClient *shared;
             return @{ @"group_name": value };
         }].array
     };
-    return [[self requestSignalWithMethod:@"POST" path:@"/groups" headers:nil body:body] map:^id(id value) {
-        return [((NSArray *)value).rac_sequence map:^id(id value) {
-            EMGroup *group = [[EMGroup alloc] init];
-            group.name = value[@"group_name"];
-            group.ID = value[@"member_group_id"];
-            return group;
+    
+    return [[self requestSignalWithMethod:@"POST" path:@"/groups" headers:nil body:body] map:^id(NSArray * results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMGroup alloc] initWithDictionary:value];
         }].array;
     }];
 }
+
+- (RACSignal *)getGroupCountWithType:(EMGroupType)groupType {
+    id query = [@{@"group_types": EMGroupTypeGetString(groupType)} dictionaryByAddingCountParam];
+    
+    return [self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil];
+}
+
+- (RACSignal *)getGroupsWithType:(EMGroupType)groupType inRange:(EMResultRange)range {
+    id query = [@{@"group_types": EMGroupTypeGetString(groupType)} dictionaryByAddingRangeParams:range];
+    
+    return [[self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(id value) {
+        return [((NSArray *)value).rac_sequence map:^id(id value) {
+            return [[EMGroup alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
+
 
 @end
