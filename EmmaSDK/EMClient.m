@@ -182,12 +182,15 @@ static EMClient *shared;
 - (RACSignal *)getGroupsWithType:(EMGroupType)groupType inRange:(EMResultRange)range {
     id query = [@{@"group_types": EMGroupTypeGetString(groupType)} dictionaryByAddingRangeParams:range];
     
-    return [[self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(id value) {
-        return [((NSArray *)value).rac_sequence map:^id(id value) {
+    return [[self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *value) {
+        return [value.rac_sequence map:^id(id value) {
             return [[EMGroup alloc] initWithDictionary:value];
         }].array;
     }];
 }
 
+- (RACSignal *)updateGroup:(EMGroup *)group {
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@", group.ID] headers:nil body:@{ @"group_name": group.name }];
+}
 
 @end

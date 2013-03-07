@@ -42,9 +42,7 @@
     return self;
 }
 
-- (RACSignal *)logCallAndGetResult:(NSDictionary *)call {
-    calls = [calls arrayByAddingObject:call];
-    
+- (RACSignal *)getNextResult {
     id resultObject = results.count ? results[0] : nil;
     
     if (results.count) {
@@ -81,7 +79,9 @@
                            @"body" : body ? body : [NSNull null]
                            };
     
-    return [self logCallAndGetResult:call];
+    calls = [calls arrayByAddingObject:call];
+    
+    return [self getNextResult];
 }
 
 - (void)addErrorResult:(NSUInteger)status headers:(NSDictionary *)headers body:(NSData *)body {
@@ -243,6 +243,48 @@ describe(@"getGroupsWithType:inRange:", ^{
         expect([result[0] activeCount]).to.equal(@1);
         expect([result[0] errorCount]).to.equal(@0);
         expect([result[0] optoutCount]).to.equal(@1);
+    });
+});
+
+describe(@"updateGroup", ^{
+    __block EMClient *client;
+    __block MockEndpoint *endpoint;
+    __block EMGroup *group;
+    
+    beforeEach(^ {
+        endpoint = [[MockEndpoint alloc] init];
+        client = [[EMClient alloc] initWithEndpoint:endpoint];
+        
+        group = [[EMGroup alloc] init];
+        group.ID = @"123";
+        group.name = @"FOO";
+    });
+    
+    it(@"should call endpoint", ^ {
+        [[client updateGroup:group] subscribeCompleted:^{ }];
+        
+        id x = @[@{
+                     @"host": API_HOST,
+                     @"method": @"PUT",
+                     @"path": @"/accounts/1/groups/123",
+                     @"headers": @{ @"Content-Type": @"application/json" },
+                     @"body": @{ @"group_name": @"FOO" }
+                     }];
+        
+        expect(endpoint.calls).to.equal(x);
+    });
+    
+    it(@"should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client updateGroup:group] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+
     });
 });
 
