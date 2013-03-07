@@ -26,4 +26,6 @@ NSString *EMMemberStatusGetShortName(EMMemberStatus status);
 @property (nonatomic, readonly) NSArray *memberFields;
 @property (nonatomic, readonly) NSString *fullName;
 
+- (id)initWithDictionary:(NSDictionary *)dict;
+
 @end

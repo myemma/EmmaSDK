@@ -30,8 +30,8 @@ typedef struct EMResultRange EMResultRange;
 - (RACSignal *)getMemberCount; // returns NSNumber
 - (RACSignal *)getMembersInRange:(EMResultRange)range; // returns NSArray of EMMember
 
-- (RACSignal *)getMemberCountInGroupID:(NSString *)groupID; // returns NSNumber
-- (RACSignal *)getMembersInGroupID:(NSString *)groupID inRange:(EMResultRange)range; // returns NSArray of EMMember
+- (RACSignal *)getMemberCountInGroupID:(NSString *)groupID includeDeleted:(BOOL)deleted; // returns NSNumber
+- (RACSignal *)getMembersInGroupID:(NSString *)groupID inRange:(EMResultRange)range includeDeleted:(BOOL)deleted; // returns NSArray of EMMember
 
 - (RACSignal *)getMemberCountInSearchID:(NSString *)searchID; // returns NSNumber
 - (RACSignal *)getMembersInSearchID:(NSString *)searchID inRange:(EMResultRange)range; // returns NSArray of EMMember

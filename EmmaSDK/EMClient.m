@@ -31,7 +31,10 @@ NSString *EMGroupTypeGetString(EMGroupType type) {
 @implementation NSDictionary (QueryString)
 
 - (NSString *)queryString {
-    return [[[self allKeys].rac_sequence map:^id(id value) {
+    NSArray *keys = [[self allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2];
+    }];
+    return [[keys.rac_sequence map:^id(id value) {
         return [NSString stringWithFormat:@"%@=%@", value, [self[value] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }].array componentsJoinedByString:@"&"];
 }
@@ -182,8 +185,8 @@ static EMClient *shared;
 - (RACSignal *)getGroupsWithType:(EMGroupType)groupType inRange:(EMResultRange)range {
     id query = [@{@"group_types": EMGroupTypeGetString(groupType)} dictionaryByAddingRangeParams:range];
     
-    return [[self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *value) {
-        return [value.rac_sequence map:^id(id value) {
+    return [[self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
             return [[EMGroup alloc] initWithDictionary:value];
         }].array;
     }];
@@ -191,6 +194,15 @@ static EMClient *shared;
 
 - (RACSignal *)updateGroup:(EMGroup *)group {
     return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@", group.ID] headers:nil body:@{ @"group_name": group.name }];
+}
+
+- (RACSignal *)getMembersInGroupID:(NSString *)groupID inRange:(EMResultRange)range includeDeleted:(BOOL)includeDeleted {
+    id query = [@{@"deleted": includeDeleted ? @"true" : @"false" } dictionaryByAddingRangeParams:range];
+    return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/groups/%@/members", groupID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMember alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
 
 @end
