@@ -296,7 +296,66 @@ describe(@"EMClient", ^{
     
     it(@"deleteGroupID: should call endpoint", ^ {
         [[client deleteGroupID:@"123"] subscribeCompleted:^{ }];
-        [endpoint expectRequestWithMethod:@"DELETE" path:@"/groups/123" body:nil];    });
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/groups/123" body:nil];
+    });
+
+    it(@"getMailingsWithStatuses:inRange: should call endpoint", ^ {
+        [client getMailingsWithStatuses:EMMailingStatusAll inRange:(EMResultRange){ .start = 10, .end = 20}];
+        
+        id x = @[@{
+                    @"host": API_HOST,
+                    @"method": @"GET",
+                    @"path": @"/accounts/1/mailings",
+                    @"headers": @{ },
+                    @"body": [NSNull null]
+                    }];
+        
+        expect(endpoint.calls).to.equal(x);
+    });
+    
+    it(@"getMailingsWithStatuses:inRange: should parse results", ^ {
+        
+        __block NSArray *result;
+
+        id mailingsDict = @{
+                                 @"mailing_status": @"p",
+                                 @"plaintext_only": @NO,
+                                 @"sender": @"Kevin McConnell",
+                                 @"name": @"Cancellable mailing",
+                                 @"mailing_id": @201,
+                                 @"started_or_finished": [NSNull null],
+                                 @"recipient_count": @0,
+                                 @"year": [NSNull null],
+                                 @"subject": @"Cancellable mailing",
+                                 @"mailing_type": @"m",
+                                 @"month": [NSNull null],
+                                 @"disabled": @NO,
+                                 @"send_finished": [NSNull null],
+                                 @"send_at": [NSNull null],
+                                 @"parent_mailing_id": [NSNull null],
+                                 @"reply_to": [NSNull null],
+                                 @"send_started": [NSNull null],
+                                 @"signup_form_id": [NSNull null],
+                                 @"archived_ts": [NSNull null],
+                                 @"account_id": @100
+                             };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               mailingsDict
+                               ]] ];
+        
+        [[client getMailingsWithStatuses:EMMailingStatusAll inRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] status]).to.equal(@"p");
+        expect([result[0] sender]).to.equal(@"Kevin McConnell");
+        expect([result[0] name]).to.equal(@"Cancellable mailing");
+        expect([result[0] ID]).to.equal(@201);
+        expect([result[0] recipientCount]).to.equal(@0);
+        expect([result[0] subject]).to.equal(@"Cancellable mailing");
+    });
 });
 
 SpecEnd

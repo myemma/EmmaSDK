@@ -209,4 +209,14 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/groups/%@", groupID] headers:nil body:nil];
 }
 
+- (RACSignal *)getMailingCountWithStatuses:(EMMailingStatus)statuses
+{
+    return nil;
+}
+
+- (RACSignal *)getMailingsWithStatuses:(EMMailingStatus)statuses inRange:(EMResultRange)range
+{
+    return [self requestSignalWithMethod:@"GET" path:@"/mailings" headers:nil body:nil];
+}
+
 @end

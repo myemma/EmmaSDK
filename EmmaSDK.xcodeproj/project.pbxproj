@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		342CB77916F172D30065A7F4 /* NSString+DateParsing.h in Headers */ = {isa = PBXBuildFile; fileRef = 342CB77716F172D30065A7F4 /* NSString+DateParsing.h */; };
+		342CB77A16F172D30065A7F4 /* NSString+DateParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CB77816F172D30065A7F4 /* NSString+DateParsing.m */; };
 		4129EC5116C45C71002A3C60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5016C45C71002A3C60 /* Foundation.framework */; };
 		4129EC6016C45C71002A3C60 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5F16C45C71002A3C60 /* SenTestingKit.framework */; };
 		4129EC6316C45C71002A3C60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5016C45C71002A3C60 /* Foundation.framework */; };
@@ -220,6 +222,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		342CB77716F172D30065A7F4 /* NSString+DateParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DateParsing.h"; sourceTree = "<group>"; };
+		342CB77816F172D30065A7F4 /* NSString+DateParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DateParsing.m"; sourceTree = "<group>"; };
 		4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEmmaSDKiOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4129EC5016C45C71002A3C60 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4129EC5416C45C71002A3C60 /* EmmaSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmmaSDK-Prefix.pch"; sourceTree = "<group>"; };
@@ -409,6 +413,8 @@
 		4159CF8916F1641800DBFD5F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				342CB77716F172D30065A7F4 /* NSString+DateParsing.h */,
+				342CB77816F172D30065A7F4 /* NSString+DateParsing.m */,
 				41EB58BF16C45EED005C1805 /* SMWebRequest.h */,
 				41EB58C016C45EED005C1805 /* SMWebRequest.m */,
 				41912D9416D599FF00126AF1 /* NSObject+ObjectOrNil.h */,
@@ -482,6 +488,7 @@
 				41EB58C116C45EED005C1805 /* SMWebRequest.h in Headers */,
 				41912D9616D599FF00126AF1 /* NSObject+ObjectOrNil.h in Headers */,
 				41912D9A16D59A4100126AF1 /* NSNumber+ObjectIDString.h in Headers */,
+				342CB77916F172D30065A7F4 /* NSString+DateParsing.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -780,6 +787,7 @@
 				41EB58C216C45EED005C1805 /* SMWebRequest.m in Sources */,
 				41912D9716D599FF00126AF1 /* NSObject+ObjectOrNil.m in Sources */,
 				41912D9B16D59A4100126AF1 /* NSNumber+ObjectIDString.m in Sources */,
+				342CB77A16F172D30065A7F4 /* NSString+DateParsing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
