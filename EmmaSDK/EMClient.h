@@ -27,6 +27,25 @@ typedef struct EMResultRange EMResultRange;
 - (RACSignal *)getMailingCountWithStatuses:(EMMailingStatus)statuses; // returns NSNumber
 - (RACSignal *)getMailingsWithStatuses:(EMMailingStatus)statuses inRange:(EMResultRange)range; // returns NSArray of EMMailing
 
+- (RACSignal *)getMembersCountForMailingID:(NSString *)mailingID; // returns NSNumber
+- (RACSignal *)getMembersForMailingID:(NSString *)mailingID inRange:(EMResultRange)range; // returns NSArray of EMMailing
+
+- (RACSignal *)getMessageToMemberID:(NSString *) forMailingID:(NSString *)mailingID; // returns EMMessageContent
+
+- (RACSignal *)getGroupCountForMailingID:(NSString *)mailingID; // returns NSNumber
+- (RACSignal *)getGroupsForMailingID:(NSString *)mailingID inRange:(EMResultRange)range; // returns NSArray of EMGroup
+
+- (RACSignal *)getSearchCountForMailingID:(NSString *)mailingID; // returns NSNumber
+- (RACSignal *)getSearchesForMailingID:(NSString *)mailingID inRange:(EMResultRange)range; // returns NSArray of EMSearch
+
+- (RACSignal *)updateMailingID:(NSString *)mailingID withStatus:(EMMailingStatus)status;
+- (RACSignal *)archiveMailingID:(NSString *)mailingID;
+- (RACSignal *)cancelMailingID:(NSString *)mailingID;
+- (RACSignal *)forwardMailingID:(NSString *)mailingID fromMemberID:(NSString *)memberID toRecipients:(NSArray *)recipients withNote:(NSString *)note; // returns NSNumber (new mailing ID)
+- (RACSignal *)getHeadsupAddressesForMailingID:(NSString *)mailingID; // returns NSArray of NSString
+- (RACSignal *)validateMailingID:(NSString *)mailingID; // returns @YES if mailing is valid, otherwise result should contain info about errors
+- (RACSignal *)declareWinnerID:(NSString *)winner forMailingID:(NSString *)mailingID;
+
 - (RACSignal *)getMemberCount; // returns NSNumber
 - (RACSignal *)getMembersInRange:(EMResultRange)range; // returns NSArray of EMMember
 
