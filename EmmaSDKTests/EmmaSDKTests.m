@@ -298,19 +298,40 @@ describe(@"EMClient", ^{
         [[client deleteGroupID:@"123"] subscribeCompleted:^{ }];
         [endpoint expectRequestWithMethod:@"DELETE" path:@"/groups/123" body:nil];
     });
+    
+    
+    void (^testCallsEndpointWithMailingStatus)(EMMailingStatus status, NSString *statusString) = ^ (EMMailingStatus status, NSString *statusString) {
+        [[client getMailingsWithStatuses:status inRange:(EMResultRange){ .start = 10, .end = 20}] subscribeCompleted:^ { }];
+        NSString *pathString = [NSString stringWithFormat:@"/mailings?end=20&mailing_statuses=%@&start=10", statusString];
+        [endpoint expectRequestWithMethod:@"GET" path:pathString];
+    };
 
-    it(@"getMailingsWithStatuses:inRange: should call endpoint", ^ {
-        [client getMailingsWithStatuses:EMMailingStatusAll inRange:(EMResultRange){ .start = 10, .end = 20}];
-        
-        id x = @[@{
-                    @"host": API_HOST,
-                    @"method": @"GET",
-                    @"path": @"/1/mailings?end=20&mailing_statuses=p,a,s,x,c,f&start=10",
-                    @"headers": @{ },
-                    @"body": [NSNull null]
-                    }];
-        
-        expect(endpoint.calls).to.equal(x);
+    it(@"getMailingsWithStatuses:inRange: should call endpoint all", ^ {
+        testCallsEndpointWithMailingStatus(EMMailingStatusAll, @"p,a,s,x,c,f");
+    });
+    
+    it(@"getMailingsWithStatuses:inRange: should call endpoint pending", ^ {
+        testCallsEndpointWithMailingStatus(EMMailingStatusPending, @"p");
+    });
+    
+    it(@"getMailingsWithStatuses:inRange: should call endpoint paused", ^ {
+        testCallsEndpointWithMailingStatus(EMMailingStatusPaused, @"a");
+    });
+    
+    it(@"getMailingsWithStatuses:inRange: should call endpoint sending", ^ {
+        testCallsEndpointWithMailingStatus(EMMailingStatusSending, @"s");
+    });
+    
+    it(@"getMailingsWithStatuses:inRange: should call endpoint cancelled", ^ {
+        testCallsEndpointWithMailingStatus(EMMailingStatusCanceled, @"x");
+    });
+    
+    it(@"getMailingsWithStatuses:inRange: should call endpoint complete", ^ {
+        testCallsEndpointWithMailingStatus(EMMailingStatusComplete, @"c");
+    });
+    
+    it(@"getMailingsWithStatuses:inRange: should call endpoint failed", ^ {
+        testCallsEndpointWithMailingStatus(EMMailingStatusFailed, @"f");
     });
     
     it(@"getMailingsWithStatuses:inRange: should parse results", ^ {

@@ -5,8 +5,10 @@
 #define API_BASE_PATH @"/1"
 
 NSString *EMMailingStatusToString(EMMailingStatus status) {
+    
     if (status == EMMailingStatusAll)
         return @"p,a,s,x,c,f";
+    
     NSMutableArray *results = [NSMutableArray array];
     
     if ((status & EMMailingStatusPending) > 0)
@@ -27,10 +29,8 @@ NSString *EMMailingStatusToString(EMMailingStatus status) {
     if ((status & EMMailingStatusFailed) > 0)
         [results addObject:@"f"];
     
-    NSString *withTrailingComma = [results componentsJoinedByString:@","];
+    return [results componentsJoinedByString:@","];
     
-    // trim trailing comma
-    return [withTrailingComma stringByReplacingCharactersInRange:NSMakeRange(withTrailingComma.length - 1, 1) withString:@""];
 }
 
 NSString *EMGroupTypeGetString(EMGroupType type) {
@@ -246,6 +246,8 @@ static EMClient *shared;
 - (RACSignal *)getMailingsWithStatuses:(EMMailingStatus)statuses inRange:(EMResultRange)range
 {
     id query = [@{@"mailing_statuses" : EMMailingStatusToString(statuses)} dictionaryByAddingRangeParams:range];
+    
+    assert(query[@"mailing_statuses"] != nil);
     
     return [[self requestSignalWithMethod:@"GET" path:[@"/mailings" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
