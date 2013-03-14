@@ -4,6 +4,35 @@
 #define API_HOST @"http://api.e2ma.net"
 #define API_BASE_PATH @"/1"
 
+NSString *EMMailingStatusToString(EMMailingStatus status) {
+    if (status == EMMailingStatusAll)
+        return @"p,a,s,x,c,f";
+    NSMutableArray *results = [NSMutableArray array];
+    
+    if ((status & EMMailingStatusPending) > 0)
+        [results addObject:@"p"];
+    
+    if ((status & EMMailingStatusPaused) > 0)
+        [results addObject:@"a"];
+    
+    if ((status & EMMailingStatusSending) > 0)
+        [results addObject:@"s"];
+    
+    if ((status & EMMailingStatusCanceled) > 0)
+        [results addObject:@"x"];
+    
+    if ((status & EMMailingStatusComplete) > 0)
+        [results addObject:@"c"];
+    
+    if ((status & EMMailingStatusFailed) > 0)
+        [results addObject:@"f"];
+    
+    NSString *withTrailingComma = [results componentsJoinedByString:@","];
+    
+    // trim trailing comma
+    return [withTrailingComma stringByReplacingCharactersInRange:NSMakeRange(withTrailingComma.length - 1, 1) withString:@""];
+}
+
 NSString *EMGroupTypeGetString(EMGroupType type) {
     if (type == EMGroupTypeAll)
         return @"all";
@@ -216,7 +245,9 @@ static EMClient *shared;
 
 - (RACSignal *)getMailingsWithStatuses:(EMMailingStatus)statuses inRange:(EMResultRange)range
 {
-    return [[self requestSignalWithMethod:@"GET" path:@"/mailings" headers:nil body:nil] map:^id(NSArray *results) {
+    id query = @{@"mailing_statuses" : EMMailingStatusToString(statuses)};
+    
+    return [[self requestSignalWithMethod:@"GET" path:[@"/mailings" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
             return [[EMMailing alloc] initWithDictionary:value];
         }].array;

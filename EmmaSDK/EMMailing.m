@@ -3,9 +3,8 @@
 #import "NSNumber+ObjectIDString.h"
 #import "NSString+DateParsing.h"
 
-@implementation EMMailing
 
-EMMailingStatus MailingStatusFromString(NSString *s) {
+EMMailingStatus EMMailingStatusFromString(NSString *s) {
     if ([s isEqual:@"p"])
         return EMMailingStatusPending;
     if ([s isEqual:@"a"])
@@ -22,6 +21,8 @@ EMMailingStatus MailingStatusFromString(NSString *s) {
     return EMMailingStatusAll;
 }
 
+@implementation EMMailing
+
 - (id)initWithDictionary:(NSDictionary *)dict {
     if ((self = [super init])) {
         _ID = [[[dict objectForKey:@"mailing_id"] numberOrNil] objectIDStringValue];
@@ -30,7 +31,7 @@ EMMailingStatus MailingStatusFromString(NSString *s) {
         _subject = [[[dict objectForKey:@"subject"] stringOrNil] copy];
         _sender = [[[dict objectForKey:@"sender"] stringOrNil] copy];
         _sendStarted = [[[dict objectForKey:@"send_started"] stringOrNil] parseISO8601Timestamp];
-        _status = MailingStatusFromString([[dict objectForKey:@"mailing_status"] stringOrNil]);
+        _status = EMMailingStatusFromString([[dict objectForKey:@"mailing_status"] stringOrNil]);
         
         NSString *publicWebViewURLString = [[[dict objectForKey:@"public_webview_url"] stringOrNil] stringByReplacingOccurrencesOfString:@"https:" withString:@"http:"];
         

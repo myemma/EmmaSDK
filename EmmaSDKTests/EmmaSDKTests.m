@@ -305,7 +305,7 @@ describe(@"EMClient", ^{
         id x = @[@{
                     @"host": API_HOST,
                     @"method": @"GET",
-                    @"path": @"/1/mailings",
+                    @"path": @"/1/mailings?mailing_statuses=p,a,s,x,c,f",
                     @"headers": @{ },
                     @"body": [NSNull null]
                     }];
