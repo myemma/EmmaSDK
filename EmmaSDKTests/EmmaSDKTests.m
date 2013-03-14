@@ -98,16 +98,21 @@
 
 SpecBegin(EMClient)
 
-describe(@"createGroupsWithNames", ^{
+describe(@"EMClient", ^{
     __block EMClient *client;
     __block MockEndpoint *endpoint;
+    __block EMGroup *group;
     
     beforeEach(^ {
         endpoint = [[MockEndpoint alloc] init];
         client = [[EMClient alloc] initWithEndpoint:endpoint];
+        
+        group = [[EMGroup alloc] init];
+        group.ID = @"123";
+        group.name = @"FOO";
     });
     
-    it(@"should call endpoint", ^ {
+    it(@"createGroupsWithNames: should call endpoint", ^ {
         [[client createGroupsWithNames:@[@"foo", @"bar", @"baz"]] subscribeCompleted:^ {}];
         
         id x = @[@{
@@ -120,7 +125,7 @@ describe(@"createGroupsWithNames", ^{
         expect(endpoint.calls).to.equal(x);
     });
     
-    it (@"should parse results", ^ {
+    it(@"createGroupsWithNames: should parse results", ^ {
         __block NSArray *result;
         
         endpoint.results = @[ [RACSignal return:@[@{ @"group_name": @"foo", @"member_group_id": @123 }, @{ @"group_name" : @"bar", @"member_group_id": @456 }] ] ];
@@ -135,18 +140,8 @@ describe(@"createGroupsWithNames", ^{
         expect([result[1] ID]).to.equal(@"456");
         expect([result[1] name]).to.equal(@"bar");
     });
-});
-
-describe(@"getGroupCountWithType:", ^{
-    __block EMClient *client;
-    __block MockEndpoint *endpoint;
     
-    beforeEach(^ {
-        endpoint = [[MockEndpoint alloc] init];
-        client = [[EMClient alloc] initWithEndpoint:endpoint];
-    });
-    
-    it(@"should call endpoint", ^ {
+    it(@"getGroupCountWithType: should call endpoint", ^ {
         [[client getGroupCountWithType:EMGroupTypeAll] subscribeCompleted:^{ }];
         
         id x = @[@{
@@ -160,7 +155,7 @@ describe(@"getGroupCountWithType:", ^{
         expect(endpoint.calls).to.equal(x);
     });
     
-    it(@"should parse results", ^ {
+    it(@"getGroupCountWithType: should parse results", ^ {
         __block NSArray *result;
         
         endpoint.results = @[ [RACSignal return:@6] ];
@@ -170,16 +165,6 @@ describe(@"getGroupCountWithType:", ^{
         }];
         
         expect(result).to.equal(@6);
-    });
-});
-
-describe(@"getGroupsWithType:inRange:", ^{
-    __block EMClient *client;
-    __block MockEndpoint *endpoint;
-    
-    beforeEach(^ {
-        endpoint = [[MockEndpoint alloc] init];
-        client = [[EMClient alloc] initWithEndpoint:endpoint];
     });
     
     void (^testCallsEndpointWithGroupType)(EMGroupType type, NSString *groupTypeString) = ^ (EMGroupType type, NSString *groupTypeString) {
@@ -197,27 +182,27 @@ describe(@"getGroupsWithType:inRange:", ^{
         expect(endpoint.calls).to.equal(x);
     };
     
-    it(@"should call endpoint for all group types", ^ {
+    it(@"getGroupsWithType:inRange: should call endpoint for all group types", ^ {
         testCallsEndpointWithGroupType(EMGroupTypeAll, @"all");
     });
     
-    it(@"should call endpoint for test groups", ^ {
+    it(@"getGroupsWithType:inRange: should call endpoint for test groups", ^ {
         testCallsEndpointWithGroupType(EMGroupTypeTest, @"t");
     });
     
-    it(@"should call endpoint for group groups", ^ {
+    it(@"getGroupsWithType:inRange: should call endpoint for group groups", ^ {
         testCallsEndpointWithGroupType(EMGroupTypeGroup, @"g");
     });
     
-    it(@"should call endpoint for hidden groups", ^ {
+    it(@"getGroupsWithType:inRange: should call endpoint for hidden groups", ^ {
         testCallsEndpointWithGroupType(EMGroupTypeHidden, @"h");
     });
     
-    it(@"should call endpoint for multiple group types", ^ {
+    it(@"getGroupsWithType:inRange: should call endpoint for multiple group types", ^ {
         testCallsEndpointWithGroupType(EMGroupTypeHidden | EMGroupTypeTest, @"t,h");
     });
     
-    it(@"should parse results", ^ {
+    it(@"getGroupsWithType:inRange: should parse results", ^ {
         __block NSArray *result;
         
         endpoint.results = @[ [RACSignal return:@[
@@ -244,23 +229,8 @@ describe(@"getGroupsWithType:inRange:", ^{
         expect([result[0] errorCount]).to.equal(@0);
         expect([result[0] optoutCount]).to.equal(@1);
     });
-});
-
-describe(@"updateGroup", ^{
-    __block EMClient *client;
-    __block MockEndpoint *endpoint;
-    __block EMGroup *group;
     
-    beforeEach(^ {
-        endpoint = [[MockEndpoint alloc] init];
-        client = [[EMClient alloc] initWithEndpoint:endpoint];
-        
-        group = [[EMGroup alloc] init];
-        group.ID = @"123";
-        group.name = @"FOO";
-    });
-    
-    it(@"should call endpoint", ^ {
+    it(@"updateGroup: should call endpoint", ^ {
         [[client updateGroup:group] subscribeCompleted:^{ }];
         
         id x = @[@{
@@ -274,7 +244,7 @@ describe(@"updateGroup", ^{
         expect(endpoint.calls).to.equal(x);
     });
     
-    it(@"should parse results", ^ {
+    it(@"updateGroup: should parse results", ^ {
         __block NSArray *result;
         
         endpoint.results = @[ [RACSignal return:@YES] ];
@@ -284,21 +254,9 @@ describe(@"updateGroup", ^{
         }];
         
         expect(result).to.equal(@YES);
-
-    });
-});
-
-describe(@"getMembersInGroupID:inRange:", ^{
-    
-    __block EMClient *client;
-    __block MockEndpoint *endpoint;
-    
-    beforeEach(^ {
-        endpoint = [[MockEndpoint alloc] init];
-        client = [[EMClient alloc] initWithEndpoint:endpoint];
     });
     
-    it(@"should call endpoint with deleted", ^ {
+    it(@"getMembersInGroupID:inRange: should call endpoint with deleted", ^ {
         [[client getMembersInGroupID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20 } includeDeleted:YES] subscribeCompleted:^ { }];
         
         id x = @[@{
@@ -312,7 +270,7 @@ describe(@"getMembersInGroupID:inRange:", ^{
         expect(endpoint.calls).to.equal(x);
     });
     
-    it(@"should call endpoint without deleted", ^ {
+    it(@"getMembersInGroupID:inRange: should call endpoint without deleted", ^ {
         [[client getMembersInGroupID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20 } includeDeleted:NO] subscribeCompleted:^ { }];
         
         id x = @[@{
@@ -326,7 +284,7 @@ describe(@"getMembersInGroupID:inRange:", ^{
         expect(endpoint.calls).to.equal(x);
     });
     
-    it(@"should parse results", ^ {
+    it(@"getMembersInGroupID:inRange: should parse results", ^ {
         __block NSArray *result;
         
         id memberDict0 = @{
