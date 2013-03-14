@@ -334,6 +334,14 @@ describe(@"EMClient", ^{
         testCallsEndpointWithMailingStatus(EMMailingStatusFailed, @"f");
     });
     
+    it(@"getMailingsWithStatuses:inRange: should call endpoint cancelled and complete", ^ {
+        testCallsEndpointWithMailingStatus(EMMailingStatusCanceled | EMMailingStatusComplete, @"x,c");
+    });
+    
+    it(@"getMailingsWithStatuses:inRange: should call endpoint pending and sending and failed", ^ {
+        testCallsEndpointWithMailingStatus(EMMailingStatusPending | EMMailingStatusSending | EMMailingStatusFailed, @"p,s,f");
+    });
+    
     it(@"getMailingsWithStatuses:inRange: should parse results", ^ {
         
         __block NSArray *result;
