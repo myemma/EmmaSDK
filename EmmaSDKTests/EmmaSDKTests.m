@@ -403,6 +403,24 @@ describe(@"EMClient", ^{
         expect(results.count).to.equal(1);
         expect(results[0]).to.equal(@123);
     });
+    
+    it(@"removeMemberIDs:fromGroupID: should call endpoint", ^ {
+        [[client removeMemberIDs:@[@123, @456] fromGroupID:@"789"] subscribeCompleted:^ {}];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/groups/789/members/remove" body:@{ @"member_ids": @[ @123, @456 ] }];
+    });
+    
+    it(@"removeMemberIDs:fromGroupID: should parse results", ^ {
+        endpoint.results = @[ [RACSignal return:@[ @123 ]] ];
+        
+        __block NSArray *results;
+        
+        [[client removeMemberIDs:@[@123, @456] fromGroupID:@"789"] subscribeNext:^(id x) {
+            results = x;
+        }];
+        
+        expect(results.count).to.equal(1);
+        expect(results[0]).to.equal(@123);
+    });
 });
 
 SpecEnd
