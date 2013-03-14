@@ -245,7 +245,7 @@ static EMClient *shared;
 
 - (RACSignal *)getMailingsWithStatuses:(EMMailingStatus)statuses inRange:(EMResultRange)range
 {
-    id query = @{@"mailing_statuses" : EMMailingStatusToString(statuses)};
+    id query = [@{@"mailing_statuses" : EMMailingStatusToString(statuses)} dictionaryByAddingRangeParams:range];
     
     return [[self requestSignalWithMethod:@"GET" path:[@"/mailings" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
