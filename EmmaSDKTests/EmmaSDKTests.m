@@ -318,7 +318,33 @@ describe(@"EMClient", ^{
         expect([result[0] ID]).to.equal(@"200");
         expect([result[0] email]).to.equal(@"emma@myemma.com");
     });
-
+    
+    it(@"deleteGroupID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client deleteGroupID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
+    
+    it(@"deleteGroupID: should call endpoint", ^ {
+        
+        [[client deleteGroupID:@"123"] subscribeCompleted:^{ }];
+        
+        id x = @[@{
+                     @"host": API_HOST,
+                     @"method": @"DELETE",
+                     @"path": @"/accounts/1/groups/123",
+                     @"headers": @{},
+                     @"body": [NSNull null]
+                     }];
+        
+        expect(endpoint.calls).to.equal(x);
+    });
 });
 
 SpecEnd

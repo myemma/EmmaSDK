@@ -205,4 +205,8 @@ static EMClient *shared;
     }];
 }
 
+- (RACSignal *)deleteGroupID:(NSString *)groupID {
+    return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/groups/%@", groupID] headers:nil body:nil];
+}
+
 @end
