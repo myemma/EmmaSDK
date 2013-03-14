@@ -2,7 +2,7 @@
 #import <SBJson/SBJson.h>
 
 #define API_HOST @"http://api.e2ma.net"
-#define API_BASE_PATH @"/accounts/1"
+#define API_BASE_PATH @"/1"
 
 NSString *EMGroupTypeGetString(EMGroupType type) {
     if (type == EMGroupTypeAll)

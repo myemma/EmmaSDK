@@ -23,6 +23,7 @@
 
 @end
 
+#define API_HOST @"http://api.e2ma.net"
 
 @interface MockEndpoint : NSObject <EMEndpoint>
 
@@ -92,9 +93,24 @@
     self.results =  [self.results arrayByAddingObject:[RACSignal error:[NSError errorWithDomain:@"SMWebRequest" code:0 userInfo:@{ SMErrorResponseKey : errorResponse }]]];
 }
 
-@end
+- (void)expectRequestWithMethod:(NSString *)method path:(NSString *)path {
+    [self expectRequestWithMethod:method path:path body:nil];
+}
 
-#define API_HOST @"http://api.e2ma.net"
+
+- (void)expectRequestWithMethod:(NSString *)method path:(NSString *)path body:(id)body {
+    id x = @[@{
+        @"host": API_HOST,
+        @"method": method,
+        @"path": [NSString stringWithFormat:@"/1%@", path],
+        @"headers": body ? @{ @"Content-Type": @"application/json" } : @{},
+        @"body": body ? body : [NSNull null],
+     }];
+    
+    expect(calls).to.equal(x);
+}
+
+@end
 
 SpecBegin(EMClient)
 
@@ -114,15 +130,7 @@ describe(@"EMClient", ^{
     
     it(@"createGroupsWithNames: should call endpoint", ^ {
         [[client createGroupsWithNames:@[@"foo", @"bar", @"baz"]] subscribeCompleted:^ {}];
-        
-        id x = @[@{
-                     @"host": API_HOST,
-                     @"method": @"POST",
-                     @"path": @"/accounts/1/groups",
-                     @"headers": @{ @"Content-Type": @"application/json" },
-                     @"body": @{ @"groups": @[ @{ @"group_name": @"foo" },  @{ @"group_name": @"bar" }, @{ @"group_name": @"baz" } ] }
-                     }];
-        expect(endpoint.calls).to.equal(x);
+        [endpoint expectRequestWithMethod:@"POST" path:@"/groups" body:@{ @"groups": @[ @{ @"group_name": @"foo" },  @{ @"group_name": @"bar" }, @{ @"group_name": @"baz" } ] }];
     });
     
     it(@"createGroupsWithNames: should parse results", ^ {
@@ -143,16 +151,7 @@ describe(@"EMClient", ^{
     
     it(@"getGroupCountWithType: should call endpoint", ^ {
         [[client getGroupCountWithType:EMGroupTypeAll] subscribeCompleted:^{ }];
-        
-        id x = @[@{
-                     @"host": API_HOST,
-                     @"method": @"GET",
-                     @"path": @"/accounts/1/groups?count=true&group_types=all",
-                     @"headers": @{ },
-                     @"body": [NSNull null]
-                   }];
-        
-        expect(endpoint.calls).to.equal(x);
+        [endpoint expectRequestWithMethod:@"GET" path:@"/groups?count=true&group_types=all" body:nil];
     });
     
     it(@"getGroupCountWithType: should parse results", ^ {
@@ -170,16 +169,7 @@ describe(@"EMClient", ^{
     void (^testCallsEndpointWithGroupType)(EMGroupType type, NSString *groupTypeString) = ^ (EMGroupType type, NSString *groupTypeString) {
         
         [[client getGroupsWithType:type inRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeCompleted:^ { }];
-        
-        id x = @[@{
-                     @"host": API_HOST,
-                     @"method": @"GET",
-                     @"path": [NSString stringWithFormat:@"/accounts/1/groups?end=20&group_types=%@&start=10", groupTypeString],
-                     @"headers": @{ },
-                     @"body": [NSNull null]
-                     }];
-        
-        expect(endpoint.calls).to.equal(x);
+        [endpoint expectRequestWithMethod:@"GET" path:[NSString stringWithFormat:@"/groups?end=20&group_types=%@&start=10", groupTypeString] body:nil];
     };
     
     it(@"getGroupsWithType:inRange: should call endpoint for all group types", ^ {
@@ -232,16 +222,7 @@ describe(@"EMClient", ^{
     
     it(@"updateGroup: should call endpoint", ^ {
         [[client updateGroup:group] subscribeCompleted:^{ }];
-        
-        id x = @[@{
-                     @"host": API_HOST,
-                     @"method": @"PUT",
-                     @"path": @"/accounts/1/groups/123",
-                     @"headers": @{ @"Content-Type": @"application/json" },
-                     @"body": @{ @"group_name": @"FOO" }
-                     }];
-        
-        expect(endpoint.calls).to.equal(x);
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/groups/123" body:@{ @"group_name": @"FOO" }];
     });
     
     it(@"updateGroup: should parse results", ^ {
@@ -258,30 +239,12 @@ describe(@"EMClient", ^{
     
     it(@"getMembersInGroupID:inRange: should call endpoint with deleted", ^ {
         [[client getMembersInGroupID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20 } includeDeleted:YES] subscribeCompleted:^ { }];
-        
-        id x = @[@{
-                     @"host": API_HOST,
-                     @"method": @"GET",
-                     @"path": @"/accounts/1/groups/123/members?deleted=true&end=20&start=10",
-                     @"headers": @{ },
-                     @"body": [NSNull null]
-                     }];
-        
-        expect(endpoint.calls).to.equal(x);
+        [endpoint expectRequestWithMethod:@"GET" path:@"/groups/123/members?deleted=true&end=20&start=10" body:nil];
     });
     
     it(@"getMembersInGroupID:inRange: should call endpoint without deleted", ^ {
         [[client getMembersInGroupID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20 } includeDeleted:NO] subscribeCompleted:^ { }];
-        
-        id x = @[@{
-                     @"host": API_HOST,
-                     @"method": @"GET",
-                     @"path": @"/accounts/1/groups/123/members?deleted=false&end=20&start=10",
-                     @"headers": @{ },
-                     @"body": [NSNull null]
-                     }];
-        
-        expect(endpoint.calls).to.equal(x);
+        [endpoint expectRequestWithMethod:@"GET" path:@"/groups/123/members?deleted=false&end=20&start=10" body:nil];
     });
     
     it(@"getMembersInGroupID:inRange: should parse results", ^ {
@@ -332,19 +295,8 @@ describe(@"EMClient", ^{
     });
     
     it(@"deleteGroupID: should call endpoint", ^ {
-        
         [[client deleteGroupID:@"123"] subscribeCompleted:^{ }];
-        
-        id x = @[@{
-                     @"host": API_HOST,
-                     @"method": @"DELETE",
-                     @"path": @"/accounts/1/groups/123",
-                     @"headers": @{},
-                     @"body": [NSNull null]
-                     }];
-        
-        expect(endpoint.calls).to.equal(x);
-    });
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/groups/123" body:nil];    });
 });
 
 SpecEnd
