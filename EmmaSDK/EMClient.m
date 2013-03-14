@@ -256,4 +256,8 @@ static EMClient *shared;
     }];
 }
 
+- (RACSignal *)addMemberIDs:(NSArray *)memberIDs toGroupID:(NSString *)groupID {
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members", groupID] headers:nil body:@{ @"member_ids": memberIDs }];
+}
+
 @end

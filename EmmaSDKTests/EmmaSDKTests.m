@@ -385,6 +385,24 @@ describe(@"EMClient", ^{
         expect([result[0] recipientCount]).to.equal(@0);
         expect([result[0] subject]).to.equal(@"Cancellable mailing");
     });
+    
+    it(@"addMemberIDs:toGroupID: should call endpoint", ^ {
+        [[client addMemberIDs:@[@123, @456] toGroupID:@"789"] subscribeCompleted:^ {}];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/groups/789/members" body:@{ @"member_ids": @[ @123, @456 ] }];
+    });
+    
+    it(@"addMemberIDs:toGroupID: should parse results", ^ {
+        endpoint.results = @[ [RACSignal return:@[ @123 ]] ];
+        
+        __block NSArray *results;
+        
+        [[client addMemberIDs:@[@123, @456] toGroupID:@"789"] subscribeNext:^(id x) {
+            results = x;
+        }];
+        
+        expect(results.count).to.equal(1);
+        expect(results[0]).to.equal(@123);
+    });
 });
 
 SpecEnd
