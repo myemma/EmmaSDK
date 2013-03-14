@@ -18,4 +18,5 @@ typedef NSUInteger EMMailingStatus;
 @property (nonatomic, readonly) NSURL *publicWebViewURL;
 @property (nonatomic, readonly) EMMailingStatus status;
 
+- (id)initWithDictionary:(NSDictionary *)dict;
 @end

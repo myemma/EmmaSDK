@@ -216,7 +216,11 @@ static EMClient *shared;
 
 - (RACSignal *)getMailingsWithStatuses:(EMMailingStatus)statuses inRange:(EMResultRange)range
 {
-    return [self requestSignalWithMethod:@"GET" path:@"/mailings" headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:@"/mailings" headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailing alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
 
 @end

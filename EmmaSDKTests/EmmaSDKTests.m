@@ -305,7 +305,7 @@ describe(@"EMClient", ^{
         id x = @[@{
                     @"host": API_HOST,
                     @"method": @"GET",
-                    @"path": @"/accounts/1/mailings",
+                    @"path": @"/1/mailings",
                     @"headers": @{ },
                     @"body": [NSNull null]
                     }];
@@ -349,10 +349,10 @@ describe(@"EMClient", ^{
         }];
         
         expect(result.count).to.equal(1);
-        expect([result[0] status]).to.equal(@"p");
+        expect([result[0] status]).to.equal(EMMailingStatusPending);
         expect([result[0] sender]).to.equal(@"Kevin McConnell");
         expect([result[0] name]).to.equal(@"Cancellable mailing");
-        expect([result[0] ID]).to.equal(@201);
+        expect([result[0] ID]).to.equal(@"201");
         expect([result[0] recipientCount]).to.equal(@0);
         expect([result[0] subject]).to.equal(@"Cancellable mailing");
     });
