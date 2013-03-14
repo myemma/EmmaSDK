@@ -345,32 +345,10 @@
 		4129EC5216C45C71002A3C60 /* EmmaSDK */ = {
 			isa = PBXGroup;
 			children = (
-				41EB585816C45CAC005C1805 /* EmmaSDK.h */,
 				41EB584C16C45CAC005C1805 /* EMClient.h */,
-				41EB58FA16C4694E005C1805 /* EMClient+Private.h */,
 				41EB584D16C45CAC005C1805 /* EMClient.m */,
-				41EB584E16C45CAC005C1805 /* EMGroup.h */,
-				41EB584F16C45CAC005C1805 /* EMGroup.m */,
-				41EB585016C45CAC005C1805 /* EMMailing.h */,
-				41EB585116C45CAC005C1805 /* EMMailing.m */,
-				41EB585216C45CAC005C1805 /* EMMailingLinkResponse.h */,
-				41EB585316C45CAC005C1805 /* EMMailingLinkResponse.m */,
-				41EB585416C45CAC005C1805 /* EMMailingResponse.h */,
-				41EB585516C45CAC005C1805 /* EMMailingResponse.m */,
-				41EB585616C45CAC005C1805 /* EMMailingResponseEvent.h */,
-				41EB585716C45CAC005C1805 /* EMMailingResponseEvent.m */,
-				41EB585916C45CAC005C1805 /* EMMember.h */,
-				41EB585A16C45CAC005C1805 /* EMMember.m */,
-				41EB585B16C45CAC005C1805 /* EMMessage.h */,
-				41EB585C16C45CAC005C1805 /* EMMessage.m */,
-				41EB585D16C45CAC005C1805 /* EMSearch.h */,
-				41EB585E16C45CAC005C1805 /* EMSearch.m */,
-				41EB58BF16C45EED005C1805 /* SMWebRequest.h */,
-				41EB58C016C45EED005C1805 /* SMWebRequest.m */,
-				41912D9416D599FF00126AF1 /* NSObject+ObjectOrNil.h */,
-				41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */,
-				41912D9816D59A4100126AF1 /* NSNumber+ObjectIDString.h */,
-				41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */,
+				4159CF8916F1641800DBFD5F /* Utils */,
+				4159CF7F16F1640100DBFD5F /* Models */,
 				4129EC5316C45C71002A3C60 /* Supporting Files */,
 			);
 			path = EmmaSDK;
@@ -379,6 +357,8 @@
 		4129EC5316C45C71002A3C60 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				41EB585816C45CAC005C1805 /* EmmaSDK.h */,
+				41EB58FA16C4694E005C1805 /* EMClient+Private.h */,
 				4129EC5416C45C71002A3C60 /* EmmaSDK-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -401,6 +381,42 @@
 				4129EC6A16C45C71002A3C60 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4159CF7F16F1640100DBFD5F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				41EB584E16C45CAC005C1805 /* EMGroup.h */,
+				41EB584F16C45CAC005C1805 /* EMGroup.m */,
+				41EB585016C45CAC005C1805 /* EMMailing.h */,
+				41EB585116C45CAC005C1805 /* EMMailing.m */,
+				41EB585216C45CAC005C1805 /* EMMailingLinkResponse.h */,
+				41EB585316C45CAC005C1805 /* EMMailingLinkResponse.m */,
+				41EB585416C45CAC005C1805 /* EMMailingResponse.h */,
+				41EB585516C45CAC005C1805 /* EMMailingResponse.m */,
+				41EB585616C45CAC005C1805 /* EMMailingResponseEvent.h */,
+				41EB585716C45CAC005C1805 /* EMMailingResponseEvent.m */,
+				41EB585916C45CAC005C1805 /* EMMember.h */,
+				41EB585A16C45CAC005C1805 /* EMMember.m */,
+				41EB585B16C45CAC005C1805 /* EMMessage.h */,
+				41EB585C16C45CAC005C1805 /* EMMessage.m */,
+				41EB585D16C45CAC005C1805 /* EMSearch.h */,
+				41EB585E16C45CAC005C1805 /* EMSearch.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		4159CF8916F1641800DBFD5F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				41EB58BF16C45EED005C1805 /* SMWebRequest.h */,
+				41EB58C016C45EED005C1805 /* SMWebRequest.m */,
+				41912D9416D599FF00126AF1 /* NSObject+ObjectOrNil.h */,
+				41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */,
+				41912D9816D59A4100126AF1 /* NSNumber+ObjectIDString.h */,
+				41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		41EB587016C45D5F005C1805 /* Other Frameworks */ = {
