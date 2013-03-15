@@ -238,6 +238,14 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/groups/%@", groupID] headers:nil body:nil];
 }
 
+- (RACSignal *)addMemberIDs:(NSArray *)memberIDs toGroupID:(NSString *)groupID {
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members", groupID] headers:nil body:@{ @"member_ids": memberIDs }];
+}
+
+- (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupID:(NSString *)groupID {
+        return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members/remove", groupID] headers:nil body:@{ @"member_ids": memberIDs }];
+}
+
 - (RACSignal *)getMailingCountWithStatuses:(EMMailingStatus)statuses
 {
     id query = @{@"mailing_statuses" : EMMailingStatusToString(statuses)};
@@ -249,8 +257,6 @@ static EMClient *shared;
 {
     id query = [@{@"mailing_statuses" : EMMailingStatusToString(statuses)} dictionaryByAddingRangeParams:range];
     
-    assert(query[@"mailing_statuses"] != nil);
-    
     return [[self requestSignalWithMethod:@"GET" path:[@"/mailings" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
             return [[EMMailing alloc] initWithDictionary:value];
@@ -258,12 +264,25 @@ static EMClient *shared;
     }];
 }
 
-- (RACSignal *)addMemberIDs:(NSArray *)memberIDs toGroupID:(NSString *)groupID {
-    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members", groupID] headers:nil body:@{ @"member_ids": memberIDs }];
+- (RACSignal *)getMembersCountForMailingID:(NSString *)mailingID
+{
+    return nil;
 }
 
-- (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupID:(NSString *)groupID {
-        return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members/remove", groupID] headers:nil body:@{ @"member_ids": memberIDs }];
+// returns NSArray of EMMailing
+- (RACSignal *)getMembersForMailingID:(NSString *)mailingID inRange:(EMResultRange)range
+{
+    //mailings/#mailing_id/members
+    id query = [@{} dictionaryByAddingRangeParams:range];
+        
+    return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/mailings/%@/members", mailingID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailing alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
+
+
+
 
 @end

@@ -438,6 +438,11 @@ describe(@"EMClient", ^{
         expect(results.count).to.equal(1);
         expect(results[0]).to.equal(@123);
     });
+    
+    it(@"getMembersForMailingID:inRange: should call endpoint", ^ {
+        [[client getMembersForMailingID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20}] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/123/members?end=20&start=10"];
+    });
 });
 
 SpecEnd
