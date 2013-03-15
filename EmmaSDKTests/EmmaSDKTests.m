@@ -305,18 +305,17 @@ describe(@"EMClient", ^{
         [endpoint expectRequestWithMethod:@"GET" path:@"/mailings?mailing_statuses=p,a,s,x,c,f"];
     });
     
-//    
-//    it(@"getGroupCountWithType: should parse results", ^ {
-//        __block NSArray *result;
-//        
-//        endpoint.results = @[ [RACSignal return:@6] ];
-//        
-//        [[client getGroupCountWithType:EMGroupTypeAll] subscribeNext:^(id x) {
-//            result = x;
-//        }];
-//        
-//        expect(result).to.equal(@6);
-//    });
+    it(@"getMailingCountWithStatuses: should parse results", ^ {
+        __block NSArray *result;
+
+        endpoint.results = @[ [RACSignal return:@4] ];
+
+        [[client getMailingCountWithStatuses:EMMailingStatusAll] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@4);
+    });
     
     void (^testCallsEndpointWithMailingStatus)(EMMailingStatus status, NSString *statusString) = ^ (EMMailingStatus status, NSString *statusString) {
         [[client getMailingsWithStatuses:status inRange:(EMResultRange){ .start = 10, .end = 20}] subscribeCompleted:^ { }];
