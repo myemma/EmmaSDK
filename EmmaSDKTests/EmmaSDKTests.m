@@ -300,6 +300,24 @@ describe(@"EMClient", ^{
     });
     
     
+    it(@"getMailingCountWithStatuses: should call endpoint", ^ {
+        [[client getMailingCountWithStatuses:EMMailingStatusAll] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings?mailing_statuses=p,a,s,x,c,f"];
+    });
+    
+//    
+//    it(@"getGroupCountWithType: should parse results", ^ {
+//        __block NSArray *result;
+//        
+//        endpoint.results = @[ [RACSignal return:@6] ];
+//        
+//        [[client getGroupCountWithType:EMGroupTypeAll] subscribeNext:^(id x) {
+//            result = x;
+//        }];
+//        
+//        expect(result).to.equal(@6);
+//    });
+    
     void (^testCallsEndpointWithMailingStatus)(EMMailingStatus status, NSString *statusString) = ^ (EMMailingStatus status, NSString *statusString) {
         [[client getMailingsWithStatuses:status inRange:(EMResultRange){ .start = 10, .end = 20}] subscribeCompleted:^ { }];
         NSString *pathString = [NSString stringWithFormat:@"/mailings?end=20&mailing_statuses=%@&start=10", statusString];

@@ -240,7 +240,9 @@ static EMClient *shared;
 
 - (RACSignal *)getMailingCountWithStatuses:(EMMailingStatus)statuses
 {
-    return nil;
+    id query = @{@"mailing_statuses" : EMMailingStatusToString(statuses)};
+    
+    return [self requestSignalWithMethod:@"GET" path:[@"/mailings" stringByAppendingQueryString:query] headers:nil body:nil];
 }
 
 - (RACSignal *)getMailingsWithStatuses:(EMMailingStatus)statuses inRange:(EMResultRange)range
