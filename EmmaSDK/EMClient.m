@@ -277,7 +277,7 @@ static EMClient *shared;
         
     return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/mailings/%@/members", mailingID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMailing alloc] initWithDictionary:value];
+            return [[EMMember alloc] initWithDictionary:value];
         }].array;
     }];
 }

@@ -6,6 +6,7 @@
 #import "EMClient+Private.h"
 #import <SBJson/SBJson.h>
 #import "SMWebRequest.h"
+#import "NSString+DateParsing.h"
 
 @interface NSString (NSString_SBJsonParsing)
 
@@ -442,6 +443,47 @@ describe(@"EMClient", ^{
     it(@"getMembersForMailingID:inRange: should call endpoint", ^ {
         [[client getMembersForMailingID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20}] subscribeCompleted:^ { }];
         [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/123/members?end=20&start=10"];
+    });
+    
+    it(@"getMembersForMailingID:inRange: should parse results", ^ {
+        
+        __block NSArray *result;
+        
+        id mailingsDict = @{
+                                @"status": @"active",
+                                @"confirmed_opt_in": [NSNull null],
+                                @"account_id": @100,
+                                @"fields": @{
+                                    @"first_name": @"Emma",
+                                    @"last_name": @"Smith",
+                                    @"favorite_food": @"tacos"
+                                },
+                                @"member_id": @200,
+                                @"last_modified_at": [NSNull null],
+                                @"member_status_id": @"a",
+                                @"plaintext_preferred": @NO,
+                                @"email_error": [NSNull null],
+                                @"member_since": @"@D:2010-11-12T11:23:45",
+                                @"bounce_count": @0,
+                                @"deleted_at": [NSNull null],
+                                @"email": @"emma@myemma.com"
+                            };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               mailingsDict
+                               ]] ];
+        
+        [[client getMembersForMailingID:@"100" inRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeNext:^(id x) {
+            result = x;
+        }];
+    
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"200");
+        expect([result[0] email]).to.equal(@"emma@myemma.com");
+        expect([result[0] status]).to.equal(EMMemberStatusActive);
+        //TODO: memberSince (weird bug with parseISO8601Timestamp)
+        //TODO: memberFields
+        //TODO: fullName
     });
 });
 
