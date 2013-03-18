@@ -485,6 +485,78 @@ describe(@"EMClient", ^{
         //TODO: memberFields
         //TODO: fullName
     });
+    
+    it(@"getMailingWithID: should call endpoint", ^ {
+        [[client getMailingWithID:@"321" ] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/321"];
+    });
+    
+    it(@"getMailingWithID: should parse results", ^ {
+        
+        __block NSArray *result;
+        
+        id mailingsDict = @{
+                                @"recipient_groups": @[
+                                                        @{
+                                                         @"member_group_id": @151,
+                                                         @"name": @"Widget Buyers"
+                                                        }
+                                                     ],
+                                @"heads_up_emails": @[],
+                                @"send_started": [NSNull null],
+                                @"signup_form_id": [NSNull null],
+                                @"links": @[
+                                            @{
+                                              @"mailing_id": @200,
+                                              @"plaintext": @NO,
+                                              @"link_id": @200,
+                                              @"link_name": @"Emma",
+                                              @"link_target": @"http://www.myemma.com",
+                                              @"link_order": @1
+                                            }
+                                          ],
+                                @"mailing_id": @200,
+                                @"plaintext": @"Hello [% member:first_name %]!",
+                                @"recipient_count": @0,
+                                @"public_webview_url": @"http://localhost/webview/uf/6db0cc7e6fdb2da589b65f29d90c96b6",
+                                @"mailing_type": @"m",
+                                @"parent_mailing_id": [NSNull null],
+                                @"recipient_searches": @[],
+                                @"account_id": @100,
+                                @"recipient_members": @[
+                                                        @{
+                                                          @"email": @"emma@myemma.com",
+                                                          @"member_id": @200
+                                                        }
+                                                      ], 
+                                @"mailing_status": @"c",
+                                @"sender": @"Kevin McConnell",
+                                @"name": @"Sample Mailing",
+                                @"send_finished": [NSNull null],
+                                @"send_at": [NSNull null],
+                                @"subject": @"Sample Mailing for [% member:first_name %] [% member:last_name %]",
+                                @"archived_ts": [NSNull null],
+                                @"html_body": @"<p>Hello [% member:first_name %]!</p>"
+             };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               mailingsDict
+                               ]] ];
+        
+        [[client getMailingWithID:@"321"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] status]).to.equal(EMMailingStatusComplete);
+        expect([result[0] sender]).to.equal(@"Kevin McConnell");
+        expect([result[0] name]).to.equal(@"Sample Mailing");
+        expect([result[0] ID]).to.equal(@"200");
+        expect([result[0] recipientCount]).to.equal(@0);
+        expect([result[0] subject]).to.equal(@"Sample Mailing for [% member:first_name %] [% member:last_name %]");
+        expect([result[0] publicWebViewURL]).to.equal([NSURL URLWithString:@"http://localhost/webview/uf/6db0cc7e6fdb2da589b65f29d90c96b6"]);
+    });
+    
 });
 
 SpecEnd

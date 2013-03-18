@@ -282,7 +282,14 @@ static EMClient *shared;
     }];
 }
 
-
+- (RACSignal *)getMailingWithID:(NSString *)mailingID
+{
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailing alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
 
 
 @end
