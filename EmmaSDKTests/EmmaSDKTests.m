@@ -682,7 +682,6 @@ describe(@"EMClient", ^{
         __block NSArray *result;
         
         id mailingsDict = @{
-        
         };
         
         endpoint.results = @[ [RACSignal return:@[
@@ -735,6 +734,23 @@ describe(@"EMClient", ^{
         endpoint.results = @[ [RACSignal return:@YES] ];
         
         [[client archiveMailingID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
+    
+    it(@"cancelMailingID: should call endpoint", ^ {
+        [[client cancelMailingID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/mailings/cancel/123" body:nil];
+    });
+    
+    it(@"cancelMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client cancelMailingID:@"123"] subscribeNext:^(id x) {
             result = x;
         }];
         
