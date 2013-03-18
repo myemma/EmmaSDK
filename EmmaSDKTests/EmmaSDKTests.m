@@ -601,6 +601,23 @@ describe(@"EMClient", ^{
         expect([result[0] subject]).to.equal(@"Sample Mailing for  ");
 #warning is this all that needs to be tested?
     });
+    
+    it(@"getGroupCountForMailingID: should call endpoint", ^ {
+        [[client getGroupCountForMailingID:@"123"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/123/groups"];
+    });
+    
+    it(@"getGroupCountForMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@4] ];
+        
+        [[client getGroupCountForMailingID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@4);
+    });
 });
 
 SpecEnd
