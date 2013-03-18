@@ -303,5 +303,17 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/groups", mailingID] headers:nil body:nil];
 }
 
+- (RACSignal *)getGroupsForMailingID:(NSString *)mailingID inRange:(EMResultRange)range
+{
+    id query = [@{} dictionaryByAddingRangeParams:range];
+    
+    return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/mailings/%@/groups", mailingID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMGroup alloc] initWithDictionary:value];
+        }].array;
+    }];
+    return nil;
+}
+
 
 @end

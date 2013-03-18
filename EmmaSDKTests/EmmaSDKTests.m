@@ -618,6 +618,43 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@4);
     });
+    
+    //getGroupsForMailingID
+    it(@"getGroupsForMailingID:inRange: should call endpoint", ^ {
+        [[client getGroupsForMailingID:@"321" inRange:(EMResultRange){ .start = 10, .end = 20}] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/321/groups?end=20&start=10"];
+    });
+    
+    it(@"getGroupsForMailingID:inRange: should parse results", ^ {
+        
+        __block NSArray *result;
+        
+        id mailingsDict = @{
+                                @"active_count": @2,
+                                @"deleted_at": [NSNull null],
+                                @"error_count": @0,
+                                @"optout_count": @0,
+                                @"group_type": @"g",
+                                @"member_group_id": @151,
+                                @"account_id": @100,
+                                @"group_name": @"Widget Buyers"
+        };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               mailingsDict
+                               ]] ];
+        
+        [[client getGroupsForMailingID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"151");
+        expect([result[0] name]).to.equal(@"Widget Buyers");
+        expect([result[0] activeCount]).to.equal(2);
+        expect([result[0] errorCount]).to.equal(0);
+        expect([result[0] optoutCount]).to.equal(0);
+     });
 });
 
 SpecEnd
