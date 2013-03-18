@@ -681,8 +681,7 @@ describe(@"EMClient", ^{
         
         __block NSArray *result;
         
-        id mailingsDict = @{
-        };
+        id mailingsDict = @{ };
         
         endpoint.results = @[ [RACSignal return:@[
                                mailingsDict
@@ -763,11 +762,9 @@ describe(@"EMClient", ^{
     });
     
     it(@"getHeadsupAddressesForMailingID: should parse results", ^ {
-        
         __block NSArray *result;
         
-        id mailingsDict = @{
-        };
+        id mailingsDict = @{ };
         
         endpoint.results = @[ [RACSignal return:@[
                                mailingsDict
@@ -779,6 +776,24 @@ describe(@"EMClient", ^{
         
         expect(result.count).to.equal(1);
 #warning the docs show no results dict, so only checking count
+    });
+    
+    it(@"declareWinnerID:forMailingID: should call endpoint", ^ {
+        [[client declareWinnerID:@"100" forMailingID:@"321"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"POST" path:@"/mailings/321/winner/100"];
+    });
+    
+    it(@"declareWinnerID:forMailingID: should parse results", ^ {
+        
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client declareWinnerID:@"100" forMailingID:@"321"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
     });
     
 });

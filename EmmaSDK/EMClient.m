@@ -354,7 +354,17 @@ static EMClient *shared;
 
 - (RACSignal *)getHeadsupAddressesForMailingID:(NSString *)mailingID
 {    
-        return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/headsup", mailingID] headers:nil body:nil];
+    return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/headsup", mailingID] headers:nil body:nil];
+}
+
+- (RACSignal *)validateMailingID:(NSString *)mailingID
+{
+    return nil;
+}
+
+- (RACSignal *)declareWinnerID:(NSString *)winner forMailingID:(NSString *)mailingID
+{
+    return [self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/mailings/%@/winner/%@", mailingID, winner] headers:nil body:nil];
 }
 
 
