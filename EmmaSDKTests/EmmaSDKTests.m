@@ -619,7 +619,6 @@ describe(@"EMClient", ^{
         expect(result).to.equal(@4);
     });
     
-    //getGroupsForMailingID
     it(@"getGroupsForMailingID:inRange: should call endpoint", ^ {
         [[client getGroupsForMailingID:@"321" inRange:(EMResultRange){ .start = 10, .end = 20}] subscribeCompleted:^ { }];
         [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/321/groups?end=20&start=10"];
@@ -655,6 +654,23 @@ describe(@"EMClient", ^{
         expect([result[0] errorCount]).to.equal(0);
         expect([result[0] optoutCount]).to.equal(0);
      });
+    
+    it(@"getSearchCountForMailingID: should call endpoint", ^ {
+        [[client getSearchCountForMailingID:@"123"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/123/searches"];
+    });
+    
+    it(@"getSearchCountForMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@3] ];
+        
+        [[client getSearchCountForMailingID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@3);
+    });
 });
 
 SpecEnd

@@ -315,5 +315,11 @@ static EMClient *shared;
     return nil;
 }
 
+- (RACSignal *)getSearchCountForMailingID:(NSString *)mailingID
+{
+    return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/searches", mailingID] headers:nil body:nil];
+}
+
+
 
 @end
