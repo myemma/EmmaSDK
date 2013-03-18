@@ -714,14 +714,31 @@ describe(@"EMClient", ^{
     it(@"updateMailingID:withStatus: should parse results", ^ {
         __block NSArray *result;
         
-        endpoint.results = @[ [RACSignal return:@YES] ];
+        endpoint.results = @[ [RACSignal return:@"c"] ];
         
         [[client updateMailingID:@"123" withStatus:EMMailingStatusComplete] subscribeNext:^(id x) {
             result = x;
         }];
         
+        expect(result).to.equal(@"c");
+#warning Docs say it should return the updated status, not sure if this is what it means or not
+    });
+    
+    it(@"archiveMailingID: should call endpoint", ^ {
+        [[client archiveMailingID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/mailings/123" body:nil];
+    });
+    
+    it(@"archiveMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client archiveMailingID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
         expect(result).to.equal(@YES);
-#warning not sure what i'm supposed to expect here, going off updateGroup test implementation
     });
 });
 

@@ -337,5 +337,10 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:@{ @"mailing_status": EMMailingStatusToString(status) }];
 }
 
+- (RACSignal *)archiveMailingID:(NSString *)mailingID
+{
+    return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:nil];
+}
+
 
 @end
