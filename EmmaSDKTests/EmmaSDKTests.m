@@ -696,6 +696,26 @@ describe(@"EMClient", ^{
         expect(result.count).to.equal(1);
 #warning the docs show no results dict, so only checking count
     });
+    
+    
+#warning the docs say: "The status can be one of canceled, paused or ready." Do we need to test other cases?
+    it(@"updateMailingID:withStatus: should call endpoint", ^ {
+        [[client updateMailingID:@"123" withStatus:EMMailingStatusComplete] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/mailings/123" body:@{ @"mailing_status": @"c" }];
+    });
+    
+    it(@"updateMailingID:withStatus: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client updateMailingID:@"123" withStatus:EMMailingStatusComplete] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+#warning not sure what i'm supposed to expect here, going off updateGroup test implementation
+    });
 });
 
 SpecEnd
