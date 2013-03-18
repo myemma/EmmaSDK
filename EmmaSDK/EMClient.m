@@ -289,5 +289,15 @@ static EMClient *shared;
     }];
 }
 
+//mailings/#mailing_id/messages/#member_id
+// returns EMMessageContent
+- (RACSignal *)getMessageToMemberID:(NSString *)memberID forMailingID:(NSString *)mailingID
+{
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/messages/%@", mailingID, memberID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMessage alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
 
 @end

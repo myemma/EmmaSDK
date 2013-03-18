@@ -574,6 +574,33 @@ describe(@"EMClient", ^{
         expect([result[0] publicWebViewURL]).to.equal([NSURL URLWithString:@"http://localhost/webview/uf/6db0cc7e6fdb2da589b65f29d90c96b6"]);
     });
     
+    it(@"getMessageToMemberID:forMailingID: should call endpoint", ^ {
+        [[client getMessageToMemberID:@"123" forMailingID:@"321"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/321/messages/123"];
+    });
+    
+    it(@"getMessageToMemberID:forMailingID: should parse results", ^ {
+        
+        __block NSArray *result;
+        
+        id mailingsDict = @{
+                                @"plaintext": @"Hello !",
+                                @"subject": @"Sample Mailing for  ",
+                                @"html_body": @"<p>Hello !</p>"
+            };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               mailingsDict
+                               ]] ];
+        
+        [[client getMessageToMemberID:@"123" forMailingID:@"321"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] subject]).to.equal(@"Sample Mailing for  ");
+#warning is this all that needs to be tested?
+    });
 });
 
 SpecEnd

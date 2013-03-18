@@ -2,9 +2,11 @@
 #import "EMGroup.h"
 #import "EMMailing.h"
 #import "EMMember.h"
+#import "EMMessage.h"
 #import "EMMailingResponse.h"
 #import "EMMailingLinkResponse.h"
 #import "EMMailingResponseEvent.h"
+
 
 struct EMResultRange {
     NSInteger start, end;
@@ -30,7 +32,7 @@ typedef struct EMResultRange EMResultRange;
 - (RACSignal *)getMembersCountForMailingID:(NSString *)mailingID; // returns NSNumber
 - (RACSignal *)getMembersForMailingID:(NSString *)mailingID inRange:(EMResultRange)range; // returns NSArray of EMMailing
 
-- (RACSignal *)getMessageToMemberID:(NSString *) forMailingID:(NSString *)mailingID; // returns EMMessageContent
+- (RACSignal *)getMessageToMemberID:(NSString *)memberID forMailingID:(NSString *)mailingID; // returns EMMessageContent
 
 - (RACSignal *)getGroupCountForMailingID:(NSString *)mailingID; // returns NSNumber
 - (RACSignal *)getGroupsForMailingID:(NSString *)mailingID inRange:(EMResultRange)range; // returns NSArray of EMGroup
