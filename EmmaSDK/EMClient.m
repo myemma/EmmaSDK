@@ -320,6 +320,17 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/searches", mailingID] headers:nil body:nil];
 }
 
+- (RACSignal *)getSearchesForMailingID:(NSString *)mailingID inRange:(EMResultRange)range
+{
+    id query = [@{} dictionaryByAddingRangeParams:range];
+    
+    return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/mailings/%@/searches", mailingID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMSearch alloc] initWithDictionary:value];
+        }].array;
+    }];
+    return nil;
+}
 
 
 @end

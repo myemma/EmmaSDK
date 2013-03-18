@@ -3,6 +3,7 @@
 #import "EMMailing.h"
 #import "EMMember.h"
 #import "EMMessage.h"
+#import "EMSearch.h"
 #import "EMMailingResponse.h"
 #import "EMMailingLinkResponse.h"
 #import "EMMailingResponseEvent.h"

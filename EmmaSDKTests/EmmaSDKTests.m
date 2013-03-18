@@ -671,6 +671,31 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@3);
     });
+    
+    it(@"getSearchesForMailingID:inRange: should call endpoint", ^ {
+        [[client getSearchesForMailingID:@"321" inRange:(EMResultRange){ .start = 10, .end = 20}] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/321/searches?end=20&start=10"];
+    });
+    
+    it(@"getSearchesForMailingID:inRange: should parse results", ^ {
+        
+        __block NSArray *result;
+        
+        id mailingsDict = @{
+        
+        };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               mailingsDict
+                               ]] ];
+        
+        [[client getSearchesForMailingID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+#warning the docs show no results dict, so only checking count
+    });
 });
 
 SpecEnd
