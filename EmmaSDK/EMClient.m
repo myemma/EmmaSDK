@@ -266,13 +266,11 @@ static EMClient *shared;
 
 - (RACSignal *)getMembersCountForMailingID:(NSString *)mailingID
 {
-    return nil;
+    return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/members", mailingID] headers:nil body:nil];
 }
 
-// returns NSArray of EMMailing
 - (RACSignal *)getMembersForMailingID:(NSString *)mailingID inRange:(EMResultRange)range
 {
-    //mailings/#mailing_id/members
     id query = [@{} dictionaryByAddingRangeParams:range];
         
     return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/mailings/%@/members", mailingID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {

@@ -440,6 +440,23 @@ describe(@"EMClient", ^{
         expect(results[0]).to.equal(@123);
     });
     
+    it(@"getMembersCountForMailingID: should call endpoint", ^ {
+        [[client getMembersCountForMailingID:@"123"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/123/members"];
+    });
+    
+    it(@"getMembersCountForMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@3] ];
+        
+        [[client getMembersCountForMailingID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@3);
+    });
+    
     it(@"getMembersForMailingID:inRange: should call endpoint", ^ {
         [[client getMembersForMailingID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20}] subscribeCompleted:^ { }];
         [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/123/members?end=20&start=10"];
