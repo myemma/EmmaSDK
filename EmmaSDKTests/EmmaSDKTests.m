@@ -697,13 +697,20 @@ describe(@"EMClient", ^{
 #warning the docs show no results dict, so only checking count
     });
     
+    void (^updateMailingTestCallsEndpointWithMailingStatus)(EMMailingStatus status, NSString *statusString) = ^ (EMMailingStatus status, NSString *statusString) {
+        [[client updateMailingID:@"123" withStatus:status] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/mailings/123" body:@{ @"mailing_status": statusString }];
+    };
     
-#warning the docs say: "The status can be one of canceled, paused or ready." Do we need to test other cases?
-    it(@"updateMailingID:withStatus: should call endpoint", ^ {
-        [[client updateMailingID:@"123" withStatus:EMMailingStatusComplete] subscribeCompleted:^{ }];
-        [endpoint expectRequestWithMethod:@"PUT" path:@"/mailings/123" body:@{ @"mailing_status": @"c" }];
+#warning the docs say: "The status can be one of canceled, paused or ready." I don't see a EMMailingStatus for 'ready'. Also, do we need to test other cases?
+    it(@"updateMailingID:withStatus: should call endpoint", ^ {        
+        updateMailingTestCallsEndpointWithMailingStatus(EMMailingStatusComplete, @"c");
     });
     
+    it(@"updateMailingID:withStatus: should parse results", ^ {
+        updateMailingTestCallsEndpointWithMailingStatus(EMMailingStatusPaused, @"a");
+    });
+
     it(@"updateMailingID:withStatus: should parse results", ^ {
         __block NSArray *result;
         
