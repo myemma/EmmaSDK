@@ -756,6 +756,31 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+    
+    it(@"getHeadsupAddressesForMailingID: should call endpoint", ^ {
+        [[client getHeadsupAddressesForMailingID:@"321"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/321/headsup"];
+    });
+    
+    it(@"getHeadsupAddressesForMailingID: should parse results", ^ {
+        
+        __block NSArray *result;
+        
+        id mailingsDict = @{
+        };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               mailingsDict
+                               ]] ];
+        
+        [[client getHeadsupAddressesForMailingID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+#warning the docs show no results dict, so only checking count
+    });
+    
 });
 
 SpecEnd

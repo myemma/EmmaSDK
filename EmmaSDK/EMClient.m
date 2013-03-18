@@ -347,5 +347,15 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/mailings/cancel/%@", mailingID] headers:nil body:nil];
 }
 
+- (RACSignal *)forwardMailingID:(NSString *)mailingID fromMemberID:(NSString *)memberID toRecipients:(NSArray *)recipients withNote:(NSString *)note
+{
+    return nil;
+}
+
+- (RACSignal *)getHeadsupAddressesForMailingID:(NSString *)mailingID
+{    
+        return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/headsup", mailingID] headers:nil body:nil];
+}
+
 
 @end
