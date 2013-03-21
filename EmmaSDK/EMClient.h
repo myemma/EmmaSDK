@@ -69,7 +69,7 @@ typedef struct EMResultRange EMResultRange;
 - (RACSignal *)forwardMailingID:(NSString *)mailingID fromMemberID:(NSString *)memberID toRecipients:(NSArray *)recipients withNote:(NSString *)note; // returns NSNumber (new mailing ID)
 - (RACSignal *)resendMailingID:(NSString *)mailingID headsUpAddresses:(NSArray *)headsUpAddresses recipientAddresses:(NSArray *)recipientAddresses recipientGroupIDs:(NSArray *)recipientGroupIDs recipientSearchIDs:(NSArray *)recipientSearchIDs;
 - (RACSignal *)getHeadsupAddressesForMailingID:(NSString *)mailingID; // returns NSArray of NSString
-- (RACSignal *)validateMailingID:(NSString *)mailingID; // returns @YES if mailing is valid, otherwise result should contain info about errors
+- (RACSignal *)validateMailingWithBody:(NSString *)htmlBody plaintext:(NSString *)plaintext andSubject:(NSString *)subject; // returns @YES if mailing is valid, otherwise result should contain info about errors
 - (RACSignal *)declareWinnerID:(NSString *)winner forMailingID:(NSString *)mailingID;
 
 // members

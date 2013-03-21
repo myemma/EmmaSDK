@@ -357,9 +357,9 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/headsup", mailingID] headers:nil body:nil];
 }
 
-- (RACSignal *)validateMailingID:(NSString *)mailingID
+- (RACSignal *)validateMailingWithBody:(NSString *)htmlBody plaintext:(NSString *)plaintext andSubject:(NSString *)subject
 {
-    return nil;
+    return [self requestSignalWithMethod:@"POST" path:@"/mailings/validate" headers:nil body:@{@"html_body" : htmlBody, @"plaintext" : plaintext, @"subject" : subject}];
 }
 
 - (RACSignal *)declareWinnerID:(NSString *)winner forMailingID:(NSString *)mailingID

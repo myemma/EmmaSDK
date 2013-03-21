@@ -834,7 +834,29 @@ describe(@"EMClient", ^{
         expect(result.count).to.equal(1);
         expect(result[0]).to.equal(mailingsDict);
     });
-
+    
+    it(@"validateMailingWithBody:plaintext:andSubject: should call endpoint", ^ {
+        [[client validateMailingWithBody:@"<html>super cool email</html>" plaintext:@"super cool email" andSubject:@"interesting subject"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"POST"
+                                     path:@"/mailings/validate"
+                                     body:@{@"html_body": @"<html>super cool email</html>", @"plaintext" : @"super cool email", @"subject" : @"interesting subject"}];
+    });
+    
+    it(@"validateMailingWithBody:plaintext:andSubject: should parse results", ^ {
+        
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               @YES
+                               ]] ];
+        
+        [[client validateMailingWithBody:@"<html>super cool email</html>" plaintext:@"super cool email" andSubject:@"interesting subject"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect(result[0]).to.equal(@YES);
+    });
 });
 
 SpecEnd
