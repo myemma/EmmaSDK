@@ -349,7 +349,7 @@ static EMClient *shared;
 
 - (RACSignal *)forwardMailingID:(NSString *)mailingID fromMemberID:(NSString *)memberID toRecipients:(NSArray *)recipients withNote:(NSString *)note
 {
-    return nil;
+    return [self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/forwards/%@/%@", mailingID, memberID] headers:nil body:@{@"recipient_emails" : recipients, @"note" : note}];
 }
 
 - (RACSignal *)getHeadsupAddressesForMailingID:(NSString *)mailingID

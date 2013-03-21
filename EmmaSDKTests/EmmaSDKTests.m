@@ -808,6 +808,33 @@ describe(@"EMClient", ^{
         expect(result).to.equal(@YES);
     });
     
+    it(@"forwardMailingID:fromMemberID:toRecipients:withNote: should call endpoint", ^ {
+        [[client forwardMailingID:@"123" fromMemberID:@"321" toRecipients:@[@"firstemail@test.com", @"another@email.com"] withNote:@"This is a note"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"POST"
+                                     path:@"/forwards/123/321"
+                                     body:@{@"recipient_emails": @[@"firstemail@test.com", @"another@email.com" ], @"note" : @"This is a note"}];
+    });
+    
+    it(@"forwardMailingID:fromMemberID:toRecipients:withNote: should parse results", ^ {
+        
+        __block NSArray *result;
+        
+        id mailingsDict = @{
+            @"mailing_id": @1024
+        };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               mailingsDict
+                               ]] ];
+        
+        [[client forwardMailingID:@"123" fromMemberID:@"321" toRecipients:@[@"firstemail@test.com", @"another@email.com" ] withNote:@"This is a note"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect(result[0]).to.equal(mailingsDict);
+    });
+
 });
 
 SpecEnd
