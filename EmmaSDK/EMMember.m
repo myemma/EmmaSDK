@@ -15,7 +15,6 @@
         if (!_email)
             _email = [[dict objectForKey:@"email_error"] stringOrNil];
         
-#warning why isn't this parseISO method working? Blergh
 //        _memberSince = [[[dict objectForKey:@"member_since"] stringOrNil] parseISO8601Timestamp];
         
         NSString *memberStatusString;
@@ -42,7 +41,6 @@
         
         if ([[dict allKeys] containsObject:@"fields"]) {
 //            NSDictionary *fieldsDict = [dict objectForKey:@"fields"];
-#warning need to implement member fields support, gonna talk with Ben
 //            self.memberFields = [EMMember memberFieldsForDictionary:fieldsDict accountFields:accountFields];
         }
     }

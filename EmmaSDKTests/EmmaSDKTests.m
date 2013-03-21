@@ -857,6 +857,53 @@ describe(@"EMClient", ^{
         expect(result.count).to.equal(1);
         expect(result[0]).to.equal(@YES);
     });
+    
+    it(@"getMembersInRange: should call endpoint with deleted", ^ {
+        [[client getMembersInRange:(EMResultRange){ .start = 10, .end = 20 } includeDeleted:YES] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members?deleted=true&end=20&start=10" body:nil];
+    });
+    
+    it(@"getMembersInRange: should call endpoint without deleted", ^ {
+        [[client getMembersInRange:(EMResultRange){ .start = 10, .end = 20 } includeDeleted:NO] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members?deleted=false&end=20&start=10" body:nil];
+    });
+    
+    it(@"getMembersInGroupID:inRange: should parse results", ^ {
+        __block NSArray *result;
+        
+        id memberDict0 = @{
+                            @"status": @"active",
+                            @"confirmed_opt_in": [NSNull null],
+                            @"account_id": @100,
+                            @"fields": @{
+                                @"first_name": @"Emma",
+                                @"last_name": @"Smith",
+                                @"favorite_food": @"tacos"
+                            },
+                            @"member_id": @200,
+                            @"last_modified_at": [NSNull null],
+                            @"member_status_id": @"a",
+                            @"plaintext_preferred": @NO,
+                            @"email_error": [NSNull null],
+                            @"member_since": @"@D:2010-11-12T11:23:45",
+                            @"bounce_count": @0,
+                            @"deleted_at": [NSNull null],
+                            @"email": @"emma@myemma.com"
+        };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               memberDict0
+                               ]] ];
+        
+        [[client getMembersInRange:(EMResultRange){ .start = 10, .end = 20 } includeDeleted:YES] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"200");
+        expect([result[0] email]).to.equal(@"emma@myemma.com");
+        expect([result[0] status]).to.equal(EMMemberStatusActive);
+    });
 });
 
 SpecEnd

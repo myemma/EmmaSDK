@@ -367,5 +367,18 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/mailings/%@/winner/%@", mailingID, winner] headers:nil body:nil];
 }
 
+//- (RACSignal *)getMemberCountIncludeDeleted:(BOOL)deleted; // returns NSNumber
+
+- (RACSignal *)getMembersInRange:(EMResultRange)range includeDeleted:(BOOL)deleted
+{
+    id query = [@{@"deleted": deleted ? @"true" : @"false" } dictionaryByAddingRangeParams:range];
+
+    return [[self requestSignalWithMethod:@"GET" path:[@"/members" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMember alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
+
 
 @end

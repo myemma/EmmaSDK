@@ -8,6 +8,8 @@
 #import "EMMailingLinkResponse.h"
 #import "EMMailingResponseEvent.h"
 #import "EMField.h"
+#import "EMTrigger.h"
+#import "EMWebhook.h"
 
 struct EMResultRange {
     NSInteger start, end;
@@ -74,9 +76,8 @@ typedef struct EMResultRange EMResultRange;
 
 // members
 
-- (RACSignal *)getMemberCount; // returns NSNumber
-- (RACSignal *)getMembersInRange:(EMResultRange)range; // returns NSArray of EMMember
-
+- (RACSignal *)getMemberCountIncludeDeleted:(BOOL)deleted; // returns NSNumber
+- (RACSignal *)getMembersInRange:(EMResultRange)range includeDeleted:(BOOL)deleted; // returns NSArray of EMMember
 - (RACSignal *)getMemberWithID:(NSString *)memberID;
 - (RACSignal *)getMemberWithEmail:(NSString *)email;
 - (RACSignal *)getOptoutInfoForMemberID:(NSString *)memberID; // XXX response format undefined
