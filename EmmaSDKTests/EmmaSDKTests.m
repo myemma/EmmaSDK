@@ -682,7 +682,17 @@ describe(@"EMClient", ^{
         
         __block NSArray *result;
         
-        id mailingsDict = @{ };
+        id mailingsDict = @{
+                            @"search_id": @200,
+                            @"optout_count": @0,
+                            @"error_count": @0,
+                            @"name": @"Test Search",
+                            @"criteria": @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
+                            @"deleted_at": [NSNull null],
+                            @"last_run_at": [NSNull null],
+                            @"active_count": @0,
+                            @"account_id": @100
+        };
         
         endpoint.results = @[ [RACSignal return:@[
                                mailingsDict
@@ -693,7 +703,12 @@ describe(@"EMClient", ^{
         }];
         
         expect(result.count).to.equal(1);
-#warning the docs show no results dict, so only checking count
+        expect([result[0] ID]).to.equal(@"200");
+        expect([result[0] name]).to.equal(@"Test Search");
+        expect([result[0] activeCount]).to.equal(@0);
+        expect([result[0] optoutCount]).to.equal(@0);
+        expect([result[0] errorCount]).to.equal(@0);
+        expect([result[0] criteria]).to.equal(@"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]");
     });
     
     void (^updateMailingTestCallsEndpointWithMailingStatus)(EMMailingStatus status, NSString *statusString) = ^ (EMMailingStatus status, NSString *statusString) {
@@ -701,7 +716,6 @@ describe(@"EMClient", ^{
         [endpoint expectRequestWithMethod:@"PUT" path:@"/mailings/123" body:@{ @"mailing_status": statusString }];
     };
     
-#warning the docs say: "The status can be one of canceled, paused or ready." I don't see a EMMailingStatus for 'ready'. Also, do we need to test other cases?
     it(@"updateMailingID:withStatus: should call endpoint", ^ {        
         updateMailingTestCallsEndpointWithMailingStatus(EMMailingStatusComplete, @"c");
     });
@@ -720,7 +734,6 @@ describe(@"EMClient", ^{
         }];
         
         expect(result).to.equal(@"c");
-#warning Docs say it should return the updated status, not sure if this is what it means or not
     });
     
     it(@"archiveMailingID: should call endpoint", ^ {

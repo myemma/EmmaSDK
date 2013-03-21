@@ -1,6 +1,7 @@
 #import "EMSearch.h"
 #import "NSObject+ObjectOrNil.h"
 #import "NSNumber+ObjectIDString.h"
+#import "NSString+DateParsing.h"
 
 @implementation EMSearch
 
@@ -8,7 +9,12 @@
     if ((self = [super init])) {
         _ID = [[[dict objectForKey:@"search_id"] numberOrNil] objectIDStringValue];
         _name = [dict objectForKey:@"name"];
+        _criteria = [dict objectForKey:@"criteria"];
         _activeCount = [[[dict objectForKey:@"active_count"] numberOrNil] intValue];
+        _optoutCount = [[[dict objectForKey:@"output_count"] numberOrNil] intValue];
+        _errorCount = [[[dict objectForKey:@"error_count"] numberOrNil] intValue];
+        _lastRunAt = [[[dict objectForKey:@"last_run_at"] stringOrNil] parseISO8601Timestamp];
+        _deletedAt = [[[dict objectForKey:@"last_run_at"] stringOrNil] parseISO8601Timestamp];
     }
     return self;
 }
