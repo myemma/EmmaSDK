@@ -21,6 +21,10 @@
 		41912D9B16D59A4100126AF1 /* NSNumber+ObjectIDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */; };
 		41912D9C16D59D2600126AF1 /* NSObject+ObjectOrNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */; };
 		41912D9D16D59D2600126AF1 /* NSNumber+ObjectIDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */; };
+		41CB3EB416FAAF9E009CAD80 /* EMTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */; };
+		41CB3EB516FAAF9E009CAD80 /* EMTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */; };
+		41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EBF16FAB113009CAD80 /* EMWebhook.h */; };
+		41CB3EC216FAB113009CAD80 /* EMWebhook.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CB3EC016FAB113009CAD80 /* EMWebhook.m */; };
 		41EB585F16C45CAC005C1805 /* EMClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB584D16C45CAC005C1805 /* EMClient.m */; };
 		41EB586016C45CAC005C1805 /* EMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB584F16C45CAC005C1805 /* EMGroup.m */; };
 		41EB586116C45CAC005C1805 /* EMMailing.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585116C45CAC005C1805 /* EMMailing.m */; };
@@ -240,6 +244,10 @@
 		41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ObjectOrNil.m"; sourceTree = "<group>"; };
 		41912D9816D59A4100126AF1 /* NSNumber+ObjectIDString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ObjectIDString.h"; sourceTree = "<group>"; };
 		41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ObjectIDString.m"; sourceTree = "<group>"; };
+		41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMTrigger.h; sourceTree = "<group>"; };
+		41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMTrigger.m; sourceTree = "<group>"; };
+		41CB3EBF16FAB113009CAD80 /* EMWebhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMWebhook.h; sourceTree = "<group>"; };
+		41CB3EC016FAB113009CAD80 /* EMWebhook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMWebhook.m; sourceTree = "<group>"; };
 		41EB584C16C45CAC005C1805 /* EMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMClient.h; sourceTree = "<group>"; };
 		41EB584D16C45CAC005C1805 /* EMClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMClient.m; sourceTree = "<group>"; };
 		41EB584E16C45CAC005C1805 /* EMGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMGroup.h; sourceTree = "<group>"; };
@@ -412,6 +420,10 @@
 				41EB585E16C45CAC005C1805 /* EMSearch.m */,
 				41F901A216FA9F1A0008CF8E /* EMField.h */,
 				41F901A316FA9F1A0008CF8E /* EMField.m */,
+				41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */,
+				41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */,
+				41CB3EBF16FAB113009CAD80 /* EMWebhook.h */,
+				41CB3EC016FAB113009CAD80 /* EMWebhook.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -496,6 +508,8 @@
 				41912D9A16D59A4100126AF1 /* NSNumber+ObjectIDString.h in Headers */,
 				342CB77916F172D30065A7F4 /* NSString+DateParsing.h in Headers */,
 				41F901A416FA9F1A0008CF8E /* EMField.h in Headers */,
+				41CB3EB416FAAF9E009CAD80 /* EMTrigger.h in Headers */,
+				41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,6 +810,8 @@
 				41912D9B16D59A4100126AF1 /* NSNumber+ObjectIDString.m in Sources */,
 				342CB77A16F172D30065A7F4 /* NSString+DateParsing.m in Sources */,
 				41F901A516FA9F1A0008CF8E /* EMField.m in Sources */,
+				41CB3EB516FAAF9E009CAD80 /* EMTrigger.m in Sources */,
+				41CB3EC216FAB113009CAD80 /* EMWebhook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

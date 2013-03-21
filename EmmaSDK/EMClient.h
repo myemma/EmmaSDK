@@ -112,15 +112,38 @@ typedef struct EMResultRange EMResultRange;
 - (RACSignal *)getMemberCountInSearchID:(NSString *)searchID; // returns NSNumber
 - (RACSignal *)getMembersInSearchID:(NSString *)searchID inRange:(EMResultRange)range; // returns NSArray of EMMember
 
+// triggers
+- (RACSignal *)getTriggerCount;
+- (RACSignal *)getTriggersInRange:(EMResultRange)range; // returns NSArray of EMTrigger
+- (RACSignal *)createTrigger:(EMTrigger *)trigger;
+- (RACSignal *)getTriggerWithID:(NSString *)triggerID;
+- (RACSignal *)updateTrigger:(EMTrigger *)trigger;
+- (RACSignal *)deleteTriggerWithID:(NSString *)triggerID;
+- (RACSignal *)getTriggerMailingCount;
+- (RACSignal *)getTriggerMailingsInRange:(EMResultRange)range; // returns NSArray of EMMailing
+
+// webhooks
+- (RACSignal *)getWebhookCount;
+- (RACSignal *)getWebhooksInRange:(EMResultRange)range; // returns NSArray of EMWebhook
+- (RACSignal *)createWebhook:(EMWebhook *)webhook;
+- (RACSignal *)updateWebhook:(EMWebhook *)webhook;
+- (RACSignal *)deleteWebhookWithID:(NSString *)webhookID;
+- (RACSignal *)deleteAllWebhooks;
+
+// response
+- (RACSignal *)getResponseSummary;
+- (RACSignal *)getResponseForMailingID:(NSString *)mailingID; // returns EMMailingResponse
+
+- (RACSignal *)getEventCountOfType:(EMResponseEventType)type forMailingID:(NSString *)mailingID; // returns NSNumber
+- (RACSignal *)getEventsOfType:(EMResponseEventType)type forMailingID:(NSString *)mailingID inRange:(EMResultRange)range; // returns NSArray of EMMailingResponseEvent
+
+
 - (RACSignal *)getMessageCountForMemberID:(NSString *)memberID; // returns NSNumber
 - (RACSignal *)getMessagesForMemberID:(NSString *)memberID inRange:(EMResultRange)range; // returns NSArray of EMMessage
 
 
-- (RACSignal *)getResponseForMailingID:(NSString *)mailingID; // returns EMMailingResponse
 - (RACSignal *)getLinkResponseForMailingID:(NSString *)mailingID; // returns EMMailingLinkResponse
 
-- (RACSignal *)getEventCountOfType:(EMResponseEventType)type forMailingID:(NSString *)mailingID; // returns NSNumber
-- (RACSignal *)getEventsOfType:(EMResponseEventType)type forMailingID:(NSString *)mailingID; // returns NSArray of EMMailingResponseEvent
 
 - (RACSignal *)getClickCountOfLinkID:(NSString *)linkID forMailingID:(NSString *)mailingID; // returns NSNumber
 - (RACSignal *)getClicksOfLinkID:(NSString *)linkID forMailingID:(NSString *)mailingID inRange:(EMResultRange)range; // returns NSArray of EMMailingResponseEvent;
