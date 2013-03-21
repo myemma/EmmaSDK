@@ -7,7 +7,7 @@
 #import "EMMailingResponse.h"
 #import "EMMailingLinkResponse.h"
 #import "EMMailingResponseEvent.h"
-
+#import "EMField.h"
 
 struct EMResultRange {
     NSInteger start, end;
@@ -15,6 +15,16 @@ struct EMResultRange {
 typedef struct EMResultRange EMResultRange;
 
 @protocol EMClient <NSObject>
+
+// fields
+
+- (RACSignal *)getFieldCount;
+- (RACSignal *)getFieldsInRange:(EMResultRange *)range;
+- (RACSignal *)getFieldID:(NSString *)fieldID;
+- (RACSignal *)createField:(EMField *)field;
+- (RACSignal *)deleteFieldID:(NSString *)fieldID;
+- (RACSignal *)clearFieldID:(NSString *)fieldID:
+- (RACSignal *)updateField:(EMField *)field;
 
 // groups
 

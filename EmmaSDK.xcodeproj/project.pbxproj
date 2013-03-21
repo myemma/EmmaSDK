@@ -50,6 +50,8 @@
 		41EB58FF16C472AF005C1805 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EB58AB16C45ED6005C1805 /* ReactiveCocoa.framework */; };
 		41EB590016C472AF005C1805 /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EB58B816C45EE0005C1805 /* SBJson.framework */; };
 		41EB590216C47528005C1805 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EB590116C47528005C1805 /* UIKit.framework */; };
+		41F901A416FA9F1A0008CF8E /* EMField.h in Headers */ = {isa = PBXBuildFile; fileRef = 41F901A216FA9F1A0008CF8E /* EMField.h */; };
+		41F901A516FA9F1A0008CF8E /* EMField.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F901A316FA9F1A0008CF8E /* EMField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +272,8 @@
 		41EB58DF16C463CA005C1805 /* Specta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Specta.xcodeproj; path = Dependencies/ReactiveCocoa/external/specta/Specta.xcodeproj; sourceTree = "<group>"; };
 		41EB58FA16C4694E005C1805 /* EMClient+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EMClient+Private.h"; sourceTree = "<group>"; };
 		41EB590116C47528005C1805 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		41F901A216FA9F1A0008CF8E /* EMField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMField.h; sourceTree = "<group>"; };
+		41F901A316FA9F1A0008CF8E /* EMField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -406,6 +410,8 @@
 				41EB585C16C45CAC005C1805 /* EMMessage.m */,
 				41EB585D16C45CAC005C1805 /* EMSearch.h */,
 				41EB585E16C45CAC005C1805 /* EMSearch.m */,
+				41F901A216FA9F1A0008CF8E /* EMField.h */,
+				41F901A316FA9F1A0008CF8E /* EMField.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -489,6 +495,7 @@
 				41912D9616D599FF00126AF1 /* NSObject+ObjectOrNil.h in Headers */,
 				41912D9A16D59A4100126AF1 /* NSNumber+ObjectIDString.h in Headers */,
 				342CB77916F172D30065A7F4 /* NSString+DateParsing.h in Headers */,
+				41F901A416FA9F1A0008CF8E /* EMField.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +795,7 @@
 				41912D9716D599FF00126AF1 /* NSObject+ObjectOrNil.m in Sources */,
 				41912D9B16D59A4100126AF1 /* NSNumber+ObjectIDString.m in Sources */,
 				342CB77A16F172D30065A7F4 /* NSString+DateParsing.m in Sources */,
+				41F901A516FA9F1A0008CF8E /* EMField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
