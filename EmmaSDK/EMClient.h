@@ -125,6 +125,7 @@ typedef struct EMResultRange EMResultRange;
 // webhooks
 - (RACSignal *)getWebhookCount;
 - (RACSignal *)getWebhooksInRange:(EMResultRange)range; // returns NSArray of EMWebhook
+- (RACSignal *)getWebhookInfo; // returns NSArray of EMWebhookInfo
 - (RACSignal *)createWebhook:(EMWebhook *)webhook;
 - (RACSignal *)updateWebhook:(EMWebhook *)webhook;
 - (RACSignal *)deleteWebhookWithID:(NSString *)webhookID;
