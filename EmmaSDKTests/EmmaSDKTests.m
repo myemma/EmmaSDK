@@ -599,7 +599,8 @@ describe(@"EMClient", ^{
         
         expect(result.count).to.equal(1);
         expect([result[0] subject]).to.equal(@"Sample Mailing for  ");
-#warning is this all that needs to be tested?
+        expect([result[0] plaintext]).to.equal(@"Hello !");
+        expect([result[0] htmlBody]).to.equal(@"<p>Hello !</p>");
     });
     
     it(@"getGroupCountForMailingID: should call endpoint", ^ {

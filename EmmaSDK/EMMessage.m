@@ -23,6 +23,8 @@
         _opened = [[[dict objectForKey:@"opened"] stringOrNil] parseISO8601Timestamp];
         _shared = [[[dict objectForKey:@"shared"] stringOrNil] parseISO8601Timestamp];
         _forwarded = [[[dict objectForKey:@"forwarded"] stringOrNil] parseISO8601Timestamp];
+        _plaintext = [[dict objectForKey:@"plaintext"] stringOrNil];
+        _htmlBody = [[dict objectForKey:@"html_body"] stringOrNil];
         
         NSString *deliveryType = [dict objectForKey:@"delivery_type"];
         

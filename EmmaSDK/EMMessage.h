@@ -8,7 +8,7 @@ typedef NSUInteger MessageDeliveryType;
 
 @interface EMMessage : NSObject
 
-@property (nonatomic, readonly) NSString *mailingID, *subject, *name;
+@property (nonatomic, readonly) NSString *mailingID, *subject, *name, *plaintext, *htmlBody;
 @property (nonatomic, readonly) NSDate *delivered, *clicked, *opened, *shared, *forwarded;
 @property (nonatomic, readonly) MessageDeliveryType type;
 
