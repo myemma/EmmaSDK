@@ -778,18 +778,16 @@ describe(@"EMClient", ^{
     it(@"getHeadsupAddressesForMailingID: should parse results", ^ {
         __block NSArray *result;
         
-        id mailingsDict = @{ };
+        id emails = @[@"testemail@test.com", @"coolemail@email.com"];
         
-        endpoint.results = @[ [RACSignal return:@[
-                               mailingsDict
-                               ]] ];
+        endpoint.results = @[ [RACSignal return:@[emails]] ];
         
         [[client getHeadsupAddressesForMailingID:@"123"] subscribeNext:^(id x) {
             result = x;
         }];
         
         expect(result.count).to.equal(1);
-#warning the docs show no results dict, so only checking count
+        expect(result[0]).to.equal(emails);
     });
     
     it(@"declareWinnerID:forMailingID: should call endpoint", ^ {

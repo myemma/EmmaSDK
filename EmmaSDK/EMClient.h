@@ -23,7 +23,7 @@ typedef struct EMResultRange EMResultRange;
 - (RACSignal *)getFieldID:(NSString *)fieldID;
 - (RACSignal *)createField:(EMField *)field;
 - (RACSignal *)deleteFieldID:(NSString *)fieldID;
-- (RACSignal *)clearFieldID:(NSString *)fieldID:
+- (RACSignal *)clearFieldID:(NSString *)fieldID;
 - (RACSignal *)updateField:(EMField *)field;
 
 // groups
