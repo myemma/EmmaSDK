@@ -32,13 +32,18 @@ typedef struct EMResultRange EMResultRange;
 - (RACSignal *)getGroupsWithType:(EMGroupType)groupType inRange:(EMResultRange)range; // returns NSArray of EMGroup
 
 - (RACSignal *)createGroupsWithNames:(NSArray *)names;
+- (RACSignal *)getGroupID:(NSString *)groupID;
 - (RACSignal *)updateGroup:(EMGroup *)group;
 - (RACSignal *)deleteGroupID:(NSString *)groupID;
-- (RACSignal *)addMemberIDs:(NSArray *)memberIDs toGroupID:(NSString *)groupID;
-- (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupID:(NSString *)groupID;
 
 - (RACSignal *)getMemberCountInGroupID:(NSString *)groupID includeDeleted:(BOOL)deleted; // returns NSNumber
 - (RACSignal *)getMembersInGroupID:(NSString *)groupID inRange:(EMResultRange)range includeDeleted:(BOOL)deleted; // returns NSArray of EMMember
+
+- (RACSignal *)addMemberIDs:(NSArray *)memberIDs toGroupID:(NSString *)groupID;
+- (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupID:(NSString *)groupID;
+
+- (RACSignal *)removeMembersWithStatus:(EMMemberStatus)status fromGroupID:(NSString *)groupID;
+- (RACSignal *)copyMembersWithStatus:(EMMemberStatus)status fromGroupID:(NSString *)fromGroupID toGroupID:(NSString *)toGroupID;
 
 // mailings
 
