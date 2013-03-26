@@ -211,7 +211,11 @@ static EMClient *shared;
 
 - (RACSignal *)getFieldID:(NSString *)fieldID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/fields/%@", fieldID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMField alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
 
 - (RACSignal *)createField:(EMField *)field

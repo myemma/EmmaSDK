@@ -1068,8 +1068,6 @@ describe(@"EMClient", ^{
         expect(result).to.equal(@6);
     });
     
-    
-    
     it(@"getFieldsInRange: should call endpoint", ^ {
         [[client getFieldsInRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeCompleted:^ { }];
         [endpoint expectRequestWithMethod:@"GET" path:@"/fields?end=20&start=10" body:nil];
@@ -1105,6 +1103,42 @@ describe(@"EMClient", ^{
         expect([result[0] widgetType]).to.equal(EMFieldWidgetTypeText);
     });
     
+    it(@"getFieldID: should call endpoint", ^ {
+        [[client getFieldID:@"321"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/fields/321" body:nil];
+    });
+    
+    it(@"getFieldID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id dict = @{
+            @"shortcut_name": @"first_name",
+            @"display_name": @"First Name",
+            @"account_id": @100,
+            @"field_type": @"text",
+            @"required": @NO,
+            @"field_id": @200,
+            @"widget_type": @"text",
+            @"short_display_name": [NSNull null],
+            @"column_order": @1,
+            @"deleted_at": [NSNull null],
+            @"options": [NSNull null]
+        };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               dict
+                               ]] ];
+        
+        [[client getFieldID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] name]).to.equal(@"first_name");
+        expect([result[0] displayName]).to.equal(@"First Name");
+        expect([result[0] fieldType]).to.equal(EMFieldTypeText);
+        expect([result[0] widgetType]).to.equal(EMFieldWidgetTypeText);
+    });
 });
 
 SpecEnd
