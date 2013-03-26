@@ -1050,6 +1050,23 @@ describe(@"EMClient", ^{
         expect(result.count).to.equal(1);
         expect([result[0] ID]).to.equal(@"1024");
     });
+    
+    it(@"getFieldCount: should call endpoint", ^ {
+        [[client getFieldCount] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/fields" body:nil];
+    });
+    
+    it(@"getFieldCount: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@6] ];
+        
+        [[client getFieldCount] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@6);
+    });
 });
 
 SpecEnd

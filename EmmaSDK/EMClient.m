@@ -191,6 +191,43 @@ static EMClient *shared;
     return [endpoint requestSignalWithURLRequest:[self requestWithMethod:method path:path headers:headers body:body]];
 }
 
+// fields
+
+- (RACSignal *) 
+{
+    return [self requestSignalWithMethod:@"GET" path:@"/fields" headers:nil body:nil];
+}
+
+- (RACSignal *)getFieldsInRange:(EMResultRange *)range
+{
+    return nil;
+}
+
+- (RACSignal *)getFieldID:(NSString *)fieldID
+{
+    return nil;
+}
+
+- (RACSignal *)createField:(EMField *)field
+{
+    return nil;
+}
+
+- (RACSignal *)deleteFieldID:(NSString *)fieldID
+{
+    return nil;
+}
+
+- (RACSignal *)clearFieldID:(NSString *)fieldID
+{
+    return nil;
+}
+
+- (RACSignal *)updateField:(EMField *)field
+{
+    return nil;
+}
+
 //groups
 
 - (RACSignal *)getGroupCountWithType:(EMGroupType)groupType {
