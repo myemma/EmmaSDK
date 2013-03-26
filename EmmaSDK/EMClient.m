@@ -261,7 +261,9 @@ static EMClient *shared;
 {
     id query = @{@"member_status_id": EMMemberStatusGetShortName(status)};
 
-    return [self requestSignalWithMethod:@"DELETE" path:[[NSString stringWithFormat:@"/groups/%@/members/remove", groupID] stringByAppendingQueryString:query] headers:nil body:nil];
+    NSString *pathString = [[NSString stringWithFormat:@"/groups/%@/members/remove", groupID] stringByAppendingQueryString:query];
+    
+    return [self requestSignalWithMethod:@"DELETE" path:pathString headers:nil body:nil];
 }
 
 - (RACSignal *)copyMembersWithStatus:(EMMemberStatus)status fromGroupID:(NSString *)fromGroupID toGroupID:(NSString *)toGroupID

@@ -1012,7 +1012,7 @@ describe(@"EMClient", ^{
         
         endpoint.results = @[ [RACSignal return:@YES] ];
         
-        [[client removeMembersWithStatus:EMMemberStatusAll fromGroupID:@"123"] subscribeNext:^(id x) {
+        [[client removeMembersWithStatus:EMMemberStatusActive fromGroupID:@"123"] subscribeNext:^(id x) {
             result = x;
         }];
         
