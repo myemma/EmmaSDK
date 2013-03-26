@@ -198,9 +198,15 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"GET" path:@"/fields" headers:nil body:nil];
 }
 
-- (RACSignal *)getFieldsInRange:(EMResultRange *)range
+- (RACSignal *)getFieldsInRange:(EMResultRange)range
 {
-    return nil;
+    id query = [@{} dictionaryByAddingRangeParams:range];
+    
+    return [[self requestSignalWithMethod:@"GET" path:[@"/fields" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMField alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
 
 - (RACSignal *)getFieldID:(NSString *)fieldID

@@ -1,4 +1,5 @@
 #import "EMField.h"
+#import "NSObject+ObjectOrNil.h"
 
 @implementation EMField
 
@@ -10,36 +11,36 @@
         NSString *fieldTypeString = [[dict objectForKey:@"field_type"] stringOrNil];
         
         if ([fieldTypeString isEqual:@"text"])
-            _fieldType = FieldTypeText;
+            _fieldType = EMFieldTypeText;
         else if ([fieldTypeString isEqual:@"text[]"])
-            _fieldType = FieldTypeTextArray;
+            _fieldType = EMFieldTypeTextArray;
         else if ([fieldTypeString isEqual:@"date"])
-            _fieldType = FieldTypeDate;
+            _fieldType = EMFieldTypeDate;
         else if ([fieldTypeString isEqual:@"timestamp"])
-            _fieldType = FieldTypeTimestamp;
+            _fieldType = EMFieldTypeTimestamp;
         else if ([fieldTypeString isEqual:@"numeric"])
-            _fieldType = FieldTypeNumeric;
+            _fieldType = EMFieldTypeNumeric;
         else if ([fieldTypeString isEqual:@"boolean"])
-            _fieldType = FieldTypeBoolean;
+            _fieldType = EMFieldTypeBoolean;
         else
             NSLog(@"-[Field initWithDictionary]: encountered unknown field type '%@'", fieldTypeString);
         
         NSString *widgetTypeString = [[dict objectForKey:@"widget_type"] stringOrNil];
         
         if ([widgetTypeString isEqual:@"text"])
-            _widgetType = FieldWidgetTypeText;
+            _widgetType = EMFieldWidgetTypeText;
         else if ([widgetTypeString isEqual:@"long"])
-            _widgetType = FieldWidgetTypeLong;
+            _widgetType = EMFieldWidgetTypeLong;
         else if ([widgetTypeString isEqual:@"check_multiple"])
-            _widgetType = FieldWidgetTypeCheckMultiple;
+            _widgetType = EMFieldWidgetTypeCheckMultiple;
         else if ([widgetTypeString isEqual:@"radio"])
-            _widgetType = FieldWidgetTypeRadio;
+            _widgetType = EMFieldWidgetTypeRadio;
         else if ([widgetTypeString isEqual:@"select one"])
-            _widgetType = FieldWidgetTypeSelectOne;
+            _widgetType = EMFieldWidgetTypeSelectOne;
         else if ([widgetTypeString isEqual:@"select multiple"])
-            _widgetType = FieldWidgetTypeSelectMultiple;
+            _widgetType = EMFieldWidgetTypeSelectMultiple;
         else if ([widgetTypeString isEqual:@"date"])
-            _widgetType = FieldWidgetTypeDate;
+            _widgetType = EMFieldWidgetTypeDate;
         else
             NSLog(@"-[Field initWithDictionary]: encountered unknown widget type '%@'", widgetTypeString);
     }

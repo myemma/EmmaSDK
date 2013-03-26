@@ -21,7 +21,7 @@ typedef struct EMResultRange EMResultRange;
 // fields
 
 - (RACSignal *)getFieldCount;
-- (RACSignal *)getFieldsInRange:(EMResultRange *)range;
+- (RACSignal *)getFieldsInRange:(EMResultRange)range;
 - (RACSignal *)getFieldID:(NSString *)fieldID;
 - (RACSignal *)createField:(EMField *)field;
 - (RACSignal *)deleteFieldID:(NSString *)fieldID;

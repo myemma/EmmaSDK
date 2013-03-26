@@ -25,5 +25,9 @@ typedef NSInteger EMFieldWidgetType;
 @property (nonatomic, readonly) NSString *displayName, *name;
 @property (nonatomic, readonly) EMFieldType fieldType;
 @property (nonatomic, readonly) EMFieldWidgetType widgetType;
+//@property (nonatomic, readonly) NSArray *options;
+
+
+- (id)initWithDictionary:(NSDictionary *)dict;
 
 @end

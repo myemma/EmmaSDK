@@ -1067,6 +1067,44 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@6);
     });
+    
+    
+    
+    it(@"getFieldsInRange: should call endpoint", ^ {
+        [[client getFieldsInRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/fields?end=20&start=10" body:nil];
+    });
+    
+    it(@"getFieldsInRange: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               @{
+                                    @"shortcut_name": @"first_name",
+                                    @"display_name": @"First Name",
+                                    @"account_id": @100,
+                                    @"field_type": @"text",
+                                    @"required": @NO,
+                                    @"field_id": @200,
+                                    @"widget_type": @"text",
+                                    @"short_display_name": [NSNull null],
+                                    @"column_order": @1,
+                                    @"deleted_at": [NSNull null],
+                                    @"options": [NSNull null]
+                                }
+                               ]] ];
+        
+        [[client getFieldsInRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] name]).to.equal(@"first_name");
+        expect([result[0] displayName]).to.equal(@"First Name");
+        expect([result[0] fieldType]).to.equal(EMFieldTypeText);
+        expect([result[0] widgetType]).to.equal(EMFieldWidgetTypeText);
+    });
+    
 });
 
 SpecEnd

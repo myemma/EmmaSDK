@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		342CB77916F172D30065A7F4 /* NSString+DateParsing.h in Headers */ = {isa = PBXBuildFile; fileRef = 342CB77716F172D30065A7F4 /* NSString+DateParsing.h */; };
 		342CB77A16F172D30065A7F4 /* NSString+DateParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CB77816F172D30065A7F4 /* NSString+DateParsing.m */; };
+		34D89D2717023EFD00C7157E /* EMField.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F901A316FA9F1A0008CF8E /* EMField.m */; };
 		4129EC5116C45C71002A3C60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5016C45C71002A3C60 /* Foundation.framework */; };
 		4129EC6016C45C71002A3C60 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5F16C45C71002A3C60 /* SenTestingKit.framework */; };
 		4129EC6316C45C71002A3C60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5016C45C71002A3C60 /* Foundation.framework */; };
@@ -783,6 +784,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34D89D2717023EFD00C7157E /* EMField.m in Sources */,
 				41912D9C16D59D2600126AF1 /* NSObject+ObjectOrNil.m in Sources */,
 				41912D9D16D59D2600126AF1 /* NSNumber+ObjectIDString.m in Sources */,
 				41EB585F16C45CAC005C1805 /* EMClient.m in Sources */,
