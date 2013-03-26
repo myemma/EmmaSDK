@@ -1,8 +1,8 @@
 #import "EMClient+Private.h"
 #import <SBJson/SBJson.h>
+#import "NSData+Base64.h"
 
-#define API_HOST @"http://api.e2ma.net"
-#define API_BASE_PATH @"/1"
+#define API_HOST @"http://api.e2ma.net/"
 
 NSString *EMMailingStatusToString(EMMailingStatus status) {
     
@@ -171,10 +171,12 @@ static EMClient *shared;
     assert(method);
     assert(path);
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", API_HOST, API_BASE_PATH, path]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", API_HOST, _accountID, path]];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:6];
     urlRequest.HTTPMethod = method;
     urlRequest.AllHTTPHeaderFields = headers;
+    
+    [urlRequest setValue:[@"Basic " stringByAppendingString:[[[NSString stringWithFormat:@"%@:%@", _publicKey, _privateKey] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];
     
     if ([body isKindOfClass:[NSInputStream class]]) {
         urlRequest.HTTPBodyStream = (NSInputStream *)body;

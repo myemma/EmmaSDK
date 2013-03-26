@@ -16,6 +16,9 @@
 		4129EC6616C45C71002A3C60 /* libEmmaSDKiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */; };
 		4129EC6C16C45C71002A3C60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4129EC6A16C45C71002A3C60 /* InfoPlist.strings */; };
 		4129EC6F16C45C71002A3C60 /* EmmaSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4129EC6E16C45C71002A3C60 /* EmmaSDKTests.m */; };
+		418E65D2170255ED00EBB567 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 418E65D0170255ED00EBB567 /* NSData+Base64.h */; };
+		418E65D3170255ED00EBB567 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E65D1170255ED00EBB567 /* NSData+Base64.m */; };
+		418E65E3170259DA00EBB567 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E65D1170255ED00EBB567 /* NSData+Base64.m */; };
 		418EE810170231F600773A19 /* EMResponseSummary.h in Headers */ = {isa = PBXBuildFile; fileRef = 418EE80E170231F600773A19 /* EMResponseSummary.h */; };
 		418EE811170231F600773A19 /* EMResponseSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 418EE80F170231F600773A19 /* EMResponseSummary.m */; };
 		418EE81D170238FB00773A19 /* EMShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 418EE81B170238FB00773A19 /* EMShare.h */; };
@@ -245,6 +248,8 @@
 		4129EC6B16C45C71002A3C60 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4129EC6D16C45C71002A3C60 /* EmmaSDKTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmmaSDKTests.h; sourceTree = "<group>"; };
 		4129EC6E16C45C71002A3C60 /* EmmaSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmmaSDKTests.m; sourceTree = "<group>"; };
+		418E65D0170255ED00EBB567 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		418E65D1170255ED00EBB567 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		418EE80E170231F600773A19 /* EMResponseSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMResponseSummary.h; sourceTree = "<group>"; };
 		418EE80F170231F600773A19 /* EMResponseSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMResponseSummary.m; sourceTree = "<group>"; };
 		418EE81B170238FB00773A19 /* EMShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMShare.h; sourceTree = "<group>"; };
@@ -452,6 +457,8 @@
 				41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */,
 				41912D9816D59A4100126AF1 /* NSNumber+ObjectIDString.h */,
 				41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */,
+				418E65D0170255ED00EBB567 /* NSData+Base64.h */,
+				418E65D1170255ED00EBB567 /* NSData+Base64.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -525,6 +532,7 @@
 				41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */,
 				418EE810170231F600773A19 /* EMResponseSummary.h in Headers */,
 				418EE81D170238FB00773A19 /* EMShare.h in Headers */,
+				418E65D2170255ED00EBB567 /* NSData+Base64.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,6 +792,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				418E65E3170259DA00EBB567 /* NSData+Base64.m in Sources */,
 				34D89D2717023EFD00C7157E /* EMField.m in Sources */,
 				41912D9C16D59D2600126AF1 /* NSObject+ObjectOrNil.m in Sources */,
 				41912D9D16D59D2600126AF1 /* NSNumber+ObjectIDString.m in Sources */,
@@ -830,6 +839,7 @@
 				41CB3EC216FAB113009CAD80 /* EMWebhook.m in Sources */,
 				418EE811170231F600773A19 /* EMResponseSummary.m in Sources */,
 				418EE81E170238FB00773A19 /* EMShare.m in Sources */,
+				418E65D3170255ED00EBB567 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

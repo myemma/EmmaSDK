@@ -7,6 +7,7 @@
 #import <SBJson/SBJson.h>
 #import "SMWebRequest.h"
 #import "NSString+DateParsing.h"
+#import "NSData+Base64.h"
 
 @interface NSString (NSString_SBJsonParsing)
 
@@ -25,6 +26,8 @@
 @end
 
 #define API_HOST @"http://api.e2ma.net"
+#define API_PUBLIC_KEY @"fooooo"
+#define API_PRIVATE_KEY @"baaar"
 
 @interface MockEndpoint : NSObject <EMEndpoint>
 
@@ -100,11 +103,18 @@
 
 
 - (void)expectRequestWithMethod:(NSString *)method path:(NSString *)path body:(id)body {
+    NSMutableDictionary *headers = [NSMutableDictionary dictionary];
+    
+    headers[@"Authorization"] = [@"Basic " stringByAppendingString:[[[NSString stringWithFormat:@"%@:%@", API_PUBLIC_KEY, API_PRIVATE_KEY] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]];
+    
+    if (body)
+        headers[@"Content-Type"] = @"application/json";
+    
     id x = @[@{
         @"host": API_HOST,
         @"method": method,
         @"path": [NSString stringWithFormat:@"/1%@", path],
-        @"headers": body ? @{ @"Content-Type": @"application/json" } : @{},
+        @"headers": headers,
         @"body": body ? body : [NSNull null],
      }];
     
@@ -123,6 +133,9 @@ describe(@"EMClient", ^{
     beforeEach(^ {
         endpoint = [[MockEndpoint alloc] init];
         client = [[EMClient alloc] initWithEndpoint:endpoint];
+        client.accountID = @"1";
+        client.publicKey = API_PUBLIC_KEY;
+        client.privateKey = API_PRIVATE_KEY;
         
         group = [[EMGroup alloc] init];
         group.ID = @"123";

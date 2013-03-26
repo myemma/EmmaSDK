@@ -158,6 +158,8 @@ typedef struct EMResultRange EMResultRange;
 
 @interface EMClient : NSObject <EMClient>
 
+@property (nonatomic, copy) NSString *publicKey, *privateKey, *accountID;
+
 + (EMClient *)shared;
 
 @end
