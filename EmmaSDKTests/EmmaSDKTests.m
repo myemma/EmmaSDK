@@ -221,6 +221,40 @@ describe(@"EMClient", ^{
         expect([result[0] optoutCount]).to.equal(@1);
     });
     
+    it(@"getGroupID: should call endpoint", ^ {
+        [[client getGroupID:@"321"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/groups/321" body:nil];
+    });
+    
+    it(@"getGroupID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id memberDict0 = @{
+            @"active_count": @1,
+            @"deleted_at": [NSNull null],
+            @"error_count": @0,
+            @"optout_count": @1,
+            @"group_type": @"g",
+            @"member_group_id": @150,
+            @"account_id": @100,
+            @"group_name": @"Monthly Newsletter"
+        };
+        endpoint.results = @[ [RACSignal return:@[
+                               memberDict0
+                               ]] ];
+        
+        [[client getGroupID:@"150"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"150");
+        expect([result[0] name]).to.equal(@"Monthly Newsletter");
+        expect([result[0] activeCount]).to.equal(@1);
+        expect([result[0] errorCount]).to.equal(@0);
+        expect([result[0] optoutCount]).to.equal(@1);
+    });
+    
     it(@"updateGroup: should call endpoint", ^ {
         [[client updateGroup:group] subscribeCompleted:^{ }];
         [endpoint expectRequestWithMethod:@"PUT" path:@"/groups/123" body:@{ @"group_name": @"FOO" }];

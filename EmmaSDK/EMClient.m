@@ -191,19 +191,7 @@ static EMClient *shared;
     return [endpoint requestSignalWithURLRequest:[self requestWithMethod:method path:path headers:headers body:body]];
 }
 
-- (RACSignal *)createGroupsWithNames:(NSArray *)names {
-    id body = @{
-        @"groups": [names.rac_sequence map:^id(id value) {
-            return @{ @"group_name": value };
-        }].array
-    };
-    
-    return [[self requestSignalWithMethod:@"POST" path:@"/groups" headers:nil body:body] map:^id(NSArray * results) {
-        return [results.rac_sequence map:^id(id value) {
-            return [[EMGroup alloc] initWithDictionary:value];
-        }].array;
-    }];
-}
+//groups
 
 - (RACSignal *)getGroupCountWithType:(EMGroupType)groupType {
     id query = [@{@"group_types": EMGroupTypeGetString(groupType)} dictionaryByAddingCountParam];
@@ -221,8 +209,35 @@ static EMClient *shared;
     }];
 }
 
+- (RACSignal *)createGroupsWithNames:(NSArray *)names {
+    id body = @{
+    @"groups": [names.rac_sequence map:^id(id value) {
+        return @{ @"group_name": value };
+    }].array
+    };
+    
+    return [[self requestSignalWithMethod:@"POST" path:@"/groups" headers:nil body:body] map:^id(NSArray * results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMGroup alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
+
+- (RACSignal *)getGroupID:(NSString *)groupID
+{
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/groups/%@", groupID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMGroup alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
+
 - (RACSignal *)updateGroup:(EMGroup *)group {
     return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@", group.ID] headers:nil body:@{ @"group_name": group.name }];
+}
+
+- (RACSignal *)deleteGroupID:(NSString *)groupID {
+    return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/groups/%@", groupID] headers:nil body:nil];
 }
 
 - (RACSignal *)getMembersInGroupID:(NSString *)groupID inRange:(EMResultRange)range includeDeleted:(BOOL)includeDeleted {
@@ -234,10 +249,6 @@ static EMClient *shared;
     }];
 }
 
-- (RACSignal *)deleteGroupID:(NSString *)groupID {
-    return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/groups/%@", groupID] headers:nil body:nil];
-}
-
 - (RACSignal *)addMemberIDs:(NSArray *)memberIDs toGroupID:(NSString *)groupID {
     return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members", groupID] headers:nil body:@{ @"member_ids": memberIDs }];
 }
@@ -245,6 +256,18 @@ static EMClient *shared;
 - (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupID:(NSString *)groupID {
         return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members/remove", groupID] headers:nil body:@{ @"member_ids": memberIDs }];
 }
+
+- (RACSignal *)removeMembersWithStatus:(EMMemberStatus)status fromGroupID:(NSString *)groupID
+{
+    return nil;
+}
+
+- (RACSignal *)copyMembersWithStatus:(EMMemberStatus)status fromGroupID:(NSString *)fromGroupID toGroupID:(NSString *)toGroupID
+{
+    return nil;
+}
+
+//mailings
 
 - (RACSignal *)getMailingCountWithStatuses:(EMMailingStatus)statuses
 {
@@ -264,6 +287,15 @@ static EMClient *shared;
     }];
 }
 
+- (RACSignal *)getMailingWithID:(NSString *)mailingID
+{
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailing alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
+
 - (RACSignal *)getMembersCountForMailingID:(NSString *)mailingID
 {
     return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/members", mailingID] headers:nil body:nil];
@@ -276,15 +308,6 @@ static EMClient *shared;
     return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/mailings/%@/members", mailingID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
             return [[EMMember alloc] initWithDictionary:value];
-        }].array;
-    }];
-}
-
-- (RACSignal *)getMailingWithID:(NSString *)mailingID
-{
-    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
-        return [results.rac_sequence map:^id(id value) {
-            return [[EMMailing alloc] initWithDictionary:value];
         }].array;
     }];
 }
@@ -352,6 +375,11 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/forwards/%@/%@", mailingID, memberID] headers:nil body:@{@"recipient_emails" : recipients, @"note" : note}];
 }
 
+- (RACSignal *)resendMailingID:(NSString *)mailingID headsUpAddresses:(NSArray *)headsUpAddresses recipientAddresses:(NSArray *)recipientAddresses recipientGroupIDs:(NSArray *)recipientGroupIDs recipientSearchIDs:(NSArray *)recipientSearchIDs
+{
+    return nil;
+}
+
 - (RACSignal *)getHeadsupAddressesForMailingID:(NSString *)mailingID
 {    
     return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/headsup", mailingID] headers:nil body:nil];
@@ -366,6 +394,8 @@ static EMClient *shared;
 {
     return [self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/mailings/%@/winner/%@", mailingID, winner] headers:nil body:nil];
 }
+
+// members
 
 - (RACSignal *)getMemberCountIncludeDeleted:(BOOL)deleted
 {
