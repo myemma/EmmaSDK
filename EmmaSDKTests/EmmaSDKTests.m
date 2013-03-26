@@ -1152,6 +1152,29 @@ describe(@"EMClient", ^{
         expect([result[0] fieldType]).to.equal(EMFieldTypeText);
         expect([result[0] widgetType]).to.equal(EMFieldWidgetTypeText);
     });
+    
+//    it(@"createField: should call endpoint", ^ {
+//        EMField *field = [[EMField alloc] init];
+//        
+//        [[client createGroupsWithNames:@[@"foo", @"bar", @"baz"]] subscribeCompleted:^ {}];
+//        [endpoint expectRequestWithMethod:@"POST" path:@"/groups" body:@{ @"groups": @[ @{ @"group_name": @"foo" },  @{ @"group_name": @"bar" }, @{ @"group_name": @"baz" } ] }];
+//    });
+//    
+//    it(@"createField: should parse results", ^ {
+//        __block NSArray *result;
+//        
+//        endpoint.results = @[ [RACSignal return:@[@{ @"group_name": @"foo", @"member_group_id": @123 }, @{ @"group_name" : @"bar", @"member_group_id": @456 }] ] ];
+//        
+//        [[client createGroupsWithNames:@[]] subscribeNext:^(id x) {
+//            result = x;
+//        }];
+//        
+//        expect(result.count).to.equal(2);
+//        expect([result[0] ID]).to.equal(@"123");
+//        expect([result[0] name]).to.equal(@"foo");
+//        expect([result[1] ID]).to.equal(@"456");
+//        expect([result[1] name]).to.equal(@"bar");
+//    });
 });
 
 SpecEnd

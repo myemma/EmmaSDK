@@ -30,7 +30,6 @@ NSString *EMMailingStatusToString(EMMailingStatus status) {
         [results addObject:@"f"];
     
     return [results componentsJoinedByString:@","];
-    
 }
 
 NSString *EMGroupTypeGetString(EMGroupType type) {
@@ -222,6 +221,19 @@ static EMClient *shared;
 
 - (RACSignal *)createField:(EMField *)field
 {
+    id body = @{
+    @"shortcut_name" : field.name,
+    @"display_name" : field.displayName,
+    @"field_type" : EMFieldTypeToString(field.fieldType),
+    @"widget_type" : EMFieldWidgetTypeToString(field.widgetType),
+    @"column_order" : @(field.columnOrder)
+    };
+    
+    return [[self requestSignalWithMethod:@"POST" path:@"/groups" headers:nil body:body] map:^id(NSArray * results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMField alloc] initWithDictionary:value];
+        }].array;
+    }];
     return nil;
 }
 
