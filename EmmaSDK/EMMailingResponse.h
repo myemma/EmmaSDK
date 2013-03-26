@@ -12,6 +12,7 @@
     optedOut,
     signedUp,
     shared,
-    shareClicked;
-
+    shareClicked,
+    webviewShared,
+    webviewShareClicked;
 @end

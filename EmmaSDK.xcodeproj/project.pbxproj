@@ -15,6 +15,10 @@
 		4129EC6616C45C71002A3C60 /* libEmmaSDKiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */; };
 		4129EC6C16C45C71002A3C60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4129EC6A16C45C71002A3C60 /* InfoPlist.strings */; };
 		4129EC6F16C45C71002A3C60 /* EmmaSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4129EC6E16C45C71002A3C60 /* EmmaSDKTests.m */; };
+		418EE810170231F600773A19 /* EMResponseSummary.h in Headers */ = {isa = PBXBuildFile; fileRef = 418EE80E170231F600773A19 /* EMResponseSummary.h */; };
+		418EE811170231F600773A19 /* EMResponseSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 418EE80F170231F600773A19 /* EMResponseSummary.m */; };
+		418EE81D170238FB00773A19 /* EMShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 418EE81B170238FB00773A19 /* EMShare.h */; };
+		418EE81E170238FB00773A19 /* EMShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 418EE81C170238FB00773A19 /* EMShare.m */; };
 		41912D9616D599FF00126AF1 /* NSObject+ObjectOrNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 41912D9416D599FF00126AF1 /* NSObject+ObjectOrNil.h */; };
 		41912D9716D599FF00126AF1 /* NSObject+ObjectOrNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */; };
 		41912D9A16D59A4100126AF1 /* NSNumber+ObjectIDString.h in Headers */ = {isa = PBXBuildFile; fileRef = 41912D9816D59A4100126AF1 /* NSNumber+ObjectIDString.h */; };
@@ -240,6 +244,10 @@
 		4129EC6B16C45C71002A3C60 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4129EC6D16C45C71002A3C60 /* EmmaSDKTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmmaSDKTests.h; sourceTree = "<group>"; };
 		4129EC6E16C45C71002A3C60 /* EmmaSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmmaSDKTests.m; sourceTree = "<group>"; };
+		418EE80E170231F600773A19 /* EMResponseSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMResponseSummary.h; sourceTree = "<group>"; };
+		418EE80F170231F600773A19 /* EMResponseSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMResponseSummary.m; sourceTree = "<group>"; };
+		418EE81B170238FB00773A19 /* EMShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMShare.h; sourceTree = "<group>"; };
+		418EE81C170238FB00773A19 /* EMShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMShare.m; sourceTree = "<group>"; };
 		41912D9416D599FF00126AF1 /* NSObject+ObjectOrNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ObjectOrNil.h"; sourceTree = "<group>"; };
 		41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ObjectOrNil.m"; sourceTree = "<group>"; };
 		41912D9816D59A4100126AF1 /* NSNumber+ObjectIDString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ObjectIDString.h"; sourceTree = "<group>"; };
@@ -406,10 +414,12 @@
 				41EB584F16C45CAC005C1805 /* EMGroup.m */,
 				41EB585016C45CAC005C1805 /* EMMailing.h */,
 				41EB585116C45CAC005C1805 /* EMMailing.m */,
-				41EB585216C45CAC005C1805 /* EMMailingLinkResponse.h */,
-				41EB585316C45CAC005C1805 /* EMMailingLinkResponse.m */,
+				418EE80E170231F600773A19 /* EMResponseSummary.h */,
+				418EE80F170231F600773A19 /* EMResponseSummary.m */,
 				41EB585416C45CAC005C1805 /* EMMailingResponse.h */,
 				41EB585516C45CAC005C1805 /* EMMailingResponse.m */,
+				41EB585216C45CAC005C1805 /* EMMailingLinkResponse.h */,
+				41EB585316C45CAC005C1805 /* EMMailingLinkResponse.m */,
 				41EB585616C45CAC005C1805 /* EMMailingResponseEvent.h */,
 				41EB585716C45CAC005C1805 /* EMMailingResponseEvent.m */,
 				41EB585916C45CAC005C1805 /* EMMember.h */,
@@ -424,6 +434,8 @@
 				41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */,
 				41CB3EBF16FAB113009CAD80 /* EMWebhook.h */,
 				41CB3EC016FAB113009CAD80 /* EMWebhook.m */,
+				418EE81B170238FB00773A19 /* EMShare.h */,
+				418EE81C170238FB00773A19 /* EMShare.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -510,6 +522,8 @@
 				41F901A416FA9F1A0008CF8E /* EMField.h in Headers */,
 				41CB3EB416FAAF9E009CAD80 /* EMTrigger.h in Headers */,
 				41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */,
+				418EE810170231F600773A19 /* EMResponseSummary.h in Headers */,
+				418EE81D170238FB00773A19 /* EMShare.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,6 +826,8 @@
 				41F901A516FA9F1A0008CF8E /* EMField.m in Sources */,
 				41CB3EB516FAAF9E009CAD80 /* EMTrigger.m in Sources */,
 				41CB3EC216FAB113009CAD80 /* EMWebhook.m in Sources */,
+				418EE811170231F600773A19 /* EMResponseSummary.m in Sources */,
+				418EE81E170238FB00773A19 /* EMShare.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

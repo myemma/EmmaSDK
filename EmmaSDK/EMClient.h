@@ -133,22 +133,26 @@ typedef struct EMResultRange EMResultRange;
 - (RACSignal *)deleteAllWebhooks;
 
 // response
-- (RACSignal *)getResponseSummary;
+
+// calls getResponseSummaryInRange:includeArchived: with nil range string and NO includeArchived
+- (RACSignal *)getResponseSummary; // returns NSArray of EMResponseSummary.
+- (RACSignal *)getResponseSummaryInRange:(NSString *)rangeString includeArchived:(BOOL)includeArchived; // returns NSArray of EMResponseSummary
+
 - (RACSignal *)getResponseForMailingID:(NSString *)mailingID; // returns EMMailingResponse
-
-- (RACSignal *)getEventCountOfType:(EMResponseEventType)type forMailingID:(NSString *)mailingID; // returns NSNumber
-- (RACSignal *)getEventsOfType:(EMResponseEventType)type forMailingID:(NSString *)mailingID inRange:(EMResultRange)range; // returns NSArray of EMMailingResponseEvent
-
-
-- (RACSignal *)getMessageCountForMemberID:(NSString *)memberID; // returns NSNumber
-- (RACSignal *)getMessagesForMemberID:(NSString *)memberID inRange:(EMResultRange)range; // returns NSArray of EMMessage
-
-
-- (RACSignal *)getLinkResponseForMailingID:(NSString *)mailingID; // returns EMMailingLinkResponse
-
-
-- (RACSignal *)getClickCountOfLinkID:(NSString *)linkID forMailingID:(NSString *)mailingID; // returns NSNumber
-- (RACSignal *)getClicksOfLinkID:(NSString *)linkID forMailingID:(NSString *)mailingID inRange:(EMResultRange)range; // returns NSArray of EMMailingResponseEvent;
+- (RACSignal *)getSendsForMailingID:(NSString *)mailingID; // returns NSArray of EMMailingResponseEvent
+- (RACSignal *)getInProgressForMailingID:(NSString *)mailingID; // returns NSArray of EMMailingResponseEvent (timestamps are nil)
+- (RACSignal *)getDeliveriesForMailingID:(NSString *)mailingID withDeliveryStatus:(EMDeliveryStatus)status; // returns NSArray of EMMailingResponseEvent (populates deliveryStatus)
+- (RACSignal *)getOpensForMailingID:(NSString *)mailingID; // returns NSArray of EMMailingResponseEvent
+- (RACSignal *)getLinksForMailingID:(NSString *)mailingID; // returns NSArray of EMMailingLinkResponse
+- (RACSignal *)getClicksForMailingID:(NSString *)mailingID memberID:(NSString *)memberID linkID:(NSString *)linkID; // returns NSArray of EMMailingResponseEvent (populates linkID)
+- (RACSignal *)getForwardsForMailingID:(NSString *)mailingID; // returns NSArray of EMMailingResponseEvent (populates forwardMailingID)
+- (RACSignal *)getOptoutsForMailingID:(NSString *)mailingID; // returns NSArray of EMMailingResponseEvent
+- (RACSignal *)getSignupsForMailingID:(NSString *)mailingID; // returns NSArray of EMMailingResponseEvent (populates referringMemberID)
+- (RACSignal *)getSharesForMailingID:(NSString *)mailingID; // returns NSArray of EMShare (populates memberID, network, clicks)
+- (RACSignal *)getCustomerSharesForMailingID:(NSString *)mailingID; // returns NSArray of EMShare (populates timestamp, network)
+- (RACSignal *)getCustomerShareClicksForMailingID:(NSString *)mailingID; // returns NSArray of EMShare (populates timestamp, network, clicks)
+- (RACSignal *)getCustomerShareID:(NSString *)shareID; // returns EMShare (timestamp, network, share_status)
+- (RACSignal *)getSharesOverviewForMailingID:(NSString *)mailingID; // returns EMShareSummary
 
 @end
 
