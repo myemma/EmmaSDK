@@ -1,6 +1,8 @@
 #import "EMClient+Private.h"
 #import <SBJson/SBJson.h>
 #import "NSData+Base64.h"
+#import "NSObject+ObjectOrNil.h"
+#import "NSNumber+ObjectIDString.h"
 
 #define API_HOST @"http://api.e2ma.net/"
 
@@ -212,29 +214,16 @@ static EMClient *shared;
 
 - (RACSignal *)getFieldID:(NSString *)fieldID
 {
-    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/fields/%@", fieldID] headers:nil body:nil] map:^id(NSArray *results) {
-        return [results.rac_sequence map:^id(id value) {
-            return [[EMField alloc] initWithDictionary:value];
-        }].array;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/fields/%@", fieldID] headers:nil body:nil] map:^id(NSDictionary *value) {
+        return [[EMField alloc] initWithDictionary:value];
     }];
 }
 
 - (RACSignal *)createField:(EMField *)field
 {
-    id body = @{
-    @"shortcut_name" : field.name,
-    @"display_name" : field.displayName,
-    @"field_type" : EMFieldTypeToString(field.fieldType),
-    @"widget_type" : EMFieldWidgetTypeToString(field.widgetType),
-    @"column_order" : @(field.columnOrder)
-    };
-    
-    return [[self requestSignalWithMethod:@"POST" path:@"/groups" headers:nil body:body] map:^id(NSArray * results) {
-        return [results.rac_sequence map:^id(id value) {
-            return [[EMField alloc] initWithDictionary:value];
-        }].array;
+    return [[self requestSignalWithMethod:@"POST" path:@"/fields" headers:nil body:field.dictionaryRepresentation] map:^id(NSNumber* result) {
+        return [[result numberOrNil] objectIDStringValue];
     }];
-    return nil;
 }
 
 - (RACSignal *)deleteFieldID:(NSString *)fieldID

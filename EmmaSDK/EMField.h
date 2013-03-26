@@ -34,5 +34,6 @@ NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type);
 @property (nonatomic) NSUInteger columnOrder;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
+- (NSDictionary *)dictionaryRepresentation;
 
 @end

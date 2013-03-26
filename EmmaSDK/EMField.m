@@ -127,4 +127,14 @@ NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type) {
     return self;
 }
 
+- (NSDictionary *)dictionaryRepresentation
+{
+    return @{
+    @"shortcut_name" : _name,
+    @"display_name" : _displayName,
+    @"field_type" : EMFieldTypeToString(_fieldType),
+    @"widget_type" : EMFieldWidgetTypeToString(_widgetType),
+    @"column_order" : @(_columnOrder)
+    };
+}
 @end
