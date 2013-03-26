@@ -960,6 +960,35 @@ describe(@"EMClient", ^{
         expect([result[0] email]).to.equal(@"emma@myemma.com");
         expect([result[0] status]).to.equal(EMMemberStatusActive);
     });
+    
+    void (^testCallsEndpointWithMemberStatus)(EMMemberStatus status, NSString *statusString) = ^ (EMMemberStatus status, NSString *statusString) {
+        [[client copyMembersWithStatus:status fromGroupID:@"123" toGroupID:@"321"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/groups/123/321/members/copy" body:@{ @"member_status_id": @[statusString] }];
+    };
+
+    it(@"copyMembersWithStatus:fromGroupID:toGroupID: should call endpoint with active", ^ {
+        testCallsEndpointWithMemberStatus(EMMemberStatusActive, EMMemberStatusGetShortName(EMMemberStatusActive));
+    });
+    
+    it(@"copyMembersWithStatus:fromGroupID:toGroupID: should call endpoint with optout", ^ {
+        testCallsEndpointWithMemberStatus(EMMemberStatusOptout, EMMemberStatusGetShortName(EMMemberStatusOptout));
+    });
+    
+    it(@"copyMembersWithStatus:fromGroupID:toGroupID: should call endpoint with active", ^ {
+        testCallsEndpointWithMemberStatus(EMMemberStatusError, EMMemberStatusGetShortName(EMMemberStatusError));
+    });
+    
+    it(@"copyMembersWithStatus:fromGroupID:toGroupID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client copyMembersWithStatus:EMMemberStatusActive fromGroupID:@"123" toGroupID:@"321"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
 });
 
 SpecEnd

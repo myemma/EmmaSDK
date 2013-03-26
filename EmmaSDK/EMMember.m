@@ -3,6 +3,55 @@
 #import "NSObject+ObjectOrNil.h"
 #import "NSString+DateParsing.h"
 
+
+NSString *EMMemberStatusGetName(EMMemberStatus status) {
+    NSString *result = nil;
+    
+    switch (status) {
+        case EMMemberStatusAll:
+            result = @"All";
+            break;
+        case EMMemberStatusActive:
+            result = @"Active";
+            break;
+        case EMMemberStatusError:
+            result = @"Error";
+            break;
+        case EMMemberStatusOptout:
+            result = @"Opt-out";
+            break;
+        case EMMemberStatusForwarded:
+            result = @"Forwarded";
+            break;
+    }
+    
+    return result;
+}
+
+NSString *EMMemberStatusGetShortName(EMMemberStatus status) {
+    NSString *result = nil;
+    
+    switch (status) {
+        case EMMemberStatusAll:
+            break;
+        case EMMemberStatusActive:
+            result = @"a";
+            break;
+        case EMMemberStatusError:
+            result = @"e";
+            break;
+        case EMMemberStatusOptout:
+            result = @"o";
+            break;
+        case EMMemberStatusForwarded:
+            result = @"f";
+            break;
+    }
+    
+    return result;
+}
+
+
 @implementation EMMember
 
 //- (id)initWithDictionary:(NSDictionary *)dict accountFields:(NSArray *)accountFields {

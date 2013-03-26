@@ -262,8 +262,11 @@ static EMClient *shared;
     return nil;
 }
 
+//PUT /#account_id/groups/#from_group_id/#to_group_id/members/copy
+
 - (RACSignal *)copyMembersWithStatus:(EMMemberStatus)status fromGroupID:(NSString *)fromGroupID toGroupID:(NSString *)toGroupID
 {
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/%@/members/copy", fromGroupID, toGroupID] headers:nil body:@{ @"member_status_id": @[EMMemberStatusGetShortName(status)] }];
     return nil;
 }
 
