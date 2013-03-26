@@ -857,6 +857,28 @@ describe(@"EMClient", ^{
         expect(result.count).to.equal(1);
         expect(result[0]).to.equal(@YES);
     });
+
+    it(@"getMemberCountIncludeDeleted: should call endpoint with deleted", ^ {
+        [[client getMemberCountIncludeDeleted:YES] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members?deleted=true"];
+    });
+    
+    it(@"getMemberCountIncludeDeleted: should call endpoint without deleted", ^ {
+        [[client getMemberCountIncludeDeleted:NO] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members?deleted=false"];
+    });
+    
+    it(@"getMemberCountIncludeDeleted: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@3] ];
+        
+        [[client getMemberCountIncludeDeleted:YES] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@3);
+    });
     
     it(@"getMembersInRange: should call endpoint with deleted", ^ {
         [[client getMembersInRange:(EMResultRange){ .start = 10, .end = 20 } includeDeleted:YES] subscribeCompleted:^ { }];
