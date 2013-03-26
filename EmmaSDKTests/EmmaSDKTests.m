@@ -1018,6 +1018,38 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+    
+    it(@"resendMailingID:headsUpAddresses:recipientAddresses:recipientGroupIDs:recipientSearchIDs: should call endpoint", ^ {
+        [[client resendMailingID:@"123" headsUpAddresses:@[@"one@test.com", @"two@test.com"] recipientAddresses:@[@"three@test.com", @"four@test.com"] recipientGroupIDs:@[@"123", @"321"] recipientSearchIDs:@[@"543", @"345"]] subscribeCompleted:^ { }];
+        
+        id body = @{
+        @"heads_up_emails" : @[@"one@test.com", @"two@test.com"],
+        @"recipient_emails" : @[@"three@test.com", @"four@test.com"],
+        @"recipient_groups" : @[@"123", @"321"],
+        @"recipient_searches" : @[@"543", @"345"]
+        };
+        
+        [endpoint expectRequestWithMethod:@"POST" path:@"/mailings/123" body:body];
+    });
+    
+    it(@"resendMailingID:headsUpAddresses:recipientAddresses:recipientGroupIDs:recipientSearchIDs: should parse results", ^ {
+        __block NSArray *result;
+        
+        id memberDict0 = @{
+            @"mailing_id": @1024
+        };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               memberDict0
+                               ]] ];
+        
+        [[client resendMailingID:@"123" headsUpAddresses:@[@"hdsup@test.com"] recipientAddresses:@[@"recip@ient.com"] recipientGroupIDs:@[@"321"] recipientSearchIDs:@[@"432"]] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"1024");
+    });
 });
 
 SpecEnd

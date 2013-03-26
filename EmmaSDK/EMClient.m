@@ -339,7 +339,6 @@ static EMClient *shared;
             return [[EMGroup alloc] initWithDictionary:value];
         }].array;
     }];
-    return nil;
 }
 
 - (RACSignal *)getSearchCountForMailingID:(NSString *)mailingID
@@ -356,7 +355,6 @@ static EMClient *shared;
             return [[EMSearch alloc] initWithDictionary:value];
         }].array;
     }];
-    return nil;
 }
 
 - (RACSignal *)updateMailingID:(NSString *)mailingID withStatus:(EMMailingStatus)status
@@ -379,9 +377,21 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/forwards/%@/%@", mailingID, memberID] headers:nil body:@{@"recipient_emails" : recipients, @"note" : note}];
 }
 
+//POST /#account_id/mailings/#mailing_id
 - (RACSignal *)resendMailingID:(NSString *)mailingID headsUpAddresses:(NSArray *)headsUpAddresses recipientAddresses:(NSArray *)recipientAddresses recipientGroupIDs:(NSArray *)recipientGroupIDs recipientSearchIDs:(NSArray *)recipientSearchIDs
 {
-    return nil;
+    id body = @{
+    @"heads_up_emails" : headsUpAddresses,
+    @"recipient_emails" : recipientAddresses,
+    @"recipient_groups" : recipientGroupIDs,
+    @"recipient_searches" : recipientSearchIDs
+    };
+    
+    return [[self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:body] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailing alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
 
 - (RACSignal *)getHeadsupAddressesForMailingID:(NSString *)mailingID
