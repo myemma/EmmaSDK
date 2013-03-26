@@ -193,7 +193,7 @@ static EMClient *shared;
 
 // fields
 
-- (RACSignal *) 
+- (RACSignal *)getFieldCount
 {
     return [self requestSignalWithMethod:@"GET" path:@"/fields" headers:nil body:nil];
 }
