@@ -683,7 +683,7 @@ static EMClient *shared;
 //webhooks
 
 - (RACSignal *)getWebhookCount {
-    return [self requestSignalWithMethod:@"GET" path:@"/webhooks" headers:nil body:nil];
+    return [self requestSignalWithMethod:@"GET" path:[@"/webhooks" stringByAppendingQueryString:[@{} dictionaryByAddingCountParam]] headers:nil body:nil];
 }
 
 - (RACSignal *)getWebhooksInRange:(EMResultRange)range {
@@ -726,6 +726,43 @@ static EMClient *shared;
 
 - (RACSignal *)deleteAllWebhooks {
     return [self requestSignalWithMethod:@"DELETE" path:@"/webhooks" headers:nil body:nil];
+}
+
+
+- (RACSignal *)getTriggerCount {
+    return [self requestSignalWithMethod:@"GET" path:[@"/triggers" stringByAppendingQueryString:[@{} dictionaryByAddingCountParam]] headers:nil body:nil];
+}
+
+- (RACSignal *)getTriggersInRange:(EMResultRange)range {
+    return [[self requestSignalWithMethod:@"GET" path:[@"/triggers" stringByAppendingQueryString:[@{} dictionaryByAddingRangeParams:range]] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(NSDictionary *value) {
+            return [[EMTrigger alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
+
+- (RACSignal *)createTrigger:(EMTrigger *)trigger {
+    return nil;
+}
+
+- (RACSignal *)getTriggerWithID:(NSString *)triggerID {
+    return nil;
+}
+
+- (RACSignal *)updateTrigger:(EMTrigger *)trigger {
+    return nil;
+}
+
+- (RACSignal *)deleteTriggerWithID:(NSString *)triggerID {
+    return nil;
+}
+
+- (RACSignal *)getTriggerMailingCount {
+    return nil;
+}
+
+- (RACSignal *)getTriggerMailingsInRange:(EMResultRange)range {
+    return nil;
 }
 
 @end

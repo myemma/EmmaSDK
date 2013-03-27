@@ -1261,7 +1261,7 @@ describe(@"EMClient", ^{
 
     it(@"getWebhookCount should call endpoint", ^ {
         [[client getWebhookCount] subscribeCompleted:^{ }];
-        [endpoint expectRequestWithMethod:@"GET" path:@"/webhooks"];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/webhooks?count=true"];
     });
     
     it(@"getWebhookCount should parse result", ^ {
@@ -1818,6 +1818,152 @@ describe(@"EMClient", ^{
         }];
         
         expect(result).to.equal(@"1234");
+    });
+    
+    __block id clientResult;
+    void (^SetEndpointResult)(id) = ^ (id endpointResult) {
+        endpoint.results = @[ [RACSignal return:endpointResult] ];
+    };
+    void (^EvaluateSignal)(RACSignal *) = ^ (RACSignal *signal) {
+        [signal subscribeNext:^(id x) {
+            clientResult = x;
+        } completed:^ {}];
+    };
+    
+    it(@"getTriggerCount should call endpoint", ^ {
+        EvaluateSignal([client getTriggerCount]);
+        [endpoint expectRequestWithMethod:@"GET" path:@"/triggers?count=true"];
+    });
+    
+    it(@"getTriggerCount should parse results", ^ {
+        SetEndpointResult(@123);
+        EvaluateSignal([client getTriggerCount]);
+        expect(clientResult).to.equal(@123);
+    });
+    
+    it(@"getTriggersInRange: should call endpoint", ^ {
+        EvaluateSignal([client getTriggersInRange:EMResultRangeMake(10, 20)]);
+        [endpoint expectRequestWithMethod:@"GET" path:@"/triggers?end=20&start=10"];
+    });
+    
+    it(@"getTriggersInRange: should parse results", ^ {
+        SetEndpointResult(@[
+                           @{
+                               @"parent_mailing": @{
+                                   @"mailing_type": @"m",
+                                   @"send_started": [NSNull null],
+                                   @"signup_form_id": [NSNull null],
+                                   @"mailing_id": @200,
+                                   @"plaintext": @"Hello [% member:first_name %]!",
+                                   @"recipient_count": @0,
+                                   @"year": [NSNull null],
+                                   @"account_id": @100,
+                                   @"month": [NSNull null],
+                                   @"disabled": @NO,
+                                   @"parent_mailing_id": [NSNull null],
+                                   @"started_or_finished": [NSNull null],
+                                   @"name": @"Sample Mailing",
+                                   @"mailing_status": @"c",
+                                   @"plaintext_only": @NO,
+                                   @"sender": @"Kevin McConnell",
+                                   @"send_finished": [NSNull null],
+                                   @"send_at": [NSNull null],
+                                   @"reply_to": [NSNull null],
+                                   @"subject": @"Sample Mailing for [% member:first_name %] [% member:last_name %]",
+                                   @"archived_ts": [NSNull null],
+                                   @"html_body": @"<p>Hello [% member:first_name %]!</p>"
+                               },
+                               @"surveys": [NSNull null],
+                               @"event_type": @"r",
+                               @"links": [NSNull null],
+                               @"field_id": @203,
+                               @"push_offset_units": @"0:-14:0:0",
+                               @"start_ts": @"@D:2013-03-20T14:21:42",
+                               @"trigger_id": @100,
+                               @"signups": [NSNull null],
+                               @"push_offset": @"@I:-1209600.0",
+                               @"account_id": @100,
+                               @"groups": @[ @1, @2 ],
+                               @"parent_mailing_id": @200,
+                               @"deleted_at": [NSNull null],
+                               @"is_disabled": @YES,
+                               @"name": @"Birthday triggers"
+                           },
+                           @{
+                               @"parent_mailing": @{
+                                   @"mailing_type": @"m",
+                                   @"send_started": [NSNull null],
+                                   @"signup_form_id": [NSNull null],
+                                   @"mailing_id": @200,
+                                   @"plaintext": @"Hello [% member:first_name %]!",
+                                   @"recipient_count": @0,
+                                   @"year": [NSNull null],
+                                   @"account_id": @100,
+                                   @"month": [NSNull null],
+                                   @"disabled": @NO,
+                                   @"parent_mailing_id": [NSNull null],
+                                   @"started_or_finished": [NSNull null],
+                                   @"name": @"Sample Mailing",
+                                   @"mailing_status": @"c",
+                                   @"plaintext_only": @NO,
+                                   @"sender": @"Kevin McConnell",
+                                   @"send_finished": [NSNull null],
+                                   @"send_at": [NSNull null],
+                                   @"reply_to": [NSNull null],
+                                   @"subject": @"Sample Mailing for [% member:first_name %] [% member:last_name %]",
+                                   @"archived_ts": [NSNull null],
+                                   @"html_body": @"<p>Hello [% member:first_name %]!</p>"
+                               },
+                               @"surveys": @[@5,@9],
+                               @"event_type": @"s",
+                               @"links": @[@3, @4],
+                               @"field_id": [NSNull null],
+                               @"push_offset_units": @"0:3:0:0",
+                               @"start_ts": @"@D:2013-03-20T14:21:42",
+                               @"trigger_id": @101,
+                               @"signups": @[
+                                           @1,
+                                           @2,
+                                           @3
+                                           ],
+                               @"push_offset": @"@I:259200.0",
+                               @"account_id": @100,
+                               @"groups": [NSNull null],
+                               @"parent_mailing_id": @200,
+                               @"deleted_at": [NSNull null],
+                               @"is_disabled": @NO,
+                               @"name": @"Test Signup Form triggers"
+                           }
+                          ]);
+        
+        id x;
+        EvaluateSignal([client getTriggersInRange:EMResultRangeAll]);
+        expect([clientResult count]).to.equal(2);
+        expect([clientResult[0] triggerID]).to.equal(@"100");
+        expect([clientResult[0] name]).to.equal(@"Birthday triggers");
+        expect([clientResult[0] parentMailingID]).to.equal(@"200");
+        expect([clientResult[0] fieldID]).to.equal(@"203");
+        x = @[ @"1", @"2" ];
+        expect([clientResult[0] groupIDs]).to.equal(x);
+        expect([clientResult[0] linkIDs]).to.beNil();
+        expect([clientResult[0] signupFormIDs]).to.beNil();
+        expect([clientResult[0] surveyIDs]).to.beNil();
+        expect([clientResult[0] pushOffset]).to.equal(@"@I:-1209600.0");
+        expect([clientResult[0] disabled]).to.beTruthy();
+        
+        expect([clientResult[1] triggerID]).to.equal(@"101");
+        expect([clientResult[1] name]).to.equal(@"Test Signup Form triggers");
+        expect([clientResult[1] parentMailingID]).to.equal(@"200");
+        expect([clientResult[1] fieldID]).to.beNil();
+        expect([clientResult[1] groupIDs]).to.beNil();
+        x = @[ @"3", @"4"];
+        expect([clientResult[1] linkIDs]).to.equal(x);
+        x = @[@"1", @"2", @"3"];
+        expect([clientResult[1] signupFormIDs]).to.equal(x);
+        x = @[ @"5", @"9" ];
+        expect([clientResult[1] surveyIDs]).to.equal(x);
+        expect([clientResult[1] pushOffset]).to.equal(@"@I:259200.0");
+        expect([clientResult[1] disabled]).to.beFalsy();
     });
 });
 
