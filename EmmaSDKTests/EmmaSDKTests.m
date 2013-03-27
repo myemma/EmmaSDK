@@ -240,7 +240,7 @@ describe(@"EMClient", ^{
     });
     
     it(@"getGroupID: should parse results", ^ {
-        __block NSArray *result;
+        __block EMGroup *result;
         
         id memberDict0 = @{
             @"active_count": @1,
@@ -252,20 +252,19 @@ describe(@"EMClient", ^{
             @"account_id": @100,
             @"group_name": @"Monthly Newsletter"
         };
-        endpoint.results = @[ [RACSignal return:@[
+        endpoint.results = @[ [RACSignal return:
                                memberDict0
-                               ]] ];
+                               ] ];
         
         [[client getGroupID:@"150"] subscribeNext:^(id x) {
             result = x;
         }];
         
-        expect(result.count).to.equal(1);
-        expect([result[0] ID]).to.equal(@"150");
-        expect([result[0] name]).to.equal(@"Monthly Newsletter");
-        expect([result[0] activeCount]).to.equal(@1);
-        expect([result[0] errorCount]).to.equal(@0);
-        expect([result[0] optoutCount]).to.equal(@1);
+        expect([result ID]).to.equal(@"150");
+        expect([result name]).to.equal(@"Monthly Newsletter");
+        expect([result activeCount]).to.equal(@1);
+        expect([result errorCount]).to.equal(@0);
+        expect([result optoutCount]).to.equal(@1);
     });
     
     it(@"updateGroup: should call endpoint", ^ {
@@ -1122,7 +1121,7 @@ describe(@"EMClient", ^{
     });
     
     it(@"getFieldID: should parse results", ^ {
-        __block NSArray *result;
+        __block EMField *result;
         
         id dict = @{
             @"shortcut_name": @"first_name",
@@ -1138,19 +1137,18 @@ describe(@"EMClient", ^{
             @"options": [NSNull null]
         };
         
-        endpoint.results = @[ [RACSignal return:@[
+        endpoint.results = @[ [RACSignal return:
                                dict
-                               ]] ];
+                               ] ];
         
         [[client getFieldID:@"123"] subscribeNext:^(id x) {
             result = x;
         }];
         
-        expect(result.count).to.equal(1);
-        expect([result[0] name]).to.equal(@"first_name");
-        expect([result[0] displayName]).to.equal(@"First Name");
-        expect([result[0] fieldType]).to.equal(EMFieldTypeText);
-        expect([result[0] widgetType]).to.equal(EMFieldWidgetTypeText);
+        expect([result name]).to.equal(@"first_name");
+        expect([result displayName]).to.equal(@"First Name");
+        expect([result fieldType]).to.equal(EMFieldTypeText);
+        expect([result widgetType]).to.equal(EMFieldWidgetTypeText);
     });
     
     it(@"createField: should call endpoint", ^ {

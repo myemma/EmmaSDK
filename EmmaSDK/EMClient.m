@@ -275,10 +275,8 @@ static EMClient *shared;
 
 - (RACSignal *)getGroupID:(NSString *)groupID
 {
-    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/groups/%@", groupID] headers:nil body:nil] map:^id(NSArray *results) {
-        return [results.rac_sequence map:^id(id value) {
-            return [[EMGroup alloc] initWithDictionary:value];
-        }].array;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/groups/%@", groupID] headers:nil body:nil] map:^id(NSDictionary *value) {
+        return [[EMGroup alloc] initWithDictionary:value];
     }];
 }
 
