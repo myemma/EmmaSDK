@@ -538,7 +538,7 @@ static EMClient *shared;
 
 - (RACSignal *)updateSearch:(EMSearch *)search
 {
-    return nil;
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/searches/%@", search.ID] headers:nil body:@{ @"criteria": search.criteria, @"name" : search.name }];
 }
 
 - (RACSignal *)deleteSearchID:(NSString *)searchID

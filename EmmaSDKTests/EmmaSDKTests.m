@@ -1564,6 +1564,39 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@"123");
     });
+    
+    it(@"updateSearch: should call endpoint", ^ {
+        
+        id data = @{
+        @"search_id" : @123,
+        @"name" : @"A Cool Search",
+        @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
+        };
+        
+        EMSearch *search = [[EMSearch alloc] initWithDictionary:data];
+        [[client updateSearch:search] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/searches/123" body:@{ @"name": @"A Cool Search", @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]"}];
+    });
+    
+    it(@"updateSearch: should parse results", ^ {
+        __block NSNumber *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        id data = @{
+        @"search_id" : @123,
+        @"name" : @"A Cool Search",
+        @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
+        };
+        
+        EMSearch *search = [[EMSearch alloc] initWithDictionary:data];
+        
+        [[client updateSearch:search] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
 });
 
 SpecEnd
