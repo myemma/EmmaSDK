@@ -1145,36 +1145,37 @@ describe(@"EMClient", ^{
     
     it(@"createField: should call endpoint", ^ {
         
-        id data = @{
-        @"field_id" : @321,
-        @"shortcut_name" : @"first_name",
-        @"display_name" : @"First Name",
-        @"field_type" : EMFieldTypeToString(EMFieldTypeText),
-        @"widget_type" : EMFieldWidgetTypeToString(EMFieldWidgetTypeText),
-        @"column_order" : @3
-        };
+        EMField *field = [[EMField alloc] init];
+        field.fieldID = @"123";
+        field.name = @"first_name";
+        field.displayName = @"First Name";
+        field.fieldType = EMFieldTypeText;
+        field.widgetType = EMFieldWidgetTypeText;
+        field.columnOrder = 3;
         
-        EMField *field = [[EMField alloc] initWithDictionary:data];        
-
         [[client createField:field] subscribeCompleted:^ {}];
-        [endpoint expectRequestWithMethod:@"POST" path:@"/fields" body:field.dictionaryRepresentation];
+        [endpoint expectRequestWithMethod:@"POST" path:@"/fields" body:@{
+         @"field_id" : @"123",
+         @"shortcut_name" : @"first_name",
+         @"display_name" : @"First Name",
+         @"field_type" : @"text",
+         @"widget_type" : @"text",
+         @"column_order" : @3
+         }];
     });
     
     it(@"createField: should parse results", ^ {
         __block NSString *result;
         
         endpoint.results = @[ [RACSignal return:@123 ] ];
-    
-        id data = @{
-        @"field_id" : @321,
-        @"shortcut_name" : @"first_name",
-        @"display_name" : @"First Name",
-        @"field_type" : EMFieldTypeToString(EMFieldTypeText),
-        @"widget_type" : EMFieldWidgetTypeToString(EMFieldWidgetTypeText),
-        @"column_order" : @3
-        };
         
-        EMField *field = [[EMField alloc] initWithDictionary:data];
+        EMField *field = [[EMField alloc] init];
+        field.fieldID = @"123";
+        field.name = @"first_name";
+        field.displayName = @"First Name";
+        field.fieldType = EMFieldTypeText;
+        field.widgetType = EMFieldWidgetTypeText;
+        field.columnOrder = 3;
         
         [[client createField:field] subscribeNext:^(id x) {
             result = x;
