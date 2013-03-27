@@ -1534,17 +1534,18 @@ describe(@"EMClient", ^{
     });
     
     it(@"createSearch: should call endpoint", ^ {
-        
-        id data = @{
-        @"search_id" : @123,
-        @"name" : @"A Search",
-        @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
-        };
-        
-        EMSearch *search = [[EMSearch alloc] initWithDictionary:data];
+    
+        EMSearch *search = [[EMSearch alloc] init];
+        search.ID = @"123";
+        search.name = @"A Search";
+        search.criteria = @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]";
         
         [[client createSearch:search] subscribeCompleted:^ {}];
-        [endpoint expectRequestWithMethod:@"POST" path:@"/searches" body:search.dictionaryRepresentation];
+        [endpoint expectRequestWithMethod:@"POST" path:@"/searches" body:@{
+         @"search_id" : @"123",
+         @"name" : @"A Search",
+         @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
+         }];
     });
     
     it(@"createSearch: should parse results", ^ {
@@ -1552,13 +1553,10 @@ describe(@"EMClient", ^{
         
         endpoint.results = @[ [RACSignal return:@123 ] ];
         
-        id data = @{
-        @"search_id" : @123,
-        @"name" : @"A Search",
-        @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
-        };
-        
-        EMSearch *search = [[EMSearch alloc] initWithDictionary:data];
+        EMSearch *search = [[EMSearch alloc] init];
+        search.ID = @"123";
+        search.name = @"A Search";
+        search.criteria = @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]";
         
         [[client createSearch:search] subscribeNext:^(id x) {
             result = x;
@@ -1569,13 +1567,12 @@ describe(@"EMClient", ^{
     
     it(@"updateSearch: should call endpoint", ^ {
         
-        id data = @{
-        @"search_id" : @123,
-        @"name" : @"A Cool Search",
-        @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
-        };
         
-        EMSearch *search = [[EMSearch alloc] initWithDictionary:data];
+        EMSearch *search = [[EMSearch alloc] init];
+        search.ID = @"123";
+        search.name = @"A Cool Search";
+        search.criteria = @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]";
+
         [[client updateSearch:search] subscribeCompleted:^{ }];
         [endpoint expectRequestWithMethod:@"PUT" path:@"/searches/123" body:@{ @"name": @"A Cool Search", @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]"}];
     });
@@ -1585,13 +1582,10 @@ describe(@"EMClient", ^{
         
         endpoint.results = @[ [RACSignal return:@YES] ];
         
-        id data = @{
-        @"search_id" : @123,
-        @"name" : @"A Cool Search",
-        @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
-        };
-        
-        EMSearch *search = [[EMSearch alloc] initWithDictionary:data];
+        EMSearch *search = [[EMSearch alloc] init];
+        search.ID = @"123";
+        search.name = @"A Cool Search";
+        search.criteria = @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]";
         
         [[client updateSearch:search] subscribeNext:^(id x) {
             result = x;
