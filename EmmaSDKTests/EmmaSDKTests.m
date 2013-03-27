@@ -465,7 +465,7 @@ describe(@"EMClient", ^{
         }];
         
         expect(results.count).to.equal(1);
-        expect(results[0]).to.equal(@123);
+        expect(results[0]).to.equal(@"123");
     });
     
     it(@"removeMemberIDs:fromGroupID: should call endpoint", ^ {
@@ -483,7 +483,7 @@ describe(@"EMClient", ^{
         }];
         
         expect(results.count).to.equal(1);
-        expect(results[0]).to.equal(@123);
+        expect(results[0]).to.equal(@"123");
     });
     
     it(@"getMembersCountForMailingID: should call endpoint", ^ {

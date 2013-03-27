@@ -302,11 +302,20 @@ static EMClient *shared;
 }
 
 - (RACSignal *)addMemberIDs:(NSArray *)memberIDs toGroupID:(NSString *)groupID {
-    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members", groupID] headers:nil body:@{ @"member_ids": memberIDs }];
+    return [[self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members", groupID] headers:nil body:@{ @"member_ids": memberIDs } ] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[value numberOrNil] objectIDStringValue];
+        }].array;
+    }];
+;
 }
 
 - (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupID:(NSString *)groupID {
-        return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members/remove", groupID] headers:nil body:@{ @"member_ids": memberIDs }];
+    return [[self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/members/remove", groupID] headers:nil body:@{ @"member_ids": memberIDs }]  map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[value numberOrNil] objectIDStringValue];
+        }].array;
+    }];
 }
 
 - (RACSignal *)removeMembersWithStatus:(EMMemberStatus)status fromGroupID:(NSString *)groupID
