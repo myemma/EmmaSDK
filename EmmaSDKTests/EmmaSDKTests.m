@@ -1614,7 +1614,64 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+    
+    it(@"getMemberCountInSearchID: should call endpoint", ^ {
+        [[client getMemberCountInSearchID:@"123"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/searches/123/members"];
+    });
+    
+    it(@"getMemberCountInSearchID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@3] ];
+        
+        [[client getMemberCountInSearchID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@3);
+    });
+    
+    it(@"getMembersInSearchID:inRange: should call endpoint", ^ {
+        [[client getMembersInSearchID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/searches/123/members?end=20&start=10" body:nil];
+    });
+    
+    it(@"getMembersInSearchID:inRange: should parse results", ^ {
+        __block NSArray *result;
+        
+        id memberDict0 = @{
+        @"status": @"opt-out",
+        @"confirmed_opt_in": [NSNull null],
+        @"account_id": @100,
+        @"fields": @{
+            @"first_name": @"Gladys",
+            @"last_name": @"Jones",
+            @"favorite_food": @"toast"
+        },
+        @"member_id": @201,
+        @"last_modified_at": [NSNull null],
+        @"member_status_id": @"o",
+        @"plaintext_preferred": @NO,
+        @"email_error": [NSNull null],
+        @"member_since": @"@D:2011-01-03T15:54:13",
+        @"bounce_count": @0,
+        @"deleted_at": [NSNull null],
+        @"email": @"gladys@myemma.com"
 
+        };
+        endpoint.results = @[ [RACSignal return:@[
+                               memberDict0
+                               ]] ];
+        
+        [[client getMembersInSearchID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"201");
+        expect([result[0] email]).to.equal(@"gladys@myemma.com");
+    });
 });
 
 SpecEnd

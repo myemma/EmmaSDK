@@ -548,13 +548,19 @@ static EMClient *shared;
 
 - (RACSignal *)getMemberCountInSearchID:(NSString *)searchID // returns NSNumber
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/searches/%@/members", searchID] headers:nil body:nil] map:^id(NSNumber *value) {
+        return [value numberOrNil];
+    }];
 }
 
 - (RACSignal *)getMembersInSearchID:(NSString *)searchID inRange:(EMResultRange)range // returns NSArray of EMMember
 {
-    return nil;
-}
+    id query = [@{} dictionaryByAddingRangeParams:range];
+    return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/searches/%@/members", searchID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMember alloc] initWithDictionary:value];
+        }].array;
+    }];}
 
 //webhooks
 
