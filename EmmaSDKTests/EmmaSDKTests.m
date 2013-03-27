@@ -1077,7 +1077,7 @@ describe(@"EMClient", ^{
             result = x;
         }];
         
-        expect(result).to.equal(@"6");
+        expect(result).to.equal(@6);
     });
     
     it(@"getFieldsInRange: should call endpoint", ^ {

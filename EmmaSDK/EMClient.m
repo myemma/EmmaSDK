@@ -199,7 +199,7 @@ static EMClient *shared;
 - (RACSignal *)getFieldCount
 {
     return [[self requestSignalWithMethod:@"GET" path:@"/fields" headers:nil body:nil] map:^id(NSNumber *value) {
-        return [[value numberOrNil] objectIDStringValue];
+        return [value numberOrNil];
     }];
 }
 
@@ -248,7 +248,9 @@ static EMClient *shared;
 - (RACSignal *)getGroupCountWithType:(EMGroupType)groupType {
     id query = [@{@"group_types": EMGroupTypeGetString(groupType)} dictionaryByAddingCountParam];
     
-    return [self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSNumber *value) {
+        return [value numberOrNil];
+    }];
 }
 
 - (RACSignal *)getGroupsWithType:(EMGroupType)groupType inRange:(EMResultRange)range {
@@ -327,7 +329,10 @@ static EMClient *shared;
 {
     id query = @{@"mailing_statuses" : EMMailingStatusToString(statuses)};
     
-    return [self requestSignalWithMethod:@"GET" path:[@"/mailings" stringByAppendingQueryString:query] headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:[@"/mailings" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSNumber *value) {
+        return [value numberOrNil];
+    }];
+;
 }
 
 - (RACSignal *)getMailingsWithStatuses:(EMMailingStatus)statuses inRange:(EMResultRange)range
@@ -352,7 +357,9 @@ static EMClient *shared;
 
 - (RACSignal *)getMembersCountForMailingID:(NSString *)mailingID
 {
-    return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/members", mailingID] headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/members", mailingID] headers:nil body:nil] map:^id(NSNumber *value) {
+        return [value numberOrNil];
+    }];
 }
 
 - (RACSignal *)getMembersForMailingID:(NSString *)mailingID inRange:(EMResultRange)range
@@ -377,7 +384,9 @@ static EMClient *shared;
 
 - (RACSignal *)getGroupCountForMailingID:(NSString *)mailingID
 {
-    return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/groups", mailingID] headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/groups", mailingID] headers:nil body:nil] map:^id(NSNumber *value) {
+        return [value numberOrNil];
+    }];;
 }
 
 - (RACSignal *)getGroupsForMailingID:(NSString *)mailingID inRange:(EMResultRange)range
@@ -393,7 +402,9 @@ static EMClient *shared;
 
 - (RACSignal *)getSearchCountForMailingID:(NSString *)mailingID
 {
-    return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/searches", mailingID] headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/searches", mailingID] headers:nil body:nil] map:^id(NSNumber *value) {
+        return [value numberOrNil];
+    }];
 }
 
 - (RACSignal *)getSearchesForMailingID:(NSString *)mailingID inRange:(EMResultRange)range
@@ -427,7 +438,6 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/forwards/%@/%@", mailingID, memberID] headers:nil body:@{@"recipient_emails" : recipients, @"note" : note}];
 }
 
-//POST /#account_id/mailings/#mailing_id
 - (RACSignal *)resendMailingID:(NSString *)mailingID headsUpAddresses:(NSArray *)headsUpAddresses recipientAddresses:(NSArray *)recipientAddresses recipientGroupIDs:(NSArray *)recipientGroupIDs recipientSearchIDs:(NSArray *)recipientSearchIDs
 {
     id body = @{
@@ -465,7 +475,10 @@ static EMClient *shared;
 {
     id query = @{@"deleted": deleted ? @"true" : @"false" };
     
-    return [self requestSignalWithMethod:@"GET" path:[@"/members" stringByAppendingQueryString:query] headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:[@"/members" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSNumber *value) {
+        return [value numberOrNil];
+    }];
+;
 }
 
 - (RACSignal *)getMembersInRange:(EMResultRange)range includeDeleted:(BOOL)deleted
