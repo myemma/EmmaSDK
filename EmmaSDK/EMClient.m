@@ -230,7 +230,7 @@ static EMClient *shared;
 
 - (RACSignal *)deleteFieldID:(NSString *)fieldID
 {
-    return nil;
+    return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/fields/%@", fieldID] headers:nil body:nil];
 }
 
 - (RACSignal *)clearFieldID:(NSString *)fieldID

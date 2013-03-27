@@ -329,6 +329,11 @@ describe(@"EMClient", ^{
         expect([result[0] email]).to.equal(@"emma@myemma.com");
     });
     
+    it(@"deleteGroupID: should call endpoint", ^ {
+        [[client deleteGroupID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/groups/123" body:nil];
+    });
+    
     it(@"deleteGroupID: should parse results", ^ {
         __block NSArray *result;
         
@@ -340,12 +345,6 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
-    
-    it(@"deleteGroupID: should call endpoint", ^ {
-        [[client deleteGroupID:@"123"] subscribeCompleted:^{ }];
-        [endpoint expectRequestWithMethod:@"DELETE" path:@"/groups/123" body:nil];
-    });
-    
     
     it(@"getMailingCountWithStatuses: should call endpoint", ^ {
         [[client getMailingCountWithStatuses:EMMailingStatusAll] subscribeCompleted:^ { }];
@@ -1179,6 +1178,23 @@ describe(@"EMClient", ^{
         }];
         
         expect(result).to.equal(@"123");
+    });
+    
+    it(@"deleteFieldID: should call endpoint", ^ {
+        [[client deleteFieldID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/fields/123" body:nil];
+    });
+    
+    it(@"deleteFieldID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client deleteFieldID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
     });
 });
 
