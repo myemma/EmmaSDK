@@ -1710,6 +1710,47 @@ describe(@"EMClient", ^{
         expect([result memberSince]).to.equal([@"@D:2011-01-03T15:54:13" parseISO8601Timestamp]);
         expect([result status]).to.equal(EMMemberStatusOptout);
     });
+    
+    it(@"getMemberWithEmail: should call endpoint", ^ {
+        [[client getMemberWithEmail:@"super@email.com"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members/email/super@email.com" body:nil];
+    });
+    
+    it(@"getMemberWithEmail: should parse results", ^ {
+        __block EMMember *result;
+        
+        id memberDict0 = @{
+            @"status": @"opt-out",
+            @"confirmed_opt_in": [NSNull null],
+            @"account_id": @100,
+            @"fields": @{
+            @"first_name": @"Gladys",
+            @"last_name": @"Jones",
+            @"favorite_food": @"toast"
+            },
+            @"member_id": @201,
+            @"last_modified_at": [NSNull null],
+            @"member_status_id": @"o",
+            @"plaintext_preferred": @NO,
+            @"email_error": [NSNull null],
+            @"member_since": @"@D:2011-01-03T15:54:13",
+            @"bounce_count": @0,
+            @"deleted_at": [NSNull null],
+            @"email": @"gladys@myemma.com"
+        };
+        endpoint.results = @[ [RACSignal return:
+                               memberDict0
+                               ] ];
+        
+        [[client getMemberWithEmail:@"gladys@myemma.com"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect([result ID]).to.equal(@"201");
+        expect([result email]).to.equal(@"gladys@myemma.com");
+        expect([result memberSince]).to.equal([@"@D:2011-01-03T15:54:13" parseISO8601Timestamp]);
+        expect([result status]).to.equal(EMMemberStatusOptout);
+    });
 });
 
 SpecEnd

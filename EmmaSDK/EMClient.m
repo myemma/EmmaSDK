@@ -510,9 +510,13 @@ static EMClient *shared;
     }];
 }
 
+//GET /#account_id/members/email/:email¶
+
 - (RACSignal *)getMemberWithEmail:(NSString *)email
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/email/%@", email] headers:nil body:nil] map:^id(NSDictionary *value) {
+        return [[EMMember alloc] initWithDictionary:value];
+    }];
 }
 
 #warning XXX response format undefined
