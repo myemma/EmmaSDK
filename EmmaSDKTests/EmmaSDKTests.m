@@ -1140,11 +1140,14 @@ describe(@"EMClient", ^{
         expect([result displayName]).to.equal(@"First Name");
         expect([result fieldType]).to.equal(EMFieldTypeText);
         expect([result widgetType]).to.equal(EMFieldWidgetTypeText);
+        expect([result fieldID]).to.equal(@"200");
+
     });
     
     it(@"createField: should call endpoint", ^ {
         
         id data = @{
+        @"field_id" : @321,
         @"shortcut_name" : @"first_name",
         @"display_name" : @"First Name",
         @"field_type" : EMFieldTypeToString(EMFieldTypeText),
@@ -1164,6 +1167,7 @@ describe(@"EMClient", ^{
         endpoint.results = @[ [RACSignal return:@123 ] ];
     
         id data = @{
+        @"field_id" : @321,
         @"shortcut_name" : @"first_name",
         @"display_name" : @"First Name",
         @"field_type" : EMFieldTypeToString(EMFieldTypeText),
@@ -1197,6 +1201,53 @@ describe(@"EMClient", ^{
         expect(result).to.equal(@YES);
     });
     
+    it(@"clearFieldID: should call endpoint", ^ {
+        [[client clearFieldID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"POST" path:@"/fields/123/clear" body:nil];
+    });
+    
+    it(@"clearFieldID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client clearFieldID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
+    
+//    it(@"updateField: should call endpoint", ^ {
+//        
+//        id data = @{
+//        @"field_id" : @321
+//        };
+//        
+//        EMField *field = [[EMField alloc] initWithDictionary:data];
+//        
+//        [[client updateField:field] subscribeCompleted:^ {}];
+//        [endpoint expectRequestWithMethod:@"POST" path:@"/fields/321"];
+//    });
+//    
+//    it(@"updateField: should parse results", ^ {
+//        __block NSArray *result;
+//        
+//        endpoint.results = @[ [RACSignal return:@123 ] ];
+//        
+//        id data = @{
+//        @"field_id" : @321
+//        };
+//        
+//        EMField *field = [[EMField alloc] initWithDictionary:data];
+//        
+//        [[client createField:field] subscribeNext:^(id x) {
+//            result = x;
+//        }];
+//        
+//        expect(result).to.equal(@"321");
+//    });
+
     it(@"getWebhookCount should call endpoint", ^ {
         [[client getWebhookCount] subscribeCompleted:^{ }];
         [endpoint expectRequestWithMethod:@"GET" path:@"/webhooks"];

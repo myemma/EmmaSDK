@@ -241,13 +241,14 @@ static EMClient *shared;
 
 - (RACSignal *)clearFieldID:(NSString *)fieldID
 {
-    return nil;
+    return [self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/fields/%@/clear", fieldID] headers:nil body:nil];
 }
 
 - (RACSignal *)updateField:(EMField *)field
 {
-    return nil;
-}
+    return [[self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/fields/%@", field.fieldID] headers:nil body:field.dictionaryRepresentation] map:^id(NSNumber* result) {
+        return [[result numberOrNil] objectIDStringValue];
+    }];}
 
 //groups
 

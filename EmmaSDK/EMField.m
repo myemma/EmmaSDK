@@ -1,5 +1,6 @@
 #import "EMField.h"
 #import "NSObject+ObjectOrNil.h"
+#import "NSNumber+ObjectIDString.h"
 
 EMFieldType EMFieldTypeFromString(NSString *fieldTypeString) {
     if ([fieldTypeString isEqual:@"text"])
@@ -81,6 +82,7 @@ NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type) {
 
 - (id)initWithDictionary:(NSDictionary *)dict {
     if ((self = [super init])) {
+        _fieldID = [[[dict objectForKey:@"field_id"] numberOrNil] objectIDStringValue];
         _name = [[[dict objectForKey:@"shortcut_name"] stringOrNil] copy];
         _displayName = [[[dict objectForKey:@"display_name"] stringOrNil] copy];
         
@@ -130,6 +132,7 @@ NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type) {
 - (NSDictionary *)dictionaryRepresentation
 {
     return @{
+    @"field_id" : _fieldID,
     @"shortcut_name" : _name,
     @"display_name" : _displayName,
     @"field_type" : EMFieldTypeToString(_fieldType),
