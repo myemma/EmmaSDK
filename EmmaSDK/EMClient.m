@@ -248,7 +248,8 @@ static EMClient *shared;
 {
     return [[self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/fields/%@", field.fieldID] headers:nil body:field.dictionaryRepresentation] map:^id(NSNumber* result) {
         return [[result numberOrNil] objectIDStringValue];
-    }];}
+    }];
+}
 
 //groups
 

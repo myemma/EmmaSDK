@@ -1042,8 +1042,7 @@ describe(@"EMClient", ^{
     });
     
     it(@"resendMailingID:headsUpAddresses:recipientAddresses:recipientGroupIDs:recipientSearchIDs: should parse results", ^ {
-        __block EMMailing *result;
-        
+        __block NSString *result;
         
         endpoint.results = @[ [RACSignal return:@1024] ];
         
@@ -1218,35 +1217,45 @@ describe(@"EMClient", ^{
         expect(result).to.equal(@YES);
     });
     
-//    it(@"updateField: should call endpoint", ^ {
-//        
-//        id data = @{
-//        @"field_id" : @321
-//        };
-//        
-//        EMField *field = [[EMField alloc] initWithDictionary:data];
-//        
-//        [[client updateField:field] subscribeCompleted:^ {}];
-//        [endpoint expectRequestWithMethod:@"POST" path:@"/fields/321"];
-//    });
-//    
-//    it(@"updateField: should parse results", ^ {
-//        __block NSArray *result;
-//        
-//        endpoint.results = @[ [RACSignal return:@123 ] ];
-//        
-//        id data = @{
-//        @"field_id" : @321
-//        };
-//        
-//        EMField *field = [[EMField alloc] initWithDictionary:data];
-//        
-//        [[client createField:field] subscribeNext:^(id x) {
-//            result = x;
-//        }];
-//        
-//        expect(result).to.equal(@"321");
-//    });
+    it(@"updateField: should call endpoint", ^ {
+        
+        id data = @{
+        @"field_id" : @321,
+        @"shortcut_name" : @"first_name",
+        @"display_name" : @"First Name",
+        @"field_type" : EMFieldTypeToString(EMFieldTypeText),
+        @"widget_type" : EMFieldWidgetTypeToString(EMFieldWidgetTypeText),
+        @"column_order" : @3
+        };
+        
+        EMField *field = [[EMField alloc] initWithDictionary:data];
+        
+        [[client updateField:field] subscribeCompleted:^ {}];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/fields/321" body:field.dictionaryRepresentation];
+    });
+    
+    it(@"updateField: should parse results", ^ {
+        __block NSString *result;
+        
+        endpoint.results = @[ [RACSignal return:@123 ] ];
+        
+        id data = @{
+        @"field_id" : @321,
+        @"shortcut_name" : @"first_name",
+        @"display_name" : @"First Name",
+        @"field_type" : EMFieldTypeToString(EMFieldTypeText),
+        @"widget_type" : EMFieldWidgetTypeToString(EMFieldWidgetTypeText),
+        @"column_order" : @3
+        };
+        
+        EMField *field = [[EMField alloc] initWithDictionary:data];
+        
+        [[client updateField:field] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@"123");
+    });
 
     it(@"getWebhookCount should call endpoint", ^ {
         [[client getWebhookCount] subscribeCompleted:^{ }];
