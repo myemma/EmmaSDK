@@ -1597,6 +1597,24 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+    
+    it(@"deleteSearchID: should call endpoint", ^ {
+        [[client deleteSearchID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/searches/123" body:nil];
+    });
+    
+    it(@"deleteSearchID: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client deleteSearchID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
+
 });
 
 SpecEnd

@@ -543,13 +543,14 @@ static EMClient *shared;
 
 - (RACSignal *)deleteSearchID:(NSString *)searchID
 {
-    return nil;
+    return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/searches/%@", searchID] headers:nil body:nil];
 }
 
 - (RACSignal *)getMemberCountInSearchID:(NSString *)searchID // returns NSNumber
 {
     return nil;
 }
+
 - (RACSignal *)getMembersInSearchID:(NSString *)searchID inRange:(EMResultRange)range // returns NSArray of EMMember
 {
     return nil;
