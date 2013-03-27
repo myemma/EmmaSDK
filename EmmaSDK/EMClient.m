@@ -532,8 +532,9 @@ static EMClient *shared;
 
 - (RACSignal *)createSearch:(EMSearch *)search
 {
-    return nil;
-}
+    return [[self requestSignalWithMethod:@"POST" path:@"/searches" headers:nil body:search.dictionaryRepresentation] map:^id(NSNumber* result) {
+        return [[result numberOrNil] objectIDStringValue];
+    }];}
 
 - (RACSignal *)updateSearch:(EMSearch *)search
 {

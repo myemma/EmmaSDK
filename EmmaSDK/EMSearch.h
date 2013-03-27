@@ -6,5 +6,6 @@
 @property (nonatomic, readonly) NSDate *deletedAt, *lastRunAt;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
+- (NSDictionary *)dictionaryRepresentation;
 
 @end

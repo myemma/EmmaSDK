@@ -140,4 +140,5 @@ NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type) {
     @"column_order" : @(_columnOrder)
     };
 }
+
 @end

@@ -1161,7 +1161,7 @@ describe(@"EMClient", ^{
     });
     
     it(@"createField: should parse results", ^ {
-        __block NSArray *result;
+        __block NSString *result;
         
         endpoint.results = @[ [RACSignal return:@123 ] ];
     
@@ -1530,7 +1530,40 @@ describe(@"EMClient", ^{
         expect([result errorCount]).to.equal(0);
         expect([result lastRunAt]).to.equal([@"@D:2013-03-20T14:21:44" parseISO8601Timestamp]);
     });
-
+    
+    it(@"createSearch: should call endpoint", ^ {
+        
+        id data = @{
+        @"search_id" : @123,
+        @"name" : @"A Search",
+        @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
+        };
+        
+        EMSearch *search = [[EMSearch alloc] initWithDictionary:data];
+        
+        [[client createSearch:search] subscribeCompleted:^ {}];
+        [endpoint expectRequestWithMethod:@"POST" path:@"/searches" body:search.dictionaryRepresentation];
+    });
+    
+    it(@"createSearch: should parse results", ^ {
+        __block NSString *result;
+        
+        endpoint.results = @[ [RACSignal return:@123 ] ];
+        
+        id data = @{
+        @"search_id" : @123,
+        @"name" : @"A Search",
+        @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
+        };
+        
+        EMSearch *search = [[EMSearch alloc] initWithDictionary:data];
+        
+        [[client createSearch:search] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@"123");
+    });
 });
 
 SpecEnd
