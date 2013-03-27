@@ -510,8 +510,6 @@ static EMClient *shared;
     }];
 }
 
-//GET /#account_id/members/email/:email¶
-
 - (RACSignal *)getMemberWithEmail:(NSString *)email
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/email/%@", email] headers:nil body:nil] map:^id(NSDictionary *value) {
@@ -520,9 +518,12 @@ static EMClient *shared;
 }
 
 #warning XXX response format undefined
+
+//GET /#account_id/members/#member_id/optout¶
+
 - (RACSignal *)getOptoutInfoForMemberID:(NSString *)memberID
 {
-    return nil;
+    return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/%@/optout", memberID] headers:nil body:nil];
 }
 
 - (RACSignal *)optoutMemberWithEmail:(NSString *)email

@@ -1751,6 +1751,25 @@ describe(@"EMClient", ^{
         expect([result memberSince]).to.equal([@"@D:2011-01-03T15:54:13" parseISO8601Timestamp]);
         expect([result status]).to.equal(EMMemberStatusOptout);
     });
+    
+    it(@"getOptoutInfoForMemberID: should call endpoint", ^ {
+        [[client getOptoutInfoForMemberID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members/123/optout" body:nil];
+    });
+    
+    it(@"getOptoutInfoForMemberID: should parse results", ^ {
+        __block id result;
+    
+        endpoint.results = @[ [RACSignal return:
+                               @"opt out info"
+                               ] ];
+        
+        [[client getOptoutInfoForMemberID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@"opt out info");
+    });
 });
 
 SpecEnd
