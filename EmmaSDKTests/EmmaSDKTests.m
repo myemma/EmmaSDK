@@ -1442,6 +1442,58 @@ describe(@"EMClient", ^{
         }];
         expect(result).to.equal(@YES);
     });
+    
+    it(@"getSearchCount: should call endpoint", ^ {
+        [[client getSearchCount] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/searches" body:nil];
+    });
+    
+    it(@"getSearchCount: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@6] ];
+        
+        [[client getSearchCount] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@6);
+    });
+    
+    it(@"getSearchesInRange: should call endpoint", ^ {
+        [[client getSearchesInRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/searches?end=20&start=10" body:nil];
+    });
+    
+    it(@"getSearchesInRange: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               @{
+                                    @"search_id": @201,
+                                    @"optout_count": @0,
+                                    @"error_count": @0,
+                                    @"name": @"Second Test Search",
+                                    @"criteria": @"[\"group\", \"eq\", \"Special Events\"]",
+                                    @"deleted_at": [NSNull null],
+                                    @"last_run_at": [NSNull null],
+                                    @"active_count": @0,
+                                    @"account_id": @100
+                               }
+                               ]] ];
+        
+        [[client getSearchesInRange:(EMResultRange){ .start = 10, .end = 20 }] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"201");
+        expect([result[0] name]).to.equal(@"Second Test Search");
+        expect([result[0] criteria]).to.equal(@"[\"group\", \"eq\", \"Special Events\"]");
+        expect([result[0] activeCount]).to.equal(0);
+        expect([result[0] optoutCount]).to.equal(0);
+        expect([result[0] errorCount]).to.equal(0);
+    });
 });
 
 SpecEnd

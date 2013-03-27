@@ -503,6 +503,57 @@ static EMClient *shared;
     }];
 }
 
+// searches
+
+- (RACSignal *)getSearchCount // returns NSArray of EMSearch
+{
+    return [[self requestSignalWithMethod:@"GET" path:@"/searches" headers:nil body:nil] map:^id(NSNumber *value) {
+        return [value numberOrNil];
+    }];
+}
+
+- (RACSignal *)getSearchesInRange:(EMResultRange)range // returns NSArray of EMSearch
+{
+    id query = [@{} dictionaryByAddingRangeParams:range];
+    
+    return [[self requestSignalWithMethod:@"GET" path:[@"/searches" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMSearch alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
+
+- (RACSignal *)getSearchID:(NSString *)searchID
+{
+    return nil;
+}
+
+- (RACSignal *)createSearch:(EMSearch *)search
+{
+    return nil;
+}
+
+- (RACSignal *)updateSearch:(EMSearch *)search
+{
+    return nil;
+}
+
+- (RACSignal *)deleteSearchID:(NSString *)searchID
+{
+    return nil;
+}
+
+- (RACSignal *)getMemberCountInSearchID:(NSString *)searchID // returns NSNumber
+{
+    return nil;
+}
+- (RACSignal *)getMembersInSearchID:(NSString *)searchID inRange:(EMResultRange)range // returns NSArray of EMMember
+{
+    return nil;
+}
+
+//webhooks
+
 - (RACSignal *)getWebhookCount {
     return [self requestSignalWithMethod:@"GET" path:@"/webhooks" headers:nil body:nil];
 }
