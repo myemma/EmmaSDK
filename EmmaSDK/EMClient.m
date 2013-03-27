@@ -505,7 +505,9 @@ static EMClient *shared;
 
 - (RACSignal *)getMemberWithID:(NSString *)memberID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/%@", memberID] headers:nil body:nil] map:^id(NSDictionary *value) {
+        return [[EMMember alloc] initWithDictionary:value];
+    }];
 }
 
 - (RACSignal *)getMemberWithEmail:(NSString *)email
