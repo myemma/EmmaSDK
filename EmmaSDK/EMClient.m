@@ -6,6 +6,12 @@
 
 #define API_HOST @"http://api.e2ma.net/"
 
+EMResultRange EMResultRangeMake(NSInteger start, NSInteger end) {
+    return (EMResultRange){ .start = start, .end = end };
+}
+
+EMResultRange EMResultRangeAll = ((EMResultRange){ .start = -1, .end = -1 });
+
 NSString *EMMailingStatusToString(EMMailingStatus status) {
     
     if (status == EMMailingStatusAll)
@@ -495,5 +501,36 @@ static EMClient *shared;
     }];
 }
 
+- (RACSignal *)getWebhookCount {
+    return [self requestSignalWithMethod:@"GET" path:@"/webhooks" headers:nil body:nil];
+}
+
+- (RACSignal *)getWebhooksInRange:(EMResultRange)range {
+    return [[self requestSignalWithMethod:@"GET" path:@"/webhooks" headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(NSDictionary *value) {
+            return [[EMWebhook alloc] initWithDictionary:value];
+        }];
+    }];
+}
+
+- (RACSignal *)getWebhookInfo {
+    return [self requestSignalWithMethod:@"GET" path:@"/webhooks/events" headers:nil body:nil];
+}
+
+- (RACSignal *)createWebhook:(EMWebhook *)webhook {
+    
+}
+
+- (RACSignal *)updateWebhook:(EMWebhook *)webhook {
+    
+}
+
+- (RACSignal *)deleteWebhookWithID:(NSString *)webhookID {
+    
+}
+
+- (RACSignal *)deleteAllWebhooks {
+    
+}
 
 @end

@@ -19,6 +19,10 @@
 		418E65D2170255ED00EBB567 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 418E65D0170255ED00EBB567 /* NSData+Base64.h */; };
 		418E65D3170255ED00EBB567 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E65D1170255ED00EBB567 /* NSData+Base64.m */; };
 		418E65E3170259DA00EBB567 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E65D1170255ED00EBB567 /* NSData+Base64.m */; };
+		418E65ED1702A30700EBB567 /* EMResponseSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 418EE80F170231F600773A19 /* EMResponseSummary.m */; };
+		418E65EE1702A30700EBB567 /* EMTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */; };
+		418E65EF1702A30700EBB567 /* EMWebhook.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CB3EC016FAB113009CAD80 /* EMWebhook.m */; };
+		418E65F01702A30700EBB567 /* EMShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 418EE81C170238FB00773A19 /* EMShare.m */; };
 		418EE810170231F600773A19 /* EMResponseSummary.h in Headers */ = {isa = PBXBuildFile; fileRef = 418EE80E170231F600773A19 /* EMResponseSummary.h */; };
 		418EE811170231F600773A19 /* EMResponseSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 418EE80F170231F600773A19 /* EMResponseSummary.m */; };
 		418EE81D170238FB00773A19 /* EMShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 418EE81B170238FB00773A19 /* EMShare.h */; };
@@ -792,6 +796,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				418E65ED1702A30700EBB567 /* EMResponseSummary.m in Sources */,
+				418E65EE1702A30700EBB567 /* EMTrigger.m in Sources */,
+				418E65EF1702A30700EBB567 /* EMWebhook.m in Sources */,
+				418E65F01702A30700EBB567 /* EMShare.m in Sources */,
 				418E65E3170259DA00EBB567 /* NSData+Base64.m in Sources */,
 				34D89D2717023EFD00C7157E /* EMField.m in Sources */,
 				41912D9C16D59D2600126AF1 /* NSObject+ObjectOrNil.m in Sources */,

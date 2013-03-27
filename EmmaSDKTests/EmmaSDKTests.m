@@ -1196,6 +1196,178 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+    
+    it(@"getWebhookCount should call endpoint", ^ {
+        [[client getWebhookCount] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/webhooks"];
+    });
+    
+    it(@"getWebhookCount should parse result", ^ {
+        endpoint.results = @[ [RACSignal return:@123] ];
+        
+        __block NSNumber *result;
+        
+        [[client getWebhookCount] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@123);
+    });
+    
+    it(@"getWebhooksInRange: should call endpoint", ^ {
+        [[client getWebhooksInRange:EMResultRangeMake(10, 20)] subscribeCompleted:^{}];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/webhooks?end=20&start=10"];
+    });
+    
+    it(@"getWebhooksInRange: should parse results", ^ {
+        endpoint.results = @[ [RACSignal return:@[@{
+                                   @"url": @"http://myemma.com",
+                                   @"webhook_id": @100,
+                                   @"method": @"POST",
+                                   @"account_id": @100,
+                                   @"event": @"mailing_finish"
+                               },
+                               @{
+                                   @"url": @"http://tech.myemma.com",
+                                   @"webhook_id": @101,
+                                   @"method": @"POST",
+                                   @"account_id": @100,
+                                   @"event": @"mailing_finish"
+                               }]] ];
+        
+        __block NSArray *result;
+        
+        [[client getWebhooksInRange:EMResultRangeAll] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(2);
+        expect([result[0] url]).to.equal("http://myemma.com");
+        expect([result[0] webhookID]).to.equal(@100);
+        expect([result[0] method]).to.equal(@"POST");
+        expect([result[0] event]).to.equal(@"mailing_finish");
+        expect([result[1] url]).to.equal("http://tech.myemma.com");
+        expect([result[1] webhookID]).to.equal(@101);
+        expect([result[1] method]).to.equal(@"POST");
+        expect([result[1] event]).to.equal(@"mailing_finish");
+    });
+    
+    it(@"getWebhookEvents should call endpoint", ^ {
+        [[client getWebhookEvents] subscribeCompleted:^ {}];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/webhooks/events"];
+    });
+    
+    it(@"getWebhookEvents should parse results", ^{
+        endpoint.results = @[ [RACSignal return:@[
+        @{
+            @"event_name": @"mailing_finish",
+            @"webhook_event_id": @1,
+            @"description": @"Fired when a mailing is finished."
+        },
+        @{
+            @"event_name": @"mailing_start",
+            @"webhook_event_id": @2,
+            @"description": @"Fired when a mailing starts."
+        },
+        @{
+            @"event_name": @"member_signup",
+            @"webhook_event_id": @3,
+            @"description": @"Fired when a member signs up through a signup form."
+        } ] ] ];
+        
+        __block NSArray *result;
+        
+        [[client getWebhookEvents] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(3);
+        expect([result[0] eventName]).to.equal(@"mailing_finish");
+        expect([result[0] webhookEventID]).to.equal(@1);
+        expect([result[0] webhookDescription]).to.equal(@"Fired when a mailing is finished.");
+        expect([result[1] eventName]).to.equal(@"mailing_start");
+        expect([result[1] webhookEventID]).to.equal(@2);
+        expect([result[1] webhookDescription]).to.equal(@"Fired when a mailing starts.");
+        expect([result[2] eventName]).to.equal(@"member_signup");
+        expect([result[2] webhookEventID]).to.equal(@3);
+        expect([result[2] webhookDescription]).to.equal(@"Fired when a member signs up through a signup form.");
+    });
+    
+    it(@"createWebhook:withPublicKey: should call endpoint", ^ {
+        EMWebhook *webhook = [[EMWebhook alloc] init];
+        webhook.url = [NSURL URLWithString:@"http://my.cool.website.tld/poast"];
+        webhook.method = @"POST";
+        webhook.event = @"member_signup";
+        [[client createWebhook:webhook withPublicKey:@"foobs"] subscribeCompleted:^{}];
+        
+        [endpoint expectRequestWithMethod:@"POST" path:@"/webhooks" body:@{
+             @"url": @"http://my.cool.website.tld/poast",
+             @"method": @"POST",
+             @"event": @"member_signup"
+         }];
+    });
+    
+    it(@"createWebhook:withPublicKey: should parse results", ^ {
+        endpoint.results = @[ [RACSignal return:@1024] ];
+        
+        __block NSNumber *result;
+        [[client createWebhook:nil withPublicKey:nil] subscribeNext:^(id x) {
+            x = result;
+        }];
+        
+        expect(result).to.equal(@1024);
+    });
+    
+    it(@"updateWebhook: should call endpoint", ^ {
+        EMWebhook *webhook = [[EMWebhook alloc] init];
+        webhook.url = [NSURL URLWithString:@"http://my.cool.website.tld/poast"];
+        webhook.method = @"POST";
+        webhook.event = @"member_signup";
+        [[client updateWebhook:webhook] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/webhooks" body:@{
+            @"url": @"http://my.cool.website.tld/poast",
+            @"method": @"POST",
+            @"event": @"member_signup"
+        }];
+    });
+    
+    it(@"updateWebhook: should parse results", ^ {
+        endpoint.results = @[ @100 ];
+        __block NSNumber *result;
+        [[client updateWebhook:nil] subscribeNext:^(id x) {
+            x = result;
+        }];
+        
+        expect(result).to.equal(@100);
+    });
+    
+    it(@"deleteWebhookWithID: should call endpoint", ^ {
+        [[client deleteWebhookWithID:@"1234"] subscribeCompleted:^ {}];
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/webhooks/1234"];
+    });
+    
+    it(@"deleteWebhookWithID: should parse results", ^ {
+        endpoint.results = @[ @YES ];
+        __block NSNumber *result;
+        [[client deleteWebhookWithID:@"1234"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        expect(result).to.equal(@YES);
+    });
+    
+    it(@"deleteAllWebhooks: should call endpoint", ^ {
+        [[client deleteAllWebhooks] subscribeCompleted:^ {}];
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/webhooks"];
+    });
+    
+    it(@"deleteAllWebhooks: should parse results", ^ {
+        endpoint.results = @[ @YES ];
+        __block NSNumber *result;
+        [[client deleteAllWebhooks] subscribeNext:^(id x) {
+            result = x;
+        }];
+        expect(result).to.equal(@YES);
+    });
 });
 
 SpecEnd

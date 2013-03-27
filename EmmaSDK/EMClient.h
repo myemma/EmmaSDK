@@ -16,6 +16,9 @@ struct EMResultRange {
 };
 typedef struct EMResultRange EMResultRange;
 
+EMResultRange EMResultRangeMake(NSInteger start, NSInteger end);
+extern EMResultRange EMResultRangeAll;
+
 @protocol EMClient <NSObject>
 
 // fields
@@ -126,8 +129,8 @@ typedef struct EMResultRange EMResultRange;
 // webhooks
 - (RACSignal *)getWebhookCount;
 - (RACSignal *)getWebhooksInRange:(EMResultRange)range; // returns NSArray of EMWebhook
-- (RACSignal *)getWebhookInfo; // returns NSArray of EMWebhookInfo
-- (RACSignal *)createWebhook:(EMWebhook *)webhook;
+- (RACSignal *)getWebhookEvents; // returns NSArray of EMWebhookEvent
+- (RACSignal *)createWebhook:(EMWebhook *)webhook withPublicKey:(NSString *)publicKey;
 - (RACSignal *)updateWebhook:(EMWebhook *)webhook;
 - (RACSignal *)deleteWebhookWithID:(NSString *)webhookID;
 - (RACSignal *)deleteAllWebhooks;
