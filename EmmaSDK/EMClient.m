@@ -518,9 +518,6 @@ static EMClient *shared;
 }
 
 #warning XXX response format undefined
-
-//GET /#account_id/members/#member_id/optout¶
-
 - (RACSignal *)getOptoutInfoForMemberID:(NSString *)memberID
 {
     return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/%@/optout", memberID] headers:nil body:nil];
@@ -528,7 +525,7 @@ static EMClient *shared;
 
 - (RACSignal *)optoutMemberWithEmail:(NSString *)email
 {
-    return nil;
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/email/optout/%@", email] headers:nil body:nil];
 }
 
 - (RACSignal *)createMembers:(NSArray *)members withSourceName:(NSString *)sourceName addOnly:(BOOL)addOnly groupIDs:(NSArray *)groupIDs

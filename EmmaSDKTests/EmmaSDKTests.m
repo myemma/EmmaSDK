@@ -1770,6 +1770,25 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@"opt out info");
     });
+    
+    it(@"optoutMemberWithEmail: should call endpoint", ^ {
+        [[client optoutMemberWithEmail:@"some@email.com"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/email/optout/some@email.com" body:nil];
+    });
+    
+    it(@"optoutMemberWithEmail: should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:
+                               @YES
+                               ] ];
+        
+        [[client optoutMemberWithEmail:@"test@email.com"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
 });
 
 SpecEnd
