@@ -556,7 +556,7 @@ describe(@"EMClient", ^{
     
     it(@"getMailingWithID: should parse results", ^ {
         
-        __block NSArray *result;
+        __block EMMailing *result;
         
         id mailingsDict = @{
                                 @"recipient_groups": @[
@@ -602,22 +602,21 @@ describe(@"EMClient", ^{
                                 @"html_body": @"<p>Hello [% member:first_name %]!</p>"
              };
         
-        endpoint.results = @[ [RACSignal return:@[
+        endpoint.results = @[ [RACSignal return:
                                mailingsDict
-                               ]] ];
+                               ] ];
         
         [[client getMailingWithID:@"321"] subscribeNext:^(id x) {
             result = x;
         }];
         
-        expect(result.count).to.equal(1);
-        expect([result[0] status]).to.equal(EMMailingStatusComplete);
-        expect([result[0] sender]).to.equal(@"Kevin McConnell");
-        expect([result[0] name]).to.equal(@"Sample Mailing");
-        expect([result[0] ID]).to.equal(@"200");
-        expect([result[0] recipientCount]).to.equal(@0);
-        expect([result[0] subject]).to.equal(@"Sample Mailing for [% member:first_name %] [% member:last_name %]");
-        expect([result[0] publicWebViewURL]).to.equal([NSURL URLWithString:@"http://localhost/webview/uf/6db0cc7e6fdb2da589b65f29d90c96b6"]);
+        expect([result status]).to.equal(EMMailingStatusComplete);
+        expect([result sender]).to.equal(@"Kevin McConnell");
+        expect([result name]).to.equal(@"Sample Mailing");
+        expect([result ID]).to.equal(@"200");
+        expect([result recipientCount]).to.equal(@0);
+        expect([result subject]).to.equal(@"Sample Mailing for [% member:first_name %] [% member:last_name %]");
+        expect([result publicWebViewURL]).to.equal([NSURL URLWithString:@"http://localhost/webview/uf/6db0cc7e6fdb2da589b65f29d90c96b6"]);
     });
     
     it(@"getMessageToMemberID:forMailingID: should call endpoint", ^ {
@@ -627,7 +626,7 @@ describe(@"EMClient", ^{
     
     it(@"getMessageToMemberID:forMailingID: should parse results", ^ {
         
-        __block NSArray *result;
+        __block EMMessage *result;
         
         id mailingsDict = @{
                                 @"plaintext": @"Hello !",
@@ -635,18 +634,17 @@ describe(@"EMClient", ^{
                                 @"html_body": @"<p>Hello !</p>"
             };
         
-        endpoint.results = @[ [RACSignal return:@[
+        endpoint.results = @[ [RACSignal return:
                                mailingsDict
-                               ]] ];
+                               ] ];
         
         [[client getMessageToMemberID:@"123" forMailingID:@"321"] subscribeNext:^(id x) {
             result = x;
         }];
         
-        expect(result.count).to.equal(1);
-        expect([result[0] subject]).to.equal(@"Sample Mailing for  ");
-        expect([result[0] plaintext]).to.equal(@"Hello !");
-        expect([result[0] htmlBody]).to.equal(@"<p>Hello !</p>");
+        expect([result subject]).to.equal(@"Sample Mailing for  ");
+        expect([result plaintext]).to.equal(@"Hello !");
+        expect([result htmlBody]).to.equal(@"<p>Hello !</p>");
     });
     
     it(@"getGroupCountForMailingID: should call endpoint", ^ {
@@ -1045,22 +1043,16 @@ describe(@"EMClient", ^{
     });
     
     it(@"resendMailingID:headsUpAddresses:recipientAddresses:recipientGroupIDs:recipientSearchIDs: should parse results", ^ {
-        __block NSArray *result;
+        __block EMMailing *result;
         
-        id memberDict0 = @{
-            @"mailing_id": @1024
-        };
         
-        endpoint.results = @[ [RACSignal return:@[
-                               memberDict0
-                               ]] ];
+        endpoint.results = @[ [RACSignal return:@1024] ];
         
         [[client resendMailingID:@"123" headsUpAddresses:@[@"hdsup@test.com"] recipientAddresses:@[@"recip@ient.com"] recipientGroupIDs:@[@"321"] recipientSearchIDs:@[@"432"]] subscribeNext:^(id x) {
             result = x;
         }];
         
-        expect(result.count).to.equal(1);
-        expect([result[0] ID]).to.equal(@"1024");
+        expect(result).to.equal(@"1024");
     });
     
     it(@"getFieldCount: should call endpoint", ^ {

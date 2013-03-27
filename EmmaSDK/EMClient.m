@@ -357,10 +357,8 @@ static EMClient *shared;
 
 - (RACSignal *)getMailingWithID:(NSString *)mailingID
 {
-    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
-        return [results.rac_sequence map:^id(id value) {
-            return [[EMMailing alloc] initWithDictionary:value];
-        }].array;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:nil] map:^id(NSDictionary *value) {
+        return [[EMMailing alloc] initWithDictionary:value];
     }];
 }
 
@@ -384,10 +382,8 @@ static EMClient *shared;
 
 - (RACSignal *)getMessageToMemberID:(NSString *)memberID forMailingID:(NSString *)mailingID
 {
-    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/messages/%@", mailingID, memberID] headers:nil body:nil] map:^id(NSArray *results) {
-        return [results.rac_sequence map:^id(id value) {
-            return [[EMMessage alloc] initWithDictionary:value];
-        }].array;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/mailings/%@/messages/%@", mailingID, memberID] headers:nil body:nil] map:^id(NSDictionary *value) {
+        return [[EMMessage alloc] initWithDictionary:value];
     }];
 }
 
@@ -456,10 +452,8 @@ static EMClient *shared;
     @"recipient_searches" : recipientSearchIDs
     };
     
-    return [[self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:body] map:^id(NSArray *results) {
-        return [results.rac_sequence map:^id(id value) {
-            return [[EMMailing alloc] initWithDictionary:value];
-        }].array;
+    return [[self requestSignalWithMethod:@"POST" path:[NSString stringWithFormat:@"/mailings/%@", mailingID] headers:nil body:body] map:^id(NSNumber* result) {
+        return [[result numberOrNil] objectIDStringValue];
     }];
 }
 
