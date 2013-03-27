@@ -1,6 +1,5 @@
 #import "EMClient.h"
 
-
 @interface NSObject (JSONDataRepresentation)
 
 - (NSData *)JSONDataRepresentation;
@@ -8,7 +7,7 @@
 
 @end
 
-#define ObjectOrNull(X) ((X) ?: [NSNull null])
+#define ObjectOrNull(X) ((X) ?: (id)[NSNull null])
 
 @protocol EMEndpoint <NSObject>
 
@@ -21,5 +20,12 @@
 - (id)initWithEndpoint:(id<EMEndpoint>)endpoint;
 
 + (RACSignal *)batchWithBasePath:(NSString *)basePath baseQuery:(NSDictionary *)baseQuery; // return RACSignal of EMResults batch
+
+@end
+
+@interface EMTrigger (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionaryRepresentation;
 
 @end
