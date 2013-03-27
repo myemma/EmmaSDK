@@ -198,7 +198,9 @@ static EMClient *shared;
 
 - (RACSignal *)getFieldCount
 {
-    return [self requestSignalWithMethod:@"GET" path:@"/fields" headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:@"/fields" headers:nil body:nil] map:^id(NSNumber *value) {
+        return [[value numberOrNil] objectIDStringValue];
+    }];
 }
 
 - (RACSignal *)getFieldsInRange:(EMResultRange)range
