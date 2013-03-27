@@ -1,4 +1,3 @@
-#import "EMClient+Private.h"
 #import <SBJson/SBJson.h>
 #import "NSData+Base64.h"
 #import "NSObject+ObjectOrNil.h"
@@ -742,7 +741,9 @@ static EMClient *shared;
 }
 
 - (RACSignal *)createTrigger:(EMTrigger *)trigger {
-    return nil;
+    return [[self requestSignalWithMethod:@"POST" path:@"/triggers" headers:nil body:trigger.dictionaryRepresentation] map:^id(id value) {
+        return [[value numberOrNil] objectIDStringValue];
+    }];
 }
 
 - (RACSignal *)getTriggerWithID:(NSString *)triggerID {
