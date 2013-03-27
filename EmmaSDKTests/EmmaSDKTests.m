@@ -1494,6 +1494,43 @@ describe(@"EMClient", ^{
         expect([result[0] optoutCount]).to.equal(0);
         expect([result[0] errorCount]).to.equal(0);
     });
+    
+    it(@"getSearchID: should call endpoint", ^ {
+        [[client getSearchID:@"321"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/searches/321" body:nil];
+    });
+    
+    it(@"getSearchID: should parse results", ^ {
+        __block EMSearch *result;
+        
+        id dict = @{
+        @"search_id": @200,
+        @"optout_count": @1,
+        @"error_count": @0,
+        @"name": @"Test Search",
+        @"criteria": @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
+        @"deleted_at": [NSNull null],
+        @"last_run_at": @"@D:2013-03-20T14:21:44",
+        @"active_count": @2,
+        @"account_id": @100
+        };
+        endpoint.results = @[ [RACSignal return:
+                               dict
+                               ] ];
+        
+        [[client getSearchID:@"150"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect([result ID]).to.equal(@"200");
+        expect([result name]).to.equal(@"Test Search");
+        expect([result criteria]).to.equal(@"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]");
+        expect([result activeCount]).to.equal(2);
+        expect([result optoutCount]).to.equal(1);
+        expect([result errorCount]).to.equal(0);
+        expect([result lastRunAt]).to.equal([@"@D:2013-03-20T14:21:44" parseISO8601Timestamp]);
+    });
+
 });
 
 SpecEnd

@@ -7,14 +7,12 @@
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     formatter.includeTime = NO;
     NSDate *result = [formatter dateFromString:[self stringByReplacingOccurrencesOfString:@"@D:" withString:@""]];
-    [formatter release];
     return result;
 }
 
 - (NSDate *)parseISO8601Timestamp {    
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     NSDate *result = [formatter dateFromString:[self stringByReplacingOccurrencesOfString:@"@D:" withString:@""]];
-    [formatter release];
     return result;
 }
 
@@ -26,7 +24,6 @@
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     formatter.includeTime = NO;
     NSString *result = [formatter stringFromDate:self];
-    [formatter release];
     //return result;
     return [NSString stringWithFormat:@"@D:%@", result];
 }
@@ -35,7 +32,6 @@
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     formatter.includeTime = YES;
     NSString *result = [formatter stringFromDate:self];
-    [formatter release];
     return result;
     return [NSString stringWithFormat:@"@D:%@", result];
 }

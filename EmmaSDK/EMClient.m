@@ -525,7 +525,9 @@ static EMClient *shared;
 
 - (RACSignal *)getSearchID:(NSString *)searchID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/searches/%@", searchID] headers:nil body:nil] map:^id(NSDictionary *value) {
+        return [[EMSearch alloc] initWithDictionary:value];
+    }];
 }
 
 - (RACSignal *)createSearch:(EMSearch *)search
