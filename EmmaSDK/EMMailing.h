@@ -12,11 +12,11 @@ typedef NSUInteger EMMailingStatus;
 
 @interface EMMailing : NSObject
 
-@property (nonatomic, readonly) NSInteger recipientCount;
-@property (nonatomic, readonly) NSString *ID, *name, *sender, *subject;
-@property (nonatomic, readonly) NSDate *sendStarted;
-@property (nonatomic, readonly) NSURL *publicWebViewURL;
-@property (nonatomic, readonly) EMMailingStatus status;
+@property (nonatomic, assign) NSInteger recipientCount;
+@property (nonatomic, copy) NSString *ID, *name, *sender, *subject;
+@property (nonatomic, strong) NSDate *sendStarted;
+@property (nonatomic, strong) NSURL *publicWebViewURL;
+@property (nonatomic, assign) EMMailingStatus status;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 

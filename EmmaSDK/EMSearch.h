@@ -1,9 +1,9 @@
 
 @interface EMSearch : NSObject
 
-@property (nonatomic, readonly) NSString *ID, *name, *criteria;
-@property (nonatomic, readonly) NSInteger activeCount, optoutCount, errorCount;
-@property (nonatomic, readonly) NSDate *deletedAt, *lastRunAt;
+@property (nonatomic, copy) NSString *ID, *name, *criteria;
+@property (nonatomic, assign) NSInteger activeCount, optoutCount, errorCount;
+@property (nonatomic, strong) NSDate *deletedAt, *lastRunAt;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryRepresentation;

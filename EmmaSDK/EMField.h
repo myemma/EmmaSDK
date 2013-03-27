@@ -27,11 +27,11 @@ NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type);
 
 @interface EMField : NSObject
 
-@property (nonatomic, readonly) NSString *displayName, *name, *fieldID;
-@property (nonatomic, readonly) EMFieldType fieldType;
-@property (nonatomic, readonly) EMFieldWidgetType widgetType;
-@property (nonatomic, readonly) NSArray *options;
-@property (nonatomic) NSUInteger columnOrder;
+@property (nonatomic, copy) NSString *displayName, *name, *fieldID;
+@property (nonatomic, assign) EMFieldType fieldType;
+@property (nonatomic, assign) EMFieldWidgetType widgetType;
+@property (nonatomic, copy) NSArray *options;
+@property (nonatomic, assign) NSUInteger columnOrder;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryRepresentation;

@@ -20,11 +20,11 @@ NSString *EMMemberStatusGetShortName(EMMemberStatus status);
 
 @interface EMMember : NSObject
 
-@property (nonatomic, readonly) NSString *ID, *email;
-@property (nonatomic, readonly) NSDate *memberSince;
-@property (nonatomic, readonly) EMMemberStatus status;
-@property (nonatomic, readonly) NSArray *memberFields;
-@property (nonatomic, readonly) NSString *fullName;
+@property (nonatomic, copy) NSString *ID, *email;
+@property (nonatomic, strong) NSDate *memberSince;
+@property (nonatomic, assign) EMMemberStatus status;
+@property (nonatomic, copy) NSArray *memberFields;
+@property (nonatomic, copy) NSString *fullName;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 
