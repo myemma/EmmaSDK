@@ -9,6 +9,8 @@
 #import "NSString+DateParsing.h"
 #import "NSData+Base64.h"
 
+#define ExpectResultTo expect(clientResult).to
+
 @interface NSString (NSString_SBJsonParsing)
 
 @end
@@ -1965,6 +1967,42 @@ describe(@"EMClient", ^{
         expect([clientResult[1] pushOffset]).to.equal(@"@I:259200.0");
         expect([clientResult[1] disabled]).to.beFalsy();
     });
+    
+    it(@"createTrigger: should call endpoint", ^ {
+        EMTrigger *t = [[EMTrigger alloc] init];
+        t.name = @"Birthdays";
+        t.eventType = EMTriggerEventClick;
+        t.parentMailingID = @"234";
+        t.fieldID = @"944";
+        t.groupIDs = nil;
+        t.linkIDs = nil;
+        t.signupFormIDs = nil;
+        t.surveyIDs = nil;
+        t.pushOffset = @"@I:123459";
+        t.disabled = NO;
+        
+        EvaluateSignal([client createTrigger:t]);
+        [endpoint expectRequestWithMethod:@"POST" path:@"/triggers" body:@{
+         @"name": @"Birthdays",
+         @"eventType": @"c",
+         @"parent_mailing_id": @234,
+         @"field_id": @944,
+         @"groups": [NSNull null],
+         @"links": [NSNull null],
+         @"signups": [NSNull null],
+         @"surveys": [NSNull null],
+         @"push_offset": @"@I:123459",
+         @"is_disabled": @NO
+        }];
+    });
+    
+    it(@"createTrigger: should parse results", ^ {
+        SetEndpointResult(@1234);
+        EvaluateSignal([client createTrigger:nil]);
+        ExpectResultTo.equal(@"1234");
+    });
+    
+    
 });
 
 SpecEnd
