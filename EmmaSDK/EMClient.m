@@ -503,6 +503,107 @@ static EMClient *shared;
     }];
 }
 
+- (RACSignal *)getMemberWithID:(NSString *)memberID
+{
+    return nil;
+}
+
+- (RACSignal *)getMemberWithEmail:(NSString *)email
+{
+    return nil;
+}
+
+#warning XXX response format undefined
+- (RACSignal *)getOptoutInfoForMemberID:(NSString *)memberID
+{
+    return nil;
+}
+
+- (RACSignal *)optoutMemberWithEmail:(NSString *)email
+{
+    return nil;
+}
+
+- (RACSignal *)createMembers:(NSArray *)members withSourceName:(NSString *)sourceName addOnly:(BOOL)addOnly groupIDs:(NSArray *)groupIDs
+{
+    return nil;
+}
+
+- (RACSignal *)createMember:(EMMember *)member
+{
+    return nil;
+}
+
+- (RACSignal *)deleteMembersWithIDs:(NSArray *)memberIDs
+{
+    return nil;
+}
+
+- (RACSignal *)updateMemberIDs:(NSArray *)memberIDs withStatus:(EMMemberStatus)status
+{
+    return nil;
+}
+
+- (RACSignal *)updateMember:(EMMember *)member
+{
+    return nil;
+}
+
+- (RACSignal *)getGroupsForMemberID:(NSString *)memberID
+{
+    return nil;
+}
+
+- (RACSignal *)addMemberID:(NSString *)memberID toGroupIDs:(NSArray *)groupIDs
+{
+    return nil;
+}
+
+- (RACSignal *)deleteMembersWithStatus:(EMMemberStatus)status
+{
+    return nil;
+}
+
+- (RACSignal *)removeMemberFromAllGroups:(NSString *)member
+{
+    return nil;
+}
+
+- (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupIDs:(NSArray *)groupIDs
+{
+    return nil;
+}
+
+- (RACSignal *)getMailingHistoryForMemberID:(NSString *)memberID
+{
+    return nil;
+}
+
+- (RACSignal *)getMembersForImportID:(NSString *)importID
+{
+    return nil;
+}
+
+- (RACSignal *)getImportID:(NSString *)importID
+{
+    return nil;
+}
+
+- (RACSignal *)getImports
+{
+    return nil;
+}
+
+- (RACSignal *)copyMembersWithStatuses:(EMMemberStatus)status toGroup:(NSString *)groupIDs
+{
+    return nil;
+}
+
+- (RACSignal *)updateMembersWithStatus:(EMMemberStatus)fromStatus toStatus:(EMMemberStatus)toStatus limitByGroupID:(NSString *)groupID
+{
+    return nil;
+}
+
 // searches
 
 - (RACSignal *)getSearchCount // returns NSArray of EMSearch

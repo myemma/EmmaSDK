@@ -543,9 +543,9 @@ describe(@"EMClient", ^{
         expect([result[0] ID]).to.equal(@"200");
         expect([result[0] email]).to.equal(@"emma@myemma.com");
         expect([result[0] status]).to.equal(EMMemberStatusActive);
-        //TODO: memberSince (weird bug with parseISO8601Timestamp)
-        //TODO: memberFields
-        //TODO: fullName
+        expect([result[0] memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+#warning TODO: memberFields
+#warning TODO: fullName
     });
     
     it(@"getMailingWithID: should call endpoint", ^ {

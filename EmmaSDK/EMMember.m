@@ -64,7 +64,7 @@ NSString *EMMemberStatusGetShortName(EMMemberStatus status) {
         if (!_email)
             _email = [[dict objectForKey:@"email_error"] stringOrNil];
         
-//        _memberSince = [[[dict objectForKey:@"member_since"] stringOrNil] parseISO8601Timestamp];
+        _memberSince = [[[dict objectForKey:@"member_since"] stringOrNil] parseISO8601Timestamp];
         
         NSString *memberStatusString;
         
