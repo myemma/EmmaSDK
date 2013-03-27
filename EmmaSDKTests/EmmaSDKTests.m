@@ -1242,12 +1242,12 @@ describe(@"EMClient", ^{
         }];
         
         expect(result.count).to.equal(2);
-        expect([result[0] url]).to.equal("http://myemma.com");
-        expect([result[0] webhookID]).to.equal(@100);
+        expect([result[0] url]).to.equal([NSURL URLWithString:@"http://myemma.com"]);
+        expect([result[0] webhookID]).to.equal(@"100");
         expect([result[0] method]).to.equal(@"POST");
         expect([result[0] event]).to.equal(@"mailing_finish");
-        expect([result[1] url]).to.equal("http://tech.myemma.com");
-        expect([result[1] webhookID]).to.equal(@101);
+        expect([result[1] url]).to.equal([NSURL URLWithString:@"http://tech.myemma.com"]);
+        expect([result[1] webhookID]).to.equal(@"101");
         expect([result[1] method]).to.equal(@"POST");
         expect([result[1] event]).to.equal(@"mailing_finish");
     });
@@ -1283,13 +1283,13 @@ describe(@"EMClient", ^{
         
         expect(result.count).to.equal(3);
         expect([result[0] eventName]).to.equal(@"mailing_finish");
-        expect([result[0] webhookEventID]).to.equal(@1);
+        expect([result[0] webhookEventID]).to.equal(@"1");
         expect([result[0] webhookDescription]).to.equal(@"Fired when a mailing is finished.");
         expect([result[1] eventName]).to.equal(@"mailing_start");
-        expect([result[1] webhookEventID]).to.equal(@2);
+        expect([result[1] webhookEventID]).to.equal(@"2");
         expect([result[1] webhookDescription]).to.equal(@"Fired when a mailing starts.");
         expect([result[2] eventName]).to.equal(@"member_signup");
-        expect([result[2] webhookEventID]).to.equal(@3);
+        expect([result[2] webhookEventID]).to.equal(@"3");
         expect([result[2] webhookDescription]).to.equal(@"Fired when a member signs up through a signup form.");
     });
     
@@ -1298,24 +1298,37 @@ describe(@"EMClient", ^{
         webhook.url = [NSURL URLWithString:@"http://my.cool.website.tld/poast"];
         webhook.method = @"POST";
         webhook.event = @"member_signup";
+        [[client createWebhook:webhook withPublicKey:nil] subscribeCompleted:^{}];
+        
+        [endpoint expectRequestWithMethod:@"POST" path:@"/webhooks" body:@{
+         @"url": @"http://my.cool.website.tld/poast",
+         @"method": @"POST",
+         @"event": @"member_signup"
+         }];
+    });
+    
+    it(@"createWebhook:withPublicKey: should call endpoint with public key", ^ {
+        EMWebhook *webhook = [[EMWebhook alloc] init];
+        webhook.url = [NSURL URLWithString:@"http://my.cool.website.tld/poast"];
+        webhook.method = @"POST";
+        webhook.event = @"member_signup";
         [[client createWebhook:webhook withPublicKey:@"foobs"] subscribeCompleted:^{}];
         
         [endpoint expectRequestWithMethod:@"POST" path:@"/webhooks" body:@{
-             @"url": @"http://my.cool.website.tld/poast",
-             @"method": @"POST",
-             @"event": @"member_signup"
+         @"url": @"http://my.cool.website.tld/poast",
+         @"method": @"POST",
+         @"event": @"member_signup",
+         @"public_key": @"foobs"
          }];
     });
     
     it(@"createWebhook:withPublicKey: should parse results", ^ {
         endpoint.results = @[ [RACSignal return:@1024] ];
-        
-        __block NSNumber *result;
+        __block NSString *result;
         [[client createWebhook:nil withPublicKey:nil] subscribeNext:^(id x) {
-            x = result;
+            result = x;
         }];
-        
-        expect(result).to.equal(@1024);
+        expect(result).to.equal(@"1024");
     });
     
     it(@"updateWebhook: should call endpoint", ^ {
@@ -1323,8 +1336,9 @@ describe(@"EMClient", ^{
         webhook.url = [NSURL URLWithString:@"http://my.cool.website.tld/poast"];
         webhook.method = @"POST";
         webhook.event = @"member_signup";
+        webhook.webhookID = @"999888";
         [[client updateWebhook:webhook] subscribeCompleted:^ { }];
-        [endpoint expectRequestWithMethod:@"PUT" path:@"/webhooks" body:@{
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/webhooks/999888" body:@{
             @"url": @"http://my.cool.website.tld/poast",
             @"method": @"POST",
             @"event": @"member_signup"
@@ -1332,13 +1346,13 @@ describe(@"EMClient", ^{
     });
     
     it(@"updateWebhook: should parse results", ^ {
-        endpoint.results = @[ @100 ];
-        __block NSNumber *result;
+        endpoint.results = @[ [RACSignal return:@100] ];
+        __block NSString *result;
         [[client updateWebhook:nil] subscribeNext:^(id x) {
-            x = result;
+            result = x;
         }];
         
-        expect(result).to.equal(@100);
+        expect(result).to.equal(@"100");
     });
     
     it(@"deleteWebhookWithID: should call endpoint", ^ {
@@ -1347,7 +1361,7 @@ describe(@"EMClient", ^{
     });
     
     it(@"deleteWebhookWithID: should parse results", ^ {
-        endpoint.results = @[ @YES ];
+        endpoint.results = @[[RACSignal return:@YES] ];
         __block NSNumber *result;
         [[client deleteWebhookWithID:@"1234"] subscribeNext:^(id x) {
             result = x;
@@ -1361,7 +1375,7 @@ describe(@"EMClient", ^{
     });
     
     it(@"deleteAllWebhooks: should parse results", ^ {
-        endpoint.results = @[ @YES ];
+        endpoint.results = @[ [RACSignal return:@YES] ];
         __block NSNumber *result;
         [[client deleteAllWebhooks] subscribeNext:^(id x) {
             result = x;

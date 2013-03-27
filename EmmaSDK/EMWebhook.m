@@ -6,8 +6,8 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if (self = [super init]) {
-        _eventName = [dictionary[@"eventName"] stringOrNil];
-        _webhookEventID = [dictionary[@"webhook_event_id"] stringOrNil];
+        _eventName = [dictionary[@"event_name"] stringOrNil];
+        _webhookEventID = [[dictionary[@"webhook_event_id"] numberOrNil] objectIDStringValue];
         _webhookDescription = [dictionary[@"description"] stringOrNil];
     }
     return self;
@@ -25,6 +25,14 @@
         _event = [dictionary[@"event"] stringOrNil];
     }
     return self;
+}
+
+- (NSDictionary *)dictionaryRepresentation {
+    return @{
+        @"url": _url.absoluteString,
+        @"method": _method,
+        @"event": _event
+    };
 }
 
 @end

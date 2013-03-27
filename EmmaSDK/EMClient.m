@@ -506,31 +506,45 @@ static EMClient *shared;
 }
 
 - (RACSignal *)getWebhooksInRange:(EMResultRange)range {
-    return [[self requestSignalWithMethod:@"GET" path:@"/webhooks" headers:nil body:nil] map:^id(NSArray *results) {
+    return [[self requestSignalWithMethod:@"GET" path:
+             [@"/webhooks" stringByAppendingQueryString:[@{} dictionaryByAddingRangeParams:range]] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(NSDictionary *value) {
             return [[EMWebhook alloc] initWithDictionary:value];
-        }];
+        }].array;
     }];
 }
 
-- (RACSignal *)getWebhookInfo {
-    return [self requestSignalWithMethod:@"GET" path:@"/webhooks/events" headers:nil body:nil];
+- (RACSignal *)getWebhookEvents {
+    return [[self requestSignalWithMethod:@"GET" path:@"/webhooks/events" headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMWebhookInfo alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
 
-- (RACSignal *)createWebhook:(EMWebhook *)webhook {
+- (RACSignal *)createWebhook:(EMWebhook *)webhook withPublicKey:(NSString *)publicKey {
+    NSMutableDictionary *body = [webhook.dictionaryRepresentation mutableCopy];
     
+    if (publicKey)
+        body[@"public_key"] = publicKey;
+    
+    return [[self requestSignalWithMethod:@"POST" path:@"/webhooks" headers:nil body:body] map:^id(NSNumber *number) {
+        return [[number numberOrNil] objectIDStringValue];
+    }];
 }
 
 - (RACSignal *)updateWebhook:(EMWebhook *)webhook {
-    
+    return [[self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/webhooks/%@", webhook.webhookID] headers:nil body:webhook.dictionaryRepresentation] map:^id(NSNumber *number) {
+        return [[number numberOrNil] objectIDStringValue];
+    }];
 }
 
 - (RACSignal *)deleteWebhookWithID:(NSString *)webhookID {
-    
+    return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/webhooks/%@", webhookID] headers:nil body:nil];
 }
 
 - (RACSignal *)deleteAllWebhooks {
-    
+    return [self requestSignalWithMethod:@"DELETE" path:@"/webhooks" headers:nil body:nil];
 }
 
 @end
