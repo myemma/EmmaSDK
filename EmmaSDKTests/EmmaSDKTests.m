@@ -2165,6 +2165,31 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+    
+    it(@"updateMember: should call endpoint", ^ {
+        EMMember *memberToUpdate = [[EMMember alloc] init];
+        memberToUpdate.email = @"email@emma.com";
+        memberToUpdate.status = EMMemberStatusOptout;
+        
+        [[client updateMember:memberToUpdate] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@", memberToUpdate.ID] body:@{@"email" : @"email@emma.com", @"status_to" : @"o"}];
+    });
+    
+    it(@"updateMember: should parse results", ^ {
+        __block id result;
+        
+        EMMember *memberToUpdate = [[EMMember alloc] init];
+        memberToUpdate.email = @"email@emma.com";
+        memberToUpdate.status = EMMemberStatusOptout;
+
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client updateMember:memberToUpdate] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
 });
 
 SpecEnd

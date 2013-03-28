@@ -564,7 +564,7 @@ static EMClient *shared;
 
 - (RACSignal *)updateMember:(EMMember *)member
 {
-    return nil;
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@", member.ID] headers:nil body:@{ @"email" : member.email, @"status_to" : EMMemberStatusGetShortName(member.status) }];
 }
 
 - (RACSignal *)getGroupsForMemberID:(NSString *)memberID
