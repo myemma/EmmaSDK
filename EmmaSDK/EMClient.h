@@ -126,8 +126,8 @@ extern EMResultRange EMResultRangeAll;
 - (RACSignal *)getTriggerWithID:(NSString *)triggerID;
 - (RACSignal *)updateTrigger:(EMTrigger *)trigger;
 - (RACSignal *)deleteTriggerWithID:(NSString *)triggerID;
-- (RACSignal *)getTriggerMailingCount;
-- (RACSignal *)getTriggerMailingsInRange:(EMResultRange)range; // returns NSArray of EMMailing
+- (RACSignal *)getMailingCountForTriggerID:(NSString *)triggerID;
+- (RACSignal *)getMailingsForTriggerID:(NSString *)triggerID inRange:(EMResultRange)range; // returns NSArray of EMMailing
 
 // webhooks
 - (RACSignal *)getWebhookCount;

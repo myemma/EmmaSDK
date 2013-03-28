@@ -762,12 +762,14 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/triggers/%@", triggerID] headers:nil body:nil];
 }
 
-- (RACSignal *)getTriggerMailingCount {
-    return nil;
+- (RACSignal *)getMailingCountForTriggerID:(NSString *)triggerID {
+    return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/triggers/%@/mailings", triggerID] stringByAppendingQueryString:[@{} dictionaryByAddingCountParam]] headers:nil body:nil] map:^id(id value) {
+        return [value numberOrNil];
+    }];
 }
 
-- (RACSignal *)getTriggerMailingsInRange:(EMResultRange)range {
-    return nil;
+- (RACSignal *)getMailingsForTriggerID:(NSString *)triggerID inRange:(EMResultRange)range {
+    return [self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/triggers/%@/mailings", triggerID] stringByAppendingQueryString:[@{} dictionaryByAddingRangeParams:range]] headers:nil body:nil];
 }
 
 @end

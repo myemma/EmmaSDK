@@ -2083,6 +2083,28 @@ describe(@"EMClient", ^{
         EvaluateSignal([client deleteTriggerWithID:@"1234"]);
         ExpectResultTo.equal(@YES);
     });
+    
+    it(@"getTriggerMailingsCount should call endpoint", ^ {
+        EvaluateSignal([client getMailingCountForTriggerID:@"12349"]);
+        [endpoint expectRequestWithMethod:@"GET" path:@"/triggers/12349/mailings?count=true"];
+    });
+    
+    it(@"getTriggerMailingsCount should parse results", ^ {
+        SetEndpointResult(@123);
+        EvaluateSignal([client getMailingCountForTriggerID:@"1992"]);
+        ExpectResultTo.equal(@123);
+    });
+    
+    it(@"getMailingsForTriggerID:inRange: should call endpoint", ^ {
+        EvaluateSignal([client getMailingsForTriggerID:@"1999" inRange:EMResultRangeMake(20, 40)]);
+        [endpoint expectRequestWithMethod:@"GET" path:@"/triggers/1999/mailings?end=40&start=20"];
+    });
+    
+    it(@"getMailingsForTriggerID:inRange: should parse results", ^ {
+        SetEndpointResult(nil);
+        EvaluateSignal([client getMailingsForTriggerID:@"1449" inRange:EMResultRangeMake(20, 40)]);
+        // XXX assert that mailings were parsed;
+    });
 });
 
 SpecEnd
