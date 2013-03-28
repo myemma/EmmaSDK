@@ -2072,6 +2072,17 @@ describe(@"EMClient", ^{
         EvaluateSignal([client updateTrigger:nil]);
         ExpectResultTo.equal(@"1239");
     });
+    
+    it(@"deleteTriggerWithID: should call endpoint", ^ {
+        EvaluateSignal([client deleteTriggerWithID:@"1234"]);
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/triggers/1234"];
+    });
+    
+    it(@"deleteTriggerWithID: should parse results", ^ {
+        SetEndpointResult(@YES);
+        EvaluateSignal([client deleteTriggerWithID:@"1234"]);
+        ExpectResultTo.equal(@YES);
+    });
 });
 
 SpecEnd

@@ -753,13 +753,13 @@ static EMClient *shared;
 }
 
 - (RACSignal *)updateTrigger:(EMTrigger *)trigger {
-    return [[self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/trigger/%@", trigger.triggerID] headers:nil body:trigger.dictionaryRepresentation] map:^id(id value) {
+    return [[self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/triggers/%@", trigger.triggerID] headers:nil body:trigger.dictionaryRepresentation] map:^id(id value) {
         return [[value numberOrNil] objectIDStringValue];
     }];
 }
 
 - (RACSignal *)deleteTriggerWithID:(NSString *)triggerID {
-    return nil;
+    return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/triggers/%@", triggerID] headers:nil body:nil];
 }
 
 - (RACSignal *)getTriggerMailingCount {
