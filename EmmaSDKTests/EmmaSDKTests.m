@@ -2147,6 +2147,24 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+    
+#warning test other statuses?
+    it(@"updateMemberIDs:withStatus: should call endpoint", ^ {
+        [[client updateMemberIDs:@[@"123", @"567"] withStatus:EMMemberStatusActive] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/status" body:@{@"member_ids" : @[@"123", @"567"], @"status_to" : @"a"}];
+    });
+    
+    it(@"updateMemberIDs:withStatus: should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client updateMemberIDs:@[@"123", @"567"] withStatus:EMMemberStatusActive] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
 });
 
 SpecEnd

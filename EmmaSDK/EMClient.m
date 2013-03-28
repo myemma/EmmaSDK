@@ -559,7 +559,7 @@ static EMClient *shared;
 
 - (RACSignal *)updateMemberIDs:(NSArray *)memberIDs withStatus:(EMMemberStatus)status
 {
-    return nil;
+    return [self requestSignalWithMethod:@"PUT" path:@"/members/status" headers:nil body:@{ @"member_ids" : memberIDs, @"status_to" : EMMemberStatusGetShortName(status) }];
 }
 
 - (RACSignal *)updateMember:(EMMember *)member
