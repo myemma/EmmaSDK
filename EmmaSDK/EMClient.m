@@ -747,7 +747,9 @@ static EMClient *shared;
 }
 
 - (RACSignal *)getTriggerWithID:(NSString *)triggerID {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/triggers/%@", triggerID] headers:nil body:nil] map:^id(id value) {
+        return [[EMTrigger alloc] initWithDictionary:value];
+    }];
 }
 
 - (RACSignal *)updateTrigger:(EMTrigger *)trigger {

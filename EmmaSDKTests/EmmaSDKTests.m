@@ -10,6 +10,7 @@
 #import "NSData+Base64.h"
 
 #define ExpectResultTo expect(clientResult).to
+#define ExpectResultSelector(A) (expect([clientResult A]))
 
 @interface NSString (NSString_SBJsonParsing)
 
@@ -1984,7 +1985,7 @@ describe(@"EMClient", ^{
         EvaluateSignal([client createTrigger:t]);
         [endpoint expectRequestWithMethod:@"POST" path:@"/triggers" body:@{
          @"name": @"Birthdays",
-         @"eventType": @"c",
+         @"event_type": @"c",
          @"parent_mailing_id": @234,
          @"field_id": @944,
          @"groups": [NSNull null],
@@ -2002,7 +2003,32 @@ describe(@"EMClient", ^{
         ExpectResultTo.equal(@"1234");
     });
     
+    it(@"getTriggerWithID: should call endpoint", ^ {
+        EvaluateSignal([client getTriggerWithID:@"123"]);
+        [endpoint expectRequestWithMethod:@"GET" path:@"/triggers/123"];
+    });
     
+    it(@"getTriggerWithID: should parse results", ^ {
+        SetEndpointResult(@{
+                          @"surveys": [NSNull null],
+                          @"event_type": @"r",
+                          @"links": [NSNull null],
+                          @"field_id": @203,
+                          @"push_offset_units": @"0:-14:0:0",
+                          @"start_ts": @"@D:2013-03-20T14:21:42",
+                          @"trigger_id": @100,
+                          @"signups": [NSNull null],
+                          @"push_offset": @"@I:-1209600.0",
+                          @"account_id": @100,
+                          @"groups": [NSNull null],
+                          @"parent_mailing_id": @200,
+                          @"deleted_at": [NSNull null],
+                          @"is_disabled": @NO,
+                          @"name": @"Birthday triggers"
+                          });
+        EvaluateSignal([client getTriggerWithID:@"1234"]);
+        ExpectResultSelector(name).to.equal(@"Birthday triggers");
+    });
 });
 
 SpecEnd
