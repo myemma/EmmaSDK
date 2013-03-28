@@ -2105,6 +2105,31 @@ describe(@"EMClient", ^{
         EvaluateSignal([client getMailingsForTriggerID:@"1449" inRange:EMResultRangeMake(20, 40)]);
         // XXX assert that mailings were parsed;
     });
+    
+    it(@"createMember: should call endpoint", ^ {
+        EMMember *firstMember = [[EMMember alloc] init];
+        firstMember.email = @"first@email.com";
+        
+        [[client createMember:firstMember] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"POST" path:@"/members/add" body:@{@"email" : @"first@email.com"}];
+    });
+    
+    it(@"createMember: should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:
+                               @{@"member_id" : @1234}
+                               ] ];
+        
+        EMMember *firstMember = [[EMMember alloc] init];
+        firstMember.email = @"first@email.com";
+        
+        [[client createMember:firstMember] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@"1234");
+    });
 });
 
 SpecEnd
