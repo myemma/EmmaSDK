@@ -1789,6 +1789,36 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+    
+    it(@"createMembers:withSourceName:addOnly:groupIDs: should call endpoint", ^ {
+        EMMember *firstMember = [[EMMember alloc] init];
+        firstMember.email = @"first@email.com";
+        
+        EMMember *secondMember = [[EMMember alloc] init];
+        secondMember.email = @"second@email.com";
+        
+        [[client createMembers:@[firstMember, secondMember] withSourceName:@"source name" addOnly:YES groupIDs:@[@"123", @"234"]] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"POST" path:@"/members" body:@{@"members" : @[ @{@"email" : @"first@email.com"}, @{@"email" : @"second@email.com"} ], @"source_filename" : @"source name", @"add_only" : @YES, @"group_ids" : @[@"123", @"234"]}];
+    });
+    
+    it(@"createMembers:withSourceName:addOnly:groupIDs: should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:
+                               @{@"import_id" : @1234}
+                               ] ];
+        
+        EMMember *firstMember = [[EMMember alloc] init];
+        firstMember.email = @"first@email.com";
+        EMMember *secondMember = [[EMMember alloc] init];
+        secondMember.email = @"second@email.com";
+        
+        [[client createMembers:@[firstMember, secondMember] withSourceName:@"source name" addOnly:YES groupIDs:@[@"123", @"234"]] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@"1234");
+    });
 });
 
 SpecEnd

@@ -530,7 +530,20 @@ static EMClient *shared;
 
 - (RACSignal *)createMembers:(NSArray *)members withSourceName:(NSString *)sourceName addOnly:(BOOL)addOnly groupIDs:(NSArray *)groupIDs
 {
-    return nil;
+    id memberEmails = [members.rac_sequence map:^id(EMMember *value) {
+        return @{ @"email" : value.email };
+    }].array;
+    
+    id body = @{
+    @"members" : memberEmails,
+    @"source_filename" : sourceName,
+    @"add_only" : @(addOnly),
+    @"group_ids" : groupIDs
+    };
+    
+    return [[self requestSignalWithMethod:@"POST" path:@"/members" headers:nil body:body] map:^id(id result) {
+        return [[result[@"import_id"] numberOrNil] objectIDStringValue];
+    }];
 }
 
 - (RACSignal *)createMember:(EMMember *)member

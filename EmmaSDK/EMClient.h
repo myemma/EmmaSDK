@@ -85,7 +85,10 @@ extern EMResultRange EMResultRangeAll;
 - (RACSignal *)getMemberWithEmail:(NSString *)email;
 - (RACSignal *)getOptoutInfoForMemberID:(NSString *)memberID; // XXX response format undefined
 - (RACSignal *)optoutMemberWithEmail:(NSString *)email;
+
+// Members should be an array of EMMember objects. All fields except email are ignored.
 - (RACSignal *)createMembers:(NSArray *)members withSourceName:(NSString *)sourceName addOnly:(BOOL)addOnly groupIDs:(NSArray *)groupIDs;
+
 - (RACSignal *)createMember:(EMMember *)member;
 - (RACSignal *)deleteMembersWithIDs:(NSArray *)memberIDs;
 - (RACSignal *)updateMemberIDs:(NSArray *)memberIDs withStatus:(EMMemberStatus)status;
