@@ -547,7 +547,9 @@ static EMClient *shared;
 
 - (RACSignal *)createMember:(EMMember *)member
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"POST" path:@"/members/add" headers:nil body:@{ @"email" : member.email }] map:^id(id result) {
+        return [[result[@"member_id"] numberOrNil] objectIDStringValue];
+    }];
 }
 
 - (RACSignal *)deleteMembersWithIDs:(NSArray *)memberIDs

@@ -89,7 +89,7 @@ extern EMResultRange EMResultRangeAll;
 // Members should be an array of EMMember objects. All fields except email are ignored.
 - (RACSignal *)createMembers:(NSArray *)members withSourceName:(NSString *)sourceName addOnly:(BOOL)addOnly groupIDs:(NSArray *)groupIDs;
 
-- (RACSignal *)createMember:(EMMember *)member;
+- (RACSignal *)createMember:(EMMember *)member; //returns member id
 - (RACSignal *)deleteMembersWithIDs:(NSArray *)memberIDs;
 - (RACSignal *)updateMemberIDs:(NSArray *)memberIDs withStatus:(EMMemberStatus)status;
 - (RACSignal *)updateMember:(EMMember *)member;
