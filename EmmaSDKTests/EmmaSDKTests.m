@@ -2028,6 +2028,49 @@ describe(@"EMClient", ^{
                           });
         EvaluateSignal([client getTriggerWithID:@"1234"]);
         ExpectResultSelector(name).to.equal(@"Birthday triggers");
+        ExpectResultSelector(eventType).to.equal(EMTriggerEventRecurringDate);
+        ExpectResultSelector(parentMailingID).to.equal(@"200");
+        ExpectResultSelector(fieldID).to.equal(@"203");
+        ExpectResultSelector(groupIDs).to.beNil();
+        ExpectResultSelector(linkIDs).to.beNil();
+        ExpectResultSelector(signupFormIDs).to.beNil();
+        ExpectResultSelector(surveyIDs).to.beNil();
+        ExpectResultSelector(pushOffset).to.equal(@"@I:-1209600.0");
+        ExpectResultSelector(disabled).to.beFalsy();
+    });
+    
+    it(@"updateTrigger: should call endpoint", ^ {
+        EMTrigger *t = [[EMTrigger alloc] init];
+        t.name = @"Birthdays";
+        t.eventType = EMTriggerEventClick;
+        t.parentMailingID = @"234";
+        t.fieldID = @"944";
+        t.groupIDs = nil;
+        t.linkIDs = nil;
+        t.signupFormIDs = nil;
+        t.surveyIDs = nil;
+        t.pushOffset = @"@I:123459";
+        t.disabled = NO;
+        
+        EvaluateSignal([client createTrigger:t]);
+        [endpoint expectRequestWithMethod:@"POST" path:@"/triggers" body:@{
+         @"name": @"Birthdays",
+         @"event_type": @"c",
+         @"parent_mailing_id": @234,
+         @"field_id": @944,
+         @"groups": [NSNull null],
+         @"links": [NSNull null],
+         @"signups": [NSNull null],
+         @"surveys": [NSNull null],
+         @"push_offset": @"@I:123459",
+         @"is_disabled": @NO
+         }];
+    });
+    
+    it(@"updateTrigger: should parse results", ^ {
+        SetEndpointResult(@1239);
+        EvaluateSignal([client updateTrigger:nil]);
+        ExpectResultTo.equal(@"1239");
     });
 });
 

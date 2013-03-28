@@ -753,7 +753,9 @@ static EMClient *shared;
 }
 
 - (RACSignal *)updateTrigger:(EMTrigger *)trigger {
-    return nil;
+    return [[self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/trigger/%@", trigger.triggerID] headers:nil body:trigger.dictionaryRepresentation] map:^id(id value) {
+        return [[value numberOrNil] objectIDStringValue];
+    }];
 }
 
 - (RACSignal *)deleteTriggerWithID:(NSString *)triggerID {
