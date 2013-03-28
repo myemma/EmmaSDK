@@ -2190,6 +2190,41 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+    
+    it(@"getGroupsForMemberID: should call endpoint", ^ {
+        [[client getGroupsForMemberID:@"123"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members/123/groups" body:nil];
+    });
+    
+    it(@"getGroupsForMemberID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id groupDict1 = @{
+            @"active_count": @1,
+            @"deleted_at": [NSNull null],
+            @"error_count": @0,
+            @"optout_count": @1,
+            @"group_type": @"g",
+            @"member_group_id": @150,
+            @"account_id": @100,
+            @"group_name": @"Monthly Newsletter"
+        };
+        endpoint.results = @[ [RACSignal return:@[
+                               groupDict1
+                               ]] ];
+        
+        [[client getGroupsForMemberID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] name]).to.equal(@"Monthly Newsletter");
+        expect([result[0] activeCount]).to.equal(1);
+        expect([result[0] optoutCount]).to.equal(1);
+        expect([result[0] errorCount]).to.equal(0);
+        expect([result[0] ID]).to.equal(@"150");
+    });
+    
 });
 
 SpecEnd
