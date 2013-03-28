@@ -2130,6 +2130,23 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@"1234");
     });
+    
+    it(@"deleteMembersWithIDs: should call endpoint", ^ {
+        [[client deleteMembersWithIDs:@[@"123", @"567"]] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/delete" body:@{@"member_ids" : @[@"123", @"567"]}];
+    });
+    
+    it(@"deleteMembersWithIDs: should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client deleteMembersWithIDs:@[@"123", @"567"]] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
 });
 
 SpecEnd

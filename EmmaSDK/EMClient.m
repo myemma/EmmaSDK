@@ -554,7 +554,7 @@ static EMClient *shared;
 
 - (RACSignal *)deleteMembersWithIDs:(NSArray *)memberIDs
 {
-    return nil;
+    return [self requestSignalWithMethod:@"PUT" path:@"/members/delete" headers:nil body:@{ @"member_ids" : memberIDs }];
 }
 
 - (RACSignal *)updateMemberIDs:(NSArray *)memberIDs withStatus:(EMMemberStatus)status
