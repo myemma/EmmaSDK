@@ -2430,7 +2430,7 @@ describe(@"EMClient", ^{
         
         id import = result[0];
         expect(result.count).to.equal(1);
-        expect(import[@"import_id"]).to.equal(@"200");
+        expect(import[@"import_id"]).to.equal(@200);
         expect(import[@"num_members_updated"]).to.equal(@0);
     });
 });
