@@ -488,7 +488,6 @@ static EMClient *shared;
     return [[self requestSignalWithMethod:@"GET" path:[@"/members" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSNumber *value) {
         return [value numberOrNil];
     }];
-;
 }
 
 - (RACSignal *)getMembersInRange:(EMResultRange)range includeDeleted:(BOOL)deleted
@@ -635,7 +634,9 @@ static EMClient *shared;
 
 - (RACSignal *)updateMembersWithStatus:(EMMemberStatus)fromStatus toStatus:(EMMemberStatus)toStatus limitByGroupID:(NSString *)groupID
 {
-    return nil;
+    id body = nil;
+    if (groupID) body = @{ @"group_id" : groupID };
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/status/%@/to/%@", EMMemberStatusGetShortName(fromStatus), EMMemberStatusGetShortName(toStatus)] headers:nil body:body];
 }
 
 // searches
@@ -745,6 +746,7 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"DELETE" path:@"/webhooks" headers:nil body:nil];
 }
 
+// triggers
 
 - (RACSignal *)getTriggerCount {
     return [self requestSignalWithMethod:@"GET" path:[@"/triggers" stringByAppendingQueryString:[@{} dictionaryByAddingCountParam]] headers:nil body:nil];

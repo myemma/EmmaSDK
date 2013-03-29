@@ -2451,6 +2451,27 @@ describe(@"EMClient", ^{
         expect(result).to.equal(@YES);
     });
     
+    it(@"updateMembersWithStatus:toStatus:limitByGroupID: should call endpoint limited by group ", ^ {
+        [[client updateMembersWithStatus:EMMemberStatusOptout toStatus:EMMemberStatusActive limitByGroupID:@"321"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/status/o/to/a" body:@{ @"group_id" : @"321" }];
+    });
+    
+    it(@"updateMembersWithStatus:toStatus:limitByGroupID: should call endpoint not limited by group", ^ {
+        [[client updateMembersWithStatus:EMMemberStatusError toStatus:EMMemberStatusForwarded limitByGroupID:nil] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/status/e/to/f" body:nil];
+    });
+    
+    it(@"   : should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client updateMembersWithStatus:EMMemberStatusError toStatus:EMMemberStatusForwarded limitByGroupID:nil] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
 });
 
 SpecEnd
