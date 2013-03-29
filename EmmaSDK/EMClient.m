@@ -885,7 +885,11 @@ static EMClient *shared;
 
 - (RACSignal *)getLinksForMailingID:(NSString *)mailingID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/links", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailingLinkResponse alloc] initWithDictionary:value];
+        }].array;
+    }];
 }// returns NSArray of EMMailingLinkResponse
 
 - (RACSignal *)getClicksForMailingID:(NSString *)mailingID memberID:(NSString *)memberID linkID:(NSString *)linkID

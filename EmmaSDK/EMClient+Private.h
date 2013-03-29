@@ -47,3 +47,9 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
+
+@interface EMMailingLinkResponse (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+
+@end

@@ -2818,6 +2818,42 @@ describe(@"EMClient", ^{
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
+    
+    it(@"getLinksForMailingID: should call endpoint", ^ {
+        [[client getLinksForMailingID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/123/links" body:nil];
+    });
+    
+    it(@"getLinksForMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id responseSummary = @{
+        @"link_order": @1,
+        @"link_name": @"Emma",
+        @"unique_clicks": @1,
+        @"plaintext": @NO,
+        @"link_target": @"http://www.myemma.com",
+        @"total_clicks": @1,
+        @"link_id": @200
+        };
+        
+        endpoint.results = @[ [RACSignal return:
+                               @[ responseSummary ]
+                               ] ];
+        
+        [[client getLinksForMailingID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        EMMailingLinkResponse *linkResponse = result[0];
+        expect(result.count).to.equal(1);
+        expect([linkResponse clicks]).to.equal(1);
+        expect([linkResponse uniqueClicks]).to.equal(1);
+        expect([linkResponse linkOrder]).to.equal(1);
+        expect([linkResponse name]).to.equal(@"Emma");
+        expect([linkResponse target]).to.equal([NSURL URLWithString:@"http://www.myemma.com"]);
+        expect([linkResponse isPlaintext]).to.equal(@NO);
+    });
 });
 
 SpecEnd
