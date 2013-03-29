@@ -2278,6 +2278,23 @@ describe(@"EMClient", ^{
         
         expect(result).to.equal(@YES);
     });
+
+    it(@"removeMemberIDs:fromGroupIDs: should call endpoint", ^ {
+        [[client removeMemberIDs:@[@"123", @"234"] fromGroupIDs:@[@"543", @"432"]] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/groups/remove" body:@{@"group_ids" : @[@"543", @"432"], @"member_ids" : @[@"123", @"234"]}];
+    });
+    
+    it(@"removeMemberIDs:fromGroupIDs: should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client removeMemberIDs:@[@"123", @"234"] fromGroupIDs:@[@"543", @"432"]] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
     
 });
 

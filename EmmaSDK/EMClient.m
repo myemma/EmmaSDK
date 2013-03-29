@@ -594,7 +594,7 @@ static EMClient *shared;
 
 - (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupIDs:(NSArray *)groupIDs
 {
-    return nil;
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/groups/remove"] headers:nil body:@{@"group_ids" : groupIDs, @"member_ids" : memberIDs}];
 }
 
 - (RACSignal *)getMailingHistoryForMemberID:(NSString *)memberID
