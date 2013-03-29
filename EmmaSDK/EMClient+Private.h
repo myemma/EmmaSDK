@@ -29,3 +29,9 @@
 - (NSDictionary *)dictionaryRepresentation;
 
 @end
+
+@interface EMResponseSummary (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+
+@end

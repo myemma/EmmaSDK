@@ -7,6 +7,7 @@
 #import "EMMailingResponse.h"
 #import "EMMailingLinkResponse.h"
 #import "EMMailingResponseEvent.h"
+#import "EMResponseSummary.h"
 #import "EMField.h"
 #import "EMTrigger.h"
 #import "EMWebhook.h"

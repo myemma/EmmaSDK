@@ -9,7 +9,7 @@
     delivered,
     bounced,
     opened,
-    clicked_unique,
+    clickedUnique,
     clicked,
     forwarded,
     shared,
