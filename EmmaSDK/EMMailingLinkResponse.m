@@ -12,6 +12,7 @@
         _clicks = [[[dictionary objectForKey:@"total_clicks"] numberOrNil] intValue];
         _uniqueClicks = [[[dictionary objectForKey:@"unique_clicks"] numberOrNil] intValue];
         _plaintext = [[[dictionary objectForKey:@"plaintext"] numberOrNil] boolValue];
+        _linkOrder = [[[dictionary objectForKey:@"link_order"] numberOrNil] intValue];
     }
     return self;
 }

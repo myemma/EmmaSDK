@@ -2854,6 +2854,53 @@ describe(@"EMClient", ^{
         expect([linkResponse target]).to.equal([NSURL URLWithString:@"http://www.myemma.com"]);
         expect([linkResponse isPlaintext]).to.equal(@NO);
     });
+    
+    /*
+     - (RACSignal *)getClicksForMailingID:(NSString *)mailingID memberID:(NSString *)memberID linkID:(NSString *)linkID
+     {
+     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/clicks", mailingID] headers:nil body:@{@"member_id" : memberID, @"link_id" : linkID}] map:^id(NSArray *results) {
+
+     */
+    
+    it(@"getClicksForMailingID:memberID:linkID: should call endpoint", ^ {
+        [[client getClicksForMailingID:@"123" memberID:@"333" linkID:@"543"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/123/clicks" body:@{@"member_id" : @"333", @"link_id" : @"543"}];
+    });
+    
+    it(@"getClicksForMailingID:memberID:linkID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id responseSummary = @{
+        @"fields": @{
+        @"first_name": @"Emma",
+        @"last_name": @"Smith",
+        @"favorite_food": @"tacos"
+        },
+        @"member_id": @200,
+        @"member_since": @"@D:2010-11-12T11:23:45",
+        @"email_domain": @"myemma.com",
+        @"email_user": @"emma",
+        @"email": @"emma@myemma.com",
+        @"member_status_id": @"a",
+        @"timestamp": @"@D:2011-01-02T11:13:51"
+        };
+        
+        endpoint.results = @[ [RACSignal return:
+                               @[ responseSummary ]
+                               ] ];
+        
+        [[client getClicksForMailingID:@"123" memberID:@"333" linkID:@"543"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        EMMailingResponseEvent *summary = result[0];
+        expect(result.count).to.equal(1);
+        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([summary.member ID]).to.equal(@"200");
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member email]).to.equal(@"emma@myemma.com");
+        expect([summary.member status]).to.equal(EMMemberStatusActive);
+    });
 });
 
 SpecEnd

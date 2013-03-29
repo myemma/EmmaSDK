@@ -892,9 +892,19 @@ static EMClient *shared;
     }];
 }// returns NSArray of EMMailingLinkResponse
 
+#warning do we need to convert the memberID and linkID to NSNumbers? API says it needs an int.
+/*
+ Parameters:
+ member_id (int) – Limits results to a single member.
+ link_id (int) – Limits results to a single link.
+ */
 - (RACSignal *)getClicksForMailingID:(NSString *)mailingID memberID:(NSString *)memberID linkID:(NSString *)linkID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/clicks", mailingID] headers:nil body:@{@"member_id" : memberID, @"link_id" : linkID}] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+        }].array;
+    }];
 }// returns NSArray of EMMailingResponseEvent (populates linkID)
 
 - (RACSignal *)getForwardsForMailingID:(NSString *)mailingID
