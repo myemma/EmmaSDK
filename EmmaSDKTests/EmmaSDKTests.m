@@ -2296,6 +2296,41 @@ describe(@"EMClient", ^{
         expect(result).to.equal(@YES);
     });
     
+    it(@"getMailingHistoryForMemberID: should call endpoint", ^ {
+        [[client getMailingHistoryForMemberID:@"123"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members/123/mailings" body:nil];
+    });
+    
+    it(@"getMailingHistoryForMemberID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id mailingsDict = @{
+            @"delivery_type": @"d",
+            @"clicked": @"@D:2011-01-02T11:14:32",
+            @"opened": @"@D:2011-01-02T11:13:51",
+            @"mailing_id": @200,
+            @"delivery_ts": @"@D:2011-01-02T10:29:36",
+            @"name": @"Sample Mailing",
+            @"forwarded": [NSNull null],
+            @"shared": [NSNull null],
+            @"subject": @"Sample Mailing for [% member:first_name %] [% member:last_name %]",
+            @"sent": @"@D:2011-01-02T10:27:43",
+            @"account_id": @100
+        };
+        endpoint.results = @[ [RACSignal return:@[
+                               mailingsDict
+                               ]] ];
+        
+        [[client getMailingHistoryForMemberID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"200");
+        expect([result[0] name]).to.equal(@"Sample Mailing");
+        expect([result[0] subject]).to.equal(@"Sample Mailing for [% member:first_name %] [% member:last_name %]");
+    });
+    
 });
 
 SpecEnd

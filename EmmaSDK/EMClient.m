@@ -597,9 +597,14 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/groups/remove"] headers:nil body:@{@"group_ids" : groupIDs, @"member_ids" : memberIDs}];
 }
 
+#warning double check that this is supposed to return mailings
 - (RACSignal *)getMailingHistoryForMemberID:(NSString *)memberID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/%@/mailings", memberID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailing alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
 
 - (RACSignal *)getMembersForImportID:(NSString *)importID
