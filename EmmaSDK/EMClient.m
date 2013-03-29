@@ -583,8 +583,10 @@ static EMClient *shared;
 
 - (RACSignal *)deleteMembersWithStatus:(EMMemberStatus)status
 {
-    return nil;
+    id query = @{ @"member_status" : EMMemberStatusGetShortName(status) };
+    return [self requestSignalWithMethod:@"PUT" path:[@"/members" stringByAppendingQueryString:query] headers:nil body:nil];
 }
+
 
 - (RACSignal *)removeMemberFromAllGroups:(NSString *)member
 {

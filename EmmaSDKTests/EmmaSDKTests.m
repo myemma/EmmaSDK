@@ -2243,8 +2243,26 @@ describe(@"EMClient", ^{
         
         expect(result[0]).to.equal(@"321");
         expect(result[1]).to.equal(@"432");
-
     });
+    
+#warning test other statuses?
+    it(@"deleteMembersWithStatus: should call endpoint", ^ {
+        [[client deleteMembersWithStatus:EMMemberStatusError] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members?member_status=e" body:nil];
+    });
+    
+    it(@"deleteMembersWithStatus: should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client deleteMembersWithStatus:EMMemberStatusError] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
+    
 });
 
 SpecEnd
