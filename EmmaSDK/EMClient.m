@@ -578,7 +578,7 @@ static EMClient *shared;
 
 - (RACSignal *)addMemberID:(NSString *)memberID toGroupIDs:(NSArray *)groupIDs
 {
-    return nil;
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@/groups", memberID] headers:nil body:@{@"group_ids" : groupIDs}];
 }
 
 - (RACSignal *)deleteMembersWithStatus:(EMMemberStatus)status

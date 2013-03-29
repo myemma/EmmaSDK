@@ -2225,6 +2225,26 @@ describe(@"EMClient", ^{
         expect([result[0] ID]).to.equal(@"150");
     });
     
+    it(@"addMemberID:toGroupIDs: should call endpoint", ^ {
+        [[client addMemberID:@"123" toGroupIDs:@[@"321", @"432"]] subscribeCompleted:^ { }];
+         [endpoint expectRequestWithMethod:@"PUT" path:@"/members/123/groups" body:@{@"group_ids" : @[@"321", @"432"]}];
+    });
+    
+    it(@"addMemberID:toGroupIDs: should parse results", ^ {
+        __block NSArray *result;
+    
+        endpoint.results = @[ [RACSignal return:@[
+                               @"321", @"432"
+                               ]] ];
+        
+        [[client addMemberID:@"123" toGroupIDs:@[@"321", @"432"]] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result[0]).to.equal(@"321");
+        expect(result[1]).to.equal(@"432");
+
+    });
 });
 
 SpecEnd
