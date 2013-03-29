@@ -1,6 +1,5 @@
 #import "EMMember.h"
 
-
 typedef enum {
     EMDeliveryStatusDelivered = 1,
     EMDeliveryStatusHardBounce = 1 << 1,

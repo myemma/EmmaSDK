@@ -58,6 +58,23 @@ NSString *EMGroupTypeGetString(EMGroupType type) {
     return [types componentsJoinedByString:@","];
 }
 
+NSString *EMDeliveryStatusToString(EMDeliveryStatus status) {
+    
+    if (status == EMDeliveryStatusAll)
+        return @"all";
+    else if (status == EMDeliveryStatusBounced)
+        return @"bounced";
+    else if (status == EMDeliveryStatusDelivered)
+        return @"delivered";
+    else if (status == EMDeliveryStatusHardBounce)
+        return @"hard";
+    else if (status == EMDeliveryStatusSoftBounce)
+        return @"soft";
+    else
+        NSLog(@"Unknown EMDeliveryStatys");
+    return nil;
+}
+
 @interface NSDictionary (QueryString)
 
 - (NSString *)queryString;
@@ -847,7 +864,14 @@ static EMClient *shared;
 
 - (RACSignal *)getDeliveriesForMailingID:(NSString *)mailingID withDeliveryStatus:(EMDeliveryStatus)status
 {
-    return nil;
+    NSString *delStatus = nil;
+    delStatus = EMDeliveryStatusToString(status);
+    if (!delStatus) delStatus = EMDeliveryStatusToString(EMDeliveryStatusAll);
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/deliveries?del_status=%@", mailingID, delStatus] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+        }].array;
+    }];
 }// returns NSArray of EMMailingResponseEvent (populates deliveryStatus)
 
 - (RACSignal *)getOpensForMailingID:(NSString *)mailingID
