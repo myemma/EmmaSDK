@@ -587,10 +587,9 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"PUT" path:[@"/members" stringByAppendingQueryString:query] headers:nil body:nil];
 }
 
-
-- (RACSignal *)removeMemberFromAllGroups:(NSString *)member
+- (RACSignal *)removeMemberFromAllGroups:(NSString *)memberID
 {
-    return nil;
+    return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/members/%@/groups", memberID] headers:nil body:nil];
 }
 
 - (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupIDs:(NSArray *)groupIDs

@@ -98,7 +98,7 @@ extern EMResultRange EMResultRangeAll;
  - (RACSignal *)addMemberID:(NSString *)memberID toGroupIDs:(NSArray *)groupIDs;
 //- (RACSignal *)removeMemberID:(NSString *)memberID fromGroupIDs:(NSArray *)groupIDs; // redundant, skip
 - (RACSignal *)deleteMembersWithStatus:(EMMemberStatus)status;
-- (RACSignal *)removeMemberFromAllGroups:(NSString *)member;
+- (RACSignal *)removeMemberFromAllGroups:(NSString *)memberID;
 - (RACSignal *)removeMemberIDs:(NSArray *)memberIDs fromGroupIDs:(NSArray *)groupIDs;
 - (RACSignal *)getMailingHistoryForMemberID:(NSString *)memberID;
 - (RACSignal *)getMembersForImportID:(NSString *)importID;

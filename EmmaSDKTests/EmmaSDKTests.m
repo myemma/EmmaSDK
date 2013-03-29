@@ -2245,7 +2245,6 @@ describe(@"EMClient", ^{
         expect(result[1]).to.equal(@"432");
     });
     
-#warning test other statuses?
     it(@"deleteMembersWithStatus: should call endpoint", ^ {
         [[client deleteMembersWithStatus:EMMemberStatusError] subscribeCompleted:^{ }];
         [endpoint expectRequestWithMethod:@"PUT" path:@"/members?member_status=e" body:nil];
@@ -2257,6 +2256,23 @@ describe(@"EMClient", ^{
         endpoint.results = @[ [RACSignal return:@YES] ];
         
         [[client deleteMembersWithStatus:EMMemberStatusError] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
+    
+    it(@"removeMemberFromAllGroups: should call endpoint", ^ {
+        [[client removeMemberFromAllGroups:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"DELETE" path:@"/members/123/groups" body:nil];
+    });
+    
+    it(@"removeMemberFromAllGroups: should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client removeMemberFromAllGroups:@"123"] subscribeNext:^(id x) {
             result = x;
         }];
         
