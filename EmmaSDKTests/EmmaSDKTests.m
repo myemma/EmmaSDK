@@ -2331,6 +2331,108 @@ describe(@"EMClient", ^{
         expect([result[0] subject]).to.equal(@"Sample Mailing for [% member:first_name %] [% member:last_name %]");
     });
     
+    it(@"getMembersForImportID: should call endpoint", ^ {
+        [[client getMembersForImportID:@"999"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members/imports/999/members" body:nil];
+    });
+    
+    it(@"getMembersForImportID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id membersDict = @{
+            @"member_id": @200,
+            @"change_type": @"a",
+            @"member_status_id": @"a",
+            @"email": @"emma@myemma.com"
+        };
+        endpoint.results = @[ [RACSignal return:@[
+                               membersDict
+                               ]] ];
+        
+        [[client getMembersForImportID:@"999"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result.count).to.equal(1);
+        expect([result[0] ID]).to.equal(@"200");
+        expect([result[0] status]).to.equal(EMMemberStatusActive);
+        expect([result[0] email]).to.equal(@"emma@myemma.com");
+    });
+    
+    it(@"getImportID: should call endpoint", ^ {
+        [[client getImportID:@"333"] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members/imports/333" body:nil];
+    });
+    
+    it(@"getImportID: should parse results", ^ {
+        __block id result;
+        
+        id importDict = @{
+            @"import_id": @200,
+            @"status": [NSNull null],
+            @"style": [NSNull null],
+            @"import_started": @"@D:2010-12-13T23:12:44",
+            @"account_id": @100,
+            @"error_message": [NSNull null],
+            @"num_members_updated": @0,
+            @"source_filename": [NSNull null],
+            @"fields_updated": @[],
+            @"num_members_added": @0,
+            @"import_finished": [NSNull null],
+            @"groups_updated": @[],
+            @"num_skipped": @0,
+            @"num_duplicates": @0
+        };
+        endpoint.results = @[ [RACSignal return:
+                               importDict
+                               ] ];
+        
+        [[client getImportID:@"999"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result[@"import_id"]).to.equal(@200);
+        expect(result[@"import_started"]).to.equal(@"@D:2010-12-13T23:12:44");
+    });
+    
+    it(@"getImports should call endpoint", ^ {
+        [[client getImports] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/members/imports" body:nil];
+    });
+    
+    it(@"getImports should parse results", ^ {
+        __block NSArray *result;
+        
+        id importDict = @{
+        @"import_id": @200,
+        @"status": [NSNull null],
+        @"style": [NSNull null],
+        @"import_started": @"@D:2010-12-13T23:12:44",
+        @"account_id": @100,
+        @"error_message": [NSNull null],
+        @"num_members_updated": @0,
+        @"source_filename": [NSNull null],
+        @"fields_updated": @[],
+        @"num_members_added": @0,
+        @"import_finished": [NSNull null],
+        @"groups_updated": @[],
+        @"num_skipped": @0,
+        @"num_duplicates": @0
+        };
+        
+        endpoint.results = @[ [RACSignal return:@[
+                               importDict
+                               ]] ];
+        
+        [[client getImports] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        id import = result[0];
+        expect(result.count).to.equal(1);
+        expect(import[@"import_id"]).to.equal(@"200");
+        expect(import[@"num_members_updated"]).to.equal(@0);
+    });
 });
 
 SpecEnd

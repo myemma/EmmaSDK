@@ -609,17 +609,23 @@ static EMClient *shared;
 
 - (RACSignal *)getMembersForImportID:(NSString *)importID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/imports/%@/members", importID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMember alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
 
+#warning import model not defined, returning json data
 - (RACSignal *)getImportID:(NSString *)importID
 {
-    return nil;
+    return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/imports/%@", importID] headers:nil body:nil];
 }
 
+#warning import model not defined, returning json data
 - (RACSignal *)getImports
 {
-    return nil;
+    return [self requestSignalWithMethod:@"GET" path:@"/members/imports" headers:nil body:nil];
 }
 
 - (RACSignal *)copyMembersWithStatuses:(EMMemberStatus)status toGroup:(NSString *)groupIDs
