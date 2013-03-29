@@ -838,7 +838,11 @@ static EMClient *shared;
 
 - (RACSignal *)getInProgressForMailingID:(NSString *)mailingID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/in_progress", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+        }].array;
+    }];
 }// returns NSArray of EMMailingResponseEvent (timestamps are nil)
 
 - (RACSignal *)getDeliveriesForMailingID:(NSString *)mailingID withDeliveryStatus:(EMDeliveryStatus)status

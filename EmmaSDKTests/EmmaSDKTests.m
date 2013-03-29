@@ -2675,6 +2675,46 @@ describe(@"EMClient", ^{
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
+    
+    //getInProgressForMailingID
+    it(@"getInProgressForMailingID: should call endpoint", ^ {
+        [[client getInProgressForMailingID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/123/in_progress" body:nil];
+    });
+    
+    it(@"getInProgressForMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id responseSummary = @{
+        @"fields": @{
+        @"first_name": @"Emma",
+        @"last_name": @"Smith",
+        @"favorite_food": @"tacos"
+        },
+        @"member_id": @200,
+        @"member_since": @"@D:2010-11-12T11:23:45",
+        @"email_domain": @"myemma.com",
+        @"email_user": @"emma",
+        @"email": @"emma@myemma.com",
+        @"member_status_id": @"a"
+        };
+        
+        endpoint.results = @[ [RACSignal return:
+                               @[ responseSummary ]
+                               ] ];
+        
+        [[client getInProgressForMailingID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        EMMailingResponseEvent *summary = result[0];
+        expect(result.count).to.equal(1);
+        expect([summary timestamp]).to.equal(nil);
+        expect([summary.member ID]).to.equal(@"200");
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member email]).to.equal(@"emma@myemma.com");
+        expect([summary.member status]).to.equal(EMMemberStatusActive);
+    });
 
 });
 
