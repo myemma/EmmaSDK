@@ -822,7 +822,9 @@ static EMClient *shared;
 
 - (RACSignal *)getResponseForMailingID:(NSString *)mailingID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@", mailingID] headers:nil body:nil] map:^id(id value) {
+        return [[EMMailingResponse alloc] initWithDictionary:value];
+    }];
 }// returns EMMailingResponse
 
 - (RACSignal *)getSendsForMailingID:(NSString *)mailingID

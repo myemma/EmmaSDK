@@ -2588,6 +2588,53 @@ describe(@"EMClient", ^{
         expect([summary optedOut]).to.equal(2);
         expect([summary signedUp]).to.equal(3);
     });
+    
+    it(@"getResponseForMailingID: should call endpoint", ^ {
+        [[client getResponseForMailingID:@"123"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/123" body:nil];
+    });
+    
+    it(@"getResponseForMailingID: should parse results", ^ {
+        __block EMMailingResponse *result;
+        
+        id responseSummary = @{
+                @"delivered": @0,
+                @"signed_up": @0,
+                @"clicked": @3,
+                @"name": @"Sample Mailing",
+                @"clicked_unique": @0,
+                @"webview_share_clicked": @0,
+                @"opened": @0,
+                @"opted_out": @0,
+                @"share_clicked": @0,
+                @"webview_shared": @0,
+                @"shared": @0,
+                @"in_progress": @0,
+                @"bounced": @0,
+                @"recipient_count": @0,
+                @"sent": @0,
+                @"forwarded": @0
+        };
+        
+        endpoint.results = @[ [RACSignal return:
+                               responseSummary
+                               ] ];
+        
+        [[client getResponseForMailingID:@"123"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect([result delivered]).to.equal(0);
+        expect([result signedUp]).to.equal(0);
+        expect([result clicked]).to.equal(3);
+        expect([result clickedUnique]).to.equal(0);
+        expect([result webviewShareClicked]).to.equal(0);
+        expect([result opened]).to.equal(0);
+        expect([result optedOut]).to.equal(0);
+        expect([result shareClicked]).to.equal(0);
+        expect([result webviewShared]).to.equal(0);
+        expect([result shared]).to.equal(0);
+    });
 });
 
 SpecEnd
