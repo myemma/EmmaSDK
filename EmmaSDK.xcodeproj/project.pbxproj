@@ -14,10 +14,25 @@
 		34F286A617038A1100E6D617 /* ISO8601DateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 34F286A417038A1100E6D617 /* ISO8601DateFormatter.h */; };
 		34F286A717038A1100E6D617 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F286A517038A1100E6D617 /* ISO8601DateFormatter.m */; };
 		34F286A817038A1100E6D617 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F286A517038A1100E6D617 /* ISO8601DateFormatter.m */; };
+		4127E5491706492D00DC61FA /* EMClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB584C16C45CAC005C1805 /* EMClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E54A1706492D00DC61FA /* EMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB584E16C45CAC005C1805 /* EMGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E54B1706492D00DC61FA /* EMMailing.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585016C45CAC005C1805 /* EMMailing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E54C1706492D00DC61FA /* EMResponseSummary.h in Headers */ = {isa = PBXBuildFile; fileRef = 418EE80E170231F600773A19 /* EMResponseSummary.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E54D1706492D00DC61FA /* EMMailingResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585416C45CAC005C1805 /* EMMailingResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E54E1706492D00DC61FA /* EMMailingLinkResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585216C45CAC005C1805 /* EMMailingLinkResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E54F1706492D00DC61FA /* EMMailingResponseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585616C45CAC005C1805 /* EMMailingResponseEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E5501706492D00DC61FA /* EMMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585916C45CAC005C1805 /* EMMember.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E5511706492D00DC61FA /* EMMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585B16C45CAC005C1805 /* EMMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E5521706492D00DC61FA /* EMSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585D16C45CAC005C1805 /* EMSearch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E5531706492D00DC61FA /* EMField.h in Headers */ = {isa = PBXBuildFile; fileRef = 41F901A216FA9F1A0008CF8E /* EMField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E5541706492D00DC61FA /* EMTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E5551706492D00DC61FA /* EMWebhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EBF16FAB113009CAD80 /* EMWebhook.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E5561706492D00DC61FA /* EMShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 418EE81B170238FB00773A19 /* EMShare.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4127E5571706492D00DC61FA /* EmmaSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585816C45CAC005C1805 /* EmmaSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4129EC5116C45C71002A3C60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5016C45C71002A3C60 /* Foundation.framework */; };
 		4129EC6016C45C71002A3C60 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5F16C45C71002A3C60 /* SenTestingKit.framework */; };
 		4129EC6316C45C71002A3C60 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC5016C45C71002A3C60 /* Foundation.framework */; };
-		4129EC6616C45C71002A3C60 /* libEmmaSDKiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */; };
+		4129EC6616C45C71002A3C60 /* libEmmaSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC4D16C45C71002A3C60 /* libEmmaSDK.a */; };
 		4129EC6C16C45C71002A3C60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4129EC6A16C45C71002A3C60 /* InfoPlist.strings */; };
 		4129EC6F16C45C71002A3C60 /* EmmaSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4129EC6E16C45C71002A3C60 /* EmmaSDKTests.m */; };
 		418E65D2170255ED00EBB567 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 418E65D0170255ED00EBB567 /* NSData+Base64.h */; };
@@ -231,24 +246,12 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		4129EC4B16C45C71002A3C60 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/${PRODUCT_NAME}";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		342CB77716F172D30065A7F4 /* NSString+DateParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DateParsing.h"; sourceTree = "<group>"; };
 		342CB77816F172D30065A7F4 /* NSString+DateParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DateParsing.m"; sourceTree = "<group>"; };
 		34F286A417038A1100E6D617 /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
 		34F286A517038A1100E6D617 /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISO8601DateFormatter.m; sourceTree = "<group>"; };
-		4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEmmaSDKiOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4129EC4D16C45C71002A3C60 /* libEmmaSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEmmaSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4129EC5016C45C71002A3C60 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4129EC5416C45C71002A3C60 /* EmmaSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmmaSDK-Prefix.pch"; sourceTree = "<group>"; };
 		4129EC5E16C45C71002A3C60 /* EmmaSDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmmaSDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -328,7 +331,7 @@
 				41EB58F316C467F4005C1805 /* libSpecta-iOS.a in Frameworks */,
 				4129EC6016C45C71002A3C60 /* SenTestingKit.framework in Frameworks */,
 				4129EC6316C45C71002A3C60 /* Foundation.framework in Frameworks */,
-				4129EC6616C45C71002A3C60 /* libEmmaSDKiOS.a in Frameworks */,
+				4129EC6616C45C71002A3C60 /* libEmmaSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +362,7 @@
 		4129EC4E16C45C71002A3C60 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */,
+				4129EC4D16C45C71002A3C60 /* libEmmaSDK.a */,
 				4129EC5E16C45C71002A3C60 /* EmmaSDKTests.octest */,
 				41EB586D16C45D5F005C1805 /* EmmaSDK.framework */,
 			);
@@ -531,6 +534,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		4127E5481706491000DC61FA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4127E5491706492D00DC61FA /* EMClient.h in Headers */,
+				4127E54A1706492D00DC61FA /* EMGroup.h in Headers */,
+				4127E54B1706492D00DC61FA /* EMMailing.h in Headers */,
+				4127E54C1706492D00DC61FA /* EMResponseSummary.h in Headers */,
+				4127E54D1706492D00DC61FA /* EMMailingResponse.h in Headers */,
+				4127E54E1706492D00DC61FA /* EMMailingLinkResponse.h in Headers */,
+				4127E54F1706492D00DC61FA /* EMMailingResponseEvent.h in Headers */,
+				4127E5501706492D00DC61FA /* EMMember.h in Headers */,
+				4127E5511706492D00DC61FA /* EMMessage.h in Headers */,
+				4127E5521706492D00DC61FA /* EMSearch.h in Headers */,
+				4127E5531706492D00DC61FA /* EMField.h in Headers */,
+				4127E5541706492D00DC61FA /* EMTrigger.h in Headers */,
+				4127E5551706492D00DC61FA /* EMWebhook.h in Headers */,
+				4127E5561706492D00DC61FA /* EMShare.h in Headers */,
+				4127E5571706492D00DC61FA /* EmmaSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41EB586A16C45D5F005C1805 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -558,7 +583,7 @@
 			buildPhases = (
 				4129EC4916C45C71002A3C60 /* Sources */,
 				4129EC4A16C45C71002A3C60 /* Frameworks */,
-				4129EC4B16C45C71002A3C60 /* CopyFiles */,
+				4127E5481706491000DC61FA /* Headers */,
 			);
 			buildRules = (
 			);
@@ -568,7 +593,7 @@
 			);
 			name = EmmaSDKiOS;
 			productName = EmmaSDK;
-			productReference = 4129EC4D16C45C71002A3C60 /* libEmmaSDKiOS.a */;
+			productReference = 4129EC4D16C45C71002A3C60 /* libEmmaSDK.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		4129EC5D16C45C71002A3C60 /* EmmaSDKTests */ = {
@@ -977,8 +1002,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EmmaSDK;
+				PUBLIC_HEADERS_FOLDER_PATH = include/EmmaSDK;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
@@ -989,8 +1016,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EmmaSDK/EmmaSDK-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EmmaSDK;
+				PUBLIC_HEADERS_FOLDER_PATH = include/EmmaSDK;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
