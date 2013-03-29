@@ -2133,7 +2133,7 @@ describe(@"EMClient", ^{
     
     it(@"deleteMembersWithIDs: should call endpoint", ^ {
         [[client deleteMembersWithIDs:@[@"123", @"567"]] subscribeCompleted:^{ }];
-        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/delete" body:@{@"member_ids" : @[@"123", @"567"]}];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/delete" body:@{@"member_ids" : @[@123, @567]}];
     });
     
     it(@"deleteMembersWithIDs: should parse results", ^ {
