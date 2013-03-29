@@ -628,9 +628,9 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"GET" path:@"/members/imports" headers:nil body:nil];
 }
 
-- (RACSignal *)copyMembersWithStatuses:(EMMemberStatus)status toGroup:(NSString *)groupIDs
+- (RACSignal *)copyMembersWithStatuses:(EMMemberStatus)status toGroup:(NSString *)groupID
 {
-    return nil;
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@/copy", groupID] headers:nil body:@{ @"member_status_id" : @[ EMMemberStatusGetShortName(status) ] }];
 }
 
 - (RACSignal *)updateMembersWithStatus:(EMMemberStatus)fromStatus toStatus:(EMMemberStatus)toStatus limitByGroupID:(NSString *)groupID

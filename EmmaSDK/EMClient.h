@@ -105,7 +105,7 @@ extern EMResultRange EMResultRangeAll;
 - (RACSignal *)getImportID:(NSString *)importID;
 - (RACSignal *)getImports;
 //- (RACSignal *)deleteImport;
-- (RACSignal *)copyMembersWithStatuses:(EMMemberStatus)status toGroup:(NSString *)groupIDs;
+- (RACSignal *)copyMembersWithStatuses:(EMMemberStatus)status toGroup:(NSString *)groupID;
 - (RACSignal *)updateMembersWithStatus:(EMMemberStatus)fromStatus toStatus:(EMMemberStatus)toStatus limitByGroupID:(NSString *)groupID;
 
 // searches

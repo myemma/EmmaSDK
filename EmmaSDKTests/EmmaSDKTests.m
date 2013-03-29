@@ -2433,6 +2433,24 @@ describe(@"EMClient", ^{
         expect(import[@"import_id"]).to.equal(@200);
         expect(import[@"num_members_updated"]).to.equal(@0);
     });
+
+    it(@"copyMembersWithStatuses:toGroup: should call endpoint", ^ {
+        [[client copyMembersWithStatuses:EMMemberStatusOptout toGroup:@"321"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/321/copy" body:@{ @"member_status_id" : @[ @"o" ] }];
+    });
+    
+    it(@"copyMembersWithStatuses:toGroup: should parse results", ^ {
+        __block id result;
+        
+        endpoint.results = @[ [RACSignal return:@YES] ];
+        
+        [[client copyMembersWithStatuses:EMMemberStatusOptout toGroup:@"321"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@YES);
+    });
+    
 });
 
 SpecEnd
