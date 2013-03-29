@@ -802,15 +802,22 @@ static EMClient *shared;
 // calls getResponseSummaryInRange:includeArchived: with nil range string and NO includeArchived
 - (RACSignal *)getResponseSummary
 {
-//    return nil;
-    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response"] headers:nil body:nil] map:^id(id value) {
-        return [[EMResponseSummary alloc] initWithDictionary:value];
+    return [[self requestSignalWithMethod:@"GET" path:@"/response?include_archived=false" headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMResponseSummary alloc] initWithDictionary:value];
+        }].array;
     }];
 }// returns NSArray of EMResponseSummary.
 
 - (RACSignal *)getResponseSummaryInRange:(NSString *)rangeString includeArchived:(BOOL)includeArchived
 {
-    return nil;
+    id query = @{ @"include_archived": includeArchived ? @"true" : @"false", @"range" : rangeString };
+    
+    return [[self requestSignalWithMethod:@"GET" path:[@"/response" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMResponseSummary alloc] initWithDictionary:value];
+        }].array;
+    }];
 }// returns NSArray of EMResponseSummary
 
 - (RACSignal *)getResponseForMailingID:(NSString *)mailingID

@@ -2475,11 +2475,11 @@ describe(@"EMClient", ^{
     
     it(@"getResponseSummary should call endpoint", ^ {
         [[client getResponseSummary] subscribeCompleted:^{ }];
-        [endpoint expectRequestWithMethod:@"GET" path:@"/response" body:nil];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response?include_archived=false" body:nil];
     });
     
     it(@"getResponseSummary should parse results", ^ {
-        __block EMResponseSummary *result;
+        __block NSArray *result;
         
         id responseSummary = @{
             @"account_id": @200,
@@ -2502,29 +2502,91 @@ describe(@"EMClient", ^{
         };
         
         endpoint.results = @[ [RACSignal return:
-                               responseSummary
+                               @[ responseSummary ]
                                ] ];
         
         [[client getResponseSummary] subscribeNext:^(id x) {
             result = x;
         }];
+    
+        EMResponseSummary *summary = result[0];
+        expect(result.count).to.equal(1);
+        expect([summary month]).to.equal(1);
+        expect([summary year]).to.equal(2013);
+        expect([summary mailings]).to.equal(3);
+        expect([summary sent]).to.equal(0);
+        expect([summary delivered]).to.equal(1);
+        expect([summary bounced]).to.equal(0);
+        expect([summary opened]).to.equal(3);
+        expect([summary clickedUnique]).to.equal(0);
+        expect([summary clicked]).to.equal(0);
+        expect([summary forwarded]).to.equal(2);
+        expect([summary shared]).to.equal(1);
+        expect([summary shareClicked]).to.equal(1);
+        expect([summary webViewShared]).to.equal(0);
+        expect([summary webViewClicked]).to.equal(0);
+        expect([summary optedOut]).to.equal(2);
+        expect([summary signedUp]).to.equal(3);
+    });
+    
+    it(@"getResponseSummaryInRange:includeArchived should call endpoint with archived", ^ {
+        [[client getResponseSummaryInRange:@"2011-04-01~2011-09-01" includeArchived:YES] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response?include_archived=true&range=2011-04-01~2011-09-01" body:nil];
+    });
+    it(@"getResponseSummaryInRange:includeArchived should call endpoint without archived", ^ {
+        [[client getResponseSummaryInRange:@"2011-04-01~2011-09-01" includeArchived:NO] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response?include_archived=false&range=2011-04-01~2011-09-01" body:nil];
+    });
+    
+    it(@"getResponseSummaryInRange:includeArchived: should parse results", ^ {
+        __block NSArray *result;
         
-        expect([result month]).to.equal(1);
-        expect([result year]).to.equal(2013);
-        expect([result mailings]).to.equal(3);
-        expect([result sent]).to.equal(0);
-        expect([result delivered]).to.equal(1);
-        expect([result bounced]).to.equal(0);
-        expect([result opened]).to.equal(3);
-        expect([result clickedUnique]).to.equal(0);
-        expect([result clicked]).to.equal(0);
-        expect([result forwarded]).to.equal(2);
-        expect([result shared]).to.equal(1);
-        expect([result shareClicked]).to.equal(1);
-        expect([result webViewShared]).to.equal(0);
-        expect([result webViewClicked]).to.equal(0);
-        expect([result optedOut]).to.equal(2);
-        expect([result signedUp]).to.equal(3);
+        id responseSummary = @{
+            @"account_id": @200,
+            @"month": @01,
+            @"year": @2013,
+            @"mailings": @3,
+            @"sent": @0,
+            @"delivered": @1,
+            @"bounced": @0,
+            @"opened": @3,
+            @"clicked_unique": @0,
+            @"clicked": @0,
+            @"forwarded": @2,
+            @"shared": @1,
+            @"share_clicked": @1,
+            @"webview_shared": @0,
+            @"webview_share_clicked": @0,
+            @"opted_out": @2,
+            @"signed_up": @3
+        };
+        
+        endpoint.results = @[ [RACSignal return:
+                               @[ responseSummary ]
+                               ] ];
+        
+        [[client getResponseSummaryInRange:@"2011-04-01~2011-09-01" includeArchived:YES] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        EMResponseSummary *summary = result[0];
+        expect(result.count).to.equal(1);
+        expect([summary month]).to.equal(1);
+        expect([summary year]).to.equal(2013);
+        expect([summary mailings]).to.equal(3);
+        expect([summary sent]).to.equal(0);
+        expect([summary delivered]).to.equal(1);
+        expect([summary bounced]).to.equal(0);
+        expect([summary opened]).to.equal(3);
+        expect([summary clickedUnique]).to.equal(0);
+        expect([summary clicked]).to.equal(0);
+        expect([summary forwarded]).to.equal(2);
+        expect([summary shared]).to.equal(1);
+        expect([summary shareClicked]).to.equal(1);
+        expect([summary webViewShared]).to.equal(0);
+        expect([summary webViewClicked]).to.equal(0);
+        expect([summary optedOut]).to.equal(2);
+        expect([summary signedUp]).to.equal(3);
     });
 });
 
