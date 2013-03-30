@@ -814,9 +814,6 @@ static EMClient *shared;
 
 //response
 
-//GET /100/response
-
-// calls getResponseSummaryInRange:includeArchived: with nil range string and NO includeArchived
 - (RACSignal *)getResponseSummary
 {
     return [[self requestSignalWithMethod:@"GET" path:@"/response?include_archived=false" headers:nil body:nil] map:^id(NSArray *results) {
@@ -824,7 +821,7 @@ static EMClient *shared;
             return [[EMResponseSummary alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMResponseSummary.
+}
 
 - (RACSignal *)getResponseSummaryInRange:(NSString *)rangeString includeArchived:(BOOL)includeArchived
 {
@@ -835,14 +832,14 @@ static EMClient *shared;
             return [[EMResponseSummary alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMResponseSummary
+}
 
 - (RACSignal *)getResponseForMailingID:(NSString *)mailingID
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@", mailingID] headers:nil body:nil] map:^id(id value) {
         return [[EMMailingResponse alloc] initWithDictionary:value];
     }];
-}// returns EMMailingResponse
+}
 
 - (RACSignal *)getSendsForMailingID:(NSString *)mailingID
 {
@@ -851,7 +848,7 @@ static EMClient *shared;
             return [[EMMailingResponseEvent alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMMailingResponseEvent
+}
 
 - (RACSignal *)getInProgressForMailingID:(NSString *)mailingID
 {
@@ -860,7 +857,7 @@ static EMClient *shared;
             return [[EMMailingResponseEvent alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMMailingResponseEvent (timestamps are nil)
+}
 
 - (RACSignal *)getDeliveriesForMailingID:(NSString *)mailingID withDeliveryStatus:(EMDeliveryStatus)status
 {
@@ -872,8 +869,7 @@ static EMClient *shared;
             return [[EMMailingResponseEvent alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMMailingResponseEvent (populates deliveryStatus)
-
+}
 - (RACSignal *)getOpensForMailingID:(NSString *)mailingID
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/opens", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
@@ -881,7 +877,7 @@ static EMClient *shared;
             return [[EMMailingResponseEvent alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMMailingResponseEvent
+}
 
 - (RACSignal *)getLinksForMailingID:(NSString *)mailingID
 {
@@ -890,7 +886,7 @@ static EMClient *shared;
             return [[EMMailingLinkResponse alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMMailingLinkResponse
+}
 
 #warning do we need to convert the memberID and linkID to NSNumbers? API says it needs an int.
 /*
@@ -905,7 +901,7 @@ static EMClient *shared;
             return [[EMMailingResponseEvent alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMMailingResponseEvent (populates linkID)
+}
 
 - (RACSignal *)getForwardsForMailingID:(NSString *)mailingID
 {
@@ -914,7 +910,7 @@ static EMClient *shared;
             return [[EMMailingResponseEvent alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMMailingResponseEvent (populates forwardMailingID)
+}
 
 - (RACSignal *)getOptoutsForMailingID:(NSString *)mailingID
 {
@@ -923,12 +919,16 @@ static EMClient *shared;
             return [[EMMailingResponseEvent alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMMailingResponseEvent
+}
 
 - (RACSignal *)getSignupsForMailingID:(NSString *)mailingID
 {
-    return nil;
-}// returns NSArray of EMMailingResponseEvent (populates referringMemberID)
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/signups", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
 
 - (RACSignal *)getSharesForMailingID:(NSString *)mailingID
 {
