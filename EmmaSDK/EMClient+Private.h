@@ -53,3 +53,15 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
+
+@interface EMShareSummary (Private);
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+
+@end
+
+@interface EMShare (Private);
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+
+@end

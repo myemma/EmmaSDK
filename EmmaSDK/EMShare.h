@@ -2,7 +2,7 @@
 @interface EMShareSummary : NSObject
 
 @property (nonatomic, copy) NSString *network;
-@property (nonatomic, assign) NSUInteger *shareClicks, *shareCount;
+@property (nonatomic, assign) NSUInteger shareClicks, shareCount;
 
 @end
 
@@ -10,7 +10,6 @@
 
 @property (nonatomic, strong) NSDate *timestamp;
 @property (nonatomic, copy) NSString *network, *memberID, *shareStatus;
-@property (nonatomic, assign) NSUInteger *clicks;
-
+@property (nonatomic, assign) NSUInteger clicks;
 
 @end

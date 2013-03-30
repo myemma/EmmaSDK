@@ -11,6 +11,7 @@
 #import "EMField.h"
 #import "EMTrigger.h"
 #import "EMWebhook.h"
+#import "EMShare.h"
 
 struct EMResultRange {
     NSInteger start, end;
