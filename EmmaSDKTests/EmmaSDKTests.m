@@ -3054,6 +3054,33 @@ describe(@"EMClient", ^{
         expect([share network]).to.equal(@"Cool Network");
         expect([share clicks]).to.equal(1);
     });
+    
+    it(@"getCustomerSharesForMailingID: should call endpoint", ^ {
+        [[client getCustomerSharesForMailingID:@"321"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/321/customer_shares" body:nil];
+    });
+    
+    it(@"getCustomerSharesForMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id shareInfo = @{
+        @"timestamp": @"@D:2011-01-02T11:13:51",
+        @"network": @"Cool Network",
+        };
+        
+        endpoint.results = @[ [RACSignal return:
+                               @[ shareInfo ]
+                               ] ];
+        
+        [[client getCustomerSharesForMailingID:@"321"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        EMShare *share = result[0];
+        expect(result.count).to.equal(1);
+        expect([share timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([share network]).to.equal(@"Cool Network");
+    });
 });
 
 SpecEnd

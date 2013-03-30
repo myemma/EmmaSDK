@@ -937,12 +937,16 @@ static EMClient *shared;
             return [[EMShare alloc] initWithDictionary:value];
         }].array;
     }];
-}// returns NSArray of EMShare (populates memberID, network, clicks)
+}
 
 - (RACSignal *)getCustomerSharesForMailingID:(NSString *)mailingID
 {
-    return nil;
-}// returns NSArray of EMShare (populates timestamp, network)
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/customer_shares", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMShare alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
 
 - (RACSignal *)getCustomerShareClicksForMailingID:(NSString *)mailingID
 {
