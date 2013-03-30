@@ -3065,7 +3065,7 @@ describe(@"EMClient", ^{
         
         id shareInfo = @{
         @"timestamp": @"@D:2011-01-02T11:13:51",
-        @"network": @"Cool Network",
+        @"network": @"Cool Network"
         };
         
         endpoint.results = @[ [RACSignal return:
@@ -3080,6 +3080,63 @@ describe(@"EMClient", ^{
         expect(result.count).to.equal(1);
         expect([share timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
         expect([share network]).to.equal(@"Cool Network");
+    });
+    
+    it(@"getCustomerShareClicksForMailingID: should call endpoint", ^ {
+        [[client getCustomerShareClicksForMailingID:@"321"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/321/customer_share_clicks" body:nil];
+    });
+    
+    it(@"getCustomerShareClicksForMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id shareInfo = @{
+        @"timestamp": @"@D:2011-01-02T11:13:51",
+        @"network": @"Cool Network",
+        @"clicks" : @1
+        };
+        
+        endpoint.results = @[ [RACSignal return:
+                               @[ shareInfo ]
+                               ] ];
+        
+        [[client getCustomerShareClicksForMailingID:@"321"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        EMShare *share = result[0];
+        expect(result.count).to.equal(1);
+        expect([share timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([share network]).to.equal(@"Cool Network");
+        expect([share clicks]).to.equal(1);
+    });
+    
+    it(@"getCustomerShareID: should call endpoint", ^ {
+        [[client getCustomerShareID:@"321"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/321/customer_share" body:nil];
+    });
+    
+    it(@"getCustomerShareID: should parse results", ^ {
+        __block EMShare *result;
+        
+        id shareInfo = @{
+        @"timestamp": @"@D:2011-01-02T11:13:51",
+        @"network": @"Cool Network",
+        @"share_status" : @"shared"
+        };
+#warning not sure what share_status could be set to. Couldn't find in API docs
+        
+        endpoint.results = @[ [RACSignal return:
+                                shareInfo
+                               ] ];
+        
+        [[client getCustomerShareID:@"321"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect([result timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([result network]).to.equal(@"Cool Network");
+        expect([result shareStatus]).to.equal(@"shared");
     });
 });
 
