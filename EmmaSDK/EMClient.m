@@ -909,7 +909,11 @@ static EMClient *shared;
 
 - (RACSignal *)getForwardsForMailingID:(NSString *)mailingID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/forwards", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+        }].array;
+    }];
 }// returns NSArray of EMMailingResponseEvent (populates forwardMailingID)
 
 - (RACSignal *)getOptoutsForMailingID:(NSString *)mailingID
