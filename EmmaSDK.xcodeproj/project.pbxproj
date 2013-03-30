@@ -53,8 +53,8 @@
 		41912D9C16D59D2600126AF1 /* NSObject+ObjectOrNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */; };
 		41912D9D16D59D2600126AF1 /* NSNumber+ObjectIDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */; };
 		41970E9517079AB600C7A67F /* SMWebRequest+RAC.h in Headers */ = {isa = PBXBuildFile; fileRef = 41970E9317079AB600C7A67F /* SMWebRequest+RAC.h */; };
-		41970E9617079AB600C7A67F /* SMWebRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */; };
-		41970E9B17079F0100C7A67F /* SMWebRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */; };
+		41970E9617079AB600C7A67F /* SMWebRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		41970E9B17079F0100C7A67F /* SMWebRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		41CB3EB416FAAF9E009CAD80 /* EMTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */; };
 		41CB3EB516FAAF9E009CAD80 /* EMTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */; };
 		41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EBF16FAB113009CAD80 /* EMWebhook.h */; };
@@ -838,7 +838,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41970E9B17079F0100C7A67F /* SMWebRequest+RAC.m in Sources */,
 				34F286A3170389B300E6D617 /* NSString+DateParsing.m in Sources */,
 				418E65ED1702A30700EBB567 /* EMResponseSummary.m in Sources */,
 				418E65EE1702A30700EBB567 /* EMTrigger.m in Sources */,
@@ -857,6 +856,7 @@
 				41EB586516C45CAC005C1805 /* EMMember.m in Sources */,
 				41EB586616C45CAC005C1805 /* EMMessage.m in Sources */,
 				41EB586716C45CAC005C1805 /* EMSearch.m in Sources */,
+				41970E9B17079F0100C7A67F /* SMWebRequest+RAC.m in Sources */,
 				41EB58C316C45EED005C1805 /* SMWebRequest.m in Sources */,
 				34F286A817038A1100E6D617 /* ISO8601DateFormatter.m in Sources */,
 			);
@@ -883,7 +883,6 @@
 				41EB589E16C45E4F005C1805 /* EMMember.m in Sources */,
 				41EB589F16C45E4F005C1805 /* EMMessage.m in Sources */,
 				41EB58A016C45E4F005C1805 /* EMSearch.m in Sources */,
-				41EB58C216C45EED005C1805 /* SMWebRequest.m in Sources */,
 				41912D9716D599FF00126AF1 /* NSObject+ObjectOrNil.m in Sources */,
 				41912D9B16D59A4100126AF1 /* NSNumber+ObjectIDString.m in Sources */,
 				342CB77A16F172D30065A7F4 /* NSString+DateParsing.m in Sources */,
@@ -894,6 +893,7 @@
 				418EE81E170238FB00773A19 /* EMShare.m in Sources */,
 				418E65D3170255ED00EBB567 /* NSData+Base64.m in Sources */,
 				34F286A717038A1100E6D617 /* ISO8601DateFormatter.m in Sources */,
+				41EB58C216C45EED005C1805 /* SMWebRequest.m in Sources */,
 				41970E9617079AB600C7A67F /* SMWebRequest+RAC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
