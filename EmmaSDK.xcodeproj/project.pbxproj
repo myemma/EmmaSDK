@@ -54,6 +54,7 @@
 		41912D9D16D59D2600126AF1 /* NSNumber+ObjectIDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */; };
 		41970E9517079AB600C7A67F /* SMWebRequest+RAC.h in Headers */ = {isa = PBXBuildFile; fileRef = 41970E9317079AB600C7A67F /* SMWebRequest+RAC.h */; };
 		41970E9617079AB600C7A67F /* SMWebRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */; };
+		41970E9B17079F0100C7A67F /* SMWebRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */; };
 		41CB3EB416FAAF9E009CAD80 /* EMTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */; };
 		41CB3EB516FAAF9E009CAD80 /* EMTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */; };
 		41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EBF16FAB113009CAD80 /* EMWebhook.h */; };
@@ -837,6 +838,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41970E9B17079F0100C7A67F /* SMWebRequest+RAC.m in Sources */,
 				34F286A3170389B300E6D617 /* NSString+DateParsing.m in Sources */,
 				418E65ED1702A30700EBB567 /* EMResponseSummary.m in Sources */,
 				418E65EE1702A30700EBB567 /* EMTrigger.m in Sources */,
