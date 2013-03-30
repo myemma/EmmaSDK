@@ -52,6 +52,8 @@
 		41912D9B16D59A4100126AF1 /* NSNumber+ObjectIDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */; };
 		41912D9C16D59D2600126AF1 /* NSObject+ObjectOrNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */; };
 		41912D9D16D59D2600126AF1 /* NSNumber+ObjectIDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */; };
+		41970E9517079AB600C7A67F /* SMWebRequest+RAC.h in Headers */ = {isa = PBXBuildFile; fileRef = 41970E9317079AB600C7A67F /* SMWebRequest+RAC.h */; };
+		41970E9617079AB600C7A67F /* SMWebRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */; };
 		41CB3EB416FAAF9E009CAD80 /* EMTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */; };
 		41CB3EB516FAAF9E009CAD80 /* EMTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */; };
 		41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EBF16FAB113009CAD80 /* EMWebhook.h */; };
@@ -271,6 +273,8 @@
 		41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ObjectOrNil.m"; sourceTree = "<group>"; };
 		41912D9816D59A4100126AF1 /* NSNumber+ObjectIDString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ObjectIDString.h"; sourceTree = "<group>"; };
 		41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ObjectIDString.m"; sourceTree = "<group>"; };
+		41970E9317079AB600C7A67F /* SMWebRequest+RAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SMWebRequest+RAC.h"; sourceTree = "<group>"; };
+		41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SMWebRequest+RAC.m"; sourceTree = "<group>"; };
 		41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMTrigger.h; sourceTree = "<group>"; };
 		41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMTrigger.m; sourceTree = "<group>"; };
 		41CB3EBF16FAB113009CAD80 /* EMWebhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMWebhook.h; sourceTree = "<group>"; };
@@ -474,6 +478,8 @@
 				41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */,
 				418E65D0170255ED00EBB567 /* NSData+Base64.h */,
 				418E65D1170255ED00EBB567 /* NSData+Base64.m */,
+				41970E9317079AB600C7A67F /* SMWebRequest+RAC.h */,
+				41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -571,6 +577,7 @@
 				418EE81D170238FB00773A19 /* EMShare.h in Headers */,
 				418E65D2170255ED00EBB567 /* NSData+Base64.h in Headers */,
 				34F286A617038A1100E6D617 /* ISO8601DateFormatter.h in Headers */,
+				41970E9517079AB600C7A67F /* SMWebRequest+RAC.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,6 +892,7 @@
 				418EE81E170238FB00773A19 /* EMShare.m in Sources */,
 				418E65D3170255ED00EBB567 /* NSData+Base64.m in Sources */,
 				34F286A717038A1100E6D617 /* ISO8601DateFormatter.m in Sources */,
+				41970E9617079AB600C7A67F /* SMWebRequest+RAC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

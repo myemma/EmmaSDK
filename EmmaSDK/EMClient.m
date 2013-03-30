@@ -3,6 +3,7 @@
 #import "NSObject+ObjectOrNil.h"
 #import "NSNumber+ObjectIDString.h"
 #import "EMResponseSummary.h"
+#import "SMWebRequest+RAC.h"
 
 #define API_HOST @"http://api.e2ma.net/"
 
@@ -159,7 +160,13 @@ NSString *EMDeliveryStatusToString(EMDeliveryStatus status) {
 @implementation EMEndpoint
 
 - (RACSignal *)requestSignalWithURLRequest:(NSURLRequest *)request {
-    return nil;
+    return [SMWebRequest requestSignalWithURLRequest:request dataParser:^id(NSData *data) {
+        SBJsonParser *parser = [[SBJsonParser alloc] init];
+        id object = [parser objectWithData:data];
+        if (!object)
+            NSLog(@"Error parsing JSON from Emma: %@", parser.error);
+        return object;
+    }];
 }
 
 @end
