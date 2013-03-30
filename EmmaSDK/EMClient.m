@@ -918,7 +918,11 @@ static EMClient *shared;
 
 - (RACSignal *)getOptoutsForMailingID:(NSString *)mailingID
 {
-    return nil;
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/optouts", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+        }].array;
+    }];
 }// returns NSArray of EMMailingResponseEvent
 
 - (RACSignal *)getSignupsForMailingID:(NSString *)mailingID

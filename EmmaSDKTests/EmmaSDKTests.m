@@ -2945,6 +2945,46 @@ describe(@"EMClient", ^{
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
+    
+    it(@"getOptoutsForMailingID: should call endpoint", ^ {
+        [[client getOptoutsForMailingID:@"321"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/321/optouts" body:nil];
+    });
+    
+    it(@"getOptoutsForMailingID: should parse results", ^ {
+        __block NSArray *result;
+        
+        id responseSummary = @{
+        @"fields": @{
+        @"first_name": @"Emma",
+        @"last_name": @"Smith",
+        @"favorite_food": @"tacos"
+        },
+        @"member_id": @200,
+        @"member_since": @"@D:2010-11-12T11:23:45",
+        @"email_domain": @"myemma.com",
+        @"email_user": @"emma",
+        @"email": @"emma@myemma.com",
+        @"member_status_id": @"a",
+        @"timestamp": @"@D:2011-01-02T11:13:51",
+        };
+        
+        endpoint.results = @[ [RACSignal return:
+                               @[ responseSummary ]
+                               ] ];
+        
+        [[client getOptoutsForMailingID:@"321"] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        EMMailingResponseEvent *summary = result[0];
+        expect(result.count).to.equal(1);
+        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([summary.member ID]).to.equal(@"200");
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member email]).to.equal(@"emma@myemma.com");
+        expect([summary.member status]).to.equal(EMMemberStatusActive);
+    });
 });
 
 SpecEnd
