@@ -2552,17 +2552,17 @@ describe(@"EMClient", ^{
             @"month": @01,
             @"year": @2013,
             @"mailings": @3,
-            @"sent": @0,
+            @"sent": @10,
             @"delivered": @1,
-            @"bounced": @0,
+            @"bounced": @11,
             @"opened": @3,
-            @"clicked_unique": @0,
-            @"clicked": @0,
+            @"clicked_unique": @12,
+            @"clicked": @13,
             @"forwarded": @2,
             @"shared": @1,
             @"share_clicked": @1,
-            @"webview_shared": @0,
-            @"webview_share_clicked": @0,
+            @"webview_shared": @14,
+            @"webview_share_clicked": @15,
             @"opted_out": @2,
             @"signed_up": @3
         };
@@ -2580,17 +2580,17 @@ describe(@"EMClient", ^{
         expect([summary month]).to.equal(1);
         expect([summary year]).to.equal(2013);
         expect([summary mailings]).to.equal(3);
-        expect([summary sent]).to.equal(0);
+        expect([summary sent]).to.equal(10);
         expect([summary delivered]).to.equal(1);
-        expect([summary bounced]).to.equal(0);
+        expect([summary bounced]).to.equal(11);
         expect([summary opened]).to.equal(3);
-        expect([summary clickedUnique]).to.equal(0);
-        expect([summary clicked]).to.equal(0);
+        expect([summary clickedUnique]).to.equal(12);
+        expect([summary clicked]).to.equal(13);
         expect([summary forwarded]).to.equal(2);
         expect([summary shared]).to.equal(1);
         expect([summary shareClicked]).to.equal(1);
-        expect([summary webViewShared]).to.equal(0);
-        expect([summary webViewShareClicked]).to.equal(0);
+        expect([summary webViewShared]).to.equal(14);
+        expect([summary webViewShareClicked]).to.equal(15);
         expect([summary optedOut]).to.equal(2);
         expect([summary signedUp]).to.equal(3);
     });

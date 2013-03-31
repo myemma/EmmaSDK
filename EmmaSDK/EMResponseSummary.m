@@ -19,6 +19,8 @@
         _month = [[[dict objectForKey:@"month"] numberOrNil] intValue];
         _year = [[[dict objectForKey:@"year"] numberOrNil] intValue];
         _mailings = [[[dict objectForKey:@"mailings"] numberOrNil] intValue];
+        _webViewShared = [[dict[@"webview_shared"] numberOrNil] intValue];
+        _webViewShareClicked = [[dict[@"webview_share_clicked"] numberOrNil] intValue];
     }
     return self;
 }
