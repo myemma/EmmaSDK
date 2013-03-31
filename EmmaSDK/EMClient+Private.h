@@ -65,3 +65,7 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
+
+NSString *EMDeliveryStatusToString(EMDeliveryStatus status);
+NSString *EMMailingStatusToString(EMMailingStatus status);
+NSString *EMGroupTypeToString(EMGroupType type);

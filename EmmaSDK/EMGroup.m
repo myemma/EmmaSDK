@@ -2,6 +2,25 @@
 #import "NSObject+ObjectOrNil.h"
 #import "NSNumber+ObjectIDString.h"
 
+
+NSString *EMGroupTypeToString(EMGroupType type) {
+    if (type == EMGroupTypeAll)
+        return @"all";
+    
+    NSArray *types = @[];
+    
+    if ((type & EMGroupTypeGroup) > 0)
+        types = [types arrayByAddingObject:@"g"];
+    
+    if ((type & EMGroupTypeTest) > 0)
+        types = [types arrayByAddingObject:@"t"];
+    
+    if ((type & EMGroupTypeHidden) > 0)
+        types = [types arrayByAddingObject:@"h"];
+    
+    return [types componentsJoinedByString:@","];
+}
+
 @implementation EMGroup
 
 @synthesize ID, name, activeCount, errorCount, optoutCount;

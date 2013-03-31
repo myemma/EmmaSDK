@@ -13,69 +13,6 @@ EMResultRange EMResultRangeMake(NSInteger start, NSInteger end) {
 
 EMResultRange EMResultRangeAll = ((EMResultRange){ .start = -1, .end = -1 });
 
-NSString *EMMailingStatusToString(EMMailingStatus status) {
-    
-    if (status == EMMailingStatusAll)
-        return @"p,a,s,x,c,f";
-    
-    NSMutableArray *results = [NSMutableArray array];
-    
-    if ((status & EMMailingStatusPending) > 0)
-        [results addObject:@"p"];
-    
-    if ((status & EMMailingStatusPaused) > 0)
-        [results addObject:@"a"];
-    
-    if ((status & EMMailingStatusSending) > 0)
-        [results addObject:@"s"];
-    
-    if ((status & EMMailingStatusCanceled) > 0)
-        [results addObject:@"x"];
-    
-    if ((status & EMMailingStatusComplete) > 0)
-        [results addObject:@"c"];
-    
-    if ((status & EMMailingStatusFailed) > 0)
-        [results addObject:@"f"];
-    
-    return [results componentsJoinedByString:@","];
-}
-
-NSString *EMGroupTypeGetString(EMGroupType type) {
-    if (type == EMGroupTypeAll)
-        return @"all";
-    
-    NSArray *types = @[];
-    
-    if ((type & EMGroupTypeGroup) > 0)
-        types = [types arrayByAddingObject:@"g"];
-    
-    if ((type & EMGroupTypeTest) > 0)
-        types = [types arrayByAddingObject:@"t"];
-    
-    if ((type & EMGroupTypeHidden) > 0)
-        types = [types arrayByAddingObject:@"h"];
-    
-    return [types componentsJoinedByString:@","];
-}
-
-NSString *EMDeliveryStatusToString(EMDeliveryStatus status) {
-    
-    if (status == EMDeliveryStatusAll)
-        return @"all";
-    else if (status == EMDeliveryStatusBounced)
-        return @"bounced";
-    else if (status == EMDeliveryStatusDelivered)
-        return @"delivered";
-    else if (status == EMDeliveryStatusHardBounce)
-        return @"hard";
-    else if (status == EMDeliveryStatusSoftBounce)
-        return @"soft";
-    else
-        NSLog(@"Unknown EMDeliveryStatys");
-    return nil;
-}
-
 @interface NSDictionary (QueryString)
 
 - (NSString *)queryString;
@@ -284,7 +221,7 @@ static EMClient *shared;
 //groups
 
 - (RACSignal *)getGroupCountWithType:(EMGroupType)groupType {
-    id query = [@{@"group_types": EMGroupTypeGetString(groupType)} dictionaryByAddingCountParam];
+    id query = [@{@"group_types": EMGroupTypeToString(groupType)} dictionaryByAddingCountParam];
     
     return [[self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSNumber *value) {
         return [value numberOrNil];
@@ -292,7 +229,7 @@ static EMClient *shared;
 }
 
 - (RACSignal *)getGroupsWithType:(EMGroupType)groupType inRange:(EMResultRange)range {
-    id query = [@{@"group_types": EMGroupTypeGetString(groupType)} dictionaryByAddingRangeParams:range];
+    id query = [@{@"group_types": EMGroupTypeToString(groupType)} dictionaryByAddingRangeParams:range];
     
     return [[self requestSignalWithMethod:@"GET" path:[@"/groups" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
@@ -646,13 +583,11 @@ static EMClient *shared;
     }];
 }
 
-#warning import model not defined, returning json data
 - (RACSignal *)getImportID:(NSString *)importID
 {
     return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/imports/%@", importID] headers:nil body:nil];
 }
 
-#warning import model not defined, returning json data
 - (RACSignal *)getImports
 {
     return [self requestSignalWithMethod:@"GET" path:@"/members/imports" headers:nil body:nil];

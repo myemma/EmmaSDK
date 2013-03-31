@@ -1760,7 +1760,7 @@ describe(@"EMClient", ^{
         [endpoint expectRequestWithMethod:@"GET" path:@"/members/123/optout" body:nil];
     });
     
-#warning XXX response format undefined
+    // XXX response format undefined
     it(@"getOptoutInfoForMemberID: should parse results", ^ {
         __block id result;
     
@@ -2149,7 +2149,6 @@ describe(@"EMClient", ^{
         expect(result).to.equal(@YES);
     });
     
-#warning test other statuses?
     it(@"updateMemberIDs:withStatus: should call endpoint", ^ {
         [[client updateMemberIDs:@[@"123", @"567"] withStatus:EMMemberStatusActive] subscribeCompleted:^{ }];
         [endpoint expectRequestWithMethod:@"PUT" path:@"/members/status" body:@{@"member_ids" : @[@"123", @"567"], @"status_to" : @"a"}];
@@ -2158,6 +2157,11 @@ describe(@"EMClient", ^{
     it(@"updateMemberIDs:withStatus: should call endpoint", ^ {
         [[client updateMemberIDs:@[@"123", @"567"] withStatus:EMMemberStatusError] subscribeCompleted:^{ }];
         [endpoint expectRequestWithMethod:@"PUT" path:@"/members/status" body:@{@"member_ids" : @[@"123", @"567"], @"status_to" : @"e"}];
+    });
+    
+    it(@"updateMemberIDs:withStatus: should call endpoint", ^ {
+        [[client updateMemberIDs:@[@"123", @"567"] withStatus:EMMemberStatusOptout] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/status" body:@{@"member_ids" : @[@"123", @"567"], @"status_to" : @"o"}];
     });
     
     it(@"updateMemberIDs:withStatus: should parse results", ^ {
@@ -2740,7 +2744,7 @@ describe(@"EMClient", ^{
     });
     
     it(@"getDeliveriesForMailingID:withDeliveryStatus: should call endpoint with status bounced", ^ {
-        testGetDeliveriesCallsEndpointWithDeliveryStatus(EMDeliveryStatusBounced, @"bounced");
+        testGetDeliveriesCallsEndpointWithDeliveryStatus(EMDeliveryStatusBounced, @"hard,soft");
     });
     
     it(@"getDeliveriesForMailingID:withDeliveryStatus: should call endpoint with status hard bounced", ^ {
@@ -2754,39 +2758,75 @@ describe(@"EMClient", ^{
     it(@"getDeliveriesForMailingID:withDeliveryStatus: should parse results", ^ {
         __block NSArray *result;
         
-        id responseSummary = @{
-        @"fields": @{
-        @"first_name": @"Emma",
-        @"last_name": @"Smith",
-        @"favorite_food": @"tacos"
-        },
-        @"member_id": @200,
-        @"member_since": @"@D:2010-11-12T11:23:45",
-        @"email_domain": @"myemma.com",
-        @"email_user": @"emma",
-        @"email": @"emma@myemma.com",
-        @"member_status_id": @"a",
-        @"delivery_type": @"delivered"
-        };
+        id responseSummaryDelivered = @{
+                                @"fields": @{
+                                        @"first_name": @"Emma",
+                                        @"last_name": @"Smith",
+                                        @"favorite_food": @"tacos"
+                                        },
+                                @"member_id": @200,
+                                @"member_since": @"@D:2010-11-12T11:23:45",
+                                @"email_domain": @"myemma.com",
+                                @"email_user": @"emma",
+                                @"email": @"emma@myemma.com",
+                                @"member_status_id": @"a",
+                                @"delivery_type": @"delivered"
+                                };
+        
+        id responseSummaryHard = @{
+                                @"fields": @{
+                                        @"first_name": @"Emma",
+                                        @"last_name": @"Smith",
+                                        @"favorite_food": @"tacos"
+                                        },
+                                @"member_id": @200,
+                                @"member_since": @"@D:2010-11-12T11:23:45",
+                                @"email_domain": @"myemma.com",
+                                @"email_user": @"emma",
+                                @"email": @"emma@myemma.com",
+                                @"member_status_id": @"a",
+                                @"delivery_type": @"hard"
+                                };
+        
+        
+        
+        id responseSummarySoft = @{
+                                   @"fields": @{
+                                           @"first_name": @"Emma",
+                                           @"last_name": @"Smith",
+                                           @"favorite_food": @"tacos"
+                                           },
+                                   @"member_id": @200,
+                                   @"member_since": @"@D:2010-11-12T11:23:45",
+                                   @"email_domain": @"myemma.com",
+                                   @"email_user": @"emma",
+                                   @"email": @"emma@myemma.com",
+                                   @"member_status_id": @"a",
+                                   @"delivery_type": @"soft"
+                                   };
+        
         
         endpoint.results = @[ [RACSignal return:
-                               @[ responseSummary ]
+                               @[ responseSummaryDelivered, responseSummaryHard, responseSummarySoft ]
                                ] ];
         
-        [[client getInProgressForMailingID:@"123"] subscribeNext:^(id x) {
+        [[client getDeliveriesForMailingID:@"123" withDeliveryStatus:EMDeliveryStatusAll] subscribeNext:^(id x) {
             result = x;
         }];
         
         EMMailingResponseEvent *summary = result[0];
-        expect(result.count).to.equal(1);
+        expect(result.count).to.equal(3);
 
         expect([summary timestamp]).to.equal(nil);
+        expect([summary deliveryStatus]).to.equal(EMDeliveryStatusDelivered);
         expect([summary.member ID]).to.equal(@"200");
         expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
-#warning review test for this
-//        expect([summary deliveryStatus]).to.equal(EMMemberStatusActive);
+        
+        
+        expect([result[1] deliveryStatus]).to.equal(EMDeliveryStatusHardBounce);
+        expect([result[2] deliveryStatus]).to.equal(EMDeliveryStatusSoftBounce);
     });
     
     it(@"getOpensForMailingID: should call endpoint", ^ {

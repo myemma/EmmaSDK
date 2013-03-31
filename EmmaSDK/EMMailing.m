@@ -3,6 +3,33 @@
 #import "NSNumber+ObjectIDString.h"
 #import "NSString+DateParsing.h"
 
+NSString *EMMailingStatusToString(EMMailingStatus status) {
+    
+    if (status == EMMailingStatusAll)
+        return @"p,a,s,x,c,f";
+    
+    NSMutableArray *results = [NSMutableArray array];
+    
+    if ((status & EMMailingStatusPending) > 0)
+        [results addObject:@"p"];
+    
+    if ((status & EMMailingStatusPaused) > 0)
+        [results addObject:@"a"];
+    
+    if ((status & EMMailingStatusSending) > 0)
+        [results addObject:@"s"];
+    
+    if ((status & EMMailingStatusCanceled) > 0)
+        [results addObject:@"x"];
+    
+    if ((status & EMMailingStatusComplete) > 0)
+        [results addObject:@"c"];
+    
+    if ((status & EMMailingStatusFailed) > 0)
+        [results addObject:@"f"];
+    
+    return [results componentsJoinedByString:@","];
+}
 
 EMMailingStatus EMMailingStatusFromString(NSString *s) {
     if ([s isEqual:@"p"])
