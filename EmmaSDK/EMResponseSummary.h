@@ -15,7 +15,7 @@
     shared,
     shareClicked,
     webViewShared,
-    webViewClicked,
+    webViewShareClicked,
     optedOut,
     signedUp;
 

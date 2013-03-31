@@ -552,7 +552,7 @@ describe(@"EMClient", ^{
     });
     
     it(@"getMailingWithID: should call endpoint", ^ {
-        [[client getMailingWithID:@"321" ] subscribeCompleted:^ { }];
+        [[client getMailingWithID:@"321"] subscribeCompleted:^ { }];
         [endpoint expectRequestWithMethod:@"GET" path:@"/mailings/321"];
     });
     
@@ -1760,6 +1760,7 @@ describe(@"EMClient", ^{
         [endpoint expectRequestWithMethod:@"GET" path:@"/members/123/optout" body:nil];
     });
     
+#warning XXX response format undefined
     it(@"getOptoutInfoForMemberID: should parse results", ^ {
         __block id result;
     
@@ -2154,6 +2155,11 @@ describe(@"EMClient", ^{
         [endpoint expectRequestWithMethod:@"PUT" path:@"/members/status" body:@{@"member_ids" : @[@"123", @"567"], @"status_to" : @"a"}];
     });
     
+    it(@"updateMemberIDs:withStatus: should call endpoint", ^ {
+        [[client updateMemberIDs:@[@"123", @"567"] withStatus:EMMemberStatusError] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"PUT" path:@"/members/status" body:@{@"member_ids" : @[@"123", @"567"], @"status_to" : @"e"}];
+    });
+    
     it(@"updateMemberIDs:withStatus: should parse results", ^ {
         __block id result;
         
@@ -2524,7 +2530,7 @@ describe(@"EMClient", ^{
         expect([summary shared]).to.equal(1);
         expect([summary shareClicked]).to.equal(1);
         expect([summary webViewShared]).to.equal(0);
-        expect([summary webViewClicked]).to.equal(0);
+        expect([summary webViewShareClicked]).to.equal(0);
         expect([summary optedOut]).to.equal(2);
         expect([summary signedUp]).to.equal(3);
     });
@@ -2584,7 +2590,7 @@ describe(@"EMClient", ^{
         expect([summary shared]).to.equal(1);
         expect([summary shareClicked]).to.equal(1);
         expect([summary webViewShared]).to.equal(0);
-        expect([summary webViewClicked]).to.equal(0);
+        expect([summary webViewShareClicked]).to.equal(0);
         expect([summary optedOut]).to.equal(2);
         expect([summary signedUp]).to.equal(3);
     });
@@ -2598,22 +2604,22 @@ describe(@"EMClient", ^{
         __block EMMailingResponse *result;
         
         id responseSummary = @{
-                @"delivered": @0,
-                @"signed_up": @0,
+                @"delivered": @1,
+                @"signed_up": @2,
                 @"clicked": @3,
                 @"name": @"Sample Mailing",
-                @"clicked_unique": @0,
-                @"webview_share_clicked": @0,
-                @"opened": @0,
-                @"opted_out": @0,
-                @"share_clicked": @0,
-                @"webview_shared": @0,
-                @"shared": @0,
-                @"in_progress": @0,
-                @"bounced": @0,
-                @"recipient_count": @0,
-                @"sent": @0,
-                @"forwarded": @0
+                @"clicked_unique": @4,
+                @"webview_share_clicked": @5,
+                @"opened": @6,
+                @"opted_out": @7,
+                @"share_clicked": @8,
+                @"webview_shared": @9,
+                @"shared": @10,
+                @"in_progress": @11,
+                @"bounced": @12,
+                @"recipient_count": @13,
+                @"sent": @14,
+                @"forwarded": @15
         };
         
         endpoint.results = @[ [RACSignal return:
@@ -2624,16 +2630,20 @@ describe(@"EMClient", ^{
             result = x;
         }];
         
-        expect([result delivered]).to.equal(0);
-        expect([result signedUp]).to.equal(0);
+        expect([result name]).to.equal(@"Sample Mailing");
+        expect([result sent]).to.equal(14);
+        expect([result delivered]).to.equal(1);
+        expect([result bounced]).to.equal(12);
+        expect([result opened]).to.equal(6);
+        expect([result clickedUnique]).to.equal(4);
         expect([result clicked]).to.equal(3);
-        expect([result clickedUnique]).to.equal(0);
-        expect([result webviewShareClicked]).to.equal(0);
-        expect([result opened]).to.equal(0);
-        expect([result optedOut]).to.equal(0);
-        expect([result shareClicked]).to.equal(0);
-        expect([result webviewShared]).to.equal(0);
-        expect([result shared]).to.equal(0);
+        expect([result forwarded]).to.equal(15);
+        expect([result optedOut]).to.equal(7);
+        expect([result signedUp]).to.equal(2);
+        expect([result shared]).to.equal(10);
+        expect([result shareClicked]).to.equal(8);
+        expect([result webviewShared]).to.equal(9);
+        expect([result webviewShareClicked]).to.equal(5);
     });
     
     it(@"getSendsForMailingID: should call endpoint", ^ {
@@ -2855,16 +2865,19 @@ describe(@"EMClient", ^{
         expect([linkResponse isPlaintext]).to.equal(@NO);
     });
     
-    /*
-     - (RACSignal *)getClicksForMailingID:(NSString *)mailingID memberID:(NSString *)memberID linkID:(NSString *)linkID
-     {
-     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/clicks", mailingID] headers:nil body:@{@"member_id" : memberID, @"link_id" : linkID}] map:^id(NSArray *results) {
-
-     */
-    
-    it(@"getClicksForMailingID:memberID:linkID: should call endpoint", ^ {
+    it(@"getClicksForMailingID:memberID:linkID: should call endpoint with member and link id", ^ {
         [[client getClicksForMailingID:@"123" memberID:@"333" linkID:@"543"] subscribeCompleted:^{ }];
-        [endpoint expectRequestWithMethod:@"GET" path:@"/response/123/clicks" body:@{@"member_id" : @"333", @"link_id" : @"543"}];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/123/clicks?link_id=543&member_id=333" body:nil];
+    });
+    
+    it(@"getClicksForMailingID:memberID:linkID: should call endpoint with link id", ^ {
+        [[client getClicksForMailingID:@"123" memberID:nil linkID:@"543"] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/123/clicks?link_id=543" body:nil];
+    });
+    
+    it(@"getClicksForMailingID:memberID:linkID: should call endpoint with member_id", ^ {
+        [[client getClicksForMailingID:@"123" memberID:@"5243" linkID:nil] subscribeCompleted:^{ }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/response/123/clicks?member_id=5243" body:nil];
     });
     
     it(@"getClicksForMailingID:memberID:linkID: should parse results", ^ {

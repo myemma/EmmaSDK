@@ -100,6 +100,9 @@ NSString *EMDeliveryStatusToString(EMDeliveryStatus status) {
 }
 
 - (NSDictionary *)dictionaryByAddingRangeParams:(EMResultRange)range {
+    if (range.start == EMResultRangeAll.start && range.end == EMResultRangeAll.end)
+        return self;
+
     NSMutableDictionary *dict = [self mutableCopy];
     dict[@"start"] = [NSString stringWithFormat:@"%d", range.start];
     dict[@"end"] = [NSString stringWithFormat:@"%d", range.end];
@@ -201,6 +204,9 @@ static EMClient *shared;
 - (NSURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path headers:(NSDictionary *)headers body:(id)body {
     assert(method);
     assert(path);
+    
+    if ([method isEqual:@"GET"])
+        assert(body == nil);
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", API_HOST, _accountID, path]];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:6];
@@ -540,7 +546,6 @@ static EMClient *shared;
     }];
 }
 
-#warning XXX response format undefined
 - (RACSignal *)getOptoutInfoForMemberID:(NSString *)memberID
 {
     return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/%@/optout", memberID] headers:nil body:nil];
@@ -623,7 +628,6 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/groups/remove"] headers:nil body:@{@"group_ids" : groupIDs, @"member_ids" : memberIDs}];
 }
 
-#warning double check that this is supposed to return mailings
 - (RACSignal *)getMailingHistoryForMemberID:(NSString *)memberID
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/%@/mailings", memberID] headers:nil body:nil] map:^id(NSArray *results) {
@@ -895,15 +899,17 @@ static EMClient *shared;
     }];
 }
 
-#warning do we need to convert the memberID and linkID to NSNumbers? API says it needs an int.
-/*
- Parameters:
- member_id (int) – Limits results to a single member.
- link_id (int) – Limits results to a single link.
- */
 - (RACSignal *)getClicksForMailingID:(NSString *)mailingID memberID:(NSString *)memberID linkID:(NSString *)linkID
 {
-    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/clicks", mailingID] headers:nil body:@{@"member_id" : memberID, @"link_id" : linkID}] map:^id(NSArray *results) {
+    id query = [@{} mutableCopy];
+    
+    if (memberID)
+        query[@"member_id"] = memberID;
+    
+    if (linkID)
+        query[@"link_id"] = linkID;
+    
+    return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/response/%@/clicks", mailingID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
             return [[EMMailingResponseEvent alloc] initWithDictionary:value];
         }].array;
