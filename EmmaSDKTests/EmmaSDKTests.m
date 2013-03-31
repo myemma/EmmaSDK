@@ -678,8 +678,8 @@ describe(@"EMClient", ^{
         id mailingsDict = @{
                                 @"active_count": @2,
                                 @"deleted_at": [NSNull null],
-                                @"error_count": @0,
-                                @"optout_count": @0,
+                                @"error_count": @10,
+                                @"optout_count": @120,
                                 @"group_type": @"g",
                                 @"member_group_id": @151,
                                 @"account_id": @100,
@@ -698,8 +698,8 @@ describe(@"EMClient", ^{
         expect([result[0] ID]).to.equal(@"151");
         expect([result[0] name]).to.equal(@"Widget Buyers");
         expect([result[0] activeCount]).to.equal(2);
-        expect([result[0] errorCount]).to.equal(0);
-        expect([result[0] optoutCount]).to.equal(0);
+        expect([result[0] errorCount]).to.equal(10);
+        expect([result[0] optoutCount]).to.equal(120);
      });
     
     it(@"getSearchCountForMailingID: should call endpoint", ^ {
@@ -1476,13 +1476,13 @@ describe(@"EMClient", ^{
         endpoint.results = @[ [RACSignal return:@[
                                @{
                                     @"search_id": @201,
-                                    @"optout_count": @0,
-                                    @"error_count": @0,
+                                    @"optout_count": @20,
+                                    @"error_count": @30,
                                     @"name": @"Second Test Search",
                                     @"criteria": @"[\"group\", \"eq\", \"Special Events\"]",
                                     @"deleted_at": [NSNull null],
                                     @"last_run_at": [NSNull null],
-                                    @"active_count": @0,
+                                    @"active_count": @10,
                                     @"account_id": @100
                                }
                                ]] ];
@@ -1495,9 +1495,9 @@ describe(@"EMClient", ^{
         expect([result[0] ID]).to.equal(@"201");
         expect([result[0] name]).to.equal(@"Second Test Search");
         expect([result[0] criteria]).to.equal(@"[\"group\", \"eq\", \"Special Events\"]");
-        expect([result[0] activeCount]).to.equal(0);
-        expect([result[0] optoutCount]).to.equal(0);
-        expect([result[0] errorCount]).to.equal(0);
+        expect([result[0] activeCount]).to.equal(10);
+        expect([result[0] optoutCount]).to.equal(20);
+        expect([result[0] errorCount]).to.equal(30);
     });
     
     it(@"getSearchID: should call endpoint", ^ {
@@ -1511,7 +1511,7 @@ describe(@"EMClient", ^{
         id dict = @{
         @"search_id": @200,
         @"optout_count": @1,
-        @"error_count": @0,
+        @"error_count": @10,
         @"name": @"Test Search",
         @"criteria": @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
         @"deleted_at": [NSNull null],
@@ -1532,7 +1532,7 @@ describe(@"EMClient", ^{
         expect([result criteria]).to.equal(@"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]");
         expect([result activeCount]).to.equal(2);
         expect([result optoutCount]).to.equal(1);
-        expect([result errorCount]).to.equal(0);
+        expect([result errorCount]).to.equal(10);
         expect([result lastRunAt]).to.equal([@"@D:2013-03-20T14:21:44" parseISO8601Timestamp]);
     });
     
@@ -2208,8 +2208,8 @@ describe(@"EMClient", ^{
         id groupDict1 = @{
             @"active_count": @1,
             @"deleted_at": [NSNull null],
-            @"error_count": @0,
-            @"optout_count": @1,
+            @"error_count": @3,
+            @"optout_count": @2,
             @"group_type": @"g",
             @"member_group_id": @150,
             @"account_id": @100,
@@ -2226,8 +2226,8 @@ describe(@"EMClient", ^{
         expect(result.count).to.equal(1);
         expect([result[0] name]).to.equal(@"Monthly Newsletter");
         expect([result[0] activeCount]).to.equal(1);
-        expect([result[0] optoutCount]).to.equal(1);
-        expect([result[0] errorCount]).to.equal(0);
+        expect([result[0] optoutCount]).to.equal(2);
+        expect([result[0] errorCount]).to.equal(3);
         expect([result[0] ID]).to.equal(@"150");
     });
     
@@ -2492,17 +2492,17 @@ describe(@"EMClient", ^{
             @"month": @01,
             @"year": @2013,
             @"mailings": @3,
-            @"sent": @0,
-            @"delivered": @1,
-            @"bounced": @0,
+            @"sent": @10,
+            @"delivered": @12,
+            @"bounced": @88,
             @"opened": @3,
-            @"clicked_unique": @0,
-            @"clicked": @0,
+            @"clicked_unique": @13,
+            @"clicked": @19,
             @"forwarded": @2,
             @"shared": @1,
             @"share_clicked": @1,
-            @"webview_shared": @0,
-            @"webview_share_clicked": @0,
+            @"webview_shared": @18,
+            @"webview_share_clicked": @17,
             @"opted_out": @2,
             @"signed_up": @3
         };
@@ -2520,17 +2520,17 @@ describe(@"EMClient", ^{
         expect([summary month]).to.equal(1);
         expect([summary year]).to.equal(2013);
         expect([summary mailings]).to.equal(3);
-        expect([summary sent]).to.equal(0);
-        expect([summary delivered]).to.equal(1);
-        expect([summary bounced]).to.equal(0);
+        expect([summary sent]).to.equal(10);
+        expect([summary delivered]).to.equal(12);
+        expect([summary bounced]).to.equal(88);
         expect([summary opened]).to.equal(3);
-        expect([summary clickedUnique]).to.equal(0);
-        expect([summary clicked]).to.equal(0);
+        expect([summary clickedUnique]).to.equal(13);
+        expect([summary clicked]).to.equal(19);
         expect([summary forwarded]).to.equal(2);
         expect([summary shared]).to.equal(1);
         expect([summary shareClicked]).to.equal(1);
-        expect([summary webViewShared]).to.equal(0);
-        expect([summary webViewShareClicked]).to.equal(0);
+        expect([summary webViewShared]).to.equal(18);
+        expect([summary webViewShareClicked]).to.equal(17);
         expect([summary optedOut]).to.equal(2);
         expect([summary signedUp]).to.equal(3);
     });
