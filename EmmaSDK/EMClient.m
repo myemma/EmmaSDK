@@ -5,7 +5,7 @@
 #import "EMResponseSummary.h"
 #import "SMWebRequest+RAC.h"
 
-#define API_HOST @"http://api.e2ma.net/"
+#define API_HOST @"https://api.e2ma.net/"
 
 EMResultRange EMResultRangeMake(NSInteger start, NSInteger end) {
     return (EMResultRange){ .start = start, .end = end };

@@ -28,7 +28,7 @@
 
 @end
 
-#define API_HOST @"http://api.e2ma.net"
+#define API_HOST @"https://api.e2ma.net"
 #define API_PUBLIC_KEY @"fooooo"
 #define API_PRIVATE_KEY @"baaar"
 
