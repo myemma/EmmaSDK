@@ -13,8 +13,8 @@
         _activeCount = [[[dict objectForKey:@"active_count"] numberOrNil] intValue];
         _optoutCount = [[[dict objectForKey:@"optout_count"] numberOrNil] intValue];
         _errorCount = [[[dict objectForKey:@"error_count"] numberOrNil] intValue];
-        _lastRunAt = [[[dict objectForKey:@"last_run_at"] stringOrNil] parseISO8601Timestamp];
-        _deletedAt = [[[dict objectForKey:@"last_run_at"] stringOrNil] parseISO8601Timestamp];
+        _lastRunAt = [[[dict objectForKey:@"last_run_at"] stringOrNil] em_parseTimestamp];
+        _deletedAt = [[[dict objectForKey:@"last_run_at"] stringOrNil] em_parseTimestamp];
     }
     return self;
 }

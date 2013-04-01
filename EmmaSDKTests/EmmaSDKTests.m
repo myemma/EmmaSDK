@@ -546,9 +546,7 @@ describe(@"EMClient", ^{
         expect([result[0] ID]).to.equal(@"200");
         expect([result[0] email]).to.equal(@"emma@myemma.com");
         expect([result[0] status]).to.equal(EMMemberStatusActive);
-        expect([result[0] memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
-#warning TODO: memberFields
-#warning TODO: fullName
+        expect([result[0] memberSince]).to.equal([@"@D:2010-11-12T11:23:45" em_parseTimestamp]);
     });
     
     it(@"getMailingWithID: should call endpoint", ^ {
@@ -1539,7 +1537,7 @@ describe(@"EMClient", ^{
         expect([result activeCount]).to.equal(2);
         expect([result optoutCount]).to.equal(1);
         expect([result errorCount]).to.equal(10);
-        expect([result lastRunAt]).to.equal([@"@D:2013-03-20T14:21:44" parseISO8601Timestamp]);
+        expect([result lastRunAt]).to.equal([@"@D:2013-03-20T14:21:44" em_parseTimestamp]);
     });
     
     it(@"createSearch: should call endpoint", ^ {
@@ -1713,7 +1711,13 @@ describe(@"EMClient", ^{
         
         expect([result ID]).to.equal(@"201");
         expect([result email]).to.equal(@"gladys@myemma.com");
-        expect([result memberSince]).to.equal([@"@D:2011-01-03T15:54:13" parseISO8601Timestamp]);
+        expect([result memberSince]).to.equal([@"@D:2011-01-03T15:54:13" em_parseTimestamp]);
+        id x = @{
+                 @"first_name": @"Gladys",
+                 @"last_name": @"Jones",
+                 @"favorite_food": @"toast"
+                 };
+        expect([result fields]).to.equal(x);
         expect([result status]).to.equal(EMMemberStatusOptout);
     });
     
@@ -1754,7 +1758,7 @@ describe(@"EMClient", ^{
         
         expect([result ID]).to.equal(@"201");
         expect([result email]).to.equal(@"gladys@myemma.com");
-        expect([result memberSince]).to.equal([@"@D:2011-01-03T15:54:13" parseISO8601Timestamp]);
+        expect([result memberSince]).to.equal([@"@D:2011-01-03T15:54:13" em_parseTimestamp]);
         expect([result status]).to.equal(EMMemberStatusOptout);
     });
     
@@ -2686,9 +2690,9 @@ describe(@"EMClient", ^{
         
         EMMailingResponseEvent *summary = result[0];
         expect(result.count).to.equal(1);
-        expect([summary timestamp]).to.equal([@"@D:2011-01-02T10:27:43" parseISO8601Timestamp]);
+        expect([summary timestamp]).to.equal([@"@D:2011-01-02T10:27:43" em_parseTimestamp]);
         expect([summary.member ID]).to.equal(@"200");
-        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" em_parseTimestamp]);
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
@@ -2727,7 +2731,7 @@ describe(@"EMClient", ^{
         expect(result.count).to.equal(1);
         expect([summary timestamp]).to.equal(nil);
         expect([summary.member ID]).to.equal(@"200");
-        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" em_parseTimestamp]);
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
@@ -2823,7 +2827,7 @@ describe(@"EMClient", ^{
         expect([summary timestamp]).to.equal(nil);
         expect([summary deliveryStatus]).to.equal(EMDeliveryStatusDelivered);
         expect([summary.member ID]).to.equal(@"200");
-        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" em_parseTimestamp]);
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
         
@@ -2865,9 +2869,9 @@ describe(@"EMClient", ^{
         
         EMMailingResponseEvent *summary = result[0];
         expect(result.count).to.equal(1);
-        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" em_parseTimestamp]);
         expect([summary.member ID]).to.equal(@"200");
-        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" em_parseTimestamp]);
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
@@ -2952,10 +2956,10 @@ describe(@"EMClient", ^{
         
         EMMailingResponseEvent *summary = result[0];
         expect(result.count).to.equal(1);
-        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" em_parseTimestamp]);
         expect([summary linkID]).to.equal(@"543");
         expect([summary.member ID]).to.equal(@"200");
-        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" em_parseTimestamp]);
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
@@ -2994,10 +2998,10 @@ describe(@"EMClient", ^{
         
         EMMailingResponseEvent *summary = result[0];
         expect(result.count).to.equal(1);
-        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" em_parseTimestamp]);
         expect([summary forwardMailingID]).to.equal(@"543");
         expect([summary.member ID]).to.equal(@"200");
-        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" em_parseTimestamp]);
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
@@ -3035,9 +3039,9 @@ describe(@"EMClient", ^{
         
         EMMailingResponseEvent *summary = result[0];
         expect(result.count).to.equal(1);
-        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" em_parseTimestamp]);
         expect([summary.member ID]).to.equal(@"200");
-        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" em_parseTimestamp]);
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
@@ -3075,9 +3079,9 @@ describe(@"EMClient", ^{
         
         EMMailingResponseEvent *summary = result[0];
         expect(result.count).to.equal(1);
-        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([summary timestamp]).to.equal([@"@D:2011-01-02T11:13:51" em_parseTimestamp]);
         expect([summary.member ID]).to.equal(@"200");
-        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" parseISO8601Timestamp]);
+        expect([summary.member memberSince]).to.equal([@"@D:2010-11-12T11:23:45" em_parseTimestamp]);
         expect([summary.member email]).to.equal(@"emma@myemma.com");
         expect([summary.member status]).to.equal(EMMemberStatusActive);
     });
@@ -3134,7 +3138,7 @@ describe(@"EMClient", ^{
         
         EMShare *share = result[0];
         expect(result.count).to.equal(1);
-        expect([share timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([share timestamp]).to.equal([@"@D:2011-01-02T11:13:51" em_parseTimestamp]);
         expect([share network]).to.equal(@"Cool Network");
     });
     
@@ -3162,7 +3166,7 @@ describe(@"EMClient", ^{
         
         EMShare *share = result[0];
         expect(result.count).to.equal(1);
-        expect([share timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([share timestamp]).to.equal([@"@D:2011-01-02T11:13:51" em_parseTimestamp]);
         expect([share network]).to.equal(@"Cool Network");
         expect([share clicks]).to.equal(1);
     });
@@ -3190,7 +3194,7 @@ describe(@"EMClient", ^{
             result = x;
         }];
         
-        expect([result timestamp]).to.equal([@"@D:2011-01-02T11:13:51" parseISO8601Timestamp]);
+        expect([result timestamp]).to.equal([@"@D:2011-01-02T11:13:51" em_parseTimestamp]);
         expect([result network]).to.equal(@"Cool Network");
         expect([result shareStatus]).to.equal(@"shared");
     });

@@ -3,14 +3,14 @@
 
 @implementation NSString (DateParsing)
 
-- (NSDate *)parseISO8601Date {    
+- (NSDate *)em_parseDate {    
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     formatter.includeTime = NO;
     NSDate *result = [formatter dateFromString:[self stringByReplacingOccurrencesOfString:@"@D:" withString:@""]];
     return result;
 }
 
-- (NSDate *)parseISO8601Timestamp {    
+- (NSDate *)em_parseTimestamp {    
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     NSDate *result = [formatter dateFromString:[self stringByReplacingOccurrencesOfString:@"@D:" withString:@""]];
     return result;
@@ -20,7 +20,7 @@
 
 @implementation NSDate (DateParsing)
 
-- (NSString *)apiDateStringValue {
+- (NSString *)em_dateString {
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     formatter.includeTime = NO;
     NSString *result = [formatter stringFromDate:self];
@@ -28,7 +28,7 @@
     return [NSString stringWithFormat:@"@D:%@", result];
 }
 
-- (NSString *)apiTimestampStringValue {
+- (NSString *)em_timestampString {
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     formatter.includeTime = YES;
     NSString *result = [formatter stringFromDate:self];
@@ -36,13 +36,6 @@
     return [NSString stringWithFormat:@"@D:%@", result];
 }
 
-- (NSString *)shortDateString {
-    return [NSDateFormatter localizedStringFromDate:self dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
-}
-
-- (NSString *)shortDateTimeString {
-    return [NSDateFormatter localizedStringFromDate:self dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-}
 
 @end
 

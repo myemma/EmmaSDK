@@ -10,11 +10,11 @@
         _mailingID = [[[dict objectForKey:@"mailing_id"] numberOrNil] objectIDStringValue];
         _subject = [dict objectForKey:@"subject"];
         _name = [[dict objectForKey:@"name"] copy];
-        _clicked = [[[dict objectForKey:@"clicked"] stringOrNil] parseISO8601Timestamp];
-        _delivered = [[[dict objectForKey:@"delivery_ts"] stringOrNil] parseISO8601Timestamp];
-        _opened = [[[dict objectForKey:@"opened"] stringOrNil] parseISO8601Timestamp];
-        _shared = [[[dict objectForKey:@"shared"] stringOrNil] parseISO8601Timestamp];
-        _forwarded = [[[dict objectForKey:@"forwarded"] stringOrNil] parseISO8601Timestamp];
+        _clicked = [[[dict objectForKey:@"clicked"] stringOrNil] em_parseTimestamp];
+        _delivered = [[[dict objectForKey:@"delivery_ts"] stringOrNil] em_parseTimestamp];
+        _opened = [[[dict objectForKey:@"opened"] stringOrNil] em_parseTimestamp];
+        _shared = [[[dict objectForKey:@"shared"] stringOrNil] em_parseTimestamp];
+        _forwarded = [[[dict objectForKey:@"forwarded"] stringOrNil] em_parseTimestamp];
         _plaintext = [[dict objectForKey:@"plaintext"] stringOrNil];
         _htmlBody = [[dict objectForKey:@"html_body"] stringOrNil];
         

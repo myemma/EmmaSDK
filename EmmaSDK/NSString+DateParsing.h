@@ -1,16 +1,14 @@
 
 @interface NSString (DateParsing)
 
-- (NSDate *)parseISO8601Date;
-- (NSDate *)parseISO8601Timestamp;
+- (NSDate *)em_parseDate;
+- (NSDate *)em_parseTimestamp;
 
 @end
 
 @interface NSDate (DateParsing)
 
-- (NSString *)apiDateStringValue;
-- (NSString *)apiTimestampStringValue;
-- (NSString *)shortDateString;
-- (NSString *)shortDateTimeString;
+- (NSString *)em_dateString;
+- (NSString *)em_timestampString;
 
 @end

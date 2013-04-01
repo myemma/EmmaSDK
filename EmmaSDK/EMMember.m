@@ -50,7 +50,7 @@ EMMemberStatus EMMemberStatusFromString(NSString *memberStatusString) {
         if (!_email)
             _email = [[dict objectForKey:@"email_error"] stringOrNil];
         
-        _memberSince = [[[dict objectForKey:@"member_since"] stringOrNil] parseISO8601Timestamp];
+        _memberSince = [[[dict objectForKey:@"member_since"] stringOrNil] em_parseTimestamp];
         
         NSString *memberStatusString;
         
@@ -62,54 +62,9 @@ EMMemberStatus EMMemberStatusFromString(NSString *memberStatusString) {
             memberStatusString = nil;
         
         _status = EMMemberStatusFromString(memberStatusString);
-        
-        if ([[dict allKeys] containsObject:@"fields"]) {
-//            NSDictionary *fieldsDict = [dict objectForKey:@"fields"];
-//            self.memberFields = [EMMember memberFieldsForDictionary:fieldsDict accountFields:accountFields];
-        }
+        _fields = dict[@"fields"];
     }
     return self;
 }
-
-//+ (NSArray *)memberFieldsForDictionary:(NSDictionary *)fieldsDict accountFields:(NSArray *)accountFields {
-//    NSMutableArray *result = [NSMutableArray array];
-//    
-//    if (accountFields)
-//    {
-//        for (AccountField *accountField in accountFields)
-//        {
-//            id value = [fieldsDict objectForKey:accountField.name];
-//            
-//            value = [accountField coerceToModelValue:value];
-//            
-//            MemberField *memberField = [[[MemberField alloc] initWithFieldName:accountField.name value:value] autorelease];
-//            
-//            [result addObject:memberField];
-//        }
-//    }
-//    else
-//    {
-//        // XXX HACK because accountFields is nil if we're not being used by the MemberController.
-//        for (NSString *fieldName in [fieldsDict allKeys]) {
-//            id value = [fieldsDict objectForKey:fieldName];
-//            
-//            // attempt to coerce to known field type if possible
-//            if (accountFields) {
-//                AccountField *field = [[accountFields filter:^ BOOL (id accountField) { return [((AccountField *)accountField).name isEqual:fieldName]; }] firstObject];
-//                value = [field coerceToModelValue:value];
-//            }
-//            // if not possible, only allow NSString past.
-//            else if (![value isKindOfClass:[NSString class]])
-//                value = nil;
-//            
-//            MemberField *memberField = [[[MemberField alloc] initWithFieldName:fieldName value:value] autorelease];
-//            
-//            [result addObject:memberField];
-//        }
-//    }
-//    
-//    return [[result copy] autorelease];
-//}
-
 
 @end

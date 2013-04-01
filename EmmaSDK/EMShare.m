@@ -20,7 +20,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)dict {
     if ((self = [super init])) {
-        _timestamp = [[[dict objectForKey:@"timestamp"] stringOrNil] parseISO8601Timestamp];
+        _timestamp = [[[dict objectForKey:@"timestamp"] stringOrNil] em_parseTimestamp];
         _network = [[dict objectForKey:@"network"] stringOrNil];
         _memberID = [[[dict objectForKey:@"member_id"] numberOrNil] objectIDStringValue];
         _shareStatus = [[dict objectForKey:@"share_status"] stringOrNil];

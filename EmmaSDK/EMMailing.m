@@ -57,7 +57,7 @@ EMMailingStatus EMMailingStatusFromString(NSString *s) {
         _name = [[[dict objectForKey:@"name"] stringOrNil] copy];
         _subject = [[[dict objectForKey:@"subject"] stringOrNil] copy];
         _sender = [[[dict objectForKey:@"sender"] stringOrNil] copy];
-        _sendStarted = [[[dict objectForKey:@"send_started"] stringOrNil] parseISO8601Timestamp];
+        _sendStarted = [[[dict objectForKey:@"send_started"] stringOrNil] em_parseTimestamp];
         _status = EMMailingStatusFromString([[dict objectForKey:@"mailing_status"] stringOrNil]);
         
         NSString *publicWebViewURLString = [[[dict objectForKey:@"public_webview_url"] stringOrNil] stringByReplacingOccurrencesOfString:@"https:" withString:@"http:"];

@@ -13,7 +13,6 @@ typedef NSInteger EMMemberStatus;
 @property (nonatomic, copy) NSString *ID, *email;
 @property (nonatomic, strong) NSDate *memberSince;
 @property (nonatomic, assign) EMMemberStatus status;
-@property (nonatomic, copy) NSArray *memberFields;
-@property (nonatomic, copy) NSString *fullName;
+@property (nonatomic, copy) NSDictionary *fields;
 
 @end
