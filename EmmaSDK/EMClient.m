@@ -295,7 +295,7 @@ static EMClient *shared;
 
 - (RACSignal *)removeMembersWithStatus:(EMMemberStatus)status fromGroupID:(NSString *)groupID
 {
-    id query = @{@"member_status_id": EMMemberStatusGetShortName(status)};
+    id query = @{@"member_status_id": EMMemberStatusToString(status)};
 
     NSString *pathString = [[NSString stringWithFormat:@"/groups/%@/members/remove", groupID] stringByAppendingQueryString:query];
     
@@ -304,7 +304,7 @@ static EMClient *shared;
 
 - (RACSignal *)copyMembersWithStatus:(EMMemberStatus)status fromGroupID:(NSString *)fromGroupID toGroupID:(NSString *)toGroupID
 {
-    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/%@/members/copy", fromGroupID, toGroupID] headers:nil body:@{ @"member_status_id": @[EMMemberStatusGetShortName(status)] }];
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/groups/%@/%@/members/copy", fromGroupID, toGroupID] headers:nil body:@{ @"member_status_id": @[EMMemberStatusToString(status)] }];
 }
 
 //mailings
@@ -527,12 +527,12 @@ static EMClient *shared;
 
 - (RACSignal *)updateMemberIDs:(NSArray *)memberIDs withStatus:(EMMemberStatus)status
 {
-    return [self requestSignalWithMethod:@"PUT" path:@"/members/status" headers:nil body:@{ @"member_ids" : memberIDs, @"status_to" : EMMemberStatusGetShortName(status) }];
+    return [self requestSignalWithMethod:@"PUT" path:@"/members/status" headers:nil body:@{ @"member_ids" : memberIDs, @"status_to" : EMMemberStatusToString(status) }];
 }
 
 - (RACSignal *)updateMember:(EMMember *)member
 {
-    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@", member.ID] headers:nil body:@{ @"email" : member.email, @"status_to" : EMMemberStatusGetShortName(member.status) }];
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@", member.ID] headers:nil body:@{ @"email" : member.email, @"status_to" : EMMemberStatusToString(member.status) }];
 }
 
 - (RACSignal *)getGroupsForMemberID:(NSString *)memberID
@@ -551,7 +551,7 @@ static EMClient *shared;
 
 - (RACSignal *)deleteMembersWithStatus:(EMMemberStatus)status
 {
-    id query = @{ @"member_status" : EMMemberStatusGetShortName(status) };
+    id query = @{ @"member_status" : EMMemberStatusToString(status) };
     return [self requestSignalWithMethod:@"PUT" path:[@"/members" stringByAppendingQueryString:query] headers:nil body:nil];
 }
 
@@ -595,14 +595,14 @@ static EMClient *shared;
 
 - (RACSignal *)copyMembersWithStatuses:(EMMemberStatus)status toGroup:(NSString *)groupID
 {
-    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@/copy", groupID] headers:nil body:@{ @"member_status_id" : @[ EMMemberStatusGetShortName(status) ] }];
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@/copy", groupID] headers:nil body:@{ @"member_status_id" : @[ EMMemberStatusToString(status) ] }];
 }
 
 - (RACSignal *)updateMembersWithStatus:(EMMemberStatus)fromStatus toStatus:(EMMemberStatus)toStatus limitByGroupID:(NSString *)groupID
 {
     id body = nil;
     if (groupID) body = @{ @"group_id" : groupID };
-    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/status/%@/to/%@", EMMemberStatusGetShortName(fromStatus), EMMemberStatusGetShortName(toStatus)] headers:nil body:body];
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/status/%@/to/%@", EMMemberStatusToString(fromStatus), EMMemberStatusToString(toStatus)] headers:nil body:body];
 }
 
 // searches

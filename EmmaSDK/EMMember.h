@@ -7,9 +7,6 @@ enum {
     EMMemberStatusForwarded
     };
 typedef NSInteger EMMemberStatus;
-    
-NSString *EMMemberStatusGetName(EMMemberStatus status);
-NSString *EMMemberStatusGetShortName(EMMemberStatus status);
 
 @interface NSValue (EMMemberStatusValue)
 

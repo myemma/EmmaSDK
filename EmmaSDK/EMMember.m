@@ -3,32 +3,7 @@
 #import "NSObject+ObjectOrNil.h"
 #import "NSString+DateParsing.h"
 
-
-NSString *EMMemberStatusGetName(EMMemberStatus status) {
-    NSString *result = nil;
-    
-    switch (status) {
-        case EMMemberStatusAll:
-            result = @"All";
-            break;
-        case EMMemberStatusActive:
-            result = @"Active";
-            break;
-        case EMMemberStatusError:
-            result = @"Error";
-            break;
-        case EMMemberStatusOptout:
-            result = @"Opt-out";
-            break;
-        case EMMemberStatusForwarded:
-            result = @"Forwarded";
-            break;
-    }
-    
-    return result;
-}
-
-NSString *EMMemberStatusGetShortName(EMMemberStatus status) {
+NSString *EMMemberStatusToString(EMMemberStatus status) {
     NSString *result = nil;
     
     switch (status) {
@@ -50,7 +25,6 @@ NSString *EMMemberStatusGetShortName(EMMemberStatus status) {
     
     return result;
 }
-
 
 @implementation EMMember
 

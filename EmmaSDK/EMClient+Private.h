@@ -120,3 +120,4 @@ NSString *EMMailingStatusToString(EMMailingStatus status);
 NSString *EMGroupTypeToString(EMGroupType type);
 NSString *EMFieldTypeToString(EMFieldType type);
 NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type);
+NSString *EMMemberStatusToString(EMMemberStatus status);

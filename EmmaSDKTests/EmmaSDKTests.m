@@ -979,15 +979,19 @@ describe(@"EMClient", ^{
     };
 
     it(@"copyMembersWithStatus:fromGroupID:toGroupID: should call endpoint with active", ^ {
-        testCopyMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusActive, EMMemberStatusGetShortName(EMMemberStatusActive));
+        testCopyMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusActive, @"a");
     });
     
     it(@"copyMembersWithStatus:fromGroupID:toGroupID: should call endpoint with optout", ^ {
-        testCopyMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusOptout, EMMemberStatusGetShortName(EMMemberStatusOptout));
+        testCopyMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusOptout, @"o");
     });
     
-    it(@"copyMembersWithStatus:fromGroupID:toGroupID: should call endpoint with active", ^ {
-        testCopyMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusError, EMMemberStatusGetShortName(EMMemberStatusError));
+    it(@"copyMembersWithStatus:fromGroupID:toGroupID: should call endpoint with error", ^ {
+        testCopyMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusError, @"e");
+    });
+    
+    it(@"copyMembersWithStatus:fromGroupID:toGroupID: should call endpoint with forward", ^ {
+        testCopyMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusForwarded, @"f");
     });
     
     it(@"copyMembersWithStatus:fromGroupID:toGroupID: should parse results", ^ {
@@ -1008,15 +1012,19 @@ describe(@"EMClient", ^{
     };
     
     it(@"removeMembersWithStatus:fromGroupID: should call endpoint with active", ^ {
-        testRemoveMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusActive, EMMemberStatusGetShortName(EMMemberStatusActive));
+        testRemoveMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusActive, @"a");
     });
     
     it(@"removeMembersWithStatus:fromGroupID: should call endpoint with optout", ^ {
-        testRemoveMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusOptout, EMMemberStatusGetShortName(EMMemberStatusOptout));
+        testRemoveMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusOptout, @"o");
     });
     
-    it(@"removeMembersWithStatus:fromGroupID: should call endpoint with active", ^ {
-        testRemoveMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusError, EMMemberStatusGetShortName(EMMemberStatusError));
+    it(@"removeMembersWithStatus:fromGroupID: should call endpoint with error", ^ {
+        testRemoveMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusError, @"e");
+    });
+    
+    it(@"removeMembersWithStatus:fromGroupID: should call endpoint with forward", ^ {
+        testRemoveMembersWithStatusCallsEndpointWithMemberStatus(EMMemberStatusForwarded, @"f");
     });
     
     it(@"removeMembersWithStatus:fromGroupID: should parse results", ^ {
