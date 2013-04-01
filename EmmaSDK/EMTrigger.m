@@ -70,7 +70,7 @@ NSString *EMTriggerEventTypeToString(EMTriggerEventType eventType) {
         @"surveys": ObjectOrNull([self numberArayFromObjectIDStringArray:_surveyIDs]),
         @"push_offset": ObjectOrNull(_pushOffset),
         @"is_disabled": @(_disabled),
-        @"event_type": EMTriggerEventTypeToString(_eventType)
+        @"event_type": ObjectOrNull(EMTriggerEventTypeToString(_eventType))
      };
 }
 

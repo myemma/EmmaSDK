@@ -29,9 +29,9 @@
 
 - (NSDictionary *)dictionaryRepresentation {
     return @{
-        @"url": _url.absoluteString,
-        @"method": _method,
-        @"event": _event
+        @"url": ObjectOrNull(_url.absoluteString),
+        @"method": ObjectOrNull(_method),
+        @"event": ObjectOrNull(_event)
     };
 }
 

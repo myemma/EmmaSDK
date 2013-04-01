@@ -22,8 +22,8 @@
 - (NSDictionary *)dictionaryRepresentation
 {
     return @{
-    @"name" : _name,
-    @"criteria" : _criteria,
+    @"name" : ObjectOrNull(_name),
+    @"criteria" : ObjectOrNull(_criteria),
     };
 }
 

@@ -104,10 +104,10 @@ NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type) {
 - (NSDictionary *)dictionaryRepresentation
 {
     return @{
-    @"shortcut_name" : _name,
-    @"display_name" : _displayName,
-    @"field_type" : EMFieldTypeToString(_fieldType),
-    @"widget_type" : EMFieldWidgetTypeToString(_widgetType),
+    @"shortcut_name" : ObjectOrNull(_name),
+    @"display_name" : ObjectOrNull(_displayName),
+    @"field_type" : ObjectOrNull(EMFieldTypeToString(_fieldType)),
+    @"widget_type" : ObjectOrNull(EMFieldWidgetTypeToString(_widgetType)),
     @"column_order" : @(_columnOrder)
     };
 }

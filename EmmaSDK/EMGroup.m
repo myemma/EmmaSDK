@@ -2,7 +2,6 @@
 #import "NSObject+ObjectOrNil.h"
 #import "NSNumber+ObjectIDString.h"
 
-
 NSString *EMGroupTypeToString(EMGroupType type) {
     if (type == EMGroupTypeAll)
         return @"all";
