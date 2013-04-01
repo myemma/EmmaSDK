@@ -26,6 +26,19 @@ NSString *EMMemberStatusToString(EMMemberStatus status) {
     return result;
 }
 
+EMMemberStatus EMMemberStatusFromString(NSString *memberStatusString) {
+    if ([memberStatusString isEqual:@"a"] || [memberStatusString isEqual:@"active"])
+        return EMMemberStatusActive;
+    else if ([memberStatusString isEqual:@"e"] || [memberStatusString isEqual:@"error"])
+        return EMMemberStatusError;
+    else if ([memberStatusString isEqual:@"o"] || [memberStatusString isEqual:@"opt-out"])
+        return EMMemberStatusOptout;
+    else if ([memberStatusString isEqual:@"f"] || [memberStatusString isEqual:@"forwarded"])
+        return EMMemberStatusForwarded;
+    else
+        return EMMemberStatusAll;
+}
+
 @implementation EMMember
 
 - (id)initWithDictionary:(NSDictionary *)dict accountFields:(NSArray *)accountFields {
@@ -48,18 +61,7 @@ NSString *EMMemberStatusToString(EMMemberStatus status) {
         else
             memberStatusString = nil;
         
-        if (memberStatusString) {
-            if ([memberStatusString isEqual:@"a"] || [memberStatusString isEqual:@"active"])
-                _status = EMMemberStatusActive;
-            else if ([memberStatusString isEqual:@"e"] || [memberStatusString isEqual:@"error"])
-                _status = EMMemberStatusError;
-            else if ([memberStatusString isEqual:@"o"] || [memberStatusString isEqual:@"opt-out"])
-                _status = EMMemberStatusOptout;
-            else if ([memberStatusString isEqual:@"f"] || [memberStatusString isEqual:@"forwarded"])
-                _status = EMMemberStatusForwarded;
-            else
-                NSLog(@"-[Member initWithDictionary:] Received unknown member status string '%@'", memberStatusString);
-        }
+        _status = EMMemberStatusFromString(memberStatusString);
         
         if ([[dict allKeys] containsObject:@"fields"]) {
 //            NSDictionary *fieldsDict = [dict objectForKey:@"fields"];

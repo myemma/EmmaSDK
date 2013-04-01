@@ -8,13 +8,6 @@ enum {
     };
 typedef NSInteger EMMemberStatus;
 
-@interface NSValue (EMMemberStatusValue)
-
-- (EMMemberStatus)memberStatusValue;
-+ (NSValue *)valueWithMemberStatus:(EMMemberStatus)status;
-
-@end
-
 @interface EMMember : NSObject
 
 @property (nonatomic, copy) NSString *ID, *email;
