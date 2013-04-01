@@ -1,10 +1,11 @@
 
-#import "EMClient.h"
 #import "EMGroup.h"
 #import "EMMailing.h"
 #import "EMMember.h"
 #import "EMMessage.h"
 #import "EMSearch.h"
+#import "EMResponseSummary.h"
+#import "EMShare.h"
 #import "EMMailingResponse.h"
 #import "EMMailingLinkResponse.h"
 #import "EMMailingResponseEvent.h"
@@ -12,3 +13,4 @@
 #import "EMTrigger.h"
 #import "EMWebhook.h"
 #import "EMTrigger.h"
+#import "EMClient.h"

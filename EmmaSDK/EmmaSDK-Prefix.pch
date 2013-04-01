@@ -1,3 +1,2 @@
 
-#import "EmmaSDK.h"
 #import "EMClient+Private.h"

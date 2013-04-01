@@ -1,17 +1,5 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import "EMGroup.h"
-#import "EMMailing.h"
-#import "EMMember.h"
-#import "EMMessage.h"
-#import "EMSearch.h"
-#import "EMMailingResponse.h"
-#import "EMMailingLinkResponse.h"
-#import "EMMailingResponseEvent.h"
-#import "EMResponseSummary.h"
-#import "EMField.h"
-#import "EMTrigger.h"
-#import "EMWebhook.h"
-#import "EMShare.h"
+#import "EmmaSDK.h"
 
 struct EMResultRange {
     NSInteger start, end;
