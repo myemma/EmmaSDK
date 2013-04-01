@@ -19,12 +19,6 @@ enum {
 };
 typedef NSInteger EMFieldWidgetType;
 
-EMFieldType EMFieldTypeFromString(NSString *fieldTypeString);
-NSString *EMFieldTypeToString(EMFieldType type);
-
-EMFieldWidgetType EMFieldWidgetTypeFromString(NSString *widgetTypeString);
-NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type);
-
 @interface EMField : NSObject
 
 @property (nonatomic, copy) NSString *displayName, *name, *fieldID;

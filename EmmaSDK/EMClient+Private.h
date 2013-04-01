@@ -118,3 +118,5 @@
 NSString *EMDeliveryStatusToString(EMDeliveryStatus status);
 NSString *EMMailingStatusToString(EMMailingStatus status);
 NSString *EMGroupTypeToString(EMGroupType type);
+NSString *EMFieldTypeToString(EMFieldType type);
+NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type);
