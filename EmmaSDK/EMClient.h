@@ -88,10 +88,10 @@ extern EMResultRange EMResultRangeAll;
 - (RACSignal *)getOptoutInfoForMemberID:(NSString *)memberID; // XXX response format undefined
 - (RACSignal *)optoutMemberWithEmail:(NSString *)email;
 
-// Members should be an array of EMMember objects. All fields except email are ignored.
+// Members should be an array of EMMember objects. All fields except email are ignored. Returns import ID (NSString)
 - (RACSignal *)createMembers:(NSArray *)members withSourceName:(NSString *)sourceName addOnly:(BOOL)addOnly groupIDs:(NSArray *)groupIDs;
 
-- (RACSignal *)createMember:(EMMember *)member; //returns member id
+- (RACSignal *)createMember:(EMMember *)member; // returns member id as NSString
 - (RACSignal *)deleteMembersWithIDs:(NSArray *)memberIDs;
 - (RACSignal *)updateMemberIDs:(NSArray *)memberIDs withStatus:(EMMemberStatus)status;
 - (RACSignal *)updateMember:(EMMember *)member;

@@ -19,8 +19,6 @@
 
 - (id)initWithEndpoint:(id<EMEndpoint>)endpoint;
 
-+ (RACSignal *)batchWithBasePath:(NSString *)basePath baseQuery:(NSDictionary *)baseQuery; // return RACSignal of EMResults batch
-
 @end
 
 @interface EMTrigger (Private)
@@ -44,7 +42,7 @@
 
 @interface EMMailingResponseEvent (Private)
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (id)initWithDictionary:(NSDictionary *)dictionary accountFields:(NSArray *)accountFields;
 
 @end
 
@@ -54,15 +52,66 @@
 
 @end
 
-@interface EMShareSummary (Private);
+@interface EMShareSummary (Private)
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
 
-@interface EMShare (Private);
+@interface EMShare (Private)
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
+
+@end
+
+@interface EMMember (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dict accountFields:(NSArray *)accountFields;
+
+@end
+
+@interface EMGroup (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dict;
+
+@end
+
+@interface EMMailing (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dict;
+
+@end
+
+@interface EMMessage (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dict;
+
+@end
+
+@interface EMSearch (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dict;
+- (NSDictionary *)dictionaryRepresentation;
+
+@end
+
+@interface EMField (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dict;
+- (NSDictionary *)dictionaryRepresentation;
+
+@end
+
+@interface EMWebhookInfo (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+
+@end
+
+@interface EMWebhook (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionaryRepresentation;
 
 @end
 

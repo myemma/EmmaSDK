@@ -22,7 +22,6 @@
 - (NSDictionary *)dictionaryRepresentation
 {
     return @{
-    @"search_id" : _ID,
     @"name" : _name,
     @"criteria" : _criteria,
     };

@@ -11,6 +11,4 @@ typedef enum {
 @property (nonatomic, copy) NSString *ID, *name;
 @property (nonatomic, assign) NSInteger activeCount, errorCount, optoutCount;
 
-- (id)initWithDictionary:(NSDictionary *)dict;
-
 @end

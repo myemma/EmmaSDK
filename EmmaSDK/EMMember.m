@@ -54,8 +54,7 @@ NSString *EMMemberStatusGetShortName(EMMemberStatus status) {
 
 @implementation EMMember
 
-//- (id)initWithDictionary:(NSDictionary *)dict accountFields:(NSArray *)accountFields {
-- (id)initWithDictionary:(NSDictionary *)dict {
+- (id)initWithDictionary:(NSDictionary *)dict accountFields:(NSArray *)accountFields {
     if ((self = [super init])) {
         _ID = [[[dict objectForKey:@"member_id"] numberOrNil] objectIDStringValue];
         _email = [[dict objectForKey:@"email"] stringOrNil];

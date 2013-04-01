@@ -132,7 +132,6 @@ NSString *EMFieldWidgetTypeToString(EMFieldWidgetType type) {
 - (NSDictionary *)dictionaryRepresentation
 {
     return @{
-    @"field_id" : _fieldID,
     @"shortcut_name" : _name,
     @"display_name" : _displayName,
     @"field_type" : EMFieldTypeToString(_fieldType),

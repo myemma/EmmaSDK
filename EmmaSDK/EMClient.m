@@ -271,7 +271,7 @@ static EMClient *shared;
     id query = [@{@"deleted": includeDeleted ? @"true" : @"false" } dictionaryByAddingRangeParams:range];
     return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/groups/%@/members", groupID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMember alloc] initWithDictionary:value];
+            return [[EMMember alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -350,7 +350,7 @@ static EMClient *shared;
         
     return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/mailings/%@/members", mailingID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMember alloc] initWithDictionary:value];
+            return [[EMMember alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -464,7 +464,7 @@ static EMClient *shared;
 
     return [[self requestSignalWithMethod:@"GET" path:[@"/members" stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMember alloc] initWithDictionary:value];
+            return [[EMMember alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -472,14 +472,14 @@ static EMClient *shared;
 - (RACSignal *)getMemberWithID:(NSString *)memberID
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/%@", memberID] headers:nil body:nil] map:^id(NSDictionary *value) {
-        return [[EMMember alloc] initWithDictionary:value];
+        return [[EMMember alloc] initWithDictionary:value accountFields:nil];
     }];
 }
 
 - (RACSignal *)getMemberWithEmail:(NSString *)email
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/email/%@", email] headers:nil body:nil] map:^id(NSDictionary *value) {
-        return [[EMMember alloc] initWithDictionary:value];
+        return [[EMMember alloc] initWithDictionary:value accountFields:nil];
     }];
 }
 
@@ -578,7 +578,7 @@ static EMClient *shared;
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/imports/%@/members", importID] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMember alloc] initWithDictionary:value];
+            return [[EMMember alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -640,7 +640,7 @@ static EMClient *shared;
 
 - (RACSignal *)updateSearch:(EMSearch *)search
 {
-    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/searches/%@", search.ID] headers:nil body:@{ @"criteria": search.criteria, @"name" : search.name }];
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/searches/%@", search.ID] headers:nil body:search.dictionaryRepresentation];
 }
 
 - (RACSignal *)deleteSearchID:(NSString *)searchID
@@ -660,7 +660,7 @@ static EMClient *shared;
     id query = [@{} dictionaryByAddingRangeParams:range];
     return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/searches/%@/members", searchID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMember alloc] initWithDictionary:value];
+            return [[EMMember alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];}
 
@@ -791,7 +791,7 @@ static EMClient *shared;
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/sends", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -800,7 +800,7 @@ static EMClient *shared;
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/in_progress", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -812,7 +812,7 @@ static EMClient *shared;
     if (!delStatus) delStatus = EMDeliveryStatusToString(EMDeliveryStatusAll);
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/deliveries?del_status=%@", mailingID, delStatus] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -820,7 +820,7 @@ static EMClient *shared;
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/opens", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -846,7 +846,7 @@ static EMClient *shared;
     
     return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/response/%@/clicks", mailingID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -855,7 +855,7 @@ static EMClient *shared;
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/forwards", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -864,7 +864,7 @@ static EMClient *shared;
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/optouts", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }
@@ -873,7 +873,7 @@ static EMClient *shared;
 {
     return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/signups", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
         return [results.rac_sequence map:^id(id value) {
-            return [[EMMailingResponseEvent alloc] initWithDictionary:value];
+            return [[EMMailingResponseEvent alloc] initWithDictionary:value accountFields:nil];
         }].array;
     }];
 }

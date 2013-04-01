@@ -30,13 +30,13 @@ NSString *EMDeliveryStatusToString(EMDeliveryStatus status) {
 
 @implementation EMMailingResponseEvent
 
-- (id)initWithDictionary:(NSDictionary *)dict {
+- (id)initWithDictionary:(NSDictionary *)dict accountFields:(NSArray *)accountFields {
     if ((self = [super init])) {
         _timestamp = [[dict[@"timestamp"] stringOrNil] parseISO8601Timestamp];
         _linkID = [[dict[@"link_id"] numberOrNil] stringValue];
         _deliveryStatus = EMDeliveryStatusFromString(dict[@"delivery_type"]);
         _forwardMailingID = [[dict[@"forward_mailing_id"] numberOrNil] stringValue];
-        _member = [[EMMember alloc] initWithDictionary:dict];
+        _member = [[EMMember alloc] initWithDictionary:dict accountFields:accountFields];
     }
     return self;
 }

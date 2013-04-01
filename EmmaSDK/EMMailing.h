@@ -18,6 +18,4 @@ typedef NSUInteger EMMailingStatus;
 @property (nonatomic, strong) NSURL *publicWebViewURL;
 @property (nonatomic, assign) EMMailingStatus status;
 
-- (id)initWithDictionary:(NSDictionary *)dict;
-
 @end

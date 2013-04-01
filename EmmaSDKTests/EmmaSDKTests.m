@@ -1158,7 +1158,6 @@ describe(@"EMClient", ^{
         
         [[client createField:field] subscribeCompleted:^ {}];
         [endpoint expectRequestWithMethod:@"POST" path:@"/fields" body:@{
-         @"field_id" : @"123",
          @"shortcut_name" : @"first_name",
          @"display_name" : @"First Name",
          @"field_type" : @"text",
@@ -1233,7 +1232,6 @@ describe(@"EMClient", ^{
         
         [[client updateField:field] subscribeCompleted:^ {}];
         [endpoint expectRequestWithMethod:@"PUT" path:@"/fields/123" body:@{
-         @"field_id" : @"123",
          @"shortcut_name" : @"first_name",
          @"display_name" : @"First Name",
          @"field_type" : @"text",
@@ -1545,7 +1543,6 @@ describe(@"EMClient", ^{
         
         [[client createSearch:search] subscribeCompleted:^ {}];
         [endpoint expectRequestWithMethod:@"POST" path:@"/searches" body:@{
-         @"search_id" : @"123",
          @"name" : @"A Search",
          @"criteria" : @"[\"or\", [\"group\", \"eq\", \"Monthly Newsletter\"],[\"group\", \"eq\", \"Widget Buyers\"]]",
          }];
@@ -1569,8 +1566,6 @@ describe(@"EMClient", ^{
     });
     
     it(@"updateSearch: should call endpoint", ^ {
-        
-        
         EMSearch *search = [[EMSearch alloc] init];
         search.ID = @"123";
         search.name = @"A Cool Search";
@@ -3177,7 +3172,7 @@ describe(@"EMClient", ^{
         @"network": @"Cool Network",
         @"share_status" : @"shared"
         };
-#warning not sure what share_status could be set to. Couldn't find in API docs
+        // XXX not sure what share_status could be set to. Couldn't find in API docs
         
         endpoint.results = @[ [RACSignal return:
                                 shareInfo

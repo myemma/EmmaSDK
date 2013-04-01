@@ -1,11 +1,3 @@
-//
-//  EMMessage.m
-//  EmmaSDK
-//
-//  Created by Benjamin van der Veen on 1/23/13.
-//  Copyright (c) 2013 Emma, Inc. All rights reserved.
-//
-
 #import "EMMessage.h"
 #import "NSObject+ObjectOrNil.h"
 #import "NSNumber+ObjectIDString.h"
@@ -29,11 +21,11 @@
         NSString *deliveryType = [dict objectForKey:@"delivery_type"];
         
         if ([deliveryType isEqual:@"d"])
-            _type = MessageDeliveryTypeDelivered;
+            _type = EMMessageDeliveryTypeDelivered;
         else if ([deliveryType isEqual:@"b"])
-            _type = MessageDeliveryTypeHardBounce;
+            _type = EMMessageDeliveryTypeHardBounce;
         else if ([deliveryType isEqual:@"s"])
-            _type = MessageDeliveryTypeSoftBounce;
+            _type = EMMessageDeliveryTypeSoftBounce;
         else
             NSLog(@"-[MemberMailing initWithDictionary]: unknown delivery type '%@'", deliveryType);
     }
