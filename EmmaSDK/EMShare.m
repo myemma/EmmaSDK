@@ -1,6 +1,6 @@
 #import "EMShare.h"
 #import "NSObject+ObjectOrNil.h"
-#import "NSString+DateParsing.h"
+#import "NSString+EMDateParsing.h"
 #import "NSNumber+ObjectIDString.h"
 
 @implementation EMShareSummary

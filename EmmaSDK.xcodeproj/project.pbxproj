@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		342CB77916F172D30065A7F4 /* NSString+DateParsing.h in Headers */ = {isa = PBXBuildFile; fileRef = 342CB77716F172D30065A7F4 /* NSString+DateParsing.h */; };
-		342CB77A16F172D30065A7F4 /* NSString+DateParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CB77816F172D30065A7F4 /* NSString+DateParsing.m */; };
+		342CB77916F172D30065A7F4 /* NSString+EMDateParsing.h in Headers */ = {isa = PBXBuildFile; fileRef = 342CB77716F172D30065A7F4 /* NSString+EMDateParsing.h */; };
+		342CB77A16F172D30065A7F4 /* NSString+EMDateParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CB77816F172D30065A7F4 /* NSString+EMDateParsing.m */; };
 		34D89D2717023EFD00C7157E /* EMField.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F901A316FA9F1A0008CF8E /* EMField.m */; };
-		34F286A3170389B300E6D617 /* NSString+DateParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CB77816F172D30065A7F4 /* NSString+DateParsing.m */; };
-		34F286A617038A1100E6D617 /* ISO8601DateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 34F286A417038A1100E6D617 /* ISO8601DateFormatter.h */; };
+		34F286A3170389B300E6D617 /* NSString+EMDateParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CB77816F172D30065A7F4 /* NSString+EMDateParsing.m */; };
 		34F286A717038A1100E6D617 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F286A517038A1100E6D617 /* ISO8601DateFormatter.m */; };
 		34F286A817038A1100E6D617 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F286A517038A1100E6D617 /* ISO8601DateFormatter.m */; };
 		4127E5491706492D00DC61FA /* EMClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB584C16C45CAC005C1805 /* EMClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,7 +34,6 @@
 		4129EC6616C45C71002A3C60 /* libEmmaSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4129EC4D16C45C71002A3C60 /* libEmmaSDK.a */; };
 		4129EC6C16C45C71002A3C60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4129EC6A16C45C71002A3C60 /* InfoPlist.strings */; };
 		4129EC6F16C45C71002A3C60 /* EmmaSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4129EC6E16C45C71002A3C60 /* EmmaSDKTests.m */; };
-		418E65D2170255ED00EBB567 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 418E65D0170255ED00EBB567 /* NSData+Base64.h */; };
 		418E65D3170255ED00EBB567 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E65D1170255ED00EBB567 /* NSData+Base64.m */; };
 		418E65E3170259DA00EBB567 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E65D1170255ED00EBB567 /* NSData+Base64.m */; };
 		418E65ED1702A30700EBB567 /* EMResponseSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 418EE80F170231F600773A19 /* EMResponseSummary.m */; };
@@ -46,15 +44,23 @@
 		418EE811170231F600773A19 /* EMResponseSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 418EE80F170231F600773A19 /* EMResponseSummary.m */; };
 		418EE81D170238FB00773A19 /* EMShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 418EE81B170238FB00773A19 /* EMShare.h */; };
 		418EE81E170238FB00773A19 /* EMShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 418EE81C170238FB00773A19 /* EMShare.m */; };
-		41912D9616D599FF00126AF1 /* NSObject+ObjectOrNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 41912D9416D599FF00126AF1 /* NSObject+ObjectOrNil.h */; };
 		41912D9716D599FF00126AF1 /* NSObject+ObjectOrNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */; };
-		41912D9A16D59A4100126AF1 /* NSNumber+ObjectIDString.h in Headers */ = {isa = PBXBuildFile; fileRef = 41912D9816D59A4100126AF1 /* NSNumber+ObjectIDString.h */; };
 		41912D9B16D59A4100126AF1 /* NSNumber+ObjectIDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */; };
 		41912D9C16D59D2600126AF1 /* NSObject+ObjectOrNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9516D599FF00126AF1 /* NSObject+ObjectOrNil.m */; };
 		41912D9D16D59D2600126AF1 /* NSNumber+ObjectIDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 41912D9916D59A4100126AF1 /* NSNumber+ObjectIDString.m */; };
-		41970E9517079AB600C7A67F /* SMWebRequest+RAC.h in Headers */ = {isa = PBXBuildFile; fileRef = 41970E9317079AB600C7A67F /* SMWebRequest+RAC.h */; };
 		41970E9617079AB600C7A67F /* SMWebRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		41970E9B17079F0100C7A67F /* SMWebRequest+RAC.m in Sources */ = {isa = PBXBuildFile; fileRef = 41970E9417079AB600C7A67F /* SMWebRequest+RAC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		41970EB1170A467C00C7A67F /* NSString+EMDateParsing.h in Headers */ = {isa = PBXBuildFile; fileRef = 342CB77716F172D30065A7F4 /* NSString+EMDateParsing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		41970EB2170A469D00C7A67F /* EMClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB584C16C45CAC005C1805 /* EMClient.h */; };
+		41970EB3170A469D00C7A67F /* EMGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB584E16C45CAC005C1805 /* EMGroup.h */; };
+		41970EB4170A469D00C7A67F /* EMMailing.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585016C45CAC005C1805 /* EMMailing.h */; };
+		41970EB5170A469D00C7A67F /* EMMailingResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585416C45CAC005C1805 /* EMMailingResponse.h */; };
+		41970EB6170A469D00C7A67F /* EMMailingLinkResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585216C45CAC005C1805 /* EMMailingLinkResponse.h */; };
+		41970EB7170A469D00C7A67F /* EMMailingResponseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585616C45CAC005C1805 /* EMMailingResponseEvent.h */; };
+		41970EB8170A469D00C7A67F /* EMMember.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585916C45CAC005C1805 /* EMMember.h */; };
+		41970EB9170A469D00C7A67F /* EMMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585B16C45CAC005C1805 /* EMMessage.h */; };
+		41970EBA170A469D00C7A67F /* EMSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585D16C45CAC005C1805 /* EMSearch.h */; };
+		41970EBB170A46DB00C7A67F /* EmmaSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585816C45CAC005C1805 /* EmmaSDK.h */; };
 		41CB3EB416FAAF9E009CAD80 /* EMTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */; };
 		41CB3EB516FAAF9E009CAD80 /* EMTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */; };
 		41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EBF16FAB113009CAD80 /* EMWebhook.h */; };
@@ -78,7 +84,6 @@
 		41EB589E16C45E4F005C1805 /* EMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585A16C45CAC005C1805 /* EMMember.m */; };
 		41EB589F16C45E4F005C1805 /* EMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585C16C45CAC005C1805 /* EMMessage.m */; };
 		41EB58A016C45E4F005C1805 /* EMSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB585E16C45CAC005C1805 /* EMSearch.m */; };
-		41EB58C116C45EED005C1805 /* SMWebRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB58BF16C45EED005C1805 /* SMWebRequest.h */; };
 		41EB58C216C45EED005C1805 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB58C016C45EED005C1805 /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		41EB58C316C45EED005C1805 /* SMWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB58C016C45EED005C1805 /* SMWebRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		41EB58F216C467F4005C1805 /* libExpecta-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EB58DA16C463C3005C1805 /* libExpecta-iOS.a */; };
@@ -250,8 +255,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		342CB77716F172D30065A7F4 /* NSString+DateParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DateParsing.h"; sourceTree = "<group>"; };
-		342CB77816F172D30065A7F4 /* NSString+DateParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DateParsing.m"; sourceTree = "<group>"; };
+		342CB77716F172D30065A7F4 /* NSString+EMDateParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EMDateParsing.h"; sourceTree = "<group>"; };
+		342CB77816F172D30065A7F4 /* NSString+EMDateParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EMDateParsing.m"; sourceTree = "<group>"; };
 		34F286A417038A1100E6D617 /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
 		34F286A517038A1100E6D617 /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISO8601DateFormatter.m; sourceTree = "<group>"; };
 		4129EC4D16C45C71002A3C60 /* libEmmaSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEmmaSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -469,8 +474,8 @@
 			children = (
 				34F286A417038A1100E6D617 /* ISO8601DateFormatter.h */,
 				34F286A517038A1100E6D617 /* ISO8601DateFormatter.m */,
-				342CB77716F172D30065A7F4 /* NSString+DateParsing.h */,
-				342CB77816F172D30065A7F4 /* NSString+DateParsing.m */,
+				342CB77716F172D30065A7F4 /* NSString+EMDateParsing.h */,
+				342CB77816F172D30065A7F4 /* NSString+EMDateParsing.m */,
 				41EB58BF16C45EED005C1805 /* SMWebRequest.h */,
 				41EB58C016C45EED005C1805 /* SMWebRequest.m */,
 				41912D9416D599FF00126AF1 /* NSObject+ObjectOrNil.h */,
@@ -560,6 +565,7 @@
 				4127E5551706492D00DC61FA /* EMWebhook.h in Headers */,
 				4127E5561706492D00DC61FA /* EMShare.h in Headers */,
 				4127E5571706492D00DC61FA /* EmmaSDK.h in Headers */,
+				41970EB1170A467C00C7A67F /* NSString+EMDateParsing.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,18 +573,22 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41EB58C116C45EED005C1805 /* SMWebRequest.h in Headers */,
-				41912D9616D599FF00126AF1 /* NSObject+ObjectOrNil.h in Headers */,
-				41912D9A16D59A4100126AF1 /* NSNumber+ObjectIDString.h in Headers */,
-				342CB77916F172D30065A7F4 /* NSString+DateParsing.h in Headers */,
+				41970EBB170A46DB00C7A67F /* EmmaSDK.h in Headers */,
+				41970EB2170A469D00C7A67F /* EMClient.h in Headers */,
+				41970EB3170A469D00C7A67F /* EMGroup.h in Headers */,
+				41970EB4170A469D00C7A67F /* EMMailing.h in Headers */,
+				41970EB5170A469D00C7A67F /* EMMailingResponse.h in Headers */,
+				41970EB6170A469D00C7A67F /* EMMailingLinkResponse.h in Headers */,
+				41970EB7170A469D00C7A67F /* EMMailingResponseEvent.h in Headers */,
+				41970EB8170A469D00C7A67F /* EMMember.h in Headers */,
+				41970EB9170A469D00C7A67F /* EMMessage.h in Headers */,
+				41970EBA170A469D00C7A67F /* EMSearch.h in Headers */,
+				342CB77916F172D30065A7F4 /* NSString+EMDateParsing.h in Headers */,
 				41F901A416FA9F1A0008CF8E /* EMField.h in Headers */,
 				41CB3EB416FAAF9E009CAD80 /* EMTrigger.h in Headers */,
 				41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */,
 				418EE810170231F600773A19 /* EMResponseSummary.h in Headers */,
 				418EE81D170238FB00773A19 /* EMShare.h in Headers */,
-				418E65D2170255ED00EBB567 /* NSData+Base64.h in Headers */,
-				34F286A617038A1100E6D617 /* ISO8601DateFormatter.h in Headers */,
-				41970E9517079AB600C7A67F /* SMWebRequest+RAC.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -838,7 +848,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34F286A3170389B300E6D617 /* NSString+DateParsing.m in Sources */,
+				34F286A3170389B300E6D617 /* NSString+EMDateParsing.m in Sources */,
 				418E65ED1702A30700EBB567 /* EMResponseSummary.m in Sources */,
 				418E65EE1702A30700EBB567 /* EMTrigger.m in Sources */,
 				418E65EF1702A30700EBB567 /* EMWebhook.m in Sources */,
@@ -885,7 +895,7 @@
 				41EB58A016C45E4F005C1805 /* EMSearch.m in Sources */,
 				41912D9716D599FF00126AF1 /* NSObject+ObjectOrNil.m in Sources */,
 				41912D9B16D59A4100126AF1 /* NSNumber+ObjectIDString.m in Sources */,
-				342CB77A16F172D30065A7F4 /* NSString+DateParsing.m in Sources */,
+				342CB77A16F172D30065A7F4 /* NSString+EMDateParsing.m in Sources */,
 				41F901A516FA9F1A0008CF8E /* EMField.m in Sources */,
 				41CB3EB516FAAF9E009CAD80 /* EMTrigger.m in Sources */,
 				41CB3EC216FAB113009CAD80 /* EMWebhook.m in Sources */,

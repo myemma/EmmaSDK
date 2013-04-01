@@ -1,6 +1,6 @@
 #import "EMMailingResponseEvent.h"
 #import "NSObject+ObjectOrNil.h"
-#import "NSString+DateParsing.h"
+#import "NSString+EMDateParsing.h"
 
 EMDeliveryStatus EMDeliveryStatusFromString(NSString *statusString) {
     return [@{

@@ -1,7 +1,7 @@
 #import "EMMailing.h"
 #import "NSObject+ObjectOrNil.h"
 #import "NSNumber+ObjectIDString.h"
-#import "NSString+DateParsing.h"
+#import "NSString+EMDateParsing.h"
 
 NSString *EMMailingStatusToString(EMMailingStatus status) {
     

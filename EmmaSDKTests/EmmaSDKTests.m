@@ -6,7 +6,7 @@
 #import "EMClient+Private.h"
 #import <SBJson/SBJson.h>
 #import "SMWebRequest.h"
-#import "NSString+DateParsing.h"
+#import "NSString+EMDateParsing.h"
 #import "NSData+Base64.h"
 
 #define ExpectResultTo expect(clientResult).to

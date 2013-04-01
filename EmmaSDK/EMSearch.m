@@ -1,7 +1,7 @@
 #import "EMSearch.h"
 #import "NSObject+ObjectOrNil.h"
 #import "NSNumber+ObjectIDString.h"
-#import "NSString+DateParsing.h"
+#import "NSString+EMDateParsing.h"
 
 @implementation EMSearch
 

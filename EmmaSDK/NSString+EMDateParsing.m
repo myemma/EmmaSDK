@@ -1,4 +1,4 @@
-#import "NSString+DateParsing.h"
+#import "NSString+EMDateParsing.h"
 #import "ISO8601DateFormatter.h"
 
 @implementation NSString (DateParsing)
@@ -24,7 +24,6 @@
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     formatter.includeTime = NO;
     NSString *result = [formatter stringFromDate:self];
-    //return result;
     return [NSString stringWithFormat:@"@D:%@", result];
 }
 
@@ -32,7 +31,6 @@
     ISO8601DateFormatter *formatter = [ISO8601DateFormatter new];
     formatter.includeTime = YES;
     NSString *result = [formatter stringFromDate:self];
-    return result;
     return [NSString stringWithFormat:@"@D:%@", result];
 }
 
