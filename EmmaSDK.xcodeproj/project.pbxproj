@@ -64,6 +64,7 @@
 		41970EB9170A469D00C7A67F /* EMMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585B16C45CAC005C1805 /* EMMessage.h */; };
 		41970EBA170A469D00C7A67F /* EMSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585D16C45CAC005C1805 /* EMSearch.h */; };
 		41970EBB170A46DB00C7A67F /* EmmaSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB585816C45CAC005C1805 /* EmmaSDK.h */; };
+		41970EC2170B5DFD00C7A67F /* EMImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 349897E8170A9E58004DFAB9 /* EMImport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41CB3EB416FAAF9E009CAD80 /* EMTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EB216FAAF9E009CAD80 /* EMTrigger.h */; };
 		41CB3EB516FAAF9E009CAD80 /* EMTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CB3EB316FAAF9E009CAD80 /* EMTrigger.m */; };
 		41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 41CB3EBF16FAB113009CAD80 /* EMWebhook.h */; };
@@ -572,6 +573,7 @@
 				4127E5551706492D00DC61FA /* EMWebhook.h in Headers */,
 				4127E5561706492D00DC61FA /* EMShare.h in Headers */,
 				4127E5571706492D00DC61FA /* EmmaSDK.h in Headers */,
+				41970EC2170B5DFD00C7A67F /* EMImport.h in Headers */,
 				41970EB1170A467C00C7A67F /* NSString+EMDateParsing.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
