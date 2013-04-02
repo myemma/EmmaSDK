@@ -32,16 +32,16 @@ Initialize the SDK with your account info:
    
     …
     
-    [EMClient shared].publicKey = @"Your Public API Key";
-    [EMClient shared].privateKey = @"Your Public API Key";
-    [EMClient shared].accountID = @"Your Account ID";
+    EMClient.shared.publicKey = @"Your Public API Key";
+    EMClient.shared.privateKey = @"Your Public API Key";
+    EMClient.shared.accountID = @"Your Account ID";
     
     …
 
 
 Use the client to make API calls. The API client performs asynchronous operations using [ReactiveCocoa](http://github.com/ReactiveCocoa/ReactiveCocoa).
 
-    [[[EMClient shared] 
+    [[EMClient.shared 
         getMembersInRange:(EMResultRange){ .start = 0, .end = 50 }] 
         subscribeNext:^ void (NSArray *members) {
         NSLog(@"Got members: %@", members);
