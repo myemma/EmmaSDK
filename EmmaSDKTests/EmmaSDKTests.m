@@ -287,6 +287,29 @@ describe(@"EMClient", ^{
         expect(result).to.equal(@YES);
     });
     
+    it(@"getMemberCountInGroupID:includeDeleted: should call endpoint with deleted", ^ {
+        [[client getMemberCountInGroupID:@"123" includeDeleted:YES] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/groups/123/members?deleted=true"];
+    });
+    
+    it(@"getMemberCountInGroupID:includeDeleted: should call endpoint without deleted", ^ {
+        [[client getMemberCountInGroupID:@"123" includeDeleted:NO] subscribeCompleted:^ { }];
+        [endpoint expectRequestWithMethod:@"GET" path:@"/groups/123/members?deleted=false"];
+    });
+    
+    it(@"getMemberCountInGroupID:includeDeleted: should parse results", ^ {
+        __block NSArray *result;
+        
+        endpoint.results = @[ [RACSignal return:@3] ];
+        
+        [[client getMemberCountInGroupID:@"123" includeDeleted:YES] subscribeNext:^(id x) {
+            result = x;
+        }];
+        
+        expect(result).to.equal(@3);
+    });
+
+    
     it(@"getMembersInGroupID:inRange: should call endpoint with deleted", ^ {
         [[client getMembersInGroupID:@"123" inRange:(EMResultRange){ .start = 10, .end = 20 } includeDeleted:YES] subscribeCompleted:^ { }];
         [endpoint expectRequestWithMethod:@"GET" path:@"/groups/123/members?deleted=true&end=20&start=10" body:nil];

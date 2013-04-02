@@ -267,6 +267,15 @@ static EMClient *shared;
     return [self requestSignalWithMethod:@"DELETE" path:[NSString stringWithFormat:@"/groups/%@", groupID] headers:nil body:nil];
 }
 
+- (RACSignal *)getMemberCountInGroupID:(NSString *)groupID includeDeleted:(BOOL)deleted
+{
+    id query = @{@"deleted": deleted ? @"true" : @"false" };
+    
+    return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/groups/%@/members", groupID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSNumber *value) {
+        return [value numberOrNil];
+    }];
+}
+
 - (RACSignal *)getMembersInGroupID:(NSString *)groupID inRange:(EMResultRange)range includeDeleted:(BOOL)includeDeleted {
     id query = [@{@"deleted": includeDeleted ? @"true" : @"false" } dictionaryByAddingRangeParams:range];
     return [[self requestSignalWithMethod:@"GET" path:[[NSString stringWithFormat:@"/groups/%@/members", groupID] stringByAppendingQueryString:query] headers:nil body:nil] map:^id(NSArray *results) {
