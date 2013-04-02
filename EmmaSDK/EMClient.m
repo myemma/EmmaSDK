@@ -929,7 +929,11 @@ static EMClient *shared;
 
 - (RACSignal *)getSharesOverviewForMailingID:(NSString *)mailingID
 {
-    return nil;
-}// returns EMShareSummary
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/response/%@/shares/overview", mailingID] headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMShareSummary alloc] initWithDictionary:value];
+        }].array;
+    }];
+}
 
 @end
