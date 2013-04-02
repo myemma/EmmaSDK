@@ -2414,14 +2414,14 @@ describe(@"EMClient", ^{
             @"import_started": @"@D:2010-12-13T23:12:44",
             @"account_id": @100,
             @"error_message": [NSNull null],
-            @"num_members_updated": @0,
-            @"source_filename": [NSNull null],
+            @"num_members_updated": @1,
+            @"source_filename": @"people.txt",
             @"fields_updated": @[],
-            @"num_members_added": @0,
+            @"num_members_added": @2,
             @"import_finished": [NSNull null],
             @"groups_updated": @[],
-            @"num_skipped": @0,
-            @"num_duplicates": @0
+            @"num_skipped": @3,
+            @"num_duplicates": @4
         };
         endpoint.results = @[ [RACSignal return:
                                importDict
@@ -2433,6 +2433,19 @@ describe(@"EMClient", ^{
         
         expect([result ID]).to.equal(@"200");
         expect([result importStarted]).to.equal([@"@D:2010-12-13T23:12:44" em_parseTimestamp]);
+        expect([result importFinished]).to.equal(nil);
+        expect([result numberOfMembersUpdated]).to.equal(1);
+        expect([result numberOfMembersAdded]).to.equal(2);
+        expect([result numberSkipped]).to.equal(3);
+        expect([result numberOfDuplicates]).to.equal(4);
+        expect([result errorMessage]).to.equal(nil);
+        expect([result sourceFilename]).to.equal(@"people.txt");
+        
+        // XXX possible values not defined in API docs
+        expect([result importStatus]).to.equal(nil);
+        expect([result importStyle]).to.equal(nil);
+        expect([result fieldsUpdated]).to.equal(@[]);
+        expect([result groupsUpdated]).to.equal(@[]);
     });
     
     it(@"getImports should call endpoint", ^ {
