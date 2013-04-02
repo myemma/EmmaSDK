@@ -594,12 +594,18 @@ static EMClient *shared;
 
 - (RACSignal *)getImportID:(NSString *)importID
 {
-    return [self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/imports/%@", importID] headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:[NSString stringWithFormat:@"/members/imports/%@", importID] headers:nil body:nil] map:^id(NSDictionary *value) {
+        return [[EMImport alloc] initWithDictionary:value];
+    }];
 }
 
 - (RACSignal *)getImports
 {
-    return [self requestSignalWithMethod:@"GET" path:@"/members/imports" headers:nil body:nil];
+    return [[self requestSignalWithMethod:@"GET" path:@"/members/imports" headers:nil body:nil] map:^id(NSArray *results) {
+        return [results.rac_sequence map:^id(id value) {
+            return [[EMImport alloc] initWithDictionary:value];
+        }].array;
+    }];
 }
 
 - (RACSignal *)copyMembersWithStatuses:(EMMemberStatus)status toGroup:(NSString *)groupID

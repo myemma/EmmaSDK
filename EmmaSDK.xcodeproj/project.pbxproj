@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		342CB77916F172D30065A7F4 /* NSString+EMDateParsing.h in Headers */ = {isa = PBXBuildFile; fileRef = 342CB77716F172D30065A7F4 /* NSString+EMDateParsing.h */; };
 		342CB77A16F172D30065A7F4 /* NSString+EMDateParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CB77816F172D30065A7F4 /* NSString+EMDateParsing.m */; };
+		349897EA170A9E58004DFAB9 /* EMImport.h in Headers */ = {isa = PBXBuildFile; fileRef = 349897E8170A9E58004DFAB9 /* EMImport.h */; };
+		349897EB170A9E58004DFAB9 /* EMImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 349897E9170A9E58004DFAB9 /* EMImport.m */; };
+		349897ED170AA324004DFAB9 /* EMImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 349897E9170A9E58004DFAB9 /* EMImport.m */; };
 		34D89D2717023EFD00C7157E /* EMField.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F901A316FA9F1A0008CF8E /* EMField.m */; };
 		34F286A3170389B300E6D617 /* NSString+EMDateParsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 342CB77816F172D30065A7F4 /* NSString+EMDateParsing.m */; };
 		34F286A717038A1100E6D617 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 34F286A517038A1100E6D617 /* ISO8601DateFormatter.m */; };
@@ -257,6 +260,8 @@
 /* Begin PBXFileReference section */
 		342CB77716F172D30065A7F4 /* NSString+EMDateParsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EMDateParsing.h"; sourceTree = "<group>"; };
 		342CB77816F172D30065A7F4 /* NSString+EMDateParsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EMDateParsing.m"; sourceTree = "<group>"; };
+		349897E8170A9E58004DFAB9 /* EMImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMImport.h; sourceTree = "<group>"; };
+		349897E9170A9E58004DFAB9 /* EMImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMImport.m; sourceTree = "<group>"; };
 		34F286A417038A1100E6D617 /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
 		34F286A517038A1100E6D617 /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISO8601DateFormatter.m; sourceTree = "<group>"; };
 		4129EC4D16C45C71002A3C60 /* libEmmaSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEmmaSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -439,6 +444,8 @@
 		4159CF7F16F1640100DBFD5F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				349897E8170A9E58004DFAB9 /* EMImport.h */,
+				349897E9170A9E58004DFAB9 /* EMImport.m */,
 				41EB584E16C45CAC005C1805 /* EMGroup.h */,
 				41EB584F16C45CAC005C1805 /* EMGroup.m */,
 				41EB585016C45CAC005C1805 /* EMMailing.h */,
@@ -589,6 +596,7 @@
 				41CB3EC116FAB113009CAD80 /* EMWebhook.h in Headers */,
 				418EE810170231F600773A19 /* EMResponseSummary.h in Headers */,
 				418EE81D170238FB00773A19 /* EMShare.h in Headers */,
+				349897EA170A9E58004DFAB9 /* EMImport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,6 +856,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				349897ED170AA324004DFAB9 /* EMImport.m in Sources */,
 				34F286A3170389B300E6D617 /* NSString+EMDateParsing.m in Sources */,
 				418E65ED1702A30700EBB567 /* EMResponseSummary.m in Sources */,
 				418E65EE1702A30700EBB567 /* EMTrigger.m in Sources */,
@@ -905,6 +914,7 @@
 				34F286A717038A1100E6D617 /* ISO8601DateFormatter.m in Sources */,
 				41EB58C216C45EED005C1805 /* SMWebRequest.m in Sources */,
 				41970E9617079AB600C7A67F /* SMWebRequest+RAC.m in Sources */,
+				349897EB170A9E58004DFAB9 /* EMImport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

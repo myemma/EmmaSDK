@@ -2431,8 +2431,8 @@ describe(@"EMClient", ^{
             result = x;
         }];
         
-        expect(result[@"import_id"]).to.equal(@200);
-        expect(result[@"import_started"]).to.equal(@"@D:2010-12-13T23:12:44");
+        expect([result ID]).to.equal(@"200");
+        expect([result importStarted]).to.equal([@"@D:2010-12-13T23:12:44" em_parseTimestamp]);
     });
     
     it(@"getImports should call endpoint", ^ {
@@ -2468,10 +2468,10 @@ describe(@"EMClient", ^{
             result = x;
         }];
         
-        id import = result[0];
+        EMImport *import = result[0];
         expect(result.count).to.equal(1);
-        expect(import[@"import_id"]).to.equal(@200);
-        expect(import[@"num_members_updated"]).to.equal(@0);
+        expect([import ID]).to.equal(@"200");
+        expect([import numberOfMembersUpdated]).to.equal(@0);
     });
 
     it(@"copyMembersWithStatuses:toGroup: should call endpoint", ^ {
