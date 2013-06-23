@@ -1,6 +1,6 @@
 # Emma SDK
 
-An Objective-C client library for the [Emma HTTP API](http://api.myemma.com/). Builds a static library for iOS use as well as a Cocoa framework for OS X. It has been recently updated to provide OAuth API call support. We suggest using an additional 3rd Party Library to manage the OAuth handshake.
+An Objective-C client library for the [Emma HTTP API](http://api.myemma.com/). Builds a static library for iOS and OS X use. It has been recently updated to provide OAuth API call support. We suggest using an additional 3rd Party Library to manage the OAuth handshake.
 
 # Cloning
 
