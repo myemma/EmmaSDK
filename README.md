@@ -1,6 +1,6 @@
 # Emma SDK
 
-An Objective-C client library for the [Emma HTTP API](http://api.myemma.com/). Builds a static library for iOSuse as well as a Cocoa framework for OS X.
+An Objective-C client library for the [Emma HTTP API](http://api.myemma.com/). Builds a static library for iOS use as well as a Cocoa framework for OS X. It has been recently updated to provide OAuth API call support. We suggest using an additional 3rd Party Library to manage the OAuth handshake.
 
 # Cloning
 
@@ -26,7 +26,7 @@ We recommend adding EmmaSDK as a submodule of your project. Ensure that you have
 
 # Using the SDK
 
-Initialize the SDK with your account info:
+Initialize the SDK with your account info (BasicAuth):
 
     #import "EmmaSDK.h"
    
@@ -38,6 +38,16 @@ Initialize the SDK with your account info:
     
     …
 
+For OAuth do the following instead:
+
+    #import "EmmaSDK.h"
+   
+    …
+    
+    EMClient.shared.oauthToken = @"Your generated OAuth Token";
+    EMClient.shared.accountID = @"Your Account ID";
+    
+    …
 
 Use the client to make API calls. The API client performs asynchronous operations using [ReactiveCocoa](http://github.com/ReactiveCocoa/ReactiveCocoa).
 
