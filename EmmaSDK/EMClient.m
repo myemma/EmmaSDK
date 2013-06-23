@@ -150,8 +150,14 @@ static EMClient *shared;
     urlRequest.HTTPMethod = method;
     urlRequest.AllHTTPHeaderFields = headers;
     
-    [urlRequest setValue:[@"Basic " stringByAppendingString:[[[NSString stringWithFormat:@"%@:%@", _publicKey, _privateKey] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];
-    
+    // check to see if oauth is set, if so make oauth request, else make basic auth request
+    if (_oauthToken != nil) {
+        [urlRequest setValue:[@"Bearer " stringByAppendingString:[NSString stringWithFormat:@"%@", _oauthToken]] forHTTPHeaderField:@"Authorization"];
+    }
+    else {
+        [urlRequest setValue:[@"Basic " stringByAppendingString:[[[NSString stringWithFormat:@"%@:%@", _publicKey, _privateKey] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];
+    }
+        
     if ([body isKindOfClass:[NSInputStream class]]) {
         urlRequest.HTTPBodyStream = (NSInputStream *)body;
     }
