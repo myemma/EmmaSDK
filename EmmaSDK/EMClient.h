@@ -158,7 +158,14 @@ extern EMResultRange EMResultRangeAll;
 
 @interface EMClient : NSObject <EMClient>
 
-@property (nonatomic, copy) NSString *publicKey, *privateKey, *accountID;
+// required information for requests
+@property (nonatomic, copy) NSString *accountID;
+
+// basic auth w/ key pair
+@property (nonatomic, copy) NSString *publicKey, *privateKey;
+
+// oauth
+@property (nonatomic, copy) NSString *oauthToken;
 
 + (EMClient *)shared;
 
