@@ -99,6 +99,20 @@
 		41EB590216C47528005C1805 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EB590116C47528005C1805 /* UIKit.framework */; };
 		41F901A416FA9F1A0008CF8E /* EMField.h in Headers */ = {isa = PBXBuildFile; fileRef = 41F901A216FA9F1A0008CF8E /* EMField.h */; };
 		41F901A516FA9F1A0008CF8E /* EMField.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F901A316FA9F1A0008CF8E /* EMField.m */; };
+		42C27B5D17840F3000505C5D /* ISO8601DateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 34F286A417038A1100E6D617 /* ISO8601DateFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42C27B5E17840F3000505C5D /* SMWebRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 41EB58BF16C45EED005C1805 /* SMWebRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42C27B5F17840F3000505C5D /* NSObject+ObjectOrNil.h in Headers */ = {isa = PBXBuildFile; fileRef = 41912D9416D599FF00126AF1 /* NSObject+ObjectOrNil.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42C27B6017840F3000505C5D /* NSNumber+ObjectIDString.h in Headers */ = {isa = PBXBuildFile; fileRef = 41912D9816D59A4100126AF1 /* NSNumber+ObjectIDString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42C27B6117840F3000505C5D /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 418E65D0170255ED00EBB567 /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42C27B6217840F3000505C5D /* SMWebRequest+RAC.h in Headers */ = {isa = PBXBuildFile; fileRef = 41970E9317079AB600C7A67F /* SMWebRequest+RAC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42E55D5A17AA352800E0FD2E /* EMOAuthAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = 42E55D5617AA352100E0FD2E /* EMOAuthAccount.h */; };
+		42E55D5B17AA352800E0FD2E /* EMOAuthAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = 42E55D5617AA352100E0FD2E /* EMOAuthAccount.h */; };
+		42E55D5C17AA352800E0FD2E /* EMOAuthAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E55D5717AA352200E0FD2E /* EMOAuthAccount.m */; };
+		42E55D5D17AA352800E0FD2E /* EMOAuthAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E55D5717AA352200E0FD2E /* EMOAuthAccount.m */; };
+		42E55D5E17AA352800E0FD2E /* EMOAuthApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 42E55D5817AA352400E0FD2E /* EMOAuthApplication.h */; };
+		42E55D5F17AA352800E0FD2E /* EMOAuthApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 42E55D5817AA352400E0FD2E /* EMOAuthApplication.h */; };
+		42E55D6017AA352800E0FD2E /* EMOAuthApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E55D5917AA352500E0FD2E /* EMOAuthApplication.m */; };
+		42E55D6117AA352800E0FD2E /* EMOAuthApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E55D5917AA352500E0FD2E /* EMOAuthApplication.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,6 +270,27 @@
 			remoteGlobalIDString = E93067CD13B2E6D100EA26FF;
 			remoteInfo = "Expecta-iOS";
 		};
+		42C27B6A17840F3100505C5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5FAF5223174D4C2000CAC810;
+			remoteInfo = "ReactiveCocoaTests-iOS";
+		};
+		42C27B6C17840F3100505C5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1860F412177C91B500C7B3C9;
+			remoteInfo = "ReactiveCocoa-iOS-UIKitTestHost";
+		};
+		42C27B6E17840F3100505C5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41EB58A216C45ED5005C1805 /* ReactiveCocoa.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1860F430177C91B500C7B3C9;
+			remoteInfo = "ReactiveCocoa-iOS-UIKitTestHostTests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -325,6 +360,10 @@
 		41EB590116C47528005C1805 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		41F901A216FA9F1A0008CF8E /* EMField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMField.h; sourceTree = "<group>"; };
 		41F901A316FA9F1A0008CF8E /* EMField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMField.m; sourceTree = "<group>"; };
+		42E55D5617AA352100E0FD2E /* EMOAuthAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOAuthAccount.h; sourceTree = "<group>"; };
+		42E55D5717AA352200E0FD2E /* EMOAuthAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOAuthAccount.m; sourceTree = "<group>"; };
+		42E55D5817AA352400E0FD2E /* EMOAuthApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMOAuthApplication.h; sourceTree = "<group>"; };
+		42E55D5917AA352500E0FD2E /* EMOAuthApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMOAuthApplication.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -461,6 +500,10 @@
 				41EB585716C45CAC005C1805 /* EMMailingResponseEvent.m */,
 				41EB585916C45CAC005C1805 /* EMMember.h */,
 				41EB585A16C45CAC005C1805 /* EMMember.m */,
+				42E55D5617AA352100E0FD2E /* EMOAuthAccount.h */,
+				42E55D5717AA352200E0FD2E /* EMOAuthAccount.m */,
+				42E55D5817AA352400E0FD2E /* EMOAuthApplication.h */,
+				42E55D5917AA352500E0FD2E /* EMOAuthApplication.m */,
 				41EB585B16C45CAC005C1805 /* EMMessage.h */,
 				41EB585C16C45CAC005C1805 /* EMMessage.m */,
 				41EB585D16C45CAC005C1805 /* EMSearch.h */,
@@ -514,6 +557,9 @@
 				41EB58AB16C45ED6005C1805 /* ReactiveCocoa.framework */,
 				41EB58AD16C45ED6005C1805 /* libReactiveCocoa-iOS.a */,
 				41EB58AF16C45ED6005C1805 /* ReactiveCocoaTests.octest */,
+				42C27B6B17840F3100505C5D /* ReactiveCocoaTests-iOS.octest */,
+				42C27B6D17840F3100505C5D /* ReactiveCocoa-iOS-UIKitTestHost.app */,
+				42C27B6F17840F3100505C5D /* ReactiveCocoa-iOS-UIKitTestHostTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -574,7 +620,15 @@
 				4127E5561706492D00DC61FA /* EMShare.h in Headers */,
 				4127E5571706492D00DC61FA /* EmmaSDK.h in Headers */,
 				41970EC2170B5DFD00C7A67F /* EMImport.h in Headers */,
+				42C27B5D17840F3000505C5D /* ISO8601DateFormatter.h in Headers */,
 				41970EB1170A467C00C7A67F /* NSString+EMDateParsing.h in Headers */,
+				42C27B5E17840F3000505C5D /* SMWebRequest.h in Headers */,
+				42C27B5F17840F3000505C5D /* NSObject+ObjectOrNil.h in Headers */,
+				42C27B6017840F3000505C5D /* NSNumber+ObjectIDString.h in Headers */,
+				42C27B6117840F3000505C5D /* NSData+Base64.h in Headers */,
+				42C27B6217840F3000505C5D /* SMWebRequest+RAC.h in Headers */,
+				42E55D5B17AA352800E0FD2E /* EMOAuthAccount.h in Headers */,
+				42E55D5F17AA352800E0FD2E /* EMOAuthApplication.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +653,8 @@
 				418EE810170231F600773A19 /* EMResponseSummary.h in Headers */,
 				418EE81D170238FB00773A19 /* EMShare.h in Headers */,
 				349897EA170A9E58004DFAB9 /* EMImport.h in Headers */,
+				42E55D5A17AA352800E0FD2E /* EMOAuthAccount.h in Headers */,
+				42E55D5E17AA352800E0FD2E /* EMOAuthApplication.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,6 +873,27 @@
 			remoteRef = 41EB58EC16C463CA005C1805 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		42C27B6B17840F3100505C5D /* ReactiveCocoaTests-iOS.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ReactiveCocoaTests-iOS.octest";
+			remoteRef = 42C27B6A17840F3100505C5D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		42C27B6D17840F3100505C5D /* ReactiveCocoa-iOS-UIKitTestHost.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "ReactiveCocoa-iOS-UIKitTestHost.app";
+			remoteRef = 42C27B6C17840F3100505C5D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		42C27B6F17840F3100505C5D /* ReactiveCocoa-iOS-UIKitTestHostTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ReactiveCocoa-iOS-UIKitTestHostTests.octest";
+			remoteRef = 42C27B6E17840F3100505C5D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -880,6 +957,8 @@
 				41970E9B17079F0100C7A67F /* SMWebRequest+RAC.m in Sources */,
 				41EB58C316C45EED005C1805 /* SMWebRequest.m in Sources */,
 				34F286A817038A1100E6D617 /* ISO8601DateFormatter.m in Sources */,
+				42E55D5D17AA352800E0FD2E /* EMOAuthAccount.m in Sources */,
+				42E55D6117AA352800E0FD2E /* EMOAuthApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -917,6 +996,8 @@
 				41EB58C216C45EED005C1805 /* SMWebRequest.m in Sources */,
 				41970E9617079AB600C7A67F /* SMWebRequest+RAC.m in Sources */,
 				349897EB170A9E58004DFAB9 /* EMImport.m in Sources */,
+				42E55D5C17AA352800E0FD2E /* EMOAuthAccount.m in Sources */,
+				42E55D6017AA352800E0FD2E /* EMOAuthApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -997,7 +1078,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "Dependencies/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -1021,7 +1102,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "Dependencies/**";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

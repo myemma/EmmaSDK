@@ -21,6 +21,19 @@
 
 @end
 
+@interface EMOAuthApplication (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+
+@end
+
+@interface EMOAuthAccount (Private)
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)dictionaryRepresentation;
+
+@end
+
 @interface EMTrigger (Private)
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
