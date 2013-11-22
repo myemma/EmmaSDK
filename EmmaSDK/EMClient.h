@@ -11,6 +11,10 @@ extern EMResultRange EMResultRangeAll;
 
 @protocol EMClient <NSObject>
 
+// accounts
+
+- (RACSignal *)getMyOAuthData;
+
 // fields
 
 - (RACSignal *)getFieldCount;
@@ -80,12 +84,13 @@ extern EMResultRange EMResultRangeAll;
 - (RACSignal *)createMembers:(NSArray *)members withSourceName:(NSString *)sourceName addOnly:(BOOL)addOnly groupIDs:(NSArray *)groupIDs;
 
 - (RACSignal *)createMember:(EMMember *)member; // returns member id as NSString
+- (RACSignal *)signupMember:(EMMember *)member groupIDs:(NSArray *)groupIDs; // returns member id as NSString
 - (RACSignal *)deleteMembersWithIDs:(NSArray *)memberIDs;
 - (RACSignal *)updateMemberIDs:(NSArray *)memberIDs withStatus:(EMMemberStatus)status;
 - (RACSignal *)updateMember:(EMMember *)member;
 // - (RACSignal *)deleteMemberWithID:(NSString *)memberID // redundant, skip
 - (RACSignal *)getGroupsForMemberID:(NSString *)memberID;
- - (RACSignal *)addMemberID:(NSString *)memberID toGroupIDs:(NSArray *)groupIDs;
+- (RACSignal *)addMemberID:(NSString *)memberID toGroupIDs:(NSArray *)groupIDs;
 //- (RACSignal *)removeMemberID:(NSString *)memberID fromGroupIDs:(NSArray *)groupIDs; // redundant, skip
 - (RACSignal *)deleteMembersWithStatus:(EMMemberStatus)status;
 - (RACSignal *)removeMemberFromAllGroups:(NSString *)memberID;
@@ -158,7 +163,14 @@ extern EMResultRange EMResultRangeAll;
 
 @interface EMClient : NSObject <EMClient>
 
-@property (nonatomic, copy) NSString *publicKey, *privateKey, *accountID;
+// required information for requests
+@property (nonatomic, copy) NSString *accountID;
+
+// basic auth w/ key pair
+@property (nonatomic, copy) NSString *publicKey, *privateKey;
+
+// oauth
+@property (nonatomic, copy) NSString *oauthToken;
 
 + (EMClient *)shared;
 
