@@ -1,4 +1,4 @@
-#import <SBJson/SBJson.h>
+#import "SBJson.h"
 #import "NSData+Base64.h"
 #import "NSObject+ObjectOrNil.h"
 #import "NSNumber+ObjectIDString.h"
@@ -6,6 +6,7 @@
 #import "SMWebRequest+RAC.h"
 
 #define API_HOST @"https://api.e2ma.net/"
+#define LOGIN_HOST @"https://login.e2ma.net/"
 
 EMResultRange EMResultRangeMake(NSInteger start, NSInteger end) {
     return (EMResultRange){ .start = start, .end = end };
@@ -145,11 +146,15 @@ static EMClient *shared;
     if ([method isEqual:@"GET"])
         assert(body == nil);
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", API_HOST, _accountID, path]];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:6];
+    NSURL *url = nil;
+    if(![path isEqualToString:@"oauth/me"])
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", API_HOST, _accountID, path]];
+    else
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", LOGIN_HOST, path]];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
     urlRequest.HTTPMethod = method;
     urlRequest.AllHTTPHeaderFields = headers;
-    
+        
     // check to see if oauth is set, if so make oauth request, else make basic auth request
     if (_oauthToken != nil) {
         [urlRequest setValue:[@"Bearer " stringByAppendingString:[NSString stringWithFormat:@"%@", _oauthToken]] forHTTPHeaderField:@"Authorization"];
@@ -157,7 +162,9 @@ static EMClient *shared;
     else {
         [urlRequest setValue:[@"Basic " stringByAppendingString:[[[NSString stringWithFormat:@"%@:%@", _publicKey, _privateKey] dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString]] forHTTPHeaderField:@"Authorization"];
     }
-        
+    
+    NSLog(@"%@",[urlRequest allHTTPHeaderFields]);
+    
     if ([body isKindOfClass:[NSInputStream class]]) {
         urlRequest.HTTPBodyStream = (NSInputStream *)body;
     }
@@ -173,8 +180,14 @@ static EMClient *shared;
     return [endpoint requestSignalWithURLRequest:[self requestWithMethod:method path:path headers:headers body:body]];
 }
 
-// fields
+- (RACSignal *)getMyOAuthData
+{
+    return [[self requestSignalWithMethod:@"GET" path:@"oauth/me" headers:nil body:nil] map:^id(NSDictionary *value) {
+        return [[EMOAuthApplication alloc] initWithDictionary:value];
+    }];
+}
 
+// fields
 - (RACSignal *)getFieldCount
 {
     return [[self requestSignalWithMethod:@"GET" path:@"/fields" headers:nil body:nil] map:^id(NSNumber *value) {
@@ -510,12 +523,13 @@ static EMClient *shared;
 
 - (RACSignal *)createMembers:(NSArray *)members withSourceName:(NSString *)sourceName addOnly:(BOOL)addOnly groupIDs:(NSArray *)groupIDs
 {
-    id memberEmails = [members.rac_sequence map:^id(EMMember *value) {
-        return @{ @"email" : value.email };
+    id memberObjects = [members.rac_sequence map:^id(EMMember *value) {
+        return @{ @"email" : value.email,
+                  @"fields" : value.fields};
     }].array;
     
     id body = @{
-    @"members" : memberEmails,
+    @"members" : memberObjects,
     @"source_filename" : sourceName,
     @"add_only" : @(addOnly),
     @"group_ids" : groupIDs
@@ -528,7 +542,20 @@ static EMClient *shared;
 
 - (RACSignal *)createMember:(EMMember *)member
 {
-    return [[self requestSignalWithMethod:@"POST" path:@"/members/add" headers:nil body:@{ @"email" : member.email }] map:^id(id result) {
+    return [[self requestSignalWithMethod:@"POST" path:@"/members/add" headers:nil body:@{ @"email" : member.email, @"fields" : member.fields }] map:^id(id result) {
+        return [[result[@"member_id"] numberOrNil] objectIDStringValue];
+    }];
+}
+
+- (RACSignal *)signupMember:(EMMember *)member groupIDs:(NSArray *)groupIDs
+{
+     id body = @{
+    @"email" : member.email,
+    @"fields" : member.fields,
+    @"group_ids" : groupIDs
+    };
+
+    return [[self requestSignalWithMethod:@"POST" path:@"/members/signup" headers:nil body:body] map:^id(id result) {
         return [[result[@"member_id"] numberOrNil] objectIDStringValue];
     }];
 }
@@ -547,7 +574,7 @@ static EMClient *shared;
 
 - (RACSignal *)updateMember:(EMMember *)member
 {
-    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@", member.ID] headers:nil body:@{ @"email" : member.email, @"status_to" : EMMemberStatusToString(member.status) }];
+    return [self requestSignalWithMethod:@"PUT" path:[NSString stringWithFormat:@"/members/%@", member.ID] headers:nil body:@{ @"email" : member.email, @"fields" : member.fields, @"status_to" : EMMemberStatusToString(member.status) }];
 }
 
 - (RACSignal *)getGroupsForMemberID:(NSString *)memberID

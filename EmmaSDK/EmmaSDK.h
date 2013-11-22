@@ -1,4 +1,5 @@
-
+#import "EMOAuthAccount.h"
+#import "EMOAuthApplication.h"
 #import "EMGroup.h"
 #import "EMMailing.h"
 #import "EMMember.h"
